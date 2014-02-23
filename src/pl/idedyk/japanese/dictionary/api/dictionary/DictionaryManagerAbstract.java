@@ -86,133 +86,152 @@ public abstract class DictionaryManagerAbstract {
 
 		final Map<String, KanaEntry> kanaCache = getKanaHelper().getKanaCache();
 
-		Collections.sort(findWordResult.result, new Comparator<ResultItem>() {
-
-			@Override
-			public int compare(ResultItem lhs, ResultItem rhs) {
-				
-				String findWord = findWordRequest.word;
-								
-				String lhsKanji = lhs.getKanji();
-				String rhsKanji = rhs.getKanji();
-
-				if (lhsKanji != null && lhsKanji.endsWith(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
-					return -1;
-				} else if (lhsKanji != null && lhsKanji.endsWith(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
-					return 1;
-				}
-				
-				List<String> lhsKanaList = lhs.getKanaList();
-				List<String> rhsKanaList = rhs.getKanaList();
-
-				if (lhsKanaList.contains(findWord) == true && rhsKanaList.contains(findWord) == false) {
-					return -1;
-				} else if (lhsKanaList.contains(findWord) == false && rhsKanaList.contains(findWord) == true) {
-					return 1;
-				}
-
-				List<String> lhsRomajiList = lhs.getRomajiList();
-				
-				boolean isInLhsRomajiList = false;
-				
-				for (String currentLhsRomajiList : lhsRomajiList) {
-					if (currentLhsRomajiList.equalsIgnoreCase(findWord) == true) {
-						isInLhsRomajiList = true;
+		try {
+			Collections.sort(findWordResult.result, new Comparator<ResultItem>() {
+	
+				@Override
+				public int compare(ResultItem lhs, ResultItem rhs) {
+					
+					String findWord = findWordRequest.word;
+									
+					String lhsKanji = lhs.getKanji();
+					String rhsKanji = rhs.getKanji();
+	
+					if (lhsKanji != null && lhsKanji.endsWith(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
+						return -1;
+					} else if (lhsKanji != null && lhsKanji.endsWith(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
+						return 1;
 					}
-				}
-								
-				List<String> rhsRomajiList = rhs.getRomajiList();
-				
-				boolean isInRhsRomajiList = false;
-				
-				for (String currentRhsRomajiList : rhsRomajiList) {
-					if (currentRhsRomajiList.equalsIgnoreCase(findWord) == true) {
-						isInRhsRomajiList = true;
+					
+					List<String> lhsKanaList = lhs.getKanaList();
+					List<String> rhsKanaList = rhs.getKanaList();
+	
+					if (lhsKanaList.contains(findWord) == true && rhsKanaList.contains(findWord) == false) {
+						return -1;
+					} else if (lhsKanaList.contains(findWord) == false && rhsKanaList.contains(findWord) == true) {
+						return 1;
 					}
-				}
-				
-				if (isInLhsRomajiList == true && isInRhsRomajiList == false) {
-					return -1;
-				} else if (isInLhsRomajiList == false && isInRhsRomajiList == true) {
-					return 1;
-				}
-				
-				List<String> lhsTranslates = lhs.getTranslates();
-
-				boolean islhsTranslates = false;
-				
-				for (String currentLhsTranslates : lhsTranslates) {
-					if (Utils.removePolishChars(currentLhsTranslates).equalsIgnoreCase(findWord) == true) {
-						islhsTranslates = true;
+	
+					List<String> lhsRomajiList = lhs.getRomajiList();
+					
+					boolean isInLhsRomajiList = false;
+					
+					for (String currentLhsRomajiList : lhsRomajiList) {
+						if (currentLhsRomajiList.equalsIgnoreCase(findWord) == true) {
+							isInLhsRomajiList = true;
+						}
 					}
-				}
-				
-				List<String> rhsTranslates = rhs.getTranslates();
-
-				boolean isRhsTranslates = false;
-				
-				for (String currentRhsTranslates : rhsTranslates) {
-					if (Utils.removePolishChars(currentRhsTranslates).equalsIgnoreCase(findWord) == true) {
-						isRhsTranslates = true;
+									
+					List<String> rhsRomajiList = rhs.getRomajiList();
+					
+					boolean isInRhsRomajiList = false;
+					
+					for (String currentRhsRomajiList : rhsRomajiList) {
+						if (currentRhsRomajiList.equalsIgnoreCase(findWord) == true) {
+							isInRhsRomajiList = true;
+						}
 					}
-				}
-				
-				if (islhsTranslates == true && isRhsTranslates == false) {
-					return -1;
-				} else if (islhsTranslates == false && isRhsTranslates == true) {
-					return 1;
-				}
-				
-				int maxKanaListArraySize = lhsKanaList.size();
-
-				if (maxKanaListArraySize < rhsKanaList.size()) {
-					maxKanaListArraySize = rhsKanaList.size();
-				}
-
-				for (int idx = 0; idx < maxKanaListArraySize; ++idx) {
-					int compareResult = compare(lhsKanaList, rhsKanaList, idx);
-
-					if (compareResult != 0) {
-						return compareResult;
+					
+					if (isInLhsRomajiList == true && isInRhsRomajiList == false) {
+						return -1;
+					} else if (isInLhsRomajiList == false && isInRhsRomajiList == true) {
+						return 1;
 					}
-				}
-
-				return 0;
-			}
-
-			private int compare(List<String> lhsKanaList, List<String> rhsKanaList, int idx) {
-				
-				KanaHelper kanaHelper = getKanaHelper();
-
-				String lhsString = getString(lhsKanaList, idx);
-
-				String rhsString = getString(rhsKanaList, idx);
-
-				if (lhsString == null && rhsString == null) {
+					
+					List<String> lhsTranslates = lhs.getTranslates();
+	
+					boolean islhsTranslates = false;
+					
+					for (String currentLhsTranslates : lhsTranslates) {
+						if (Utils.removePolishChars(currentLhsTranslates).equalsIgnoreCase(findWord) == true) {
+							islhsTranslates = true;
+						}
+					}
+					
+					List<String> rhsTranslates = rhs.getTranslates();
+	
+					boolean isRhsTranslates = false;
+					
+					for (String currentRhsTranslates : rhsTranslates) {
+						if (Utils.removePolishChars(currentRhsTranslates).equalsIgnoreCase(findWord) == true) {
+							isRhsTranslates = true;
+						}
+					}
+					
+					if (islhsTranslates == true && isRhsTranslates == false) {
+						return -1;
+					} else if (islhsTranslates == false && isRhsTranslates == true) {
+						return 1;
+					}
+					
+					int maxKanaListArraySize = lhsKanaList.size();
+	
+					if (maxKanaListArraySize < rhsKanaList.size()) {
+						maxKanaListArraySize = rhsKanaList.size();
+					}
+	
+					for (int idx = 0; idx < maxKanaListArraySize; ++idx) {
+						int compareResult = compare(lhsKanaList, rhsKanaList, idx);
+	
+						if (compareResult != 0) {
+							return compareResult;
+						}
+					}
+	
 					return 0;
-				} else if (lhsString != null && rhsString == null) {
-					return -1;
-				} else if (lhsString == null && rhsString != null) {
-					return 1;
-				} else {
-					String lhsRomaji = kanaHelper.createRomajiString(kanaHelper.convertKanaStringIntoKanaWord(
-							lhsString, kanaCache, true));
-					String rhsRomaji = kanaHelper.createRomajiString(kanaHelper.convertKanaStringIntoKanaWord(
-							rhsString, kanaCache, true));
-
-					return lhsRomaji.compareToIgnoreCase(rhsRomaji);
 				}
-			}
-
-			private String getString(List<String> kanaList, int kanaListIdx) {
-				if (kanaListIdx < kanaList.size()) {
-					return kanaList.get(kanaListIdx);
-				} else {
-					return null;
+	
+				private int compare(List<String> lhsKanaList, List<String> rhsKanaList, int idx) {
+					
+					KanaHelper kanaHelper = getKanaHelper();
+	
+					String lhsString = getString(lhsKanaList, idx);
+	
+					String rhsString = getString(rhsKanaList, idx);
+	
+					if (lhsString == null && rhsString == null) {
+						return 0;
+					} else if (lhsString != null && rhsString == null) {
+						return -1;
+					} else if (lhsString == null && rhsString != null) {
+						return 1;
+					} else {
+						String lhsRomaji = kanaHelper.createRomajiString(kanaHelper.convertKanaStringIntoKanaWord(
+								lhsString, kanaCache, true));
+						String rhsRomaji = kanaHelper.createRomajiString(kanaHelper.convertKanaStringIntoKanaWord(
+								rhsString, kanaCache, true));
+	
+						return lhsRomaji.compareToIgnoreCase(rhsRomaji);
+					}
 				}
-			}
-		});
+	
+				private String getString(List<String> kanaList, int kanaListIdx) {
+					if (kanaListIdx < kanaList.size()) {
+						return kanaList.get(kanaListIdx);
+					} else {
+						return null;
+					}
+				}
+			});
 
+		} catch (IllegalArgumentException e) {
+						
+			StringBuffer errorMessage = new StringBuffer();
+			
+			errorMessage.append("Error during sort words. Debug info:\n\n");
+			errorMessage.append("findWordRequest.word = ").append(findWordRequest.word).append("\n");
+			errorMessage.append("findWordRequest.searchKanji = ").append(findWordRequest.searchKanji).append("\n");
+			errorMessage.append("findWordRequest.searchKana = ").append(findWordRequest.searchKana).append("\n");
+			errorMessage.append("findWordRequest.searchRomaji = ").append(findWordRequest.searchRomaji).append("\n");
+			errorMessage.append("findWordRequest.searchTranslate = ").append(findWordRequest.searchTranslate).append("\n");
+			errorMessage.append("findWordRequest.searchInfo = ").append(findWordRequest.searchInfo).append("\n");
+			errorMessage.append("findWordRequest.searchGrammaFormAndExamples = ").append(findWordRequest.searchGrammaFormAndExamples).append("\n");
+			errorMessage.append("findWordRequest.wordPlaceSearch = ").append(findWordRequest.wordPlaceSearch).append("\n");
+			errorMessage.append("findWordRequest.dictionaryEntryList = ").append(findWordRequest.dictionaryEntryList).append("\n");
+			
+			throw new IllegalArgumentException(errorMessage.toString(), e);
+		}
+			
 		return findWordResult;
 	}
 	
