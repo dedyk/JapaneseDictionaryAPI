@@ -97,9 +97,9 @@ public abstract class DictionaryManagerAbstract {
 					String lhsKanji = lhs.getKanji();
 					String rhsKanji = rhs.getKanji();
 	
-					if (lhsKanji != null && lhsKanji.endsWith(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
+					if (lhsKanji != null && lhsKanji.equals(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
 						return -1;
-					} else if (lhsKanji != null && lhsKanji.endsWith(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
+					} else if (lhsKanji != null && lhsKanji.equals(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
 						return 1;
 					}
 					
@@ -119,6 +119,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentLhsRomajiList : lhsRomajiList) {
 						if (currentLhsRomajiList.equalsIgnoreCase(findWord) == true) {
 							isInLhsRomajiList = true;
+							
+							continue;
 						}
 					}
 									
@@ -129,6 +131,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentRhsRomajiList : rhsRomajiList) {
 						if (currentRhsRomajiList.equalsIgnoreCase(findWord) == true) {
 							isInRhsRomajiList = true;
+							
+							continue;
 						}
 					}
 					
@@ -145,6 +149,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentLhsTranslates : lhsTranslates) {
 						if (Utils.removePolishChars(currentLhsTranslates).equalsIgnoreCase(findWord) == true) {
 							islhsTranslates = true;
+							
+							continue;
 						}
 					}
 					
@@ -155,6 +161,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentRhsTranslates : rhsTranslates) {
 						if (Utils.removePolishChars(currentRhsTranslates).equalsIgnoreCase(findWord) == true) {
 							isRhsTranslates = true;
+							
+							continue;
 						}
 					}
 					
@@ -386,9 +394,9 @@ public abstract class DictionaryManagerAbstract {
 					String lhsKanji = lhs.getKanji();
 					String rhsKanji = rhs.getKanji();
 
-					if (lhsKanji != null && lhsKanji.endsWith(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
+					if (lhsKanji != null && lhsKanji.equals(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
 						return -1;
-					} else if (lhsKanji != null && lhsKanji.endsWith(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
+					} else if (lhsKanji != null && lhsKanji.equals(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
 						return 1;
 					}
 										
@@ -399,6 +407,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentLhsPolishTranslates : lhsPolishTranslates) {
 						if (Utils.removePolishChars(currentLhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
 							islhsPolishTranslates = true;
+							
+							continue;
 						}
 					}
 					
@@ -409,6 +419,8 @@ public abstract class DictionaryManagerAbstract {
 					for (String currentRhsPolishTranslates : rhsPolishTranslates) {
 						if (Utils.removePolishChars(currentRhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
 							isRhsPolishTranslates = true;
+							
+							continue;
 						}
 					}
 					
