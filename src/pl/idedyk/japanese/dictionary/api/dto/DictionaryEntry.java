@@ -181,10 +181,6 @@ public class DictionaryEntry implements Serializable {
 		this.attributeList = attributeList;
 	}
 		
-	public String getEntryPrefixKanaKanjiKanaKey() {
-		return prefixKana + "." + kanji + "." + kanaList.toString();
-	}
-	
 	public WordType getWordType() {
 		return wordType;
 	}
