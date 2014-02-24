@@ -13,6 +13,8 @@ public class DictionaryEntry implements Serializable {
 	private List<DictionaryEntryType> dictionaryEntryTypeList;
 
 	private AttributeList attributeList;
+	
+	private WordType wordType;
 
 	private List<GroupEnum> groups;
 
@@ -29,7 +31,7 @@ public class DictionaryEntry implements Serializable {
 	private List<String> translates;
 
 	private String info;
-
+	
 	public DictionaryEntryType getDictionaryEntryType() {
 		return dictionaryEntryTypeList.get(0);
 	}
@@ -178,12 +180,24 @@ public class DictionaryEntry implements Serializable {
 	public void setAttributeList(AttributeList attributeList) {
 		this.attributeList = attributeList;
 	}
+		
+	public String getEntryPrefixKanaKanjiKanaKey() {
+		return prefixKana + "." + kanji + "." + kanaList.toString();
+	}
+	
+	public WordType getWordType() {
+		return wordType;
+	}
 
+	public void setWordType(WordType wordType) {
+		this.wordType = wordType;
+	}
+	
 	@Override
 	public String toString() {
 		return "DictionaryEntry [id=" + id + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList
-				+ ", attributeList=" + attributeList + ", groups=" + groups + ", prefixKana=" + prefixKana + ", kanji="
-				+ kanji + ", kanaList=" + kanaList + ", prefixRomaji=" + prefixRomaji + ", romajiList=" + romajiList
-				+ ", translates=" + translates + ", info=" + info + "]";
+				+ ", attributeList=" + attributeList + ", wordType=" + wordType + ", groups=" + groups
+				+ ", prefixKana=" + prefixKana + ", kanji=" + kanji + ", kanaList=" + kanaList + ", prefixRomaji="
+				+ prefixRomaji + ", romajiList=" + romajiList + ", translates=" + translates + ", info=" + info + "]";
 	}
 }
