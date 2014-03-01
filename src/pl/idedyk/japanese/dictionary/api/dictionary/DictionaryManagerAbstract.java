@@ -14,7 +14,6 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultItem;
-import pl.idedyk.japanese.dictionary.api.dictionary.sqlite.SQLiteConnector;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
@@ -30,12 +29,8 @@ import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
 
 public abstract class DictionaryManagerAbstract {
 	
-	protected SQLiteConnector sqliteConnector;
-	
-	public DictionaryManagerAbstract() {
-		this.sqliteConnector = new SQLiteConnector();
-	}
-	
+	protected IDatabaseConnector databaseConnector;
+		
 	public abstract KanaHelper getKanaHelper();
 	
 	public abstract KeigoHelper getKeigoHelper();
@@ -44,7 +39,7 @@ public abstract class DictionaryManagerAbstract {
 
 	public int getWordGroupsNo(int groupSize) {
 
-		int dictionaryEntriesSize = sqliteConnector.getDictionaryEntriesSize();
+		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
 
 		int result = dictionaryEntriesSize / groupSize;
 
@@ -58,12 +53,12 @@ public abstract class DictionaryManagerAbstract {
 	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) {
 
 		try {
-			int dictionaryEntriesSize = sqliteConnector.getDictionaryEntriesSize();
+			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
 
 			List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
 
 			for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-				DictionaryEntry currentDictionaryEntry = sqliteConnector.getNthDictionaryEntry(idx);
+				DictionaryEntry currentDictionaryEntry = databaseConnector.getNthDictionaryEntry(idx);
 
 				result.add(currentDictionaryEntry);
 			}
@@ -79,9 +74,9 @@ public abstract class DictionaryManagerAbstract {
 		FindWordResult findWordResult = null;
 
 		try {
-			findWordResult = sqliteConnector.findDictionaryEntries(findWordRequest);
+			findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
-			sqliteConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
+			databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
 
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
@@ -247,12 +242,12 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public int getDictionaryEntriesSize() {
-		return sqliteConnector.getDictionaryEntriesSize();
+		return databaseConnector.getDictionaryEntriesSize();
 	}
 
 	public DictionaryEntry getDictionaryEntryById(int id) {
 		try {
-			return sqliteConnector.getDictionaryEntryById(String.valueOf(id));
+			return databaseConnector.getDictionaryEntryById(String.valueOf(id));
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -268,7 +263,7 @@ public abstract class DictionaryManagerAbstract {
 
 			KanjiEntry kanjiEntry = null;
 			try {
-				kanjiEntry = sqliteConnector.getKanjiEntry(currentChar);
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
 			} catch (DictionaryException e) {
 				throw new RuntimeException(e);
 			}
@@ -286,7 +281,7 @@ public abstract class DictionaryManagerAbstract {
 		KanjiEntry kanjiEntry = null;
 
 		try {
-			kanjiEntry = sqliteConnector.getKanjiEntry(kanji);
+			kanjiEntry = databaseConnector.getKanjiEntry(kanji);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -296,7 +291,7 @@ public abstract class DictionaryManagerAbstract {
 
 	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean addGenerated) {
 		try {
-			return sqliteConnector.getAllKanjis(withDetails, addGenerated);
+			return databaseConnector.getAllKanjis(withDetails, addGenerated);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -309,7 +304,7 @@ public abstract class DictionaryManagerAbstract {
 		List<KanjiEntry> result = null;
 
 		try {
-			result = sqliteConnector.findKanjiFromRadicals(radicals);
+			result = databaseConnector.findKanjiFromRadicals(radicals);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -343,7 +338,7 @@ public abstract class DictionaryManagerAbstract {
 		FindKanjiResult result = null;
 
 		try {
-			result = sqliteConnector.findKanjisFromStrokeCount(from, to);
+			result = databaseConnector.findKanjisFromStrokeCount(from, to);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -375,7 +370,7 @@ public abstract class DictionaryManagerAbstract {
 	public Set<String> findAllAvailableRadicals(String[] radicals) {
 
 		try {
-			return sqliteConnector.findAllAvailableRadicals(radicals);
+			return databaseConnector.findAllAvailableRadicals(radicals);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
@@ -384,7 +379,7 @@ public abstract class DictionaryManagerAbstract {
 	public FindKanjiResult findKanji(final FindKanjiRequest findKanjiRequest) {
 
 		try {
-			FindKanjiResult findKanjiResult = sqliteConnector.findKanji(findKanjiRequest);
+			FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
 			
 			
 			Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiEntry>() {
@@ -469,7 +464,7 @@ public abstract class DictionaryManagerAbstract {
 
 			KanjiEntry kanjiEntry = null;
 			try {
-				kanjiEntry = sqliteConnector.getKanjiEntry(currentChar);
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
 			} catch (DictionaryException e) {
 				throw new RuntimeException(e);
 			}
@@ -538,11 +533,11 @@ public abstract class DictionaryManagerAbstract {
 	/*
 	private void getFuriganaForAll() throws DictionaryException {
 
-		int dictionaryEntriesSize = sqliteConnector.getDictionaryEntriesSize();
+		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
 
 		for (int dictionaryEntriesSizeIdx = 0; dictionaryEntriesSizeIdx < dictionaryEntriesSize; ++dictionaryEntriesSizeIdx) {
 
-			DictionaryEntry nthDictionaryEntry = sqliteConnector.getNthDictionaryEntry(dictionaryEntriesSizeIdx);
+			DictionaryEntry nthDictionaryEntry = databaseConnector.getNthDictionaryEntry(dictionaryEntriesSizeIdx);
 
 			getFurigana(nthDictionaryEntry);
 		}
@@ -564,7 +559,7 @@ public abstract class DictionaryManagerAbstract {
 
 			KanjiEntry kanjiEntry = null;
 			try {
-				kanjiEntry = sqliteConnector.getKanjiEntry(currentChar);
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
 			} catch (DictionaryException e) {
 				throw new RuntimeException(e);
 			}
@@ -807,13 +802,13 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public List<GroupEnum> getDictionaryEntryGroupTypes() {
-		return sqliteConnector.getDictionaryEntryGroupTypes();
+		return databaseConnector.getDictionaryEntryGroupTypes();
 	}
 
 	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) {
 
 		try {
-			return sqliteConnector.getGroupDictionaryEntries(groupName);
+			return databaseConnector.getGroupDictionaryEntries(groupName);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
