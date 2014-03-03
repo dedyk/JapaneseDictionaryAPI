@@ -139,7 +139,7 @@ public class Utils {
 
 	public static KanjiEntry parseKanjiEntry(String idString, String kanjiString, String strokeCountString,
 			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList,
-			String strokePathString, List<String> polishTranslateList, String infoString, String generatedString,
+			Object strokePathObject, List<String> polishTranslateList, String infoString, String generatedString,
 			List<String> groupsList) throws DictionaryException {
 
 		int id = Integer.parseInt(idString);
@@ -169,7 +169,13 @@ public class Utils {
 		entry.setKanji(kanjiString);
 		
 		KanjivgEntry kanjivgEntry = new KanjivgEntry();
-		kanjivgEntry.setStrokePaths(parseStringIntoList(strokePathString, false));
+		
+		if (strokePathObject instanceof String) {
+			kanjivgEntry.setStrokePaths(parseStringIntoList((String)strokePathObject, false));
+			
+		} else {
+			kanjivgEntry.setStrokePaths(convertToListString(strokePathObject));
+		}		
 		
 		entry.setKanjivgEntry(kanjivgEntry);
 		entry.setPolishTranslates(polishTranslateList);
