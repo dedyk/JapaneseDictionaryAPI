@@ -434,6 +434,7 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ヂョ", "dyo", KanaType.KATAKANA, KanaGroup.YOUON));
 
 		katakanaEntries.add(new KanaEntry("ヴ", "vu", KanaType.KATAKANA, KanaGroup.OTHER));
+		katakanaEntries.add(new KanaEntry("ヴォ", "vo", KanaType.KATAKANA, KanaGroup.OTHER));
 
 		katakanaEntries.add(new KanaEntry("ッ", "ttsu", KanaType.KATAKANA, KanaGroup.SOKUON));
 		katakanaEntries.add(new KanaEntry("ー", "ttsu2", KanaType.KATAKANA, KanaGroup.SOKUON));
@@ -1126,7 +1127,7 @@ public class KanaHelper {
 				kanaEntries.add(kanaEntry);
 
 				currentRestChars = "";
-			} else if (currentRestChars.equals("vu") == true) {
+			} else if (currentRestChars.equals("vu") == true || currentRestChars.equals("vo") == true) {
 
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
