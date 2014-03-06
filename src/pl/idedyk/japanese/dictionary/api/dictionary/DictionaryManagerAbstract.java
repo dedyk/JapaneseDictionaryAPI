@@ -381,7 +381,6 @@ public abstract class DictionaryManagerAbstract {
 		try {
 			FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
 			
-			
 			Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiEntry>() {
 
 				@Override
@@ -439,7 +438,7 @@ public abstract class DictionaryManagerAbstract {
 						return lhsKanji.compareTo(rhsKanji);
 					}
 				}				
-			});		
+			});
 			
 			return findKanjiResult;
 			
