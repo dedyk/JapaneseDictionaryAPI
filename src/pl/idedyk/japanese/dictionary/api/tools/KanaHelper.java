@@ -248,8 +248,6 @@ public class KanaHelper {
 		hiraganaEntries.add(new KanaEntry("ぢゃ", "dya", KanaType.HIRAGANA, KanaGroup.YOUON));
 		hiraganaEntries.add(new KanaEntry("ぢゅ", "dyu", KanaType.HIRAGANA, KanaGroup.YOUON));
 		hiraganaEntries.add(new KanaEntry("ぢょ", "dyo", KanaType.HIRAGANA, KanaGroup.YOUON));
-
-		hiraganaEntries.add(new KanaEntry("デュ", "dyu", KanaType.HIRAGANA, KanaGroup.YOUON));
 		
 		hiraganaEntries.add(new KanaEntry("っ", "ttsu", KanaType.HIRAGANA, KanaGroup.SOKUON));
 
@@ -432,6 +430,8 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ヂャ", "dya", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂョ", "dyo", KanaType.KATAKANA, KanaGroup.YOUON));
+		
+		katakanaEntries.add(new KanaEntry("デュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));
 
 		katakanaEntries.add(new KanaEntry("ヴ", "vu", KanaType.KATAKANA, KanaGroup.OTHER));
 		katakanaEntries.add(new KanaEntry("ヴォ", "vo", KanaType.KATAKANA, KanaGroup.OTHER));
