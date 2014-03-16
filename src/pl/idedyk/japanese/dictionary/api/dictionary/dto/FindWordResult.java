@@ -12,7 +12,23 @@ public class FindWordResult {
 	public List<ResultItem> result;
 	
 	public boolean moreElemetsExists = false;
-	
+
+	public List<ResultItem> getResult() {
+		return result;
+	}
+
+	public void setResult(List<ResultItem> result) {
+		this.result = result;
+	}
+
+	public boolean isMoreElemetsExists() {
+		return moreElemetsExists;
+	}
+
+	public void setMoreElemetsExists(boolean moreElemetsExists) {
+		this.moreElemetsExists = moreElemetsExists;
+	}
+
 	public static class ResultItem {
 		
 		private DictionaryEntry dictionaryEntry;

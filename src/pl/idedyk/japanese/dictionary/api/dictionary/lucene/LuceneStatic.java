@@ -20,6 +20,8 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_info = "dictionaryEntry_info";
 	public static final String dictionaryEntry_infoWithoutPolishChars = "dictionaryEntry_infoWithoutPolishChars";
 	
+	public static final String dictionaryEntry_sugestionList = "dictionaryEntry_sugestionList";
+	
 	public static final String kanjiEntry_objectType = "kanjiEntry";
 	
 	public static final String kanjiEntry_id = "kanjiEntry_id";
