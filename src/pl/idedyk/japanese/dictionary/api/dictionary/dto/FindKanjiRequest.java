@@ -17,4 +17,9 @@ public class FindKanjiRequest implements Serializable {
 		
 		EXACT;
 	}
+
+	@Override
+	public String toString() {
+		return "FindKanjiRequest [word=" + word + ", wordPlaceSearch=" + wordPlaceSearch + "]";
+	}
 }

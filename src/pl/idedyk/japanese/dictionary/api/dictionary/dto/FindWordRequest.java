@@ -34,4 +34,12 @@ public class FindWordRequest implements Serializable {
 		
 		EXACT;
 	}
+
+	@Override
+	public String toString() {
+		return "FindWordRequest [word=" + word + ", searchKanji=" + searchKanji + ", searchKana=" + searchKana
+				+ ", searchRomaji=" + searchRomaji + ", searchTranslate=" + searchTranslate + ", searchInfo="
+				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples + ", wordPlaceSearch="
+				+ wordPlaceSearch + ", dictionaryEntryList=" + dictionaryEntryList + "]";
+	}
 }
