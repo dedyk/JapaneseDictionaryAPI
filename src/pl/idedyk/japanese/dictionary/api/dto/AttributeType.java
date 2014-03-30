@@ -29,7 +29,9 @@ public enum AttributeType {
 	NOUN_SUFFIX("przyrostek do rzeczowników", true),
 	
 	PREFIX("prefiks", true),
-	NOUN_PREFIX("prefiks do rzeczowników", true);
+	NOUN_PREFIX("prefiks do rzeczowników", true),
+	
+	NOUN_ADJECTIVE_NO("rzeczownik z partykułą no pełniący rolę przymiotnika", true);
 	
 	private String name;
 	
