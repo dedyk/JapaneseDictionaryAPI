@@ -83,6 +83,8 @@ public abstract class DictionaryManagerAbstract {
 		}
 
 		final Map<String, KanaEntry> kanaCache = getKanaHelper().getKanaCache();
+		
+		final String findWordWithoutPolishChars = Utils.removePolishChars(findWordRequest.word);
 
 		try {
 			Collections.sort(findWordResult.result, new Comparator<ResultItem>() {
@@ -145,7 +147,7 @@ public abstract class DictionaryManagerAbstract {
 					boolean islhsTranslates = false;
 					
 					for (String currentLhsTranslates : lhsTranslates) {
-						if (Utils.removePolishChars(currentLhsTranslates).equalsIgnoreCase(findWord) == true) {
+						if (Utils.removePolishChars(currentLhsTranslates).equalsIgnoreCase(findWordWithoutPolishChars) == true) {
 							islhsTranslates = true;
 							
 							continue;
@@ -157,7 +159,7 @@ public abstract class DictionaryManagerAbstract {
 					boolean isRhsTranslates = false;
 					
 					for (String currentRhsTranslates : rhsTranslates) {
-						if (Utils.removePolishChars(currentRhsTranslates).equalsIgnoreCase(findWord) == true) {
+						if (Utils.removePolishChars(currentRhsTranslates).equalsIgnoreCase(findWordWithoutPolishChars) == true) {
 							isRhsTranslates = true;
 							
 							continue;
