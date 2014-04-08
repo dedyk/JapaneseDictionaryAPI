@@ -419,6 +419,11 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ジェ", "je", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("チェ", "che", KanaType.KATAKANA, KanaGroup.YOUON));
 
+		katakanaEntries.add(new KanaEntry("ツァ", "tsa", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ツィ", "tsi", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ツェ", "tse", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ツォ", "tso", KanaType.KATAKANA, KanaGroup.YOUON));
+		
 		katakanaEntries.add(new KanaEntry("ファ", "fa", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("フィ", "fi", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("フェ", "fe", KanaType.KATAKANA, KanaGroup.YOUON));
@@ -1066,6 +1071,19 @@ public class KanaHelper {
 					|| currentRestChars.equals("fi") == true || currentRestChars.equals("fe") == true
 					|| currentRestChars.equals("fo") == true) {
 
+				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
+
+				if (kanaEntry == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				kanaEntries.add(kanaEntry);
+
+				currentRestChars = "";
+			
+			} else if (currentRestChars.equals("tsa") == true || currentRestChars.equals("tsi") == true
+					|| currentRestChars.equals("tse") == true || currentRestChars.equals("tso") == true) {
+				
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
 				if (kanaEntry == null) {
