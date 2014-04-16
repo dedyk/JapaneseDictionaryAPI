@@ -31,7 +31,9 @@ public enum AttributeType {
 	PREFIX("prefiks", true),
 	NOUN_PREFIX("prefiks do rzeczowników", true),
 	
-	NOUN_ADJECTIVE_NO("rzeczownik z partykułą no pełniący rolę przymiotnika", true);
+	NOUN_ADJECTIVE_NO("rzeczownik z partykułą no pełniący rolę przymiotnika", true),
+	
+	ONAMATOPOEIC_OR_MIMETIC_WORD("onomatopeiczne lub mimetyczne słowo", true);
 	
 	private String name;
 	
