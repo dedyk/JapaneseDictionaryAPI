@@ -42,6 +42,8 @@ public class LuceneStatic {
 	
 	public static final String kanjiEntry_kanjivgEntry_strokePaths = "kanjiEntry_kanjivgEntry_strokePaths";	
 	
+	public static final String kanjiEntry_sugestionList = "kanjiEntry_sugestionList";
+	
 	public static final String uniqueDictionaryEntryGroupEnumList_objectType = "uniqueDictionaryEntryGroupEnumList";
 	public static final String uniqueDictionaryEntryGroupEnumList_groupsList = "uniqueDictionaryEntryGroupEnumList_groupsList";
 	
