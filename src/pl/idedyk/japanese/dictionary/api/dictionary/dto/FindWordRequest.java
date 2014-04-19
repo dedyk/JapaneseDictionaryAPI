@@ -24,7 +24,7 @@ public class FindWordRequest implements Serializable {
 	public boolean searchGrammaFormAndExamples = false;
 	
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
-	
+		
 	public List<DictionaryEntryType> dictionaryEntryList = null;
 	
 	public static enum WordPlaceSearch {

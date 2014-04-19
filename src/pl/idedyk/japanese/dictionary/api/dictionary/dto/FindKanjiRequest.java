@@ -9,7 +9,11 @@ public class FindKanjiRequest implements Serializable {
 	public String word;
 		
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
-		
+	
+	public Integer strokeCountFrom = null;
+	
+	public Integer strokeCountTo = null;
+	
 	public static enum WordPlaceSearch {
 		ANY_PLACE,
 		
@@ -20,6 +24,7 @@ public class FindKanjiRequest implements Serializable {
 
 	@Override
 	public String toString() {
-		return "FindKanjiRequest [word=" + word + ", wordPlaceSearch=" + wordPlaceSearch + "]";
+		return "FindKanjiRequest [word=" + word + ", wordPlaceSearch=" + wordPlaceSearch + ", strokeCountFrom="
+				+ strokeCountFrom + ", strokeCountTo=" + strokeCountTo + "]";
 	}
 }
