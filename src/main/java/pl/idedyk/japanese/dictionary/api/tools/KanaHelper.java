@@ -429,9 +429,12 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("フェ", "fe", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("フォ", "fo", KanaType.KATAKANA, KanaGroup.YOUON));
 
-		katakanaEntries.add(new KanaEntry("ティ", "ti", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ティ", "ti", KanaType.KATAKANA, KanaGroup.YOUON));		
 		katakanaEntries.add(new KanaEntry("ディ", "di", KanaType.KATAKANA, KanaGroup.YOUON));
-
+		
+		katakanaEntries.add(new KanaEntry("トゥ", "tu", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ドゥ", "du", KanaType.KATAKANA, KanaGroup.YOUON));
+		
 		katakanaEntries.add(new KanaEntry("ヂャ", "dya", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂョ", "dyo", KanaType.KATAKANA, KanaGroup.YOUON));
@@ -964,7 +967,7 @@ public class KanaHelper {
 				currentRestChars = "";
 			} else if (currentRestChars.equals("ta") == true || currentRestChars.equals("tsu") == true
 					|| currentRestChars.equals("te") == true || currentRestChars.equals("to") == true
-					|| currentRestChars.equals("ti") == true) {
+					|| currentRestChars.equals("ti") == true || currentRestChars.equals("tu") == true) {
 
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
