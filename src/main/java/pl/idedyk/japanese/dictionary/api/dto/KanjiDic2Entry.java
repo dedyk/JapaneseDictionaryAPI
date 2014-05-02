@@ -76,4 +76,10 @@ public class KanjiDic2Entry implements Serializable {
 	public void setFreq(Integer freq) {
 		this.freq = freq;
 	}
+	
+	@Override
+	public String toString() {
+		return "KanjiDic2Entry [kanji=" + kanji + ", strokeCount=" + strokeCount + ", onReading=" + onReading
+				+ ", kunReading=" + kunReading + ", radicals=" + radicals + ", jlpt=" + jlpt + ", freq=" + freq + "]";
+	}
 }
