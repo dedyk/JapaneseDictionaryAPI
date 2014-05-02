@@ -117,4 +117,11 @@ public class KanjiEntry implements Serializable {
 		
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "KanjiEntry [id=" + id + ", kanji=" + kanji + ", polishTranslates=" + polishTranslates + ", info="
+				+ info + ", kanjiDic2Entry=" + kanjiDic2Entry + ", kanjivgEntry=" + kanjivgEntry + ", generated="
+				+ generated + ", groups=" + groups + "]";
+	}
 }
