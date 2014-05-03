@@ -235,7 +235,7 @@ public abstract class DictionaryManagerAbstract {
 			errorMessage.append("findWordRequest.searchInfo = ").append(findWordRequest.searchInfo).append("\n");
 			errorMessage.append("findWordRequest.searchGrammaFormAndExamples = ").append(findWordRequest.searchGrammaFormAndExamples).append("\n");
 			errorMessage.append("findWordRequest.wordPlaceSearch = ").append(findWordRequest.wordPlaceSearch).append("\n");
-			errorMessage.append("findWordRequest.dictionaryEntryList = ").append(findWordRequest.dictionaryEntryList).append("\n");
+			errorMessage.append("findWordRequest.dictionaryEntryTypeList = ").append(findWordRequest.dictionaryEntryTypeList).append("\n");
 			
 			throw new IllegalArgumentException(errorMessage.toString(), e);
 		}

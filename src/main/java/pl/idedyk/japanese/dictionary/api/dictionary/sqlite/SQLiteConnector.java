@@ -327,10 +327,10 @@ public class SQLiteConnector implements IDatabaseConnector {
 			sql.append(" )");
 		}
 
-		List<DictionaryEntryType> findWordRequestDictionaryEntryList = findWordRequest.dictionaryEntryList;
+		List<DictionaryEntryType> findWordRequestDictionaryEntryTypeList = findWordRequest.dictionaryEntryTypeList;
 
-		if (findWordRequestDictionaryEntryList != null && findWordRequestDictionaryEntryList.size() != 0
-				&& findWordRequestDictionaryEntryList.size() != DictionaryEntryType.values().length) {
+		if (findWordRequestDictionaryEntryTypeList != null && findWordRequestDictionaryEntryTypeList.size() != 0
+				&& findWordRequestDictionaryEntryTypeList.size() != DictionaryEntryType.values().length) {
 
 			if (addedWhere == false) {
 				sql.append(" where ");
@@ -342,14 +342,14 @@ public class SQLiteConnector implements IDatabaseConnector {
 
 			sql.append(" ( ");
 
-			for (int findWordRequestDictionaryEntryListIdx = 0; findWordRequestDictionaryEntryListIdx < findWordRequestDictionaryEntryList
+			for (int findWordRequestDictionaryEntryListIdx = 0; findWordRequestDictionaryEntryListIdx < findWordRequestDictionaryEntryTypeList
 					.size(); findWordRequestDictionaryEntryListIdx++) {
 
 				if (findWordRequestDictionaryEntryListIdx != 0) {
 					sql.append(" or ");
 				}
 
-				DictionaryEntryType currentFindWordRequestDictionaryEntry = findWordRequestDictionaryEntryList
+				DictionaryEntryType currentFindWordRequestDictionaryEntry = findWordRequestDictionaryEntryTypeList
 						.get(findWordRequestDictionaryEntryListIdx);
 
 				sql.append(" ").append(SQLiteStatic.dictionaryEntriesTableSelectElements_dictionaryEntryType)

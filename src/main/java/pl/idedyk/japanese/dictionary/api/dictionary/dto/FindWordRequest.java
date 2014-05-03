@@ -25,7 +25,7 @@ public class FindWordRequest implements Serializable {
 	
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
 		
-	public List<DictionaryEntryType> dictionaryEntryList = null;
+	public List<DictionaryEntryType> dictionaryEntryTypeList = null;
 	
 	public static enum WordPlaceSearch {
 		ANY_PLACE,
@@ -40,6 +40,6 @@ public class FindWordRequest implements Serializable {
 		return "FindWordRequest [word=" + word + ", searchKanji=" + searchKanji + ", searchKana=" + searchKana
 				+ ", searchRomaji=" + searchRomaji + ", searchTranslate=" + searchTranslate + ", searchInfo="
 				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples + ", wordPlaceSearch="
-				+ wordPlaceSearch + ", dictionaryEntryList=" + dictionaryEntryList + "]";
+				+ wordPlaceSearch + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
 	}
 }
