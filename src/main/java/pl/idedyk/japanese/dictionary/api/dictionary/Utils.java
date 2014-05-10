@@ -22,9 +22,13 @@ public class Utils {
 		if (text == null) {
 			return null;
 		}
-
+		
 		List<String> result = new ArrayList<String>();
 
+		if (text.equals("") == true) {
+			return result;
+		}
+		
 		String[] splitedText = text.split("\n");
 
 		for (String currentSplitedText : splitedText) {
