@@ -1,7 +1,11 @@
 package pl.idedyk.japanese.dictionary.api.dto;
 
-public class KanjiRecognizerResultItem {
+import java.io.Serializable;
+
+public class KanjiRecognizerResultItem implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private String kanji;
 	
 	private float score;
