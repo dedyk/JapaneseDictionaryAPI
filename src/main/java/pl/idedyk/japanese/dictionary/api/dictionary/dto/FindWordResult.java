@@ -1,5 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
@@ -7,8 +8,10 @@ import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
 
-public class FindWordResult {
+public class FindWordResult implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	public List<ResultItem> result;
 	
 	public boolean moreElemetsExists = false;
@@ -29,8 +32,10 @@ public class FindWordResult {
 		this.moreElemetsExists = moreElemetsExists;
 	}
 
-	public static class ResultItem {
+	public static class ResultItem implements Serializable {
 		
+		private static final long serialVersionUID = 1L;
+
 		private DictionaryEntry dictionaryEntry;
 		
 		private GrammaFormConjugateResult grammaFormConjugateResult;
