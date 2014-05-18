@@ -43,6 +43,11 @@ public class Utils {
 	}
 
 	public static String convertListToString(List<String> list) {
+		
+		if (list == null) {
+			return null;
+		}
+		
 		StringBuffer sb = new StringBuffer();
 
 		for (int idx = 0; idx < list.size(); ++idx) {
