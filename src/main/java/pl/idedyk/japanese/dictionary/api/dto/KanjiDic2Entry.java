@@ -17,6 +17,8 @@ public class KanjiDic2Entry implements Serializable {
 	
 	private List<String> radicals;
 	
+	private List<String> engMeaning;
+	
     private Integer jlpt;
 
     private Integer freq;
@@ -61,6 +63,14 @@ public class KanjiDic2Entry implements Serializable {
 		this.radicals = radicals;
 	}
 
+	public List<String> getEngMeaning() {
+		return engMeaning;
+	}
+
+	public void setEngMeaning(List<String> engMeaning) {
+		this.engMeaning = engMeaning;
+	}
+
 	public Integer getJlpt() {
 		return jlpt;
 	}
@@ -80,6 +90,7 @@ public class KanjiDic2Entry implements Serializable {
 	@Override
 	public String toString() {
 		return "KanjiDic2Entry [kanji=" + kanji + ", strokeCount=" + strokeCount + ", onReading=" + onReading
-				+ ", kunReading=" + kunReading + ", radicals=" + radicals + ", jlpt=" + jlpt + ", freq=" + freq + "]";
+				+ ", kunReading=" + kunReading + ", radicals=" + radicals + ", engMeaning=" + engMeaning + ", jlpt="
+				+ jlpt + ", freq=" + freq + "]";
 	}
 }
