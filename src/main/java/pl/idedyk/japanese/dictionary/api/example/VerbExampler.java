@@ -1425,6 +1425,10 @@ public class VerbExampler {
 						templateGoSuruRomaji, false);
 
 			} else if (kanaList.get(0).endsWith(suruKana) == true) {
+				
+				if (kanji != null && kanji.equals("為る") == true) {
+					kanji = null;
+				}
 
 				if (kanji != null) {
 

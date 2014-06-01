@@ -676,6 +676,9 @@ public class VerbGrammaConjugater {
 			if (kanji.endsWith("来る") == true) {
 				return removeChars(kanji, 1);
 				
+			} else if (kanji.endsWith("為る") == true) {
+				return removeChars(kanji, 1);
+				
 			} else if (kanji.endsWith("くる") == true) {
 				return removeChars(kanji, 2) + "き";
 				
@@ -803,8 +806,8 @@ public class VerbGrammaConjugater {
 			
 			} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 				
-				if (kanji.endsWith("来る") == false && kanji.endsWith("くる") == false && kanji.endsWith("する") == false) {
-					throw new RuntimeException("kanji.endsWith(来る) == false && kanji.endsWith(くる) == false && kanji.endsWith(する) == false: " + kanji);
+				if (kanji.endsWith("来る") == false && kanji.endsWith("くる") == false && kanji.endsWith("する") == false && kanji.endsWith("為る") == false) {
+					throw new RuntimeException("kanji.endsWith(来る) == false && kanji.endsWith(くる) == false && kanji.endsWith(する) == false && kanji.endsWith(為る) == false: " + kanji);
 				}				
 			}
 		}
@@ -936,6 +939,9 @@ public class VerbGrammaConjugater {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 			
 			if (text.endsWith("来る") == true) {
+				return removeChars(text, 1) + "て";
+				
+			} else if (text.endsWith("為る") == true) {
 				return removeChars(text, 1) + "て";
 				
 			} else if (text.endsWith("くる") == true) {
@@ -1099,8 +1105,12 @@ public class VerbGrammaConjugater {
 			} else if (text.endsWith("くる") == true) {
 				return removeChars(text, 2) + "こない";
 				
+			} else if (text.endsWith("為る") == true) {
+				return removeChars(text, 1) + "ない";
+				
 			} else if (text.endsWith("する") == true) {
 				return removeChars(text, 2) + "しない";
+				
 			} else {
 				throw new RuntimeException("makeInformalPresentNegativeFormForKanjiOrKana 1: " + text);	
 			}
@@ -1642,7 +1652,7 @@ public class VerbGrammaConjugater {
 			} else if (kana.endsWith("くる") == true) {
 				return removeChars(kana, 2) + "こ" + ruPostfixKana;
 				
-			} else if (kana.endsWith("する") == true) {
+			} else if (kana.endsWith("する") == true || kana.endsWith("為る") == true) {
 				return removeChars(kana, 2) + "できる";
 			} else {
 				throw new RuntimeException("makePotentialFormForKanjiOrKana 1: " + kana);	
@@ -1756,6 +1766,10 @@ public class VerbGrammaConjugater {
 				
 			} else if (kana.endsWith("する") == true) {
 				return removeChars(kana, 2) + "しよう";
+				
+			} else if (kana.endsWith("為る") == true) {
+				return removeChars(kana, 1) + "よう";
+				
 			} else {
 				throw new RuntimeException("makeVolitionalFormForKanjiOrKana 1: " + kana);	
 			}
@@ -2255,6 +2269,10 @@ public class VerbGrammaConjugater {
 				
 			} else if (kana.endsWith("する") == true) {
 				return removeChars(kana, 2) + "される";
+				
+			} else if (kana.endsWith("為る") == true) {
+				return removeChars(kana, 1) + "れる";
+				
 			} else {
 				throw new RuntimeException("makePassiveFormForKanjiOrKana 1: " + kana);	
 			}
@@ -2492,6 +2510,10 @@ public class VerbGrammaConjugater {
 				
 			} else if (kana.endsWith("する") == true) {
 				return removeChars(kana, 2) + "させる";
+				
+			} else if (kana.endsWith("為る") == true) { 
+				return removeChars(kana, 1) + "せる";
+				
 			} else {
 				throw new RuntimeException("makeCausativeFormForKanjiOrKana 1: " + kana);	
 			}
@@ -2754,6 +2776,10 @@ public class VerbGrammaConjugater {
 				
 			} else if (kana.endsWith("する") == true) {
 				return removeChars(kana, 2) + "させられる";
+				
+			} else if (kana.endsWith("為る") == true) {
+				return removeChars(kana, 1) + "せられる";
+				
 			} else {
 				throw new RuntimeException("makeCausativePassiveFormForKanjiOrKana 1: " + kana);	
 			}
