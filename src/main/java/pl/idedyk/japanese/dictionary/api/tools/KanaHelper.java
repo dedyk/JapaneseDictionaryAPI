@@ -528,6 +528,10 @@ public class KanaHelper {
 	}
 
 	public Map<String, KanaEntry> getKanaCache() {
+		return getKanaCache(false);
+	}
+	
+	public Map<String, KanaEntry> getKanaCache(boolean addIsNotUse) {
 
 		List<KanaEntry> allHiraganaEntries = getAllHiraganaKanaEntries();
 		List<KanaEntry> allKatakanaKanaEntries = getAllKatakanaKanaEntries();
@@ -537,7 +541,7 @@ public class KanaHelper {
 
 		for (KanaEntry kanaEntry : allHiraganaEntries) {
 			
-			if (kanaEntry.isUse() == false) {
+			if (addIsNotUse == false && kanaEntry.isUse() == false) {
 				continue;
 			}
 			
@@ -546,7 +550,7 @@ public class KanaHelper {
 
 		for (KanaEntry kanaEntry : allKatakanaKanaEntries) {
 			
-			if (kanaEntry.isUse() == false) {
+			if (addIsNotUse == false && kanaEntry.isUse() == false) {
 				continue;
 			}
 
@@ -555,7 +559,7 @@ public class KanaHelper {
 
 		for (KanaEntry kanaEntry : allAdditionalEntries) {
 			
-			if (kanaEntry.isUse() == false) {
+			if (addIsNotUse == false && kanaEntry.isUse() == false) {
 				continue;
 			}
 			
