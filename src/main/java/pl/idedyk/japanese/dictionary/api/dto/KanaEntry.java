@@ -20,12 +20,22 @@ public class KanaEntry implements Serializable {
 	private List<KanjivgEntry> strokePaths;
 	
 	private String image;
+	
+	private boolean use = true;
 
 	public KanaEntry(String kanaJapanese, String kana, KanaType kanaType, KanaGroup kanaGroup) {
 		this.kanaJapanese = kanaJapanese;
 		this.kana = kana;
 		this.kanaType = kanaType;
 		this.kanaGroup = kanaGroup;
+	}
+
+	public KanaEntry(String kanaJapanese, String kana, KanaType kanaType, KanaGroup kanaGroup, boolean use) {
+		this.kanaJapanese = kanaJapanese;
+		this.kana = kana;
+		this.kanaType = kanaType;
+		this.kanaGroup = kanaGroup;
+		this.use = use;
 	}
 	
 	public KanaEntry(String kanaJapanese, String kana, String kanaDisplay, KanaType kanaType, KanaGroup kanaGroup) {
@@ -80,6 +90,14 @@ public class KanaEntry implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public boolean isUse() {
+		return use;
+	}
+
+	public void setUse(boolean use) {
+		this.use = use;
 	}
 
 	public static enum KanaType {

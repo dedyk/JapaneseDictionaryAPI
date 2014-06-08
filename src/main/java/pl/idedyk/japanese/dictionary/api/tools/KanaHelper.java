@@ -167,6 +167,8 @@ public class KanaHelper {
 		hiraganaEntries.add(new KanaEntry("ろ", "ro", KanaType.HIRAGANA, KanaGroup.GOJUUON));
 
 		hiraganaEntries.add(new KanaEntry("わ", "wa", KanaType.HIRAGANA, KanaGroup.GOJUUON));
+		hiraganaEntries.add(new KanaEntry("ゐ", "wi", KanaType.HIRAGANA, KanaGroup.GOJUUON, false));
+		hiraganaEntries.add(new KanaEntry("ゑ", "we", KanaType.HIRAGANA, KanaGroup.GOJUUON, false));
 		hiraganaEntries.add(new KanaEntry("を", "wo", KanaType.HIRAGANA, KanaGroup.GOJUUON));
 
 		hiraganaEntries.add(new KanaEntry("ん", "n", KanaType.HIRAGANA, KanaGroup.GOJUUON));
@@ -248,6 +250,8 @@ public class KanaHelper {
 		hiraganaEntries.add(new KanaEntry("ぢゃ", "dya", KanaType.HIRAGANA, KanaGroup.YOUON));
 		hiraganaEntries.add(new KanaEntry("ぢゅ", "dyu", KanaType.HIRAGANA, KanaGroup.YOUON));
 		hiraganaEntries.add(new KanaEntry("ぢょ", "dyo", KanaType.HIRAGANA, KanaGroup.YOUON));
+		
+		hiraganaEntries.add(new KanaEntry("ゔ", "vu", KanaType.HIRAGANA, KanaGroup.DAKUTEN, false));
 		
 		hiraganaEntries.add(new KanaEntry("っ", "ttsu", KanaType.HIRAGANA, KanaGroup.SOKUON));
 
@@ -333,6 +337,8 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ロ", "ro", KanaType.KATAKANA, KanaGroup.GOJUUON));
 
 		katakanaEntries.add(new KanaEntry("ワ", "wa", KanaType.KATAKANA, KanaGroup.GOJUUON));
+		katakanaEntries.add(new KanaEntry("ヰ", "wi", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
+		katakanaEntries.add(new KanaEntry("ヱ", "we", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
 		katakanaEntries.add(new KanaEntry("ヲ", "wo", KanaType.KATAKANA, KanaGroup.GOJUUON));
 
 		katakanaEntries.add(new KanaEntry("ン", "n", KanaType.KATAKANA, KanaGroup.GOJUUON));
@@ -415,6 +421,30 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ウェ", "we", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ウォ", "wo", KanaType.KATAKANA, KanaGroup.YOUON));
 
+		katakanaEntries.add(new KanaEntry("ヷ", "va", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
+		katakanaEntries.add(new KanaEntry("ヸ", "vi", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
+		katakanaEntries.add(new KanaEntry("ヹ", "ve", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
+		katakanaEntries.add(new KanaEntry("ヺ", "vo", KanaType.KATAKANA, KanaGroup.GOJUUON, false));
+		
+		katakanaEntries.add(new KanaEntry("ヴァ", "va", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ヴィ", "vi", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ヴ", "vu", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ヴェ", "ve", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ヴォ", "vo", KanaType.KATAKANA, KanaGroup.YOUON));
+		
+		katakanaEntries.add(new KanaEntry("イェ", "ye", KanaType.KATAKANA, KanaGroup.YOUON));
+		
+		katakanaEntries.add(new KanaEntry("ファ", "fa", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("フィ", "fi", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("フェ", "fe", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("フォ", "fo", KanaType.KATAKANA, KanaGroup.YOUON));
+		
+		katakanaEntries.add(new KanaEntry("ティ", "ti", KanaType.KATAKANA, KanaGroup.YOUON));	
+		katakanaEntries.add(new KanaEntry("トゥ", "tu", KanaType.KATAKANA, KanaGroup.YOUON));
+		
+		katakanaEntries.add(new KanaEntry("ドゥ", "du", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("ディ", "di", KanaType.KATAKANA, KanaGroup.YOUON));
+
 		katakanaEntries.add(new KanaEntry("シェ", "she", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ジェ", "je", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("チェ", "che", KanaType.KATAKANA, KanaGroup.YOUON));
@@ -423,28 +453,15 @@ public class KanaHelper {
 		katakanaEntries.add(new KanaEntry("ツィ", "tsi", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ツェ", "tse", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ツォ", "tso", KanaType.KATAKANA, KanaGroup.YOUON));
-		
-		katakanaEntries.add(new KanaEntry("ファ", "fa", KanaType.KATAKANA, KanaGroup.YOUON));
-		katakanaEntries.add(new KanaEntry("フィ", "fi", KanaType.KATAKANA, KanaGroup.YOUON));
-		katakanaEntries.add(new KanaEntry("フェ", "fe", KanaType.KATAKANA, KanaGroup.YOUON));
-		katakanaEntries.add(new KanaEntry("フォ", "fo", KanaType.KATAKANA, KanaGroup.YOUON));
-
-		katakanaEntries.add(new KanaEntry("ティ", "ti", KanaType.KATAKANA, KanaGroup.YOUON));		
-		katakanaEntries.add(new KanaEntry("ディ", "di", KanaType.KATAKANA, KanaGroup.YOUON));
-		
-		katakanaEntries.add(new KanaEntry("トゥ", "tu", KanaType.KATAKANA, KanaGroup.YOUON));
-		katakanaEntries.add(new KanaEntry("ドゥ", "du", KanaType.KATAKANA, KanaGroup.YOUON));
-		
+							
 		katakanaEntries.add(new KanaEntry("ヂャ", "dya", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));
 		katakanaEntries.add(new KanaEntry("ヂョ", "dyo", KanaType.KATAKANA, KanaGroup.YOUON));
 		
-		katakanaEntries.add(new KanaEntry("デュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));
+		katakanaEntries.add(new KanaEntry("テュ", "tyu", KanaType.KATAKANA, KanaGroup.YOUON));
 		
-		katakanaEntries.add(new KanaEntry("ヴァ", "va", KanaType.KATAKANA, KanaGroup.OTHER));
-		katakanaEntries.add(new KanaEntry("ヴ", "vu", KanaType.KATAKANA, KanaGroup.OTHER));
-		katakanaEntries.add(new KanaEntry("ヴォ", "vo", KanaType.KATAKANA, KanaGroup.OTHER));
-
+		katakanaEntries.add(new KanaEntry("デュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));		
+		
 		katakanaEntries.add(new KanaEntry("ッ", "ttsu", KanaType.KATAKANA, KanaGroup.SOKUON));
 		katakanaEntries.add(new KanaEntry("ー", "ttsu2", KanaType.KATAKANA, KanaGroup.SOKUON));
 
@@ -519,14 +536,29 @@ public class KanaHelper {
 		Map<String, KanaEntry> kanaCache = new HashMap<String, KanaEntry>();
 
 		for (KanaEntry kanaEntry : allHiraganaEntries) {
+			
+			if (kanaEntry.isUse() == false) {
+				continue;
+			}
+			
 			kanaCache.put(kanaEntry.getKanaJapanese(), kanaEntry);
 		}
 
 		for (KanaEntry kanaEntry : allKatakanaKanaEntries) {
+			
+			if (kanaEntry.isUse() == false) {
+				continue;
+			}
+
 			kanaCache.put(kanaEntry.getKanaJapanese(), kanaEntry);
 		}
 
 		for (KanaEntry kanaEntry : allAdditionalEntries) {
+			
+			if (kanaEntry.isUse() == false) {
+				continue;
+			}
+			
 			kanaCache.put(kanaEntry.getKanaJapanese(), kanaEntry);
 		}
 
@@ -739,7 +771,7 @@ public class KanaHelper {
 
 				currentRestChars = "";
 			} else if (currentRestChars.equals("ya") == true || currentRestChars.equals("yu") == true
-					|| currentRestChars.equals("yo") == true) {
+					|| currentRestChars.equals("yo") == true || currentRestChars.equals("ye") == true) {
 
 				KanaEntry kanaEntry = hiraganaCache.get(currentRestChars);
 
@@ -1073,7 +1105,7 @@ public class KanaHelper {
 				currentRestChars = "";
 			} else if (currentRestChars.equals("fu") == true || currentRestChars.equals("fa") == true
 					|| currentRestChars.equals("fi") == true || currentRestChars.equals("fe") == true
-					|| currentRestChars.equals("fo") == true) {
+					|| currentRestChars.equals("fo") == true || currentRestChars.equals("fyu") == true) {
 
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
@@ -1086,7 +1118,8 @@ public class KanaHelper {
 				currentRestChars = "";
 			
 			} else if (currentRestChars.equals("tsa") == true || currentRestChars.equals("tsi") == true
-					|| currentRestChars.equals("tse") == true || currentRestChars.equals("tso") == true) {
+					|| currentRestChars.equals("tse") == true || currentRestChars.equals("tso") == true
+					|| currentRestChars.equals("tyu") == true) {
 				
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
@@ -1149,7 +1182,8 @@ public class KanaHelper {
 				kanaEntries.add(kanaEntry);
 
 				currentRestChars = "";
-			} else if (currentRestChars.equals("va") == true || currentRestChars.equals("vu") == true || currentRestChars.equals("vo") == true) {
+			} else if (currentRestChars.equals("va") == true || currentRestChars.equals("vi") == true || currentRestChars.equals("vu") == true 
+					|| currentRestChars.equals("ve") == true || currentRestChars.equals("vo") == true) {
 
 				KanaEntry kanaEntry = kitakanaCache.get(currentRestChars);
 
