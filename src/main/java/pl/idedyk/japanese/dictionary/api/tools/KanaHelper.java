@@ -462,6 +462,8 @@ public class KanaHelper {
 		
 		katakanaEntries.add(new KanaEntry("デュ", "dyu", KanaType.KATAKANA, KanaGroup.YOUON));		
 		
+		katakanaEntries.add(new KanaEntry("フュ", "fyu", KanaType.KATAKANA, KanaGroup.YOUON));
+		
 		katakanaEntries.add(new KanaEntry("ッ", "ttsu", KanaType.KATAKANA, KanaGroup.SOKUON));
 		katakanaEntries.add(new KanaEntry("ー", "ttsu2", KanaType.KATAKANA, KanaGroup.SOKUON));
 
