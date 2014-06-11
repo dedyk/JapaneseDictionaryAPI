@@ -42,4 +42,75 @@ public class FindWordRequest implements Serializable {
 				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples + ", wordPlaceSearch="
 				+ wordPlaceSearch + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		
+		int result = 1;
+		
+		result = prime * result + ((dictionaryEntryTypeList == null) ? 0 : dictionaryEntryTypeList.hashCode());
+		result = prime * result + (searchGrammaFormAndExamples ? 1231 : 1237);
+		result = prime * result + (searchInfo ? 1231 : 1237);
+		result = prime * result + (searchKana ? 1231 : 1237);
+		result = prime * result + (searchKanji ? 1231 : 1237);
+		result = prime * result + (searchRomaji ? 1231 : 1237);
+		result = prime * result + (searchTranslate ? 1231 : 1237);
+		result = prime * result + ((word == null) ? 0 : word.hashCode());
+		result = prime * result + ((wordPlaceSearch == null) ? 0 : wordPlaceSearch.hashCode());
+		
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		
+		if (obj == null)
+			return false;
+		
+		if (getClass() != obj.getClass())
+			return false;
+		
+		FindWordRequest other = (FindWordRequest) obj;
+		
+		if (dictionaryEntryTypeList == null) {
+			if (other.dictionaryEntryTypeList != null)
+				return false;
+		
+		} else if (!dictionaryEntryTypeList.equals(other.dictionaryEntryTypeList))
+			return false;
+		
+		if (searchGrammaFormAndExamples != other.searchGrammaFormAndExamples)
+			return false;
+		
+		if (searchInfo != other.searchInfo)
+			return false;
+		
+		if (searchKana != other.searchKana)
+			return false;
+		
+		if (searchKanji != other.searchKanji)
+			return false;
+		
+		if (searchRomaji != other.searchRomaji)
+			return false;
+		
+		if (searchTranslate != other.searchTranslate)
+			return false;
+		
+		if (word == null) {
+			if (other.word != null)
+				return false;
+		
+		} else if (!word.equals(other.word))
+			return false;
+		
+		if (wordPlaceSearch != other.wordPlaceSearch)
+			return false;
+		
+		return true;
+	}	
 }
