@@ -112,5 +112,45 @@ public class FindWordRequest implements Serializable {
 			return false;
 		
 		return true;
-	}	
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getWord() {
+		return word;
+	}
+
+	public boolean isSearchKanji() {
+		return searchKanji;
+	}
+
+	public boolean isSearchKana() {
+		return searchKana;
+	}
+
+	public boolean isSearchRomaji() {
+		return searchRomaji;
+	}
+
+	public boolean isSearchTranslate() {
+		return searchTranslate;
+	}
+
+	public boolean isSearchInfo() {
+		return searchInfo;
+	}
+
+	public boolean isSearchGrammaFormAndExamples() {
+		return searchGrammaFormAndExamples;
+	}
+
+	public WordPlaceSearch getWordPlaceSearch() {
+		return wordPlaceSearch;
+	}
+
+	public List<DictionaryEntryType> getDictionaryEntryTypeList() {
+		return dictionaryEntryTypeList;
+	}
 }
