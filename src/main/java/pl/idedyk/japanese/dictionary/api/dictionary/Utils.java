@@ -15,7 +15,7 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 
 public class Utils {
 
-	public static int MAX_LIST_SIZE = 15;
+	public static int MAX_LIST_SIZE = 18;
 
 	public static List<String> parseStringIntoList(String text, boolean limitSize) {
 
