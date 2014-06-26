@@ -237,4 +237,24 @@ public class Utils {
 
 		return pattern.matcher(text).find();
 	}
+	
+	public static boolean isKanji(char c) {
+		return (c >= 0x4e00 && c < 0xa000) || c == '\u3005';
+	}
+
+	public static boolean isKatakana(char c) {
+		return (c >= 0x30a0 && c < 0x3100);
+	}
+
+	public static boolean isHiragana(char c) {
+		return (c >= 0x3040 && c < 0x30a0);
+	}
+
+	public static boolean isKana(char c) {
+		return (c >= 0x3040 && c < 0x3100);
+	}
+	
+	public static boolean isJapanaseChar(char c) {
+		return isHiragana(c) || isKatakana(c) || isKana(c) || isKanji(c);
+	}
 }
