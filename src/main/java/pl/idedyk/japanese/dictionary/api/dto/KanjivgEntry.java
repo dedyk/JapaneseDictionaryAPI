@@ -7,6 +7,8 @@ public class KanjivgEntry implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private String kanji;
+	
 	private List<String> strokePaths;
 	
 	public KanjivgEntry() {
@@ -22,5 +24,13 @@ public class KanjivgEntry implements Serializable {
 
 	public void setStrokePaths(List<String> strokePaths) {
 		this.strokePaths = strokePaths;
+	}
+
+	public String getKanji() {
+		return kanji;
+	}
+
+	public void setKanji(String kanji) {
+		this.kanji = kanji;
 	}
 }
