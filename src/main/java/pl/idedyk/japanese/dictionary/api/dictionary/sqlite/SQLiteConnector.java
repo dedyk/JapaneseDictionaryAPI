@@ -473,8 +473,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 	}
 
 	@Override
-	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean addGenerated) throws DictionaryException {
+	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean addGenerated, boolean onlyWithKanjivgEntry) throws DictionaryException {
 
+		if (onlyWithKanjivgEntry == true) {
+			throw new UnsupportedOperationException("onlyWithKanjivgEntry = true");
+		}
+		
 		KanjiEntry kanjiEntry = null;
 
 		Cursor cursor = null;
