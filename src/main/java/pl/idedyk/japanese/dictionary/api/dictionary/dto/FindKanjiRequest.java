@@ -14,6 +14,8 @@ public class FindKanjiRequest implements Serializable {
 	
 	public Integer strokeCountTo = null;
 	
+	public boolean searchOnlyTop2500 = false;
+	
 	public static enum WordPlaceSearch {
 		ANY_PLACE,
 		
@@ -25,16 +27,17 @@ public class FindKanjiRequest implements Serializable {
 	@Override
 	public String toString() {
 		return "FindKanjiRequest [word=" + word + ", wordPlaceSearch=" + wordPlaceSearch + ", strokeCountFrom="
-				+ strokeCountFrom + ", strokeCountTo=" + strokeCountTo + "]";
+				+ strokeCountFrom + ", strokeCountTo=" + strokeCountTo + ", searchOnlyTop2500=" + searchOnlyTop2500
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
-		
 		final int prime = 31;
 		
 		int result = 1;
 		
+		result = prime * result + (searchOnlyTop2500 ? 1231 : 1237);
 		result = prime * result + ((strokeCountFrom == null) ? 0 : strokeCountFrom.hashCode());
 		result = prime * result + ((strokeCountTo == null) ? 0 : strokeCountTo.hashCode());
 		result = prime * result + ((word == null) ? 0 : word.hashCode());
@@ -45,7 +48,6 @@ public class FindKanjiRequest implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		
 		if (this == obj)
 			return true;
 		
@@ -57,6 +59,9 @@ public class FindKanjiRequest implements Serializable {
 		
 		FindKanjiRequest other = (FindKanjiRequest) obj;
 		
+		if (searchOnlyTop2500 != other.searchOnlyTop2500)
+			return false;
+		
 		if (strokeCountFrom == null) {
 			if (other.strokeCountFrom != null)
 				return false;
@@ -67,7 +72,6 @@ public class FindKanjiRequest implements Serializable {
 		if (strokeCountTo == null) {
 			if (other.strokeCountTo != null)
 				return false;
-		
 		} else if (!strokeCountTo.equals(other.strokeCountTo))
 			return false;
 		

@@ -23,6 +23,8 @@ public class FindWordRequest implements Serializable {
 	
 	public boolean searchGrammaFormAndExamples = false;
 	
+	public boolean searchOnlyCommonWord = false;
+	
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
 		
 	public List<DictionaryEntryType> dictionaryEntryTypeList = null;
@@ -39,8 +41,9 @@ public class FindWordRequest implements Serializable {
 	public String toString() {
 		return "FindWordRequest [word=" + word + ", searchKanji=" + searchKanji + ", searchKana=" + searchKana
 				+ ", searchRomaji=" + searchRomaji + ", searchTranslate=" + searchTranslate + ", searchInfo="
-				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples + ", wordPlaceSearch="
-				+ wordPlaceSearch + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
+				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples
+				+ ", searchOnlyCommonWord=" + searchOnlyCommonWord + ", wordPlaceSearch=" + wordPlaceSearch
+				+ ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
 	}
 
 	@Override
@@ -51,6 +54,7 @@ public class FindWordRequest implements Serializable {
 		
 		result = prime * result + ((dictionaryEntryTypeList == null) ? 0 : dictionaryEntryTypeList.hashCode());
 		result = prime * result + (searchGrammaFormAndExamples ? 1231 : 1237);
+		result = prime * result + (searchOnlyCommonWord ? 1231 : 1237);
 		result = prime * result + (searchInfo ? 1231 : 1237);
 		result = prime * result + (searchKana ? 1231 : 1237);
 		result = prime * result + (searchKanji ? 1231 : 1237);
@@ -84,6 +88,9 @@ public class FindWordRequest implements Serializable {
 			return false;
 		
 		if (searchGrammaFormAndExamples != other.searchGrammaFormAndExamples)
+			return false;
+
+		if (searchOnlyCommonWord != other.searchOnlyCommonWord)
 			return false;
 		
 		if (searchInfo != other.searchInfo)
@@ -140,6 +147,10 @@ public class FindWordRequest implements Serializable {
 
 	public boolean isSearchInfo() {
 		return searchInfo;
+	}
+
+	public boolean isSearchOnlyCommonWord() {
+		return searchOnlyCommonWord;
 	}
 
 	public boolean isSearchGrammaFormAndExamples() {
