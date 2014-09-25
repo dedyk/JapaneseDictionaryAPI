@@ -9,6 +9,8 @@ public class TatoebaSentence implements Serializable {
 
 	private String id;
 	
+	private String groupId;
+	
 	private String lang;
 	
 	private String sentence;
@@ -21,6 +23,14 @@ public class TatoebaSentence implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getLang() {
