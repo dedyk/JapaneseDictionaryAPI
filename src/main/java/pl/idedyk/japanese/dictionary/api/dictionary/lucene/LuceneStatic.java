@@ -27,6 +27,11 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_exampleSentence_lang = "dictionaryEntry_exampleSentence_lang";
 	public static final String dictionaryEntry_exampleSentence_sentence = "dictionaryEntry_exampleSentence_sentence";
 	
+	public static final String dictionaryEntry_exampleSentenceGroups_objectType = "dictionaryEntry_exampleSentenceGroups";
+	
+	public static final String dictionaryEntry_exampleSentenceGroups_groupId = "dictionaryEntry_exampleSentenceGroups_groupId";
+	public static final String dictionaryEntry_exampleSentenceGroups_sentenceIdList = "dictionaryEntry_exampleSentenceGroups_sentenceIdList";
+	
 	public static final String dictionaryEntry_sugestionList = "dictionaryEntry_sugestionList";
 	
 	public static final String kanjiEntry_objectType = "kanjiEntry";
