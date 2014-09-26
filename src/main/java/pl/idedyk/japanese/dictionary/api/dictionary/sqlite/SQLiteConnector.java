@@ -107,9 +107,11 @@ public class SQLiteConnector implements IDatabaseConnector {
 				infoString = infoStringList.get(0);
 			}
 
+			// INFO: przykladowe zdania nie sa wspierane
+			
 			DictionaryEntry entry = Utils.parseDictionaryEntry(idString, dictionaryEntryTypeList, attributeList,
 					groupsList, prefixKanaString, kanjiString, kanaList, prefixRomajiString, romajiList, translateList,
-					infoString);
+					infoString, new ArrayList<String>());
 
 			return entry;
 		} finally {
@@ -151,10 +153,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 			if (infoStringList != null && infoStringList.size() > 0) {
 				infoString = infoStringList.get(0);
 			}
+			
+			// INFO: przykladowe zdania nie sa wspierane
 
 			DictionaryEntry entry = Utils.parseDictionaryEntry(idString, dictionaryEntryTypeList, attributeList,
 					groupsList, prefixKanaString, kanjiString, kanaList, prefixRomajiString, romajiList, translateList,
-					infoString);
+					infoString, new ArrayList<String>());
 
 			return entry;
 		} finally {
@@ -400,10 +404,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 				if (infoStringList != null && infoStringList.size() > 0) {
 					infoString = infoStringList.get(0);
 				}
+				
+				// INFO: przykladowe zdania nie sa wspierane
 
 				DictionaryEntry entry = Utils.parseDictionaryEntry(idString, dictionaryEntryTypeList, attributeList,
 						groupsList, prefixKanaString, kanjiString, kanaList, prefixRomajiString, romajiList,
-						translateList, infoString);
+						translateList, infoString, new ArrayList<String>());
 
 				findWordResult.result.add(new FindWordResult.ResultItem(entry));
 
@@ -1239,10 +1245,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 				if (infoStringList != null && infoStringList.size() > 0) {
 					infoString = infoStringList.get(0);
 				}
+				
+				// INFO: przykladowe zdania nie sa wspierane
 
 				DictionaryEntry entry = Utils.parseDictionaryEntry(idString, dictionaryEntryTypeList, attributeList,
 						groupsList, prefixKanaString, kanjiString, kanaList, prefixRomajiString, romajiList,
-						translateList, infoString);
+						translateList, infoString, new ArrayList<String>());
 
 				result.add(entry);
 

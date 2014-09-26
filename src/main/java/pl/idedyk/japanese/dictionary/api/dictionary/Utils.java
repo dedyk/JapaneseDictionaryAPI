@@ -64,7 +64,7 @@ public class Utils {
 	public static DictionaryEntry parseDictionaryEntry(String idString, Object dictionaryEntryTypeObject,
 			Object attributesObject, Object groupsObject, String prefixKanaString, String kanjiString,
 			Object kanaListObject, String prefixRomajiString, Object romajiListObject, Object translateListObject,
-			String infoString) throws DictionaryException {
+			String infoString, Object exampleSentenceGroupIdsListObject) throws DictionaryException {
 
 		if (kanjiString.equals("") == true || kanjiString.equals("-") == true) {
 			kanjiString = null;
@@ -125,6 +125,12 @@ public class Utils {
 		}
 
 		entry.setInfo(infoString);
+		
+		if (exampleSentenceGroupIdsListObject instanceof String) {
+			entry.setExampleSentenceGroupIdsList(parseStringIntoList((String) exampleSentenceGroupIdsListObject, false));			
+		} else {
+			entry.setTranslates(convertToListString(exampleSentenceGroupIdsListObject));
+		}
 
 		return entry;
 	}

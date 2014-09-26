@@ -19,6 +19,7 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_translatesListWithoutPolishChars = "dictionaryEntry_translatesListWithoutPolishChars";
 	public static final String dictionaryEntry_info = "dictionaryEntry_info";
 	public static final String dictionaryEntry_infoWithoutPolishChars = "dictionaryEntry_infoWithoutPolishChars";
+	public static final String dictionaryEntry_exampleSentenceGroupIdsList = "dictionaryEntry_exampleSentenceGroupIdsList";
 	
 	public static final String dictionaryEntry_sugestionList = "dictionaryEntry_sugestionList";
 	
