@@ -19,6 +19,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultIte
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
+import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupTypeElements;
@@ -1417,5 +1418,10 @@ public class SQLiteConnector implements IDatabaseConnector {
 		}
 
 		return findKanjiResult;
+	}
+
+	@Override
+	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException {
+		throw new UnsupportedOperationException();
 	}
 }

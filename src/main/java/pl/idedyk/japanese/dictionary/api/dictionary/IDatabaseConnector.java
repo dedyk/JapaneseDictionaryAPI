@@ -9,6 +9,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
+import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 
@@ -40,4 +41,6 @@ public interface IDatabaseConnector {
 	public List<GroupEnum> getDictionaryEntryGroupTypes();
 	
 	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException;
+	
+	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException;
 }
