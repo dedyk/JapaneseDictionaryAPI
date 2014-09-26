@@ -17,6 +17,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultIte
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
+import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.dto.KanaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiDic2Entry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
@@ -810,6 +811,15 @@ public abstract class DictionaryManagerAbstract {
 
 		try {
 			return databaseConnector.getGroupDictionaryEntries(groupName);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) {
+		
+		try {
+			return databaseConnector.getTatoebaSentenceGroup(groupId);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
