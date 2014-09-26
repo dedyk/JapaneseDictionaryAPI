@@ -8,7 +8,7 @@ public class LuceneStatic {
 	
 	public static final String dictionaryEntry_id = "dictionaryEntry_id";
 	public static final String dictionaryEntry_dictionaryEntryTypeList = "dictionaryEntry_dictionaryEntryTypeList";
-	public static final String dictionaryEntry_attributeList = "dictionaryEntryattributeList";
+	public static final String dictionaryEntry_attributeList = "dictionaryEntry_attributeList";
 	public static final String dictionaryEntry_groupsList = "dictionaryEntry_groupsList";
 	public static final String dictionaryEntry_prefixKana = "dictionaryEntry_prefixKana";
 	public static final String dictionaryEntry_kanji = "dictionaryEntry_kanji";
@@ -20,6 +20,12 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_info = "dictionaryEntry_info";
 	public static final String dictionaryEntry_infoWithoutPolishChars = "dictionaryEntry_infoWithoutPolishChars";
 	public static final String dictionaryEntry_exampleSentenceGroupIdsList = "dictionaryEntry_exampleSentenceGroupIdsList";
+	
+	public static final String dictionaryEntry_exampleSentence_objectType = "dictionaryEntry_exampleSentence";
+	
+	public static final String dictionaryEntry_exampleSentence_id = "dictionaryEntry_exampleSentence_id";
+	public static final String dictionaryEntry_exampleSentence_lang = "dictionaryEntry_exampleSentence_lang";
+	public static final String dictionaryEntry_exampleSentence_sentence = "dictionaryEntry_exampleSentence_sentence";
 	
 	public static final String dictionaryEntry_sugestionList = "dictionaryEntry_sugestionList";
 	

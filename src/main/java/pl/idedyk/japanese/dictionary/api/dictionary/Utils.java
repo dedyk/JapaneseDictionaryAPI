@@ -129,9 +129,9 @@ public class Utils {
 		if (exampleSentenceGroupIdsListObject instanceof String) {
 			entry.setExampleSentenceGroupIdsList(parseStringIntoList((String) exampleSentenceGroupIdsListObject, false));			
 		} else {
-			entry.setTranslates(convertToListString(exampleSentenceGroupIdsListObject));
+			entry.setExampleSentenceGroupIdsList(convertToListString(exampleSentenceGroupIdsListObject));
 		}
-
+				
 		return entry;
 	}
 
