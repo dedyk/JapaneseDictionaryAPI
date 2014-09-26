@@ -32,6 +32,8 @@ public class DictionaryEntry implements Serializable {
 
 	private String info;
 	
+	private List<String> exampleSentenceGroupIdsList;
+	
 	public DictionaryEntryType getDictionaryEntryType() {
 		return dictionaryEntryTypeList.get(0);
 	}
@@ -189,6 +191,14 @@ public class DictionaryEntry implements Serializable {
 		this.wordType = wordType;
 	}
 	
+	public List<String> getExampleSentenceGroupIdsList() {
+		return exampleSentenceGroupIdsList;
+	}
+
+	public void setExampleSentenceGroupIdsList(List<String> exampleSentenceGroupIdsList) {
+		this.exampleSentenceGroupIdsList = exampleSentenceGroupIdsList;
+	}
+
 	@Override
 	public String toString() {
 		return "DictionaryEntry [id=" + id + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList
