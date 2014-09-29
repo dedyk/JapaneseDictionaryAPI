@@ -21,6 +21,18 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_infoWithoutPolishChars = "dictionaryEntry_infoWithoutPolishChars";
 	public static final String dictionaryEntry_exampleSentenceGroupIdsList = "dictionaryEntry_exampleSentenceGroupIdsList";
 	
+	public static final String dictionaryEntry_grammaConjufateResult_objectType = "dictionaryEntry_grammaConjufateResult";
+	
+	public static final String dictionaryEntry_grammaConjufateResult_dictionaryEntry_id = "dictionaryEntry_grammaConjufateResult_dictionaryEntry_id";
+	public static final String dictionaryEntry_grammaConjufateResult_kanji = "dictionaryEntry_grammaConjufateResult_kanji";
+	public static final String dictionaryEntry_grammaConjufateResult_kanaList = "dictionaryEntry_grammaConjufateResult_kanaList";
+	public static final String dictionaryEntry_grammaConjufateResult_romajiList = "dictionaryEntry_grammaConjufateResult_romajiList";
+
+	public static final String dictionaryEntry_exampleResult_dictionaryEntry_id = "dictionaryEntry_exampleResult_dictionaryEntry_id";
+	public static final String dictionaryEntry_exampleResult_kanji = "dictionaryEntry_exampleResult_kanji";
+	public static final String dictionaryEntry_exampleResult_kanaList = "dictionaryEntry_exampleResult_kanaList";
+	public static final String dictionaryEntry_exampleResult_romajiList = "dictionaryEntry_exampleResult_romajiList";
+	
 	public static final String dictionaryEntry_exampleSentence_objectType = "dictionaryEntry_exampleSentence";
 	
 	public static final String dictionaryEntry_exampleSentence_id = "dictionaryEntry_exampleSentence_id";
