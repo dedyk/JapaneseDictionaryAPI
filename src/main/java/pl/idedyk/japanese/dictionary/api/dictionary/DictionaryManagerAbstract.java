@@ -59,7 +59,7 @@ public abstract class DictionaryManagerAbstract {
 			List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
 
 			for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-				DictionaryEntry currentDictionaryEntry = databaseConnector.getNthDictionaryEntry(idx);
+				DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryById(String.valueOf(idx + 1));
 
 				result.add(currentDictionaryEntry);
 			}
