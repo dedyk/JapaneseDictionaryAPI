@@ -28,6 +28,8 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_grammaConjufateResult_kanaList = "dictionaryEntry_grammaConjufateResult_kanaList";
 	public static final String dictionaryEntry_grammaConjufateResult_romajiList = "dictionaryEntry_grammaConjufateResult_romajiList";
 
+	public static final String dictionaryEntry_exampleResult_objectType = "dictionaryEntry_exampleResult";
+	
 	public static final String dictionaryEntry_exampleResult_dictionaryEntry_id = "dictionaryEntry_exampleResult_dictionaryEntry_id";
 	public static final String dictionaryEntry_exampleResult_kanji = "dictionaryEntry_exampleResult_kanji";
 	public static final String dictionaryEntry_exampleResult_kanaList = "dictionaryEntry_exampleResult_kanaList";
