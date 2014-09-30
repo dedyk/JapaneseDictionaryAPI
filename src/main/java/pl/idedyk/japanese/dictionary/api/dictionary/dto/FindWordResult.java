@@ -15,6 +15,8 @@ public class FindWordResult implements Serializable {
 	public List<ResultItem> result;
 	
 	public boolean moreElemetsExists = false;
+	
+	public boolean foundGrammaAndExamples = false;
 
 	public List<ResultItem> getResult() {
 		return result;
@@ -30,6 +32,14 @@ public class FindWordResult implements Serializable {
 
 	public void setMoreElemetsExists(boolean moreElemetsExists) {
 		this.moreElemetsExists = moreElemetsExists;
+	}
+
+	public boolean isFoundGrammaAndExamples() {
+		return foundGrammaAndExamples;
+	}
+
+	public void setFoundGrammaAndExamples(boolean foundGrammaAndExamples) {
+		this.foundGrammaAndExamples = foundGrammaAndExamples;
 	}
 
 	public static class ResultItem implements Serializable {
