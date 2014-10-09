@@ -79,6 +79,8 @@ public enum DictionaryEntryType {
 
 	WORD_SURNAME_NAME("nazwisko"),
 
+	WORD_PERSON("osoba"),
+	
 	WORD_CONJUNCTION("spójnik"),
 
 	WORD_PARTICULE("partykuła"),
