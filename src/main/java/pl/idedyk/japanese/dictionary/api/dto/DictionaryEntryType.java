@@ -81,6 +81,10 @@ public enum DictionaryEntryType {
 
 	WORD_PERSON("osoba"),
 	
+	WORD_STATION_NAME("nazwa stacji"),
+	
+	WORD_PLACE("nazwa miejsca"),
+	
 	WORD_CONJUNCTION("spójnik"),
 
 	WORD_PARTICULE("partykuła"),
