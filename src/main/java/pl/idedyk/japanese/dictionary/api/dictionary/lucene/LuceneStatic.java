@@ -40,6 +40,18 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_exampleSentenceGroups_sentenceIdList = "dictionaryEntry_exampleSentenceGroups_sentenceIdList";
 	
 	public static final String dictionaryEntry_sugestionList = "dictionaryEntry_sugestionList";
+		
+	public static final String nameDictionaryEntry_objectType = "nameDictionaryEntry";
+	
+	public static final String nameDictionaryEntry_id = "nameDictionaryEntry_id";
+	public static final String nameDictionaryEntry_dictionaryEntryTypeList = "nameDictionaryEntry_dictionaryEntryTypeList";
+	public static final String nameDictionaryEntry_kanji = "nameDictionaryEntry_kanji";
+	public static final String nameDictionaryEntry_kanaList = "nameDictionaryEntry_kanaList";
+	public static final String nameDictionaryEntry_romajiList = "nameDictionaryEntry_romajiList";
+	public static final String nameDictionaryEntry_translatesList = "nameDictionaryEntry_translatesList";
+	public static final String nameDictionaryEntry_translatesListWithoutPolishChars = "nameDictionaryEntry_translatesListWithoutPolishChars";
+	public static final String nameDictionaryEntry_info = "nameDictionaryEntry_info";
+	public static final String nameDictionaryEntry_infoWithoutPolishChars = "nameDictionaryEntry_infoWithoutPolishChars";
 	
 	public static final String kanjiEntry_objectType = "kanjiEntry";
 	
