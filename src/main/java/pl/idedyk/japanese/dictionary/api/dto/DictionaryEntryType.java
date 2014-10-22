@@ -145,6 +145,9 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_MALE_NAME);
 		addableDictionaryEntryList.add(WORD_FEMALE_NAME);
 		addableDictionaryEntryList.add(WORD_SURNAME_NAME);
+		addableDictionaryEntryList.add(WORD_PERSON);
+		addableDictionaryEntryList.add(WORD_STATION_NAME);
+		addableDictionaryEntryList.add(WORD_PLACE);
 	}
 
 	public static boolean isAddableDictionaryEntryTypeInfo(DictionaryEntryType dictionaryEntryType) {
