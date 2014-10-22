@@ -44,5 +44,5 @@ public interface IDatabaseConnector {
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException;
 
-	public void findDictionaryEntriesInNames(FindWordRequest findWordRequest, FindWordResult findWordResult);
+	public void findDictionaryEntriesInNames(FindWordRequest findWordRequest, FindWordResult findWordResult) throws DictionaryException;
 }
