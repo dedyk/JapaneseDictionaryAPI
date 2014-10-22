@@ -1,6 +1,8 @@
 package pl.idedyk.japanese.dictionary.api.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public enum DictionaryEntryType {
@@ -148,6 +150,15 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_PERSON);
 		addableDictionaryEntryList.add(WORD_STATION_NAME);
 		addableDictionaryEntryList.add(WORD_PLACE);
+		
+		Collections.sort(addableDictionaryEntryList, new Comparator<DictionaryEntryType>() {
+
+			@Override
+			public int compare(DictionaryEntryType o1, DictionaryEntryType o2) {
+				
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
 	}
 
 	public static boolean isAddableDictionaryEntryTypeInfo(DictionaryEntryType dictionaryEntryType) {
