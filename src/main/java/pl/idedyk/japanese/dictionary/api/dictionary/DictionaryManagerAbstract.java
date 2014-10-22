@@ -78,6 +78,8 @@ public abstract class DictionaryManagerAbstract {
 			findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
 			databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
+			
+			databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
 
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
