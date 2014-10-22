@@ -1424,4 +1424,9 @@ public class SQLiteConnector implements IDatabaseConnector {
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public void findDictionaryEntriesInNames(FindWordRequest findWordRequest, FindWordResult findWordResult) {
+		throw new UnsupportedOperationException();		
+	}
 }
