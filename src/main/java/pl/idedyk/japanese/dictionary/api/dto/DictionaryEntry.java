@@ -34,6 +34,8 @@ public class DictionaryEntry implements Serializable {
 	
 	private List<String> exampleSentenceGroupIdsList;
 	
+	private boolean name = false;
+	
 	public DictionaryEntryType getDictionaryEntryType() {
 		return dictionaryEntryTypeList.get(0);
 	}
@@ -199,11 +201,20 @@ public class DictionaryEntry implements Serializable {
 		this.exampleSentenceGroupIdsList = exampleSentenceGroupIdsList;
 	}
 
+	public boolean isName() {
+		return name;
+	}
+
+	public void setName(boolean name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
 		return "DictionaryEntry [id=" + id + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList
 				+ ", attributeList=" + attributeList + ", wordType=" + wordType + ", groups=" + groups
 				+ ", prefixKana=" + prefixKana + ", kanji=" + kanji + ", kanaList=" + kanaList + ", prefixRomaji="
-				+ prefixRomaji + ", romajiList=" + romajiList + ", translates=" + translates + ", info=" + info + "]";
+				+ prefixRomaji + ", romajiList=" + romajiList + ", translates=" + translates + ", info=" + info
+				+ ", exampleSentenceGroupIdsList=" + exampleSentenceGroupIdsList + ", name=" + name + "]";
 	}
 }
