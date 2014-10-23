@@ -69,6 +69,25 @@ public abstract class DictionaryManagerAbstract {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public List<DictionaryEntry> getWordsNameGroup(int groupSize, int groupNo) {
+
+		try {
+			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesNameSize();
+
+			List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+
+			for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
+				DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryNameById(String.valueOf(idx + 1));
+
+				result.add(currentDictionaryEntry);
+			}
+
+			return result;
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	public FindWordResult findWord(final FindWordRequest findWordRequest) {
 
