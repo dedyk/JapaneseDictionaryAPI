@@ -258,6 +258,14 @@ public abstract class DictionaryManagerAbstract {
 		}
 	}
 	
+	public DictionaryEntry getDictionaryEntryNameById(int id) {
+		try {
+			return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public List<KanjiEntry> findKnownKanji(String text) {
 
 		List<KanjiEntry> result = new ArrayList<KanjiEntry>();

@@ -119,6 +119,11 @@ public class SQLiteConnector implements IDatabaseConnector {
 			cursor.close();
 		}
 	}
+	
+	@Override
+	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException {
+		throw new UnsupportedOperationException();		
+	}
 
 	@Override
 	public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException {
