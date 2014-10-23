@@ -75,6 +75,11 @@ public class SQLiteConnector implements IDatabaseConnector {
 	}
 
 	@Override
+	public int getDictionaryEntriesNameSize() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException {
 
 		Cursor cursor = null;

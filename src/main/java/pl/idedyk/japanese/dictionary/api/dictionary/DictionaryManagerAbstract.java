@@ -250,6 +250,10 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntriesSize();
 	}
 
+	public int getDictionaryEntriesNameSize() {
+		return databaseConnector.getDictionaryEntriesNameSize();
+	}
+	
 	public DictionaryEntry getDictionaryEntryById(int id) {
 		try {
 			return databaseConnector.getDictionaryEntryById(String.valueOf(id));
