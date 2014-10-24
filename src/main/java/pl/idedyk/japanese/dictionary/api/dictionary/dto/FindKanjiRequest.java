@@ -8,7 +8,7 @@ public class FindKanjiRequest implements Serializable {
 
 	public String word;
 		
-	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
+	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.START_WITH;
 	
 	public Integer strokeCountFrom = null;
 	
@@ -17,7 +17,7 @@ public class FindKanjiRequest implements Serializable {
 	public boolean searchOnlyTop2500 = false;
 	
 	public static enum WordPlaceSearch {
-		ANY_PLACE,
+		//ANY_PLACE,
 		
 		START_WITH,
 		

@@ -27,12 +27,12 @@ public class FindWordRequest implements Serializable {
 	
 	public boolean searchName = false;
 	
-	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.ANY_PLACE;
+	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.START_WITH;
 		
 	public List<DictionaryEntryType> dictionaryEntryTypeList = null;
 	
 	public static enum WordPlaceSearch {
-		ANY_PLACE,
+		//ANY_PLACE,
 		
 		START_WITH,
 		
