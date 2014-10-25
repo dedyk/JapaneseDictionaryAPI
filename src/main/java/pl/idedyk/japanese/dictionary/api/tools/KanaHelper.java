@@ -1347,8 +1347,8 @@ public class KanaHelper {
 
 					continue;
 				} else {
-					if (ignoreUnknownChars == false) {
-						throw new RuntimeException(kana);
+					if (ignoreUnknownChars == false && nextSingleKanaPart.equals("・") == false) {
+						throw new RuntimeException(kana + " - " + nextSingleKanaPart);
 					}
 
 					pos += 1;
