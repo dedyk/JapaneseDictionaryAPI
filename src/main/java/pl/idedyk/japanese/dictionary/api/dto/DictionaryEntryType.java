@@ -80,6 +80,8 @@ public enum DictionaryEntryType {
 	WORD_FEMALE_NAME("imię żeńskie"),
 
 	WORD_SURNAME_NAME("nazwisko"),
+	
+	WORD_UNCLASS_NAME("bezklasowa nazwa"),
 
 	WORD_PERSON("osoba"),
 	
