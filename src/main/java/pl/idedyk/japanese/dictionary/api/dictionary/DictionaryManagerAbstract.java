@@ -333,6 +333,14 @@ public abstract class DictionaryManagerAbstract {
 		}
 	}
 	
+	public KanjiEntry getKanjiEntryById(int id) {
+		try {
+			return databaseConnector.getKanjiEntryById(String.valueOf(id));
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public abstract List<RadicalInfo> getRadicalList();
 	
 	public List<KanjiEntry> findKnownKanjiFromRadicals(String[] radicals) {

@@ -30,6 +30,8 @@ public interface IDatabaseConnector {
 	
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	
+	public KanjiEntry getKanjiEntryById(String id) throws DictionaryException;
+	
 	public KanjiEntry getKanjiEntry(String kanji) throws DictionaryException;
 	
 	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean addGenerated, boolean onlyWithKanjivgEntry) throws DictionaryException;

@@ -1451,4 +1451,9 @@ public class SQLiteConnector implements IDatabaseConnector {
 	public void findDictionaryEntriesInNames(FindWordRequest findWordRequest, FindWordResult findWordResult) {
 		throw new UnsupportedOperationException();		
 	}
+
+	@Override
+	public KanjiEntry getKanjiEntryById(String id) throws DictionaryException {
+		throw new UnsupportedOperationException();
+	}
 }
