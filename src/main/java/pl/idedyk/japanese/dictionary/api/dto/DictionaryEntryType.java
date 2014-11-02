@@ -89,6 +89,12 @@ public enum DictionaryEntryType {
 	
 	WORD_PLACE("nazwa miejsca"),
 	
+	WORD_COMPANY_NAME("nazwa firmy"),
+	
+	WORD_PRODUCT_NAME("nazwa produktu"),
+	
+	WORD_ORGANIZATION_NAME("nazwa organizacji"),
+	
 	WORD_CONJUNCTION("spójnik"),
 
 	WORD_PARTICULE("partykuła"),
