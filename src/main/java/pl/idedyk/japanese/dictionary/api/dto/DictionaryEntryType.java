@@ -157,7 +157,10 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_SURNAME_NAME);
 		addableDictionaryEntryList.add(WORD_PERSON);
 		addableDictionaryEntryList.add(WORD_STATION_NAME);
-		addableDictionaryEntryList.add(WORD_PLACE);
+		addableDictionaryEntryList.add(WORD_PLACE);		
+		addableDictionaryEntryList.add(WORD_COMPANY_NAME);
+		addableDictionaryEntryList.add(WORD_PRODUCT_NAME);
+		addableDictionaryEntryList.add(WORD_ORGANIZATION_NAME);
 		
 		Collections.sort(addableDictionaryEntryList, new Comparator<DictionaryEntryType>() {
 
