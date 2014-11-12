@@ -21,10 +21,10 @@ public class FindWordRequest implements Serializable {
 	
 	public boolean searchInfo = true;
 	
-	public boolean searchGrammaFormAndExamples = false;
-	
 	public boolean searchOnlyCommonWord = false;
 	
+	public boolean searchMainDictionary = true;
+	public boolean searchGrammaFormAndExamples = false;
 	public boolean searchName = false;
 	
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.START_WITH;
@@ -43,9 +43,10 @@ public class FindWordRequest implements Serializable {
 	public String toString() {
 		return "FindWordRequest [word=" + word + ", searchKanji=" + searchKanji + ", searchKana=" + searchKana
 				+ ", searchRomaji=" + searchRomaji + ", searchTranslate=" + searchTranslate + ", searchInfo="
-				+ searchInfo + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples
-				+ ", searchOnlyCommonWord=" + searchOnlyCommonWord + ", searchName=" + searchName
-				+ ", wordPlaceSearch=" + wordPlaceSearch + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
+				+ searchInfo + ", searchOnlyCommonWord=" + searchOnlyCommonWord + ", searchMainDictionary="
+				+ searchMainDictionary + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples
+				+ ", searchName=" + searchName + ", wordPlaceSearch=" + wordPlaceSearch + ", dictionaryEntryTypeList="
+				+ dictionaryEntryTypeList + "]";
 	}
 
 	@Override
@@ -55,6 +56,7 @@ public class FindWordRequest implements Serializable {
 		int result = 1;
 		
 		result = prime * result + ((dictionaryEntryTypeList == null) ? 0 : dictionaryEntryTypeList.hashCode());
+		result = prime * result + (searchMainDictionary ? 1231 : 1237);
 		result = prime * result + (searchGrammaFormAndExamples ? 1231 : 1237);
 		result = prime * result + (searchOnlyCommonWord ? 1231 : 1237);
 		result = prime * result + (searchName ? 1231 : 1237);
@@ -88,6 +90,9 @@ public class FindWordRequest implements Serializable {
 				return false;
 		
 		} else if (!dictionaryEntryTypeList.equals(other.dictionaryEntryTypeList))
+			return false;
+
+		if (searchMainDictionary != other.searchMainDictionary)
 			return false;
 		
 		if (searchGrammaFormAndExamples != other.searchGrammaFormAndExamples)
