@@ -58,17 +58,23 @@ public class FindWordResult implements Serializable {
 
 		private DictionaryEntry dictionaryEntry;
 		
+		@Deprecated
 		private GrammaFormConjugateResult grammaFormConjugateResult;
 		
+		@Deprecated
 		private ExampleResult exampleResult;
+		
+		@Deprecated
 		private ExampleGroupType exampleGroupType;
 		
+		@Deprecated
 		private DictionaryEntry relatedDictionaryEntryById;
 		
 		public ResultItem(DictionaryEntry dictionaryEntry) {
 			this.dictionaryEntry = dictionaryEntry;
 		}
 		
+		/*
 		public ResultItem(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntry relatedDictionaryEntryById) {
 			this.grammaFormConjugateResult = grammaFormConjugateResult;
 			
@@ -81,6 +87,7 @@ public class FindWordResult implements Serializable {
 			
 			this.relatedDictionaryEntryById = relatedDictionaryEntryById;
 		}
+		*/
 
 		public DictionaryEntry getDictionaryEntry() {
 			if (dictionaryEntry != null) {

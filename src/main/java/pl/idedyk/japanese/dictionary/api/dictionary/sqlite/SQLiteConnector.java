@@ -1,5 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.dictionary.sqlite;
 
+/*
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +29,9 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateGroupTypeElements;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResultType;
+*/
 
-public class SQLiteConnector implements IDatabaseConnector {
+public class SQLiteConnector { } /* implements IDatabaseConnector {
 
 	private SQLiteDatabase sqliteDatabase;
 		
@@ -187,13 +189,13 @@ public class SQLiteConnector implements IDatabaseConnector {
 		String wordArgument = null;
 		String wordKanjiArgument = null;
 		
-		/*
+		/ *
 		if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 
 			wordArgument = "%" + findWordRequest.word + "%";
 			wordKanjiArgument = wordArgument;
 
-		} else*/ 
+		} else* / 
 		if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.START_WITH) {
 
 			wordArgument = findWordRequest.word + "*";
@@ -236,11 +238,11 @@ public class SQLiteConnector implements IDatabaseConnector {
 				sql.append(" or ");
 			}
 			
-			/*
+			/ *
 			if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_like_kana);
 			} else {
-			*/
+			* /
 			if (findWordRequest.wordPlaceSearch != FindWordRequest.WordPlaceSearch.EXACT) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_match_kana);
 
@@ -264,12 +266,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 				sql.append(" or ");
 			}
 			
-			/*
+			/ *
 			if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_like_romaji);
 
 			} else {
-			*/
+			* /
 			if (findWordRequest.wordPlaceSearch != FindWordRequest.WordPlaceSearch.EXACT) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_match_romaji);
 
@@ -294,12 +296,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 				sql.append(" or ");
 			}
 
-			/*
+			/ *
 			if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_like_translate);
 
 			} else {
-			*/
+			* /
 			if (findWordRequest.wordPlaceSearch != FindWordRequest.WordPlaceSearch.EXACT) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_match_translate);
 
@@ -324,12 +326,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 				sql.append(" or ");
 			}
 
-			/*
+			/ *
 			if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_like_info);
 
 			} else {
-			*/
+			* /
 			if (findWordRequest.wordPlaceSearch != FindWordRequest.WordPlaceSearch.EXACT) {
 				sql.append(SQLiteStatic.dictionaryEntriesTableSelectElements_match_info);
 
@@ -900,13 +902,13 @@ public class SQLiteConnector implements IDatabaseConnector {
 		String wordWithPercent = null;
 		String wordLowerCaseWithPercent = null;
 
-		/*
+		/ *
 		if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.ANY_PLACE) {
 
 			wordWithPercent = "%" + findWordRequest.word + "%";
 			wordLowerCaseWithPercent = "%" + findWordRequest.word.toLowerCase(Locale.getDefault()) + "%";
 
-		} else*/
+		} else * /
 		if (findWordRequest.wordPlaceSearch == FindWordRequest.WordPlaceSearch.START_WITH) {
 
 			wordWithPercent = findWordRequest.word + "%";
@@ -1298,13 +1300,13 @@ public class SQLiteConnector implements IDatabaseConnector {
 		String wordArgument = null;
 		String wordKanjiArgument = null;
 
-		/*
+		/ *
 		if (findKanjiRequest.wordPlaceSearch == FindKanjiRequest.WordPlaceSearch.ANY_PLACE) {
 
 			wordArgument = "%" + findKanjiRequest.word + "%";
 			wordKanjiArgument = wordArgument;
 
-		} else*/
+		} else* /
 		if (findKanjiRequest.wordPlaceSearch == FindKanjiRequest.WordPlaceSearch.START_WITH) {
 
 			wordArgument = findKanjiRequest.word + "*";
@@ -1332,12 +1334,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 		sql.append(" ) ");
 		sql.append(" or ");
 
-		/*
+		/ *
 		if (findKanjiRequest.wordPlaceSearch == FindKanjiRequest.WordPlaceSearch.ANY_PLACE) {
 			sql.append(SQLiteStatic.kanjiEntriesTableFindKanjiElements_like_translate);
 
 		} else {
-		*/
+		* /
 		if (findKanjiRequest.wordPlaceSearch != FindKanjiRequest.WordPlaceSearch.EXACT) {
 			sql.append(SQLiteStatic.kanjiEntriesTableFindKanjiElements_match_translate);
 
@@ -1352,12 +1354,12 @@ public class SQLiteConnector implements IDatabaseConnector {
 
 		sql.append(" or ");
 
-		/*
+		/ *
 		if (findKanjiRequest.wordPlaceSearch == FindKanjiRequest.WordPlaceSearch.ANY_PLACE) {
 			sql.append(SQLiteStatic.kanjiEntriesTableFindKanjiElements_like_info);
 
 		} else {
-		*/
+		* /
 		if (findKanjiRequest.wordPlaceSearch != FindKanjiRequest.WordPlaceSearch.EXACT) {
 			sql.append(SQLiteStatic.kanjiEntriesTableFindKanjiElements_match_info);
 
@@ -1457,3 +1459,4 @@ public class SQLiteConnector implements IDatabaseConnector {
 		throw new UnsupportedOperationException();
 	}
 }
+*/
