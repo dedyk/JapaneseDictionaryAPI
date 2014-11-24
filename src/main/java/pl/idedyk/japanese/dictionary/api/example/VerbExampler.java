@@ -19,7 +19,7 @@ import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper.KeigoEntry;
 
 public class VerbExampler {
 	public static List<ExampleGroupTypeElements> makeAll(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry,
-			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
 		List<ExampleGroupTypeElements> result = new ArrayList<ExampleGroupTypeElements>();
 

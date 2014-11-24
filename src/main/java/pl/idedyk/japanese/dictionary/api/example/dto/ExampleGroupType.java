@@ -99,6 +99,8 @@ public enum ExampleGroupType {
 	ADJECTIVE_NA_TE_MO("Nawet, jeśli"),
 
 	NOUN_NI_NARU("Stawać się"),
+	
+	NOUN_SURU("Tworzenie czynności"),
 
 	NOUN_LIKE("Lubić"), NOUN_DISLIKE("Nie lubić"),
 

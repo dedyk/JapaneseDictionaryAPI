@@ -160,7 +160,7 @@ public class VerbGrammaConjugater {
 		lastRomajiCharsMapperToCharForVolitionalForm.put("bu", "bou");
 	}
 
-	public static List<GrammaFormConjugateGroupTypeElements> makeAll(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	public static List<GrammaFormConjugateGroupTypeElements> makeAll(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
 		// validate DictionaryEntry
 		validateDictionaryEntry(dictionaryEntry);

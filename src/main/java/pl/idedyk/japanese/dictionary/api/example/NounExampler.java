@@ -15,9 +15,14 @@ import pl.idedyk.japanese.dictionary.api.grammaexample.GrammaExampleHelper;
 
 public class NounExampler {
 	public static List<ExampleGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry, 
-			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 		
 		List<ExampleGroupTypeElements> result = new ArrayList<ExampleGroupTypeElements>();
+		
+		// suru
+		if (dictionaryEntry.getAttributeList().contains(AttributeType.SURU_VERB) == true) {
+			GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_SURU, makeSuru(dictionaryEntry, grammaFormCache, addVirtual));
+		}
 		
 		// like : suki		
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_LIKE, makeSukiExample(dictionaryEntry));
@@ -105,6 +110,28 @@ public class NounExampler {
 		return result;
 	}
 	
+	private static ExampleResult makeSuru(DictionaryEntry dictionaryEntry, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
+		
+		final String templateKanji1 = "%sする";
+		final String templateKana1 = "%sする";
+		final String templateRomaji1 = "%s suru";
+		
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji1, templateKana1, templateRomaji1, true);
+
+		if (addVirtual == true) {
+			
+			final String templateKanji2 = "%sする";
+			final String templateKana2 = "%sする";
+			final String templateRomaji2 = "%ssuru";
+			
+			ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji2, templateKana2, templateRomaji2, true);
+			
+			exampleResult1.setAlternative(exampleResult2);
+		}
+				
+		return exampleResult1;
+	}
+
 	private static ExampleResult makeSukiExample(DictionaryEntry dictionaryEntry) {
 		
 		final String templateKanji = "%sが好き";

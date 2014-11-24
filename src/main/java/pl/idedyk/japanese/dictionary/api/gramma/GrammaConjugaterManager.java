@@ -15,7 +15,7 @@ public class GrammaConjugaterManager {
 	public static List<GrammaFormConjugateGroupTypeElements> getGrammaConjufateResult(KeigoHelper keigoHelper,
 			DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache,
-			DictionaryEntryType forceDictionaryEntryType) {
+			DictionaryEntryType forceDictionaryEntryType, boolean addVirtual) {
 
 		DictionaryEntryType dictionaryEntryType = null;
 
@@ -26,19 +26,19 @@ public class GrammaConjugaterManager {
 		}
 
 		if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_I) {
-			return AdjectiveIGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache);
+			return AdjectiveIGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NA) {
-			return AdjectiveNaGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, forceDictionaryEntryType);
+			return AdjectiveNaGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, forceDictionaryEntryType, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN) {
-			return NounGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, forceDictionaryEntryType);
+			return NounGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, forceDictionaryEntryType, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 
-			return VerbGrammaConjugater.makeAll(keigoHelper, dictionaryEntry, grammaFormCache);
+			return VerbGrammaConjugater.makeAll(keigoHelper, dictionaryEntry, grammaFormCache, addVirtual);
 		}
 
 		return null;

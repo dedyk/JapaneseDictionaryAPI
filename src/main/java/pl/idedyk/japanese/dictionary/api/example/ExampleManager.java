@@ -18,7 +18,7 @@ public class ExampleManager {
 
 	public static List<ExampleGroupTypeElements> getExamples(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache,
-			DictionaryEntryType forceDictionaryEntryType) {
+			DictionaryEntryType forceDictionaryEntryType, boolean addVirtual) {
 
 		DictionaryEntryType dictionaryEntryType = null;
 
@@ -31,19 +31,19 @@ public class ExampleManager {
 		List<ExampleGroupTypeElements> result = null;
 
 		if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_I) {
-			result = AdjectiveIExampler.makeAll(dictionaryEntry, grammaFormCache);
+			result = AdjectiveIExampler.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NA) {
-			result = AdjectiveNaExampler.makeAll(dictionaryEntry, grammaFormCache);
+			result = AdjectiveNaExampler.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN) {
-			result = NounExampler.makeAll(dictionaryEntry, grammaFormCache);
+			result = NounExampler.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 
-			result = VerbExampler.makeAll(keigoHelper, dictionaryEntry, grammaFormCache);
+			result = VerbExampler.makeAll(keigoHelper, dictionaryEntry, grammaFormCache, addVirtual);
 		}
 
 		if (result != null) {

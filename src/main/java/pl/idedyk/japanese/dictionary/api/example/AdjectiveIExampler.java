@@ -15,7 +15,7 @@ import pl.idedyk.japanese.dictionary.api.grammaexample.GrammaExampleHelper;
 public class AdjectiveIExampler {
 
 	public static List<ExampleGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry, 
-			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
 		List<ExampleGroupTypeElements> result = new ArrayList<ExampleGroupTypeElements>();
 		

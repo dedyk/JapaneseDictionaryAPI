@@ -15,7 +15,7 @@ import pl.idedyk.japanese.dictionary.api.grammaexample.GrammaExampleHelper;
 public class AdjectiveIGrammaConjugater {
 
 	public static List<GrammaFormConjugateGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry, 
-			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 		
 		// validate DictionaryEntry
 		validateDictionaryEntry(dictionaryEntry);

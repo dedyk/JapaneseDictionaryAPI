@@ -15,7 +15,7 @@ public class NounGrammaConjugater {
 
 	public static List<GrammaFormConjugateGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache,
-			DictionaryEntryType forceDictionaryEntryType) {
+			DictionaryEntryType forceDictionaryEntryType, boolean addVirtual) {
 
 		// validate DictionaryEntry
 		validateDictionaryEntry(dictionaryEntry, forceDictionaryEntryType);
