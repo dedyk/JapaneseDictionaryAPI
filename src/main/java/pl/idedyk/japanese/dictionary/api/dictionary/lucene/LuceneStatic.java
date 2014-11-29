@@ -15,6 +15,7 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_kanaList = "dictionaryEntry_kanaList";
 	public static final String dictionaryEntry_prefixRomaji = "dictionaryEntry_prefixRomaji";
 	public static final String dictionaryEntry_romajiList = "dictionaryEntry_romajiList";
+	public static final String dictionaryEntry_virtual_romajiList = "dictionaryEntry_virtual_romajiList";
 	public static final String dictionaryEntry_translatesList = "dictionaryEntry_translatesList";
 	public static final String dictionaryEntry_translatesListWithoutPolishChars = "dictionaryEntry_translatesListWithoutPolishChars";
 	public static final String dictionaryEntry_info = "dictionaryEntry_info";
