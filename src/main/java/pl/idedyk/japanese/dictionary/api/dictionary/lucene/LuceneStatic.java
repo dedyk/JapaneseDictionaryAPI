@@ -28,6 +28,7 @@ public class LuceneStatic {
 	public static final String dictionaryEntry_grammaConjufateResult_and_exampleResult_kanji = "dictionaryEntry_grammaConjufateResult_and_exampleResult_kanji";
 	public static final String dictionaryEntry_grammaConjufateResult_and_exampleResult_kanaList = "dictionaryEntry_grammaConjufateResult_and_exampleResult_kanaList";
 	public static final String dictionaryEntry_grammaConjufateResult_and_exampleResult_romajiList = "dictionaryEntry_grammaConjufateResult_and_exampleResult_romajiList";
+	public static final String dictionaryEntry_grammaConjufateResult_and_exampleResult_virtual_romajiList = "dictionaryEntry_grammaConjufateResult_and_exampleResult_virtual_romajiList";
 		
 	public static final String dictionaryEntry_exampleSentence_objectType = "dictionaryEntry_exampleSentence";
 	
@@ -49,6 +50,7 @@ public class LuceneStatic {
 	public static final String nameDictionaryEntry_kanji = "nameDictionaryEntry_kanji";
 	public static final String nameDictionaryEntry_kanaList = "nameDictionaryEntry_kanaList";
 	public static final String nameDictionaryEntry_romajiList = "nameDictionaryEntry_romajiList";
+	public static final String nameDictionaryEntry_virtual_romajiList = "nameDictionaryEntry_virtual_romajiList";
 	public static final String nameDictionaryEntry_translatesList = "nameDictionaryEntry_translatesList";
 	public static final String nameDictionaryEntry_translatesListWithoutPolishChars = "nameDictionaryEntry_translatesListWithoutPolishChars";
 	public static final String nameDictionaryEntry_info = "nameDictionaryEntry_info";
