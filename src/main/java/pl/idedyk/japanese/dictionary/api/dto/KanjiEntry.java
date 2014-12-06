@@ -19,7 +19,7 @@ public class KanjiEntry implements Serializable {
 	
 	private KanjivgEntry kanjivgEntry;
 		
-	private boolean generated;
+	private boolean used;
 	
 	private List<GroupEnum> groups;
 
@@ -71,12 +71,12 @@ public class KanjiEntry implements Serializable {
 		this.kanjivgEntry = kanjivgEntry;
 	}
 
-	public boolean isGenerated() {
-		return generated;
+	public boolean isUsed() {
+		return used;
 	}
 
-	public void setGenerated(boolean generated) {
-		this.generated = generated;
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 
 	public List<GroupEnum> getGroups() {
@@ -121,7 +121,7 @@ public class KanjiEntry implements Serializable {
 	@Override
 	public String toString() {
 		return "KanjiEntry [id=" + id + ", kanji=" + kanji + ", polishTranslates=" + polishTranslates + ", info="
-				+ info + ", kanjiDic2Entry=" + kanjiDic2Entry + ", kanjivgEntry=" + kanjivgEntry + ", generated="
-				+ generated + ", groups=" + groups + "]";
+				+ info + ", kanjiDic2Entry=" + kanjiDic2Entry + ", kanjivgEntry=" + kanjivgEntry + ", used="
+				+ used + ", groups=" + groups + "]";
 	}
 }

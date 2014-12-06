@@ -154,7 +154,7 @@ public class Utils {
 
 	public static KanjiEntry parseKanjiEntry(String idString, String kanjiString, String strokeCountString,
 			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList,
-			Object strokePathObject, List<String> polishTranslateList, String infoString, String generatedString,
+			Object strokePathObject, List<String> polishTranslateList, String infoString, String usedString,
 			List<String> groupsList) throws DictionaryException {
 
 		int id = Integer.parseInt(idString);
@@ -196,7 +196,7 @@ public class Utils {
 		entry.setPolishTranslates(polishTranslateList);
 		entry.setInfo(infoString);
 
-		entry.setGenerated(Boolean.parseBoolean(generatedString));
+		entry.setUsed(Boolean.parseBoolean(usedString));
 
 		entry.setGroups(GroupEnum.convertToListGroupEnum(groupsList));
 
