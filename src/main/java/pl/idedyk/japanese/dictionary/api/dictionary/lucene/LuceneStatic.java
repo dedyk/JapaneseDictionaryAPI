@@ -64,7 +64,7 @@ public class LuceneStatic {
 	public static final String kanjiEntry_polishTranslatesListWithoutPolishChars = "kanjiEntry_polishTranslatesListWithoutPolishChars";
 	public static final String kanjiEntry_info = "kanjiEntry_info";
 	public static final String kanjiEntry_infoWithoutPolishChars = "kanjiEntry_infoWithoutPolishChars";
-	public static final String kanjiEntry_generated = "kanjiEntry_generated";
+	public static final String kanjiEntry_used = "kanjiEntry_used";
 	public static final String kanjiEntry_groupsList = "kanjiEntry_groupsList";
 	
 	public static final String kanjiEntry_kanjiDic2Entry_strokeCount = "kanjiEntry_kanjiDic2Entry_strokeCount";

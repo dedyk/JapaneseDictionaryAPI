@@ -326,9 +326,9 @@ public abstract class DictionaryManagerAbstract {
 		return kanjiEntry;
 	}
 
-	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean addGenerated, boolean onlyWithKanjivgEntry) {
+	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) {
 		try {
-			return databaseConnector.getAllKanjis(withDetails, addGenerated, onlyWithKanjivgEntry);
+			return databaseConnector.getAllKanjis(withDetails, onlyUsed);
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
