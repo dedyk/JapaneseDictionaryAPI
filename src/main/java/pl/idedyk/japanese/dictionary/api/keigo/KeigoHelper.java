@@ -50,7 +50,7 @@ public class KeigoHelper {
 
 		// iu
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_U, "言う", "いう", "iu", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "おっしゃる", null, "ossharu", null, null, "おっしゃい", "osshai");
+				DictionaryEntryType.WORD_VERB_U, "仰っしゃる", null, "おっしゃる", null, "ossharu", null, null, "おっしゃい", "osshai");
 
 		// suru
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_IRREGULAR, null, "する", "suru",
