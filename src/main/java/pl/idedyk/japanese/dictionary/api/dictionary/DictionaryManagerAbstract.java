@@ -542,7 +542,8 @@ public abstract class DictionaryManagerAbstract {
 		if (kanji == null) {
 			return null;
 		}
-
+		
+		@SuppressWarnings("deprecation")
 		List<String> kana = dictionaryEntry.getKanaList();
 
 		List<FuriganaEntry> result = new ArrayList<FuriganaEntry>();

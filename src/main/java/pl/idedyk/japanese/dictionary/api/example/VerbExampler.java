@@ -1352,7 +1352,10 @@ public class VerbExampler {
 
 		String kanji = dictionaryEntry.getKanji();
 
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
+		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		for (String currentKana : kanaList) {
@@ -1476,17 +1479,18 @@ public class VerbExampler {
 			if (isKeigoHigh == true) {
 
 				KeigoEntry keigoEntry = keigoHelper.getKeigoHighEntryFromKeigoWord(dictionaryEntry.getKanji(), null,
-						dictionaryEntry.getKanaList().get(0), null);
+						dictionaryEntry.getKana(), null);
 
 				if (keigoEntry == null) {
 					throw new RuntimeException("Empty keigo entry for: " + dictionaryEntry.getKanji() + " - "
-							+ dictionaryEntry.getKanaList().get(0));
+							+ dictionaryEntry.getKana());
 				}
 
 				return makeKeigoKudasaiForKeigoEntry(dictionaryEntry, keigoEntry, true);
 
 			} else {
 
+				@SuppressWarnings("deprecation")
 				KeigoEntry keigoEntry = keigoHelper.findKeigoHighEntry(dictionaryEntry.getDictionaryEntryType(),
 						dictionaryEntry.getKanji(), dictionaryEntry.getKanaList(), dictionaryEntry.getRomajiList());
 
@@ -1504,6 +1508,7 @@ public class VerbExampler {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private static ExampleResult makeKeigoKudasaiForKeigoEntry(DictionaryEntry dictionaryEntry, KeigoEntry keigoEntry,
 			boolean isKeigoHigh) {
 

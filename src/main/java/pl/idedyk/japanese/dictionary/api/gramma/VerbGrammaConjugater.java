@@ -170,7 +170,11 @@ public class VerbGrammaConjugater {
 		boolean isGozaruVerb = false;
 		
 		AttributeList attributeList = dictionaryEntry.getAttributeList();
+		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
+		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		for (int idx = 0; idx < kanaList.size(); ++idx) {
@@ -454,6 +458,7 @@ public class VerbGrammaConjugater {
 		return result;		
 	}
 
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeFormalPresentForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, 
 			boolean isKeigoHigh, boolean isKeigoLow) {
 		// czas terazniejszy, twierdzenie, forma formalna, -masu
@@ -517,6 +522,7 @@ public class VerbGrammaConjugater {
 		return result;		
 	}
 
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeFormalPresentNegativeForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, 
 			boolean isKeigoHigh, boolean isKeigoLow) {
 		// czas terazniejszy, twierdzenie, forma formalna, -masen
@@ -551,6 +557,7 @@ public class VerbGrammaConjugater {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeFormalPastForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, 
 			boolean isKeigoHigh, boolean isKeigoLow) {
 		// czas przeszly, przeczenie, forma formalna, -mashita
@@ -586,6 +593,7 @@ public class VerbGrammaConjugater {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeFormalPastNegativeForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, 
 			boolean isKeigoHigh, boolean isKeigoLow) {
 		// czas przeszly, twierdzenie, forma formalna, -masen deshita
@@ -638,6 +646,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(kanjiStem + postfixKana);
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -650,6 +659,7 @@ public class VerbGrammaConjugater {
 
 		result.setKanaList(kanaListResult);		
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
@@ -812,6 +822,7 @@ public class VerbGrammaConjugater {
 			}
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		for (String currentKana : kanaList) {
@@ -829,6 +840,7 @@ public class VerbGrammaConjugater {
 			}
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		for (String currentRomaji : romajiList) {
@@ -879,6 +891,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(teFormKanji);
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -891,6 +904,7 @@ public class VerbGrammaConjugater {
 
 		result.setKanaList(kanaListResult);
 		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
@@ -1006,6 +1020,7 @@ public class VerbGrammaConjugater {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeInformalPresentForm(DictionaryEntry dictionaryEntry) {
 		// czas terazniejszy, twierdzenie, forma nieformalna (prosta)
 		
@@ -1041,6 +1056,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(informalKanji);
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -1053,6 +1069,7 @@ public class VerbGrammaConjugater {
 
 		result.setKanaList(kanaListResult);		
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
@@ -1296,6 +1313,7 @@ public class VerbGrammaConjugater {
 				"", "");
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeMashouForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry, 
 			boolean isKeigoHigh, boolean isKeigoLow) {
 		
@@ -1569,6 +1587,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makePotentialFormForKanjiOrKana(kanji, dictionaryEntryType, ruPostfixKana));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 			
 		List<String> kanaListResult = new ArrayList<String>();
@@ -1586,6 +1605,7 @@ public class VerbGrammaConjugater {
 			result.setPrefixRomaji("ga");
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();
@@ -1716,6 +1736,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeVolitionalFormForKanjiOrKana(kanji, dictionaryEntryType));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 		
 		List<String> kanaListResult = new ArrayList<String>();
@@ -1726,6 +1747,7 @@ public class VerbGrammaConjugater {
 		
 		result.setKanaList(kanaListResult);
 		
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();
@@ -1824,9 +1846,9 @@ public class VerbGrammaConjugater {
 		dictionaryEntry.setDictionaryEntryType(dictionaryEntryType);
 		dictionaryEntry.setPrefixKana(grammaFormConjugateResult.getPrefixKana());
 		dictionaryEntry.setKanji(grammaFormConjugateResult.getKanji());
-		dictionaryEntry.setKanaList(grammaFormConjugateResult.getKanaList());
+		dictionaryEntry.setKana(grammaFormConjugateResult.getKanaList().get(0));
 		dictionaryEntry.setPrefixRomaji(grammaFormConjugateResult.getPrefixRomaji());
-		dictionaryEntry.setRomajiList(grammaFormConjugateResult.getRomajiList());
+		dictionaryEntry.setRomaji(grammaFormConjugateResult.getRomajiList().get(0));
 		
 		return dictionaryEntry;		
 	}
@@ -1860,6 +1882,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeBaAffirmativeFormForKanjiOrKana(kanji, dictionaryEntryType, ruPostfixKana));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 			
 		List<String> kanaListResult = new ArrayList<String>();
@@ -1874,6 +1897,7 @@ public class VerbGrammaConjugater {
 		
 		result.setPrefixRomaji(prefixRomaji);
 				
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();
@@ -1984,6 +2008,7 @@ public class VerbGrammaConjugater {
 		return result;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeKeigoHighForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry) {
 		
 		KeigoEntry keigoEntry = keigoHelper.findKeigoHighEntry(dictionaryEntry.getDictionaryEntryType(), dictionaryEntry.getKanji(), dictionaryEntry.getKanaList(), dictionaryEntry.getRomajiList());
@@ -2078,6 +2103,7 @@ public class VerbGrammaConjugater {
 		return result;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static GrammaFormConjugateResult makeKeigoLowForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry) {
 		
 		KeigoEntry keigoEntry = keigoHelper.findKeigoLowEntry(dictionaryEntry.getDictionaryEntryType(), dictionaryEntry.getKanji(), dictionaryEntry.getKanaList(), dictionaryEntry.getRomajiList());
@@ -2218,6 +2244,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makePassiveFormForKanjiOrKana(kanji, dictionaryEntryType, postfixKana));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 			
 		List<String> kanaListResult = new ArrayList<String>();
@@ -2228,6 +2255,7 @@ public class VerbGrammaConjugater {
 		
 		result.setKanaList(kanaListResult);
 				
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();
@@ -2459,6 +2487,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeCausativeFormForKanjiOrKana(kanji, dictionaryEntryType, postfixKana));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 			
 		List<String> kanaListResult = new ArrayList<String>();
@@ -2469,6 +2498,7 @@ public class VerbGrammaConjugater {
 		
 		result.setKanaList(kanaListResult);
 				
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();
@@ -2690,6 +2720,7 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeCausativePassiveFormForKanjiOrKana(kanji, dictionaryEntryType, false));
 		}
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 			
 		List<String> kanaListResult = new ArrayList<String>();
@@ -2700,6 +2731,7 @@ public class VerbGrammaConjugater {
 		
 		result.setKanaList(kanaListResult);
 				
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 		
 		List<String> romajiListResult = new ArrayList<String>();

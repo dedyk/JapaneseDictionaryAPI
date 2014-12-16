@@ -136,6 +136,7 @@ public class FindWordResult implements Serializable {
 			throw new RuntimeException("getPrefixKana");
 		}
 
+		@SuppressWarnings("deprecation")
 		public List<String> getKanaList() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getKanaList();
@@ -160,6 +161,7 @@ public class FindWordResult implements Serializable {
 			throw new RuntimeException("getPrefixRomaji");
 		}
 
+		@SuppressWarnings("deprecation")
 		public List<String> getRomajiList() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getRomajiList();

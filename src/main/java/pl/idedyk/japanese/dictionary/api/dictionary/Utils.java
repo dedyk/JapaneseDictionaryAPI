@@ -63,7 +63,7 @@ public class Utils {
 
 	public static DictionaryEntry parseDictionaryEntry(String idString, Object dictionaryEntryTypeObject,
 			Object attributesObject, Object groupsObject, String prefixKanaString, String kanjiString,
-			Object kanaListObject, String prefixRomajiString, Object romajiListObject, Object translateListObject,
+			String kanaString, String prefixRomajiString, String romajiString, Object translateListObject,
 			String infoString, Object exampleSentenceGroupIdsListObject) throws DictionaryException {
 
 		if (kanjiString.equals("") == true || kanjiString.equals("-") == true) {
@@ -106,17 +106,9 @@ public class Utils {
 		entry.setKanji(kanjiString);
 		entry.setPrefixRomaji(prefixRomajiString);
 
-		if (romajiListObject instanceof String) {
-			entry.setRomajiList(parseStringIntoList((String) romajiListObject, true));
-		} else {
-			entry.setRomajiList(convertToListString(romajiListObject));
-		}
-
-		if (kanaListObject instanceof String) {
-			entry.setKanaList(parseStringIntoList((String) kanaListObject, true));
-		} else {
-			entry.setKanaList(convertToListString(kanaListObject));
-		}
+		entry.setKana(kanaString);
+		
+		entry.setRomaji(romajiString);
 
 		if (translateListObject instanceof String) {
 			entry.setTranslates(parseStringIntoList((String) translateListObject, true));

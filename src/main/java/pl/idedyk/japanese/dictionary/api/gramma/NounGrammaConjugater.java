@@ -202,6 +202,7 @@ public class NounGrammaConjugater {
 			result.setKanji(kanji + postfixKana);
 		}
 
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -212,6 +213,7 @@ public class NounGrammaConjugater {
 
 		result.setKanaList(kanaListResult);
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();

@@ -164,6 +164,7 @@ public class AdjectiveIExampler {
 		
 		boolean isIiAdjective = false;
 		
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 		
 		for (String currentKana : kanaList) {

@@ -224,6 +224,7 @@ public class AdjectiveIGrammaConjugater {
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -236,6 +237,7 @@ public class AdjectiveIGrammaConjugater {
 
 		result.setKanaList(kanaListResult);		
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
@@ -305,6 +307,7 @@ public class AdjectiveIGrammaConjugater {
 			throw new RuntimeException("kanji.endsWith(い) == false: " + kanji);
 		}
 
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		for (String currentKana : kanaList) {
@@ -313,6 +316,7 @@ public class AdjectiveIGrammaConjugater {
 			}			
 		}
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		for (String currentRomaji : romajiList) {
@@ -341,6 +345,7 @@ public class AdjectiveIGrammaConjugater {
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
+		@SuppressWarnings("deprecation")
 		List<String> kanaList = dictionaryEntry.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
@@ -353,6 +358,7 @@ public class AdjectiveIGrammaConjugater {
 
 		result.setKanaList(kanaListResult);		
 
+		@SuppressWarnings("deprecation")
 		List<String> romajiList = dictionaryEntry.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();

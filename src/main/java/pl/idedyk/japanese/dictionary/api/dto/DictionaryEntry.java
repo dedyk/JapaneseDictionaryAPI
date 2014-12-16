@@ -22,11 +22,11 @@ public class DictionaryEntry implements Serializable {
 
 	private String kanji;
 
-	private List<String> kanaList;
+	private String kana;
 
 	private String prefixRomaji;
 
-	private List<String> romajiList;
+	private String romaji;
 
 	private List<String> translates;
 
@@ -48,14 +48,8 @@ public class DictionaryEntry implements Serializable {
 		return kanji;
 	}
 
-	public List<String> getFullKanaList() {
-		List<String> result = new ArrayList<String>();
-
-		for (String currentKanaList : kanaList) {
-			result.add(prefixKana + currentKanaList);
-		}
-
-		return result;
+	public String getFullKana() {		
+		return prefixKana + kana;
 	}
 
 	public List<String> getTranslates() {
@@ -85,12 +79,12 @@ public class DictionaryEntry implements Serializable {
 		}
 	}
 
-	public List<String> getRomajiList() {
-		return romajiList;
+	public String getRomaji() {
+		return romaji;
 	}
 
-	public void setRomajiList(List<String> romajiList) {
-		this.romajiList = romajiList;
+	public void setRomaji(String romaji) {
+		this.romaji = romaji;
 	}
 
 	public void setDictionaryEntryType(DictionaryEntryType dictionaryEntryType) {
@@ -108,8 +102,8 @@ public class DictionaryEntry implements Serializable {
 		this.kanji = kanji;
 	}
 
-	public void setKanaList(List<String> kanaList) {
-		this.kanaList = kanaList;
+	public void setKana(String kana) {
+		this.kana = kana;
 	}
 
 	public void setTranslates(List<String> translates) {
@@ -149,10 +143,30 @@ public class DictionaryEntry implements Serializable {
 		return id;
 	}
 
+	public String getKana() {
+		return kana;
+	}
+	
+	@Deprecated
 	public List<String> getKanaList() {
+		
+		List<String> kanaList = new ArrayList<String>();
+		
+		kanaList.add(kana);
+		
 		return kanaList;
 	}
 
+	@Deprecated
+	public List<String> getRomajiList() {
+		
+		List<String> romajiList = new ArrayList<String>();
+		
+		romajiList.add(romaji);
+		
+		return romajiList;
+	}
+	
 	public String getInfo() {
 		return info;
 	}
@@ -213,8 +227,8 @@ public class DictionaryEntry implements Serializable {
 	public String toString() {
 		return "DictionaryEntry [id=" + id + ", dictionaryEntryTypeList=" + dictionaryEntryTypeList
 				+ ", attributeList=" + attributeList + ", wordType=" + wordType + ", groups=" + groups
-				+ ", prefixKana=" + prefixKana + ", kanji=" + kanji + ", kanaList=" + kanaList + ", prefixRomaji="
-				+ prefixRomaji + ", romajiList=" + romajiList + ", translates=" + translates + ", info=" + info
+				+ ", prefixKana=" + prefixKana + ", kanji=" + kanji + ", kana=" + kana + ", prefixRomaji="
+				+ prefixRomaji + ", romaji=" + romaji + ", translates=" + translates + ", info=" + info
 				+ ", exampleSentenceGroupIdsList=" + exampleSentenceGroupIdsList + ", name=" + name + "]";
 	}
 }
