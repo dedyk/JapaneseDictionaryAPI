@@ -7,17 +7,11 @@ import java.util.List;
 
 public enum DictionaryEntryType {
 
-	WORD_GREETING("zwrot grzecznościowy"),
-
 	WORD_NUMBER("liczba"),
-
-	WORD_TIME("godzina"),
-
-	WORD_AGE("wiek"),
 
 	WORD_NOUN("rzeczownik"),
 	
-	WORD_PRE_NOUN_ADJECTIVAL("???"),
+	WORD_PRE_NOUN_ADJECTIVAL("pre rzeczownik przysłówkowy"),
 	
 	WORD_ADJECTIVE_F("rzeczownik, bądź czasownik pełniący rolę przymiotnika"),
 
@@ -42,14 +36,12 @@ public enum DictionaryEntryType {
 	WORD_AUX_ADJECTIVE_I("i-przymiotnik (pomocniczy)"),
 
 	WORD_ADJECTIVE_NA("na-przymiotnik"),
+	
+	WORD_ADJECTIVE_NO("rzeczowniki pełniące rolę przymiotnika"),
 
 	WORD_ADJECTIVE_TARU("taru-przymiotnik"),
 
 	WORD_EXPRESSION("wyrażenia"),
-
-	WORD_THAT_POINT("wskazywanie punktu"),
-
-	WORD_ASK("słówka pytające"),
 
 	WORD_ADVERB("przysłówek"),
 
@@ -57,21 +49,7 @@ public enum DictionaryEntryType {
 
 	WORD_ADVERBIAL_NOUN("rzeczownik przysłówkowy"),
 
-	WORD_PRE_NOUN_ADVERBIAL("pre rzeczownik przysłówkowy"),
-
-	WORD_DAY_NUMBER("numer dnia"),
-
-	WORD_DAY_WEEK("dzień tygodnia"),
-
-	WORD_MONTH("miesiąc"),
-
-	WORD_LOCATION("lokalizacja"),
-
-	WORD_PEOPLE_NUMBER("liczenie ludzi"),
-
-	WORD_COUNT_DAY_NUMBER("liczenie dni"),
-
-	WORD_COUNTERS("klasyfikatory"),
+	WORD_COUNTER("klasyfikatory"),
 
 	WORD_PRONOUN("zaimki"),
 
@@ -105,8 +83,6 @@ public enum DictionaryEntryType {
 
 	WORD_AUX("słówko pomocnicze"),
 	
-	WORD_ATEJI("Ateji (fonetyczne czytanie)"),
-
 	WORD_EMPTY("pusty"),
 
 	UNKNOWN("nieznany");
@@ -128,14 +104,14 @@ public enum DictionaryEntryType {
 	static {
 		addableDictionaryEntryList = new ArrayList<DictionaryEntryType>();
 
-		addableDictionaryEntryList.add(WORD_GREETING);
 		addableDictionaryEntryList.add(WORD_PARTICULE);
-		addableDictionaryEntryList.add(WORD_COUNTERS);
+		addableDictionaryEntryList.add(WORD_COUNTER);
 		addableDictionaryEntryList.add(WORD_NOUN);
 		addableDictionaryEntryList.add(WORD_TEMPORAL_NOUN);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_I);
 		addableDictionaryEntryList.add(WORD_AUX_ADJECTIVE_I);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_NA);
+		addableDictionaryEntryList.add(WORD_ADJECTIVE_NO);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_TARU);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_F);
 		addableDictionaryEntryList.add(WORD_VERB_U);
@@ -147,7 +123,6 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_ADVERB);
 		addableDictionaryEntryList.add(WORD_ADVERB_TO);
 		addableDictionaryEntryList.add(WORD_ADVERBIAL_NOUN);
-		addableDictionaryEntryList.add(WORD_PRE_NOUN_ADVERBIAL);
 		addableDictionaryEntryList.add(WORD_PRONOUN);
 		addableDictionaryEntryList.add(WORD_CONJUNCTION);
 		addableDictionaryEntryList.add(WORD_INTERJECTION);

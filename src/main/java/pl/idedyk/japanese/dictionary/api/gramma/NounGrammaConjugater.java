@@ -249,8 +249,8 @@ public class NounGrammaConjugater {
 			dictionaryEntryType = forceDictionaryEntryType;
 		}
 
-		if (dictionaryEntryType != DictionaryEntryType.WORD_NOUN) {
-			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN: " + dictionaryEntryType);
+		if (dictionaryEntryType != DictionaryEntryType.WORD_NOUN && dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO) {
+			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN && dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO: " + dictionaryEntryType);
 		}
 	}
 

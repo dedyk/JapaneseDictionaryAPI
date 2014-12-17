@@ -33,7 +33,9 @@ public enum AttributeType {
 	
 	NOUN_ADJECTIVE_NO("rzeczownik z partykułą no pełniący rolę przymiotnika", true),
 	
-	ONAMATOPOEIC_OR_MIMETIC_WORD("onomatopeiczne lub mimetyczne słowo", true);
+	ONAMATOPOEIC_OR_MIMETIC_WORD("onomatopeiczne lub mimetyczne słowo", true),
+	
+	ATEJI("ateji (fonetyczne) czytanie", true);
 	
 	private String name;
 	
