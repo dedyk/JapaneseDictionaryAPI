@@ -37,10 +37,12 @@ public enum DictionaryEntryType {
 
 	WORD_ADJECTIVE_NA("na-przymiotnik"),
 	
-	WORD_ADJECTIVE_NO("rzeczowniki pełniące rolę przymiotnika"),
+	WORD_ADJECTIVE_NO("rzeczownik z partykułą no pełniący rolę przymiotnika"),
 
 	WORD_ADJECTIVE_TARU("taru-przymiotnik"),
 
+	WORD_ADJECTIVE_NARI("archaiczna/dawna forma na-przymiotnika"),
+	
 	WORD_EXPRESSION("wyrażenia"),
 
 	WORD_ADVERB("przysłówek"),

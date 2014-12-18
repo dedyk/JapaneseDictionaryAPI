@@ -36,7 +36,11 @@ public class ExampleManager {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NA) {
 			result = AdjectiveNaExampler.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
-		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN || dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NO) {
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN || 
+				dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NO ||
+				dictionaryEntryType == DictionaryEntryType.WORD_TEMPORAL_NOUN ||
+				dictionaryEntryType == DictionaryEntryType.WORD_ADVERBIAL_NOUN) {
+			
 			result = NounExampler.makeAll(dictionaryEntry, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U

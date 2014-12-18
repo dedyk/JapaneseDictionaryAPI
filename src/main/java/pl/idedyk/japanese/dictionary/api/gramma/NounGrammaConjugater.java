@@ -249,8 +249,15 @@ public class NounGrammaConjugater {
 			dictionaryEntryType = forceDictionaryEntryType;
 		}
 
-		if (dictionaryEntryType != DictionaryEntryType.WORD_NOUN && dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO) {
-			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN && dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO: " + dictionaryEntryType);
+		if (	dictionaryEntryType != DictionaryEntryType.WORD_NOUN && 
+				dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO &&
+				dictionaryEntryType != DictionaryEntryType.WORD_TEMPORAL_NOUN &&
+				dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN) {
+			
+			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN && "
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO && "
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_TEMPORAL_NOUN && "
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN: " + dictionaryEntryType);
 		}
 	}
 
