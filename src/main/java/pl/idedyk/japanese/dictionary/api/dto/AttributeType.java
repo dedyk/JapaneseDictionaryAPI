@@ -33,7 +33,9 @@ public enum AttributeType {
 		
 	ONAMATOPOEIC_OR_MIMETIC_WORD("onomatopeiczne lub mimetyczne słowo", true),
 	
-	ATEJI("ateji (fonetyczne) czytanie", true);
+	ATEJI("ateji (fonetyczne) czytanie", true),
+	
+	ALTERNATIVE("alternatywna", false);
 	
 	private String name;
 	
