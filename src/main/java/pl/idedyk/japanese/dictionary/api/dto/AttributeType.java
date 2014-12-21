@@ -35,7 +35,7 @@ public enum AttributeType {
 	
 	ATEJI("ateji (fonetyczne) czytanie", true),
 	
-	ALTERNATIVE("alternatywna", false);
+	ALTERNATIVE("alternatywa", false);
 	
 	private String name;
 	
