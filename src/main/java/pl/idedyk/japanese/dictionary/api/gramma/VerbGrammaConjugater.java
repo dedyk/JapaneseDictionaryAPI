@@ -685,7 +685,10 @@ public class VerbGrammaConjugater {
 			
 			if (kanji.endsWith("来る") == true) {
 				return removeChars(kanji, 1);
-				
+
+			} else if (kanji.endsWith("來る") == true) {
+				return removeChars(kanji, 1);
+
 			} else if (kanji.endsWith("為る") == true) {
 				return removeChars(kanji, 1);
 				
@@ -816,8 +819,8 @@ public class VerbGrammaConjugater {
 			
 			} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 				
-				if (kanji.endsWith("来る") == false && kanji.endsWith("くる") == false && kanji.endsWith("する") == false && kanji.endsWith("為る") == false) {
-					throw new RuntimeException("kanji.endsWith(来る) == false && kanji.endsWith(くる) == false && kanji.endsWith(する) == false && kanji.endsWith(為る) == false: " + kanji);
+				if (kanji.endsWith("来る") == false && kanji.endsWith("くる") == false && kanji.endsWith("する") == false && kanji.endsWith("為る") == false && kanji.endsWith("來る") == false) {
+					throw new RuntimeException("kanji.endsWith(来る) == false && kanji.endsWith(くる) == false && kanji.endsWith(する) == false && kanji.endsWith(為る) == false && kanji.endsWith(來る) == false: " + kanji);
 				}				
 			}
 		}
@@ -953,6 +956,9 @@ public class VerbGrammaConjugater {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 			
 			if (text.endsWith("来る") == true) {
+				return removeChars(text, 1) + "て";
+				
+			} else if (text.endsWith("來る") == true) {
 				return removeChars(text, 1) + "て";
 				
 			} else if (text.endsWith("為る") == true) {
@@ -1118,6 +1124,9 @@ public class VerbGrammaConjugater {
 			
 			if (text.endsWith("来る") == true) {
 				return removeChars(text, 2) + "来ない";
+				
+			} else if (text.endsWith("來る") == true) {
+				return removeChars(text, 2) + "來ない";
 				
 			} else if (text.endsWith("くる") == true) {
 				return removeChars(text, 2) + "こない";
@@ -1362,7 +1371,7 @@ public class VerbGrammaConjugater {
 		
 		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU ||
 			(dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR && 
-			kanji != null && kanji.endsWith("来る") == true)) {
+			kanji != null && (kanji.endsWith("来る") == true || kanji.endsWith("來る") == true))) {
 			
 			final String ruPostfixKana2 = "れる";
 			final String ruPostfixRomaji2 = "reru";
@@ -1669,6 +1678,9 @@ public class VerbGrammaConjugater {
 			if (kana.endsWith("来る") == true) {
 				return removeChars(kana, 1) + ruPostfixKana;
 				
+			} else if (kana.endsWith("來る") == true) {
+				return removeChars(kana, 1) + ruPostfixKana;
+				
 			} else if (kana.endsWith("くる") == true) {
 				return removeChars(kana, 2) + "こ" + ruPostfixKana;
 				
@@ -1781,6 +1793,9 @@ public class VerbGrammaConjugater {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 			
 			if (kana.endsWith("来る") == true) {
+				return removeChars(kana, 1) + "よう";
+				
+			} else if (kana.endsWith("來る") == true) {
 				return removeChars(kana, 1) + "よう";
 				
 			} else if (kana.endsWith("くる") == true) {
@@ -2292,6 +2307,9 @@ public class VerbGrammaConjugater {
 			if (kana.endsWith("来る") == true) {
 				return removeChars(kana, 1) + "ら" + postfixKana;
 				
+			} else if (kana.endsWith("來る") == true) {
+				return removeChars(kana, 1) + "ら" + postfixKana;
+				
 			} else if (kana.endsWith("くる") == true) {
 				return removeChars(kana, 2) + "こ" + "ら" + postfixKana;
 				
@@ -2533,6 +2551,9 @@ public class VerbGrammaConjugater {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 			
 			if (kana.endsWith("来る") == true) {
+				return removeChars(kana, 1) + "さ" + postfixKana;
+				
+			} else if (kana.endsWith("來る") == true) {
 				return removeChars(kana, 1) + "さ" + postfixKana;
 				
 			} else if (kana.endsWith("くる") == true) {
@@ -2801,6 +2822,9 @@ public class VerbGrammaConjugater {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 			
 			if (kana.endsWith("来る") == true) {
+				return removeChars(kana, 1) + "させられる";
+				
+			} else if (kana.endsWith("來る") == true) {
 				return removeChars(kana, 1) + "させられる";
 				
 			} else if (kana.endsWith("くる") == true) {
