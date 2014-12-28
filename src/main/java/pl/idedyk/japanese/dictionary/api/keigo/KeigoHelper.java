@@ -120,10 +120,16 @@ public class KeigoHelper {
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_U, "行く", "いく", "iku", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "参る", null, "まいる", null, "mairu", null, null, null, null);
 
+		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_U, "行く", "いく", "iku", KeigoEntryFindMatchType.END_WITH,
+				DictionaryEntryType.WORD_VERB_U, "詣る", null, "まいる", null, "mairu", null, null, null, null);
+		
 		// kuru
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_IRREGULAR, "来る", "くる", "kuru", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "参る", null, "まいる", null, "mairu", null, null, null, null);
 
+		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_IRREGULAR, "来る", "くる", "kuru", KeigoEntryFindMatchType.END_WITH,
+				DictionaryEntryType.WORD_VERB_U, "詣る", null, "まいる", null, "mairu", null, null, null, null);
+		
 		// iu
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_U, "言う", "いう", "iu", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "申す", null, "もうす", null, "mousu", null, null, null, null);
@@ -161,6 +167,9 @@ public class KeigoHelper {
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_RU, null, "あげる", "ageru", KeigoEntryFindMatchType.EXACT,
 				DictionaryEntryType.WORD_VERB_RU, "差し上げる", null, "さしあげる", null, "sashiageru", null, null, null, null);
 
+		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_RU, null, "あげる", "ageru", KeigoEntryFindMatchType.EXACT,
+				DictionaryEntryType.WORD_VERB_RU, "差上げる", null, "さしあげる", null, "sashiageru", null, null, null, null);
+		
 		// desu - special
 		addKeigoLowEntry(DictionaryEntryType.UNKNOWN, null, "です", "desu", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, null, null, "でござる", null, "de gozaru", null, null, "でござい", "de gozai");
