@@ -114,6 +114,16 @@ public abstract class DictionaryManagerAbstract {
 				@Override
 				public int compare(ResultItem lhs, ResultItem rhs) {
 					
+					boolean lhsIsName = lhs.getDictionaryEntry().isName();
+					boolean rhsIsName = rhs.getDictionaryEntry().isName();
+					
+					if (lhsIsName == false && rhsIsName == true) {
+						return -1;
+						
+					} else if (lhsIsName == true && rhsIsName == false) {
+						return 1;
+					}					
+					
 					String findWord = findWordRequest.word;
 									
 					String lhsKanji = lhs.getKanji();
