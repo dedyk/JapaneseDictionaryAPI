@@ -37,8 +37,12 @@ public abstract class DictionaryManagerAbstract {
 	public abstract KeigoHelper getKeigoHelper();
 	
 	public abstract List<TransitiveIntransitivePair> getTransitiveIntransitivePairsList();
+	
+	public abstract void waitForDatabaseReady();
 
 	public int getWordGroupsNo(int groupSize) {
+		
+		waitForDatabaseReady();
 
 		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
 
@@ -52,6 +56,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) {
+		
+		waitForDatabaseReady();
 
 		try {
 			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
@@ -71,6 +77,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public List<DictionaryEntry> getWordsNameGroup(int groupSize, int groupNo) {
+		
+		waitForDatabaseReady();
 
 		try {
 			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesNameSize();
@@ -90,6 +98,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public FindWordResult findWord(final FindWordRequest findWordRequest) {
+		
+		waitForDatabaseReady();
 
 		FindWordResult findWordResult = null;
 
@@ -277,14 +287,23 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public int getDictionaryEntriesSize() {
+		
+		waitForDatabaseReady();
+		
 		return databaseConnector.getDictionaryEntriesSize();
 	}
 
 	public int getDictionaryEntriesNameSize() {
+		
+		waitForDatabaseReady();
+		
 		return databaseConnector.getDictionaryEntriesNameSize();
 	}
 	
 	public DictionaryEntry getDictionaryEntryById(int id) {
+		
+		waitForDatabaseReady();
+		
 		try {
 			return databaseConnector.getDictionaryEntryById(String.valueOf(id));
 		} catch (DictionaryException e) {
@@ -293,6 +312,9 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public DictionaryEntry getDictionaryEntryNameById(int id) {
+		
+		waitForDatabaseReady();
+		
 		try {
 			return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
 		} catch (DictionaryException e) {
@@ -301,6 +323,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public List<KanjiEntry> findKnownKanji(String text) {
+		
+		waitForDatabaseReady();
 
 		List<KanjiEntry> result = new ArrayList<KanjiEntry>();
 
@@ -324,6 +348,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public KanjiEntry findKanji(String kanji) {
+		
+		waitForDatabaseReady();
 
 		KanjiEntry kanjiEntry = null;
 
@@ -337,6 +363,9 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) {
+		
+		waitForDatabaseReady();
+		
 		try {
 			return databaseConnector.getAllKanjis(withDetails, onlyUsed);
 		} catch (DictionaryException e) {
@@ -345,6 +374,9 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public KanjiEntry getKanjiEntryById(int id) {
+		
+		waitForDatabaseReady();
+		
 		try {
 			return databaseConnector.getKanjiEntryById(String.valueOf(id));
 		} catch (DictionaryException e) {
@@ -355,6 +387,8 @@ public abstract class DictionaryManagerAbstract {
 	public abstract List<RadicalInfo> getRadicalList();
 	
 	public List<KanjiEntry> findKnownKanjiFromRadicals(String[] radicals) {
+		
+		waitForDatabaseReady();
 
 		List<KanjiEntry> result = null;
 
@@ -389,6 +423,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public FindKanjiResult findKanjisFromStrokeCount(int from, int to) {
+		
+		waitForDatabaseReady();
 
 		FindKanjiResult result = null;
 
@@ -423,6 +459,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public Set<String> findAllAvailableRadicals(String[] radicals) {
+		
+		waitForDatabaseReady();
 
 		try {
 			return databaseConnector.findAllAvailableRadicals(radicals);
@@ -433,6 +471,8 @@ public abstract class DictionaryManagerAbstract {
 
 	public FindKanjiResult findKanji(final FindKanjiRequest findKanjiRequest) {
 
+		waitForDatabaseReady();
+		
 		try {
 			FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
 			
@@ -503,6 +543,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public List<KanjivgEntry> getStrokePathsForWord(String word) {
+		
+		waitForDatabaseReady();
 
 		List<KanjivgEntry> result = new ArrayList<KanjivgEntry>();
 
@@ -542,6 +584,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 
 	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry) {
+		
+		waitForDatabaseReady();
 
 		if (dictionaryEntry == null) {
 			return null;
@@ -857,10 +901,15 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public List<GroupEnum> getDictionaryEntryGroupTypes() {
+		
+		waitForDatabaseReady();
+		
 		return databaseConnector.getDictionaryEntryGroupTypes();
 	}
 
 	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) {
+		
+		waitForDatabaseReady();
 
 		try {
 			return databaseConnector.getGroupDictionaryEntries(groupName);
@@ -870,6 +919,8 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) {
+		
+		waitForDatabaseReady();
 		
 		try {
 			return databaseConnector.getTatoebaSentenceGroup(groupId);
