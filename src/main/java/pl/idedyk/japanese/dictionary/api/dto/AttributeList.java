@@ -159,4 +159,9 @@ public class AttributeList implements Serializable {
 		
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "AttributeList [attributeList=" + attributeList + "]";
+	}
 }

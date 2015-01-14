@@ -33,5 +33,10 @@ public class Attribute implements Serializable {
 		attributeValueList = new ArrayList<String>();
 		
 		attributeValueList.add(attributeValue);
+	}
+
+	@Override
+	public String toString() {
+		return "Attribute [attributeType=" + attributeType + ", attributeValueList=" + attributeValueList + "]";
 	}	
 }
