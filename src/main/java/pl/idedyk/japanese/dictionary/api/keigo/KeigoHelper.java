@@ -111,10 +111,10 @@ public class KeigoHelper {
 
 		// iru
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_RU, null, "いる", "iru", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "おる", null, "oru", null, null, null, null);
+				DictionaryEntryType.WORD_VERB_U, "居る", null, "おる", null, "oru", null, null, null, null);
 
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_RU, "居る", "いる", "iru", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "おる", null, "oru", null, null, null, null);
+				DictionaryEntryType.WORD_VERB_U, "居る", null, "おる", null, "oru", null, null, null, null);
 
 		// iku
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_U, "行く", "いく", "iku", KeigoEntryFindMatchType.END_WITH,
