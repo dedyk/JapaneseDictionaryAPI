@@ -43,6 +43,8 @@ public enum DictionaryEntryType {
 
 	WORD_ADJECTIVE_NARI("archaiczna/dawna forma na-przymiotnika"),
 	
+	WORD_ADJECTIVE_KU("ku-przymiotnik"),
+	
 	WORD_EXPRESSION("wyrażenie"),
 
 	WORD_ADVERB("przysłówek"),
