@@ -30,14 +30,6 @@ public class FindWordRequest implements Serializable {
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.START_WITH;
 		
 	public List<DictionaryEntryType> dictionaryEntryTypeList = null;
-	
-	public static enum WordPlaceSearch {
-		//ANY_PLACE,
-		
-		START_WITH,
-		
-		EXACT;
-	}
 
 	@Override
 	public String toString() {

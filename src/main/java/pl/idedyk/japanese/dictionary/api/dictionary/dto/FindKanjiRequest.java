@@ -16,14 +16,6 @@ public class FindKanjiRequest implements Serializable {
 	
 	public boolean searchOnlyTop2500 = false;
 	
-	public static enum WordPlaceSearch {
-		//ANY_PLACE,
-		
-		START_WITH,
-		
-		EXACT;
-	}
-
 	@Override
 	public String toString() {
 		return "FindKanjiRequest [word=" + word + ", wordPlaceSearch=" + wordPlaceSearch + ", strokeCountFrom="
