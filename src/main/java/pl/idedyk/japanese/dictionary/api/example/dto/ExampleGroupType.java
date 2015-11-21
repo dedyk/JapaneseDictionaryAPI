@@ -44,7 +44,7 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_I_SURU("Sprawiać, że coś jest ..."),
 
-	ADJECTIVE_I_NONI("Mimo, że jest ..., to ..."),
+	ADJECTIVE_I_NONI("Mimo że jest ..., to ..."),
 
 	ADJECTIVE_I_YOUNI("Podobny do ..., jak ..."),
 
@@ -92,7 +92,7 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_NA_SURU("Sprawiać, że coś jest ..."),
 
-	ADJECTIVE_NA_NONI("Mimo, że jest ..., to ..."),
+	ADJECTIVE_NA_NONI("Mimo że jest ..., to ..."),
 
 	ADJECTIVE_NA_YOUNI("Podobny do ..., jak ..."),
 
@@ -145,7 +145,7 @@ public enum ExampleGroupType {
 
 	NOUN_NO_AIDA_NI("Podczas"),
 
-	NOUN_NONI("Mimo, że jest ..., to ..."),
+	NOUN_NONI("Mimo że jest ..., to ..."),
 
 	NOUN_YOUNA("Podobny do ..., jak ..."),
 
@@ -279,7 +279,7 @@ public enum ExampleGroupType {
 
 	VERB_EBA("Jeśli ..., wtedy ..."),
 
-	VERB_NONI("Mimo, że ..., to ..."),
+	VERB_NONI("Mimo że ..., to ..."),
 
 	VERB_TE_MO("Nawet, jeśli"),
 
