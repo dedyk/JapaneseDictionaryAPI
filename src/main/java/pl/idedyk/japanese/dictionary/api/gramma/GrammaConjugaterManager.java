@@ -34,7 +34,8 @@ public class GrammaConjugaterManager {
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN || 
 				dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NO ||
 				dictionaryEntryType == DictionaryEntryType.WORD_TEMPORAL_NOUN ||
-				dictionaryEntryType == DictionaryEntryType.WORD_ADVERBIAL_NOUN) {
+				dictionaryEntryType == DictionaryEntryType.WORD_ADVERBIAL_NOUN ||
+				dictionaryEntryType == DictionaryEntryType.WORD_PROPER_NOUN) {
 			
 			return NounGrammaConjugater.makeAll(dictionaryEntry, grammaFormCache, forceDictionaryEntryType, addVirtual);
 

@@ -11,7 +11,13 @@ public enum DictionaryEntryType {
 
 	WORD_NOUN("rzeczownik"),
 	
+	WORD_NOUN_PREFIX("rzeczownik (prefiks)"),
+	
+	WORD_NOUN_SUFFIX("rzeczownik (przyrostek)"),	
+	
 	WORD_PRE_NOUN_ADJECTIVAL("pre rzeczownik przysłówkowy"),
+	
+	WORD_PROPER_NOUN("nazwa własna"),
 	
 	WORD_ADJECTIVE_F("rzeczownik, bądź czasownik pełniący rolę przymiotnika"),
 
@@ -87,6 +93,10 @@ public enum DictionaryEntryType {
 
 	WORD_AUX("słówko pomocnicze"),
 	
+	WORD_PREFIX("prefiks"),
+	
+	WORD_SUFFIX("przyrostek"),
+	
 	WORD_EMPTY("pusty"),
 
 	UNKNOWN("nieznany");
@@ -111,7 +121,10 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_PARTICULE);
 		addableDictionaryEntryList.add(WORD_COUNTER);
 		addableDictionaryEntryList.add(WORD_NOUN);
+		addableDictionaryEntryList.add(WORD_NOUN_PREFIX);
+		addableDictionaryEntryList.add(WORD_NOUN_SUFFIX);
 		addableDictionaryEntryList.add(WORD_TEMPORAL_NOUN);
+		addableDictionaryEntryList.add(WORD_PROPER_NOUN);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_I);
 		addableDictionaryEntryList.add(WORD_AUX_ADJECTIVE_I);
 		addableDictionaryEntryList.add(WORD_ADJECTIVE_NA);
@@ -132,6 +145,8 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_INTERJECTION);
 		addableDictionaryEntryList.add(WORD_AUX);
 		addableDictionaryEntryList.add(WORD_EXPRESSION);
+		addableDictionaryEntryList.add(WORD_PREFIX);
+		addableDictionaryEntryList.add(WORD_SUFFIX);
 		addableDictionaryEntryList.add(WORD_NAME);
 		addableDictionaryEntryList.add(WORD_MALE_NAME);
 		addableDictionaryEntryList.add(WORD_FEMALE_NAME);

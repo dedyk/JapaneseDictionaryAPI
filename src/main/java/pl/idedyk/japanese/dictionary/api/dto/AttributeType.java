@@ -25,11 +25,13 @@ public enum AttributeType {
 	
 	OBSOLETE("słowo przestarzałe", true),
 	
+	/*
 	SUFFIX("przyrostek", true),
 	NOUN_SUFFIX("przyrostek do rzeczowników", true),
 	
 	PREFIX("prefiks", true),
 	NOUN_PREFIX("prefiks do rzeczowników", true),
+	*/
 		
 	ONAMATOPOEIC_OR_MIMETIC_WORD("onomatopeiczne lub mimetyczne słowo", true),
 	

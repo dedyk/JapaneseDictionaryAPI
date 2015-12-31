@@ -21,6 +21,22 @@ public class AttributeList implements Serializable {
 		
 		return false;
 	}
+	
+	public void remove(AttributeType attributeType) {
+		
+		Attribute attributeToRemove = null;
+		
+		for (Attribute currentAttribute : attributeList) {
+			
+			if (currentAttribute.getAttributeType() == attributeType) {				
+				attributeToRemove = currentAttribute;
+			}
+		}
+		
+		if (attributeToRemove != null) {
+			attributeList.remove(attributeToRemove);
+		}
+	}
 
 	public void add(int i, AttributeType attributeType) {
 		

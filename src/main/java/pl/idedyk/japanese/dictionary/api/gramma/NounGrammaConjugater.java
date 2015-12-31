@@ -252,12 +252,14 @@ public class NounGrammaConjugater {
 		if (	dictionaryEntryType != DictionaryEntryType.WORD_NOUN && 
 				dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO &&
 				dictionaryEntryType != DictionaryEntryType.WORD_TEMPORAL_NOUN &&
-				dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN) {
+				dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN &&
+				dictionaryEntryType != DictionaryEntryType.WORD_PROPER_NOUN) {
 			
 			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN && "
 					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO && "
 					+ "dictionaryEntryType != DictionaryEntryType.WORD_TEMPORAL_NOUN && "
-					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN: " + dictionaryEntryType);
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN && "
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_PROPER_NOUN: " + dictionaryEntryType);
 		}
 	}
 
