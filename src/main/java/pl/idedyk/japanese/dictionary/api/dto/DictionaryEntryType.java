@@ -11,7 +11,7 @@ public enum DictionaryEntryType {
 
 	WORD_NOUN("rzeczownik"),
 	
-	WORD_NOUN_PREFIX("rzeczownik (prefiks)"),
+	WORD_NOUN_PREFIX("rzeczownik (przedrostek)"),
 	
 	WORD_NOUN_SUFFIX("rzeczownik (przyrostek)"),	
 	
@@ -93,7 +93,7 @@ public enum DictionaryEntryType {
 
 	WORD_AUX("słówko pomocnicze"),
 	
-	WORD_PREFIX("prefiks"),
+	WORD_PREFIX("przedrostek"),
 	
 	WORD_SUFFIX("przyrostek"),
 	
