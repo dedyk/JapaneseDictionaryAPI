@@ -47,6 +47,8 @@ public enum DictionaryEntryType {
 
 	WORD_ADJECTIVE_TARU("taru-przymiotnik"),
 
+	WORD_ADJECTIVE_SHIKU("shiku-przymiotnik (archaiczna forma)"),
+	
 	WORD_ADJECTIVE_NARI("archaiczna/dawna forma na-przymiotnika"),
 	
 	WORD_ADJECTIVE_KU("ku-przymiotnik"),
