@@ -82,9 +82,14 @@ public class KanaHelper {
 				continue;
 			}
 
-			if (kana.equals("ttsu2") == true) {
+			if (kana.equals("ttsu2") == true && sb.length() > 0) {
 				sb.append(sb.charAt(sb.length() - 1));
 
+				continue;
+				
+			} else if (kana.equals("ttsu2") == true && sb.length() == 0) {
+				sb.append("ー");
+				
 				continue;
 			}
 
