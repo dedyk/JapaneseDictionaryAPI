@@ -16,10 +16,14 @@ public class AdjectiveIGrammaConjugater {
 
 	public static List<GrammaFormConjugateGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry, 
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
+
+		if (isKanaI(dictionaryEntry) == true) { // nie liczymy dla i dla kany
+			return null;
+		}
 		
 		// validate DictionaryEntry
 		validateDictionaryEntry(dictionaryEntry);
-
+		
 		List<GrammaFormConjugateGroupTypeElements> result = new ArrayList<GrammaFormConjugateGroupTypeElements>();
 
 		// forma formalna
@@ -294,7 +298,8 @@ public class AdjectiveIGrammaConjugater {
 		return text.substring(0, text.length() - 1);
 	}
 
-	private static void  validateDictionaryEntry(DictionaryEntry dictionaryEntry) {
+	private static void validateDictionaryEntry(DictionaryEntry dictionaryEntry) {
+		
 		DictionaryEntryType dictionaryEntryType = dictionaryEntry.getDictionaryEntryType();
 
 		if (dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_I) {
@@ -324,6 +329,26 @@ public class AdjectiveIGrammaConjugater {
 				throw new RuntimeException("currentRomaji.endsWith(i) == false: " + currentRomaji);
 			}
 		}		
+	}
+	
+	private static boolean isKanaI(DictionaryEntry dictionaryEntry) {
+		
+		String kanji = dictionaryEntry.getKanji();
+
+		if (kanji != null && kanji.endsWith("イ") == true) {
+			return true;
+		}
+
+		@SuppressWarnings("deprecation")
+		List<String> kanaList = dictionaryEntry.getKanaList();
+
+		for (String currentKana : kanaList) {
+			if (currentKana.endsWith("イ") == true) {
+				return true;
+			}			
+		}		
+		
+		return false;
 	}
 	
 	private static GrammaFormConjugateResult makeTeForm(DictionaryEntry dictionaryEntry) {

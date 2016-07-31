@@ -17,6 +17,10 @@ public class AdjectiveIExampler {
 	public static List<ExampleGroupTypeElements> makeAll(DictionaryEntry dictionaryEntry, 
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
+		if (isKanaI(dictionaryEntry) == true) { // nie liczymy dla i dla kany
+			return null;
+		}
+		
 		List<ExampleGroupTypeElements> result = new ArrayList<ExampleGroupTypeElements>();
 		
 		// motto
@@ -89,6 +93,26 @@ public class AdjectiveIExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_TE_MO, makeTeMoExample(dictionaryEntry, grammaFormCache));
 		
 		return result;
+	}
+	
+	private static boolean isKanaI(DictionaryEntry dictionaryEntry) {
+		
+		String kanji = dictionaryEntry.getKanji();
+
+		if (kanji != null && kanji.endsWith("イ") == true) {
+			return true;
+		}
+
+		@SuppressWarnings("deprecation")
+		List<String> kanaList = dictionaryEntry.getKanaList();
+
+		for (String currentKana : kanaList) {
+			if (currentKana.endsWith("イ") == true) {
+				return true;
+			}			
+		}		
+		
+		return false;
 	}
 	
 	private static ExampleResult makeMotto(DictionaryEntry dictionaryEntry) {
