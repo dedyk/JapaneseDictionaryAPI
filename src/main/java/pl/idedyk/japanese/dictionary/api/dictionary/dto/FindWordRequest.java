@@ -1,7 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
@@ -28,8 +27,6 @@ public class FindWordRequest implements Serializable {
 	public boolean searchGrammaFormAndExamples = false;
 	public boolean searchName = false;
 	
-	public boolean findWords = false;
-	
 	public WordPlaceSearch wordPlaceSearch = WordPlaceSearch.START_WITH;
 		
 	public List<DictionaryEntryType> dictionaryEntryTypeList = null;
@@ -40,8 +37,8 @@ public class FindWordRequest implements Serializable {
 				+ ", searchRomaji=" + searchRomaji + ", searchTranslate=" + searchTranslate + ", searchInfo="
 				+ searchInfo + ", searchOnlyCommonWord=" + searchOnlyCommonWord + ", searchMainDictionary="
 				+ searchMainDictionary + ", searchGrammaFormAndExamples=" + searchGrammaFormAndExamples
-				+ ", searchName=" + searchName + ", findWords=" + findWords + ", wordPlaceSearch=" + wordPlaceSearch
-				+ ", dictionaryEntryTypeList=" + dictionaryEntryTypeList + "]";
+				+ ", searchName=" + searchName + ", wordPlaceSearch=" + wordPlaceSearch + ", dictionaryEntryTypeList="
+				+ dictionaryEntryTypeList + "]";
 	}
 
 	@Override
@@ -62,7 +59,6 @@ public class FindWordRequest implements Serializable {
 		result = prime * result + (searchTranslate ? 1231 : 1237);
 		result = prime * result + ((word == null) ? 0 : word.hashCode());
 		result = prime * result + ((wordPlaceSearch == null) ? 0 : wordPlaceSearch.hashCode());
-		result = prime * result + (findWords ? 1231 : 1237);
 		
 		return result;
 	}
@@ -124,10 +120,7 @@ public class FindWordRequest implements Serializable {
 		
 		if (wordPlaceSearch != other.wordPlaceSearch)
 			return false;
-
-		if (findWords != other.findWords)
-			return false;
-
+		
 		return true;
 	}
 
@@ -173,43 +166,5 @@ public class FindWordRequest implements Serializable {
 
 	public List<DictionaryEntryType> getDictionaryEntryTypeList() {
 		return dictionaryEntryTypeList;
-	}
-
-	public boolean isFindWords() {
-		return findWords;
-	}
-	
-	public FindWordRequest createCopy() {
-		
-		FindWordRequest newFindWordRequest = new FindWordRequest();
-		
-		newFindWordRequest.word = word;
-		
-		newFindWordRequest.searchKanji = searchKanji;
-		newFindWordRequest.searchKana = searchKana;
-		newFindWordRequest.searchRomaji = searchRomaji;
-		newFindWordRequest.searchTranslate = searchTranslate;
-		newFindWordRequest.searchInfo = searchInfo;
-		
-		newFindWordRequest.searchOnlyCommonWord = searchOnlyCommonWord;
-		
-		newFindWordRequest.searchMainDictionary = searchMainDictionary;
-		
-		newFindWordRequest.searchGrammaFormAndExamples = searchGrammaFormAndExamples;
-		newFindWordRequest.searchName = searchName;
-		
-		newFindWordRequest.findWords = findWords;
-		
-		newFindWordRequest.wordPlaceSearch = wordPlaceSearch;
-		
-		if (dictionaryEntryTypeList != null) {
-			newFindWordRequest.dictionaryEntryTypeList = new ArrayList<DictionaryEntryType>(dictionaryEntryTypeList);
-			
-		} else {
-			newFindWordRequest.dictionaryEntryTypeList = null;
-			
-		}
-		
-		return newFindWordRequest;
 	}
 }

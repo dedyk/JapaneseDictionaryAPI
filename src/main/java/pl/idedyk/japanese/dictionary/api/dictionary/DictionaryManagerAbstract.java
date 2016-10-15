@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +14,6 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultItem;
-import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
@@ -102,88 +100,18 @@ public abstract class DictionaryManagerAbstract {
 	public FindWordResult findWord(final FindWordRequest findWordRequest) {
 		
 		waitForDatabaseReady();
-		
+
 		FindWordResult findWordResult = null;
-		
-		if (findWordRequest.findWords == false) { // zwykle szukanie slow
-			
-			try {
-				findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
-				databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
-				
-				databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
+		try {
+			findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
-			} catch (DictionaryException e) {
-				throw new RuntimeException(e);
-			}
+			databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
 			
-		} else { // wyszukiwanie slow w ciagu znakow
-			
-			// generowanie wszystkich mozliwosci
-			List<String> allPrefixes = new ArrayList<String>();
-			
-			for (int startIdx = 0; startIdx < findWordRequest.word.length(); ++startIdx) {
-				
-				for (int endIdx = 0; endIdx <= findWordRequest.word.length(); ++endIdx) {
-					
-					if (endIdx <= startIdx) {
-						continue;
-					}
-					
-					String substring = findWordRequest.word.substring(startIdx, endIdx);
-					
-					allPrefixes.add(substring);
-				}			
-			}
-			
-			findWordResult = new FindWordResult();
-			
-			findWordResult.setResult(new ArrayList<FindWordResult.ResultItem>());
-			
-			Set<Integer> alreadyExistsDictionaryEntryIdSet = new HashSet<Integer>();
-			
-			// wyszukiwanie dla kazdego podciagu
-			for (String currentPrefix : allPrefixes) {
-				
-				FindWordRequest findWordRequestForCurrentPrefix = findWordRequest.createCopy();
-				
-				findWordRequestForCurrentPrefix.word = currentPrefix; // zmieniamy szukane slowo
-				findWordRequestForCurrentPrefix.wordPlaceSearch = WordPlaceSearch.EXACT; // zmiana trybu wyszukiwania
-				findWordRequestForCurrentPrefix.searchName = false;
-				
-				//
-				
-				FindWordResult findWordResultForCurrentPrefix = null; 
-				
-				try {
-					findWordResultForCurrentPrefix = databaseConnector.findDictionaryEntries(findWordRequestForCurrentPrefix);
-	
-					databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequestForCurrentPrefix, findWordResultForCurrentPrefix);
-					
-					databaseConnector.findDictionaryEntriesInNames(findWordRequestForCurrentPrefix, findWordResultForCurrentPrefix);
-				
-				} catch (DictionaryException e) {
-					throw new RuntimeException(e);
-				}
-				
-				// laczenie wynikow z glowna odpowiedzia
-				for (FindWordResult.ResultItem currentResultItem : findWordResultForCurrentPrefix.result) {
-					
-					if (alreadyExistsDictionaryEntryIdSet.contains(currentResultItem.getDictionaryEntry().getId()) == false) { // to jest nowe slowko, dodajemy je
-						
-						findWordResult.getResult().add(currentResultItem);
-						
-						//
-						
-						alreadyExistsDictionaryEntryIdSet.add(currentResultItem.getDictionaryEntry().getId());
-					}
-				}
-				
-				findWordResult.moreElemetsExists = findWordResult.moreElemetsExists | findWordResultForCurrentPrefix.moreElemetsExists;
-				findWordResult.foundGrammaAndExamples = findWordResult.foundGrammaAndExamples | findWordResultForCurrentPrefix.foundGrammaAndExamples;
-				findWordResult.foundNames = findWordResult.foundNames | findWordResultForCurrentPrefix.foundNames;
-			}
+			databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
+
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
 		}
 
 		final Map<String, KanaEntry> kanaCache = getKanaHelper().getKanaCache();
