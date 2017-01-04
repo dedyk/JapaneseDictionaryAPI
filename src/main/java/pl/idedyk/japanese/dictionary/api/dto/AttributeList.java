@@ -22,20 +22,6 @@ public class AttributeList implements Serializable {
 		return false;
 	}
 	
-	public List<Attribute> getAttributeList(AttributeType attributeType) {
-		
-		List<Attribute> result = new ArrayList<Attribute>();
-		
-		for (Attribute currentAttribute : attributeList) {
-			
-			if (currentAttribute.getAttributeType() == attributeType) {
-				result.add(currentAttribute);
-			}
-		}
-		
-		return result;
-	}
-	
 	public void remove(AttributeType attributeType) {
 		
 		Attribute attributeToRemove = null;
