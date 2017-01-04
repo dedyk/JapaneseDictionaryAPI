@@ -1,12 +1,12 @@
 package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
-import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
-import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
-import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
+import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryGroup;
 
 public class FindWordResult implements Serializable {
 	
@@ -58,55 +58,46 @@ public class FindWordResult implements Serializable {
 
 		private DictionaryEntry dictionaryEntry;
 		
-		@Deprecated
-		private GrammaFormConjugateResult grammaFormConjugateResult;
-		
-		@Deprecated
-		private ExampleResult exampleResult;
-		
-		@Deprecated
-		private ExampleGroupType exampleGroupType;
-		
-		@Deprecated
-		private DictionaryEntry relatedDictionaryEntryById;
-		
+		private DictionaryEntryGroup dictionaryEntryGroup;
+				
 		public ResultItem(DictionaryEntry dictionaryEntry) {
 			this.dictionaryEntry = dictionaryEntry;
 		}
 		
-		/*
-		public ResultItem(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntry relatedDictionaryEntryById) {
-			this.grammaFormConjugateResult = grammaFormConjugateResult;
-			
-			this.relatedDictionaryEntryById = relatedDictionaryEntryById;
-		}
-
-		public ResultItem(ExampleResult exampleResult, ExampleGroupType exampleGroupType, DictionaryEntry relatedDictionaryEntryById) {
-			this.exampleResult = exampleResult;
-			this.exampleGroupType = exampleGroupType;
-			
-			this.relatedDictionaryEntryById = relatedDictionaryEntryById;
-		}
-		*/
-
+		@Deprecated
 		public DictionaryEntry getDictionaryEntry() {
+			
 			if (dictionaryEntry != null) {
 				return dictionaryEntry;
-			} else if (grammaFormConjugateResult != null || exampleResult != null) {
-				return relatedDictionaryEntryById;
+				
 			}
 			
 			throw new RuntimeException("getDictionaryEntry");
+		}
+		
+		public List<Integer> getDictionaryEntryIdList() {
+			
+			if (dictionaryEntry != null) {
+				return Arrays.asList(dictionaryEntry.getId());
+					
+			} else if (dictionaryEntryGroup != null) {
+				
+				List<Integer> result = new ArrayList<Integer>();
+				
+				for (DictionaryEntry dictionaryEntry : dictionaryEntryGroup.getDictionaryEntryList()) {
+					result.add(dictionaryEntry.getId());
+				}
+				
+				return result;
+			}
+			
+			throw new RuntimeException("getDictionaryEntryIdList");
 		}
 
 		public boolean isKanjiExists() {
 			
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.isKanjiExists();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.isKanjiExists();
-			} else if (exampleResult != null) {
-				return exampleResult.isKanjiExists();
 			}
 			
 			throw new RuntimeException("isKanjiExists");
@@ -115,10 +106,6 @@ public class FindWordResult implements Serializable {
 		public String getKanji() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getKanji();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getKanji();
-			} else if (exampleResult != null) {
-				return exampleResult.getKanji();
 			}
 			
 			throw new RuntimeException("getKanji");
@@ -127,10 +114,6 @@ public class FindWordResult implements Serializable {
 		public String getPrefixKana() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getPrefixKana();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getPrefixKana();
-			} else if (exampleResult != null) {
-				return exampleResult.getPrefixKana();
 			}
 			
 			throw new RuntimeException("getPrefixKana");
@@ -140,10 +123,6 @@ public class FindWordResult implements Serializable {
 		public List<String> getKanaList() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getKanaList();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getKanaList();
-			} else if (exampleResult != null) {
-				return exampleResult.getKanaList();
 			}
 			
 			throw new RuntimeException("getKanaList");
@@ -152,10 +131,6 @@ public class FindWordResult implements Serializable {
 		public String getPrefixRomaji() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getPrefixRomaji();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getPrefixRomaji();
-			} else if (exampleResult != null) {
-				return exampleResult.getPrefixRomaji();
 			}
 			
 			throw new RuntimeException("getPrefixRomaji");
@@ -165,10 +140,6 @@ public class FindWordResult implements Serializable {
 		public List<String> getRomajiList() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getRomajiList();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getRomajiList();
-			} else if (exampleResult != null) {
-				return exampleResult.getRomajiList();
 			}
 			
 			throw new RuntimeException("getRomajiList");
@@ -177,10 +148,6 @@ public class FindWordResult implements Serializable {
 		public List<String> getTranslates() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getTranslates();
-			} else if (grammaFormConjugateResult != null) {
-				return relatedDictionaryEntryById.getTranslates();
-			} else if (exampleResult != null) {
-				return relatedDictionaryEntryById.getTranslates();
 			}
 			
 			throw new RuntimeException("getTranslates");
@@ -189,32 +156,6 @@ public class FindWordResult implements Serializable {
 		public String getInfo() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getInfo();
-			} else if (grammaFormConjugateResult != null) {
-				
-				String relatedDictionaryEntryByIdInfo = relatedDictionaryEntryById.getInfo();
-				
-				String result = "";
-				
-				if (relatedDictionaryEntryByIdInfo != null && relatedDictionaryEntryByIdInfo.equals("") == false) {
-					result = relatedDictionaryEntryByIdInfo + ", ";
-				}
-				
-				result = result + grammaFormConjugateResult.getResultType().getName();
-				
-				return result;
-			} else if (exampleResult != null) {
-				String relatedDictionaryEntryByIdInfo = relatedDictionaryEntryById.getInfo();
-				
-				String result = "";
-				
-				if (relatedDictionaryEntryByIdInfo != null && relatedDictionaryEntryByIdInfo.equals("") == false) {
-					result = relatedDictionaryEntryByIdInfo + ", ";
-				}
-				
-				result = result + exampleGroupType.getName() + (exampleGroupType.getInfo() != null ? ", " + exampleGroupType.getInfo() : "");
-				
-				return result;
-				
 			}
 			
 			throw new RuntimeException("getInfo");

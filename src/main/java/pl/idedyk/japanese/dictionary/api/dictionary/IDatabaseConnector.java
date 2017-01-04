@@ -22,6 +22,7 @@ public interface IDatabaseConnector {
 	public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
 	
 	public FindWordResult findDictionaryEntries(FindWordRequest findWordRequest) throws DictionaryException;
+	public FindWordResult findDictionaryGroupEntries(FindWordRequest findWordRequest) throws DictionaryException;
 	
 	public void findDictionaryEntriesInGrammaFormAndExamples(FindWordRequest findWordRequest,
 			FindWordResult findWordResult) throws DictionaryException;
