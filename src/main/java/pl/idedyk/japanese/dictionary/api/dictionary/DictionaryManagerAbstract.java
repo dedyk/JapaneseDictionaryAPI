@@ -14,6 +14,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultItem;
+import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
@@ -132,8 +133,8 @@ public abstract class DictionaryManagerAbstract {
 						
 					} else if (lhsIsName == true && rhsIsName == false) {
 						return 1;
-					}					
-					
+					}
+										
 					String findWord = findWordRequest.word;
 									
 					String lhsKanji = lhs.getKanji();
@@ -211,6 +212,16 @@ public abstract class DictionaryManagerAbstract {
 					if (islhsTranslates == true && isRhsTranslates == false) {
 						return -1;
 					} else if (islhsTranslates == false && isRhsTranslates == true) {
+						return 1;
+					}
+					
+					boolean lhsContaintsCommon = lhs.getDictionaryEntry().getAttributeList().contains(AttributeType.COMMON_WORD);
+					boolean rhsContaintsCommon = rhs.getDictionaryEntry().getAttributeList().contains(AttributeType.COMMON_WORD);
+					
+					if (lhsContaintsCommon == true && rhsContaintsCommon == false) {
+						return -1;
+						
+					} else if (lhsContaintsCommon == false && rhsContaintsCommon == true) {
 						return 1;
 					}
 					
