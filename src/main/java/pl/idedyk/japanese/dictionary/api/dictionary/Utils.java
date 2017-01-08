@@ -255,4 +255,21 @@ public class Utils {
 	public static boolean isJapanaseChar(char c) {
 		return isHiragana(c) || isKatakana(c) || isKana(c) || isKanji(c);
 	}
+	
+	public static boolean isAllJapaneseChars(String text) {
+		
+		boolean isAllJapaneseChars = true;
+
+		for (int textIdx = 0; textIdx < text.length(); ++textIdx) {
+			
+			if (isJapanaseChar(text.charAt(textIdx)) == false) {
+				
+				isAllJapaneseChars = false;
+				
+				break;
+			}									
+		}
+
+		return isAllJapaneseChars;
+	}
 }
