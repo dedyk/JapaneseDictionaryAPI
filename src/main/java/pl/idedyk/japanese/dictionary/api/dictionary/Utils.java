@@ -256,6 +256,40 @@ public class Utils {
 		return isHiragana(c) || isKatakana(c) || isKana(c) || isKanji(c);
 	}
 	
+	public static boolean isAllKanjiChars(String text) {
+		
+		boolean isAllKanjiChars = true;
+
+		for (int textIdx = 0; textIdx < text.length(); ++textIdx) {
+			
+			if (isKanji(text.charAt(textIdx)) == false) {
+				
+				isAllKanjiChars = false;
+				
+				break;
+			}									
+		}
+
+		return isAllKanjiChars;
+	}
+
+	public static boolean isAllKanaChars(String text) {
+		
+		boolean isAllKanaChars = true;
+
+		for (int textIdx = 0; textIdx < text.length(); ++textIdx) {
+			
+			if (isKana(text.charAt(textIdx)) == false) {
+				
+				isAllKanaChars = false;
+				
+				break;
+			}									
+		}
+
+		return isAllKanaChars;
+	}
+
 	public static boolean isAllJapaneseChars(String text) {
 		
 		boolean isAllJapaneseChars = true;
