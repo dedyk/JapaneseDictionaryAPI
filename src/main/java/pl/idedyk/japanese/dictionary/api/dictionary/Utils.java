@@ -228,6 +228,69 @@ public class Utils {
 
 		return text;
 	}
+	
+	public static char removePolishChar(char c) {
+		
+		switch (c) {
+			
+			case 'Ę':
+				return 'E';
+			
+			case 'ę':
+				return 'e';
+			
+			case 'Ó':
+				return 'O';
+				
+			case 'ó':
+				return 'o';
+				
+			case 'Ą':
+				return 'A';
+			
+			case 'ą':
+				return 'a';
+				
+			case 'Ś':
+				return 'S';
+				
+			case 'ś':
+				return 's';
+				
+			case 'Ł':
+				return 'L';
+				
+			case 'ł':
+				return 'l';
+				
+			case 'Ż':
+				return 'Z';
+				
+			case 'ż':
+				return 'z';
+				
+			case 'Ź':
+				return 'Z';
+				
+			case 'ź':
+				return 'z';
+				
+			case 'Ć':
+				return 'C';
+				
+			case 'ć':
+				return 'c';
+			
+			case 'Ń':
+				return 'N';
+				
+			case 'ń':
+				return 'n';
+			
+			default:
+				return c;		
+		}
+	}
 
 	public static boolean containsPolishChars(String text) {
 
