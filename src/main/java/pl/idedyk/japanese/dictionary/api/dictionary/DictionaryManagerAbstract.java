@@ -14,6 +14,9 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultItem;
+import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult;
+import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
+import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
@@ -938,5 +941,124 @@ public abstract class DictionaryManagerAbstract {
 		} catch (DictionaryException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public TranslateJapaneseSentenceResult translateJapaneseSentenceTEST(String sentence) throws DictionaryException {
+		
+		TranslateJapaneseSentenceResult result = new TranslateJapaneseSentenceResult();
+		
+		//
+		
+		final int maxStartIdx = 0;
+		final int maxEndIdx = sentence.length();
+		
+		int currentStartIdx = maxStartIdx;
+		int currentEndIdx = maxEndIdx;
+		
+		int currentUnknownStartIdx = -1;
+		int currentUnknownEndIdx = -1;
+		
+		while (true) {
+			
+			if (currentStartIdx == maxEndIdx) {
+				break;
+			}
+			
+			// robimy ciecie zdania
+			String substringToCheck = substringSentence(sentence, currentStartIdx, currentEndIdx);
+						
+			if (substringToCheck.equals("") == true) { // nie udalo sie nic znalesc
+				
+				// ustawiamy, ze ten znak bedzie poczatkiem nieznanego fragmentu				
+				if (currentUnknownStartIdx == -1) {
+					currentUnknownStartIdx = currentStartIdx;
+				}
+								
+				// przesuwamy poczatek o jeden, moze uda sie cos innego znalezc				
+				currentStartIdx++;
+				currentEndIdx = maxEndIdx;
+				
+				continue;
+			}
+						
+			// wyszukujemy, czy ten uciety kawalek znajduje sie w slowniku
+			FindWordRequest findWordRequest = createFindWordRequestForTranslateJapaneseSentence(substringToCheck);
+			
+			// wyszukujemy
+			FindWordResult findWordResult = findWord(findWordRequest);
+			
+			// sprawdzamy odpowiedz
+			if (findWordResult.result.size() != 0) { // mamy cos
+				
+				// czy wczesniej byly jakiej nieznane znaki, jesli tak to dodajemy je do listy
+				if (currentUnknownStartIdx != -1) {
+										
+					currentUnknownEndIdx = currentStartIdx;
+					
+					//
+					
+					String unknownWord = substringSentence(sentence, currentUnknownStartIdx, currentUnknownEndIdx);
+										
+					result.addToken(TokenType.UNKNOWN, unknownWord, currentUnknownStartIdx, currentUnknownEndIdx, null);
+					
+					currentUnknownStartIdx = -1;
+					currentUnknownEndIdx = -1;
+				}
+								
+				// wstawic znaleziony kawalek do wyniku				
+				result.addToken(TokenType.FOUND, substringToCheck, currentStartIdx, currentEndIdx, findWordResult);
+
+				//
+				
+				currentStartIdx = currentEndIdx;
+				currentEndIdx = maxEndIdx;				
+				
+			} else { // nic nie znalezlismy				
+				currentEndIdx--;
+			}			
+		}
+		
+		if (currentUnknownStartIdx != -1) {
+			
+			currentUnknownEndIdx = currentStartIdx;
+			
+			// czy wczesniej byly jakiej nieznane znaki, jesli tak to dodajemy je do listy			
+			String unknownWord = substringSentence(sentence, currentUnknownStartIdx, currentUnknownEndIdx);
+						
+			result.addToken(TokenType.UNKNOWN, unknownWord, currentUnknownStartIdx, currentUnknownEndIdx, null);
+
+			currentUnknownStartIdx = -1;
+			currentUnknownEndIdx = -1;
+		}
+		
+		return result;
+	}
+	
+	private String substringSentence(String sentence, int startIdx, int endIdx) {		
+		return sentence.substring(startIdx, endIdx);
+	}
+	
+	private FindWordRequest createFindWordRequestForTranslateJapaneseSentence(String word) {
+		
+		FindWordRequest findWordRequest = new FindWordRequest();
+		
+		findWordRequest.word = word;
+		
+		findWordRequest.searchKanji = true;		
+		findWordRequest.searchKana = true;		
+		findWordRequest.searchRomaji = true;
+		
+		findWordRequest.searchTranslate = false;		
+		findWordRequest.searchInfo = false;
+		
+		findWordRequest.searchOnlyCommonWord = false;
+		
+		findWordRequest.searchMainDictionary = true;
+		findWordRequest.searchGrammaFormAndExamples = true;
+		findWordRequest.searchName = true;
+		
+		findWordRequest.wordPlaceSearch = WordPlaceSearch.EXACT;
+		
+		return findWordRequest;
 	}
 }
