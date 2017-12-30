@@ -100,6 +100,8 @@ public enum DictionaryEntryType {
 	WORD_SUFFIX("przyrostek"),
 	
 	WORD_EMPTY("pusty"),
+	
+	WORD_COPULA_DA("kopuła (łącznik, spójnik) da"),
 
 	UNKNOWN("nieznany");
 
