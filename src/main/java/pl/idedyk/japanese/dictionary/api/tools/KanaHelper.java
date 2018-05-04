@@ -1299,12 +1299,470 @@ public class KanaHelper {
 
 		return result;
 	}
+	
+	public Map<String, List<KanaEntry>> getAllKanaListCacheKanaRomajiAsKey() {
+		
+		List<KanaEntry> allHiraganaKanaEntries = getAllHiraganaKanaEntries();
+		List<KanaEntry> allKatakanaKanaEntries = getAllKatakanaKanaEntries();
+		List<KanaEntry> allAdditionalKanaEntries = getAllAdditionalKanaEntries();
+		
+		List<KanaEntry> allKanaEntries = new ArrayList<KanaEntry>();
+		
+		allKanaEntries.addAll(allHiraganaKanaEntries);
+		allKanaEntries.addAll(allKatakanaKanaEntries);
+		allKanaEntries.addAll(allAdditionalKanaEntries);
+		
+		//
+		
+		Map<String, List<KanaEntry>> result = new HashMap<String, List<KanaEntry>>();
+		
+		for (KanaEntry kanaEntry : allKanaEntries) {
+			
+			String kana = kanaEntry.getKana();
+			
+			List<KanaEntry> kanaEntryList = result.get(kana);
+			
+			if (kanaEntryList == null) {
+				kanaEntryList = new ArrayList<KanaEntry>();
+				
+				result.put(kana, kanaEntryList);
+			}
+			
+			kanaEntryList.add(kanaEntry);
+		}
+		
+		return result;
+	}	
+	
+	public KanaWordFromRomaji convertRomajiIntoKanaWordFromRomaji(Map<String, List<KanaEntry>> allKanaListCacheKanaRomajiAsKey, String word)
+			throws DictionaryException {
+		
+		KanaWordFromRomaji result = new KanaWordFromRomaji();
+		
+		//		
 
-	public static class KanaWord {
-		public List<KanaEntry> kanaEntries;
+		word = word.toLowerCase(Locale.getDefault());
 
-		public String remaingRestChars;
+		String remaingRestChars = "";
+
+		String currentRestChars = "";
+
+		for (int idx = 0; idx < word.length(); ++idx) {
+			String currentChar = String.valueOf(word.charAt(idx));
+
+			if (currentChar.equals(" ") == true) {
+				continue;
+			}
+
+			currentRestChars += currentChar.toLowerCase(Locale.getDefault());
+
+			if (idx > 0) {
+				char previousChar = word.charAt(idx - 1);
+				char currentCharChar = word.charAt(idx);
+
+				if (previousChar == currentCharChar && isVowel(previousChar) == true
+						&& isVowel(currentCharChar) == true) {
+					
+					List<KanaEntry> kanaEntryList = new ArrayList<KanaEntry>();
+					
+					List<KanaEntry> partialKanaEntryList = allKanaListCacheKanaRomajiAsKey.get("ttsu2");
+					
+					if (partialKanaEntryList == null) {
+						throw new DictionaryException("Can't find kanaEntry: " + word);
+					}
+
+					kanaEntryList.addAll(partialKanaEntryList);
+					
+					//
+					
+					partialKanaEntryList = allKanaListCacheKanaRomajiAsKey.get(String.valueOf(currentCharChar));
+
+					if (partialKanaEntryList == null) {
+						throw new DictionaryException("Can't find kanaEntry: " + word);
+					}
+					
+					kanaEntryList.addAll(partialKanaEntryList);
+										
+					//
+
+					result.add(kanaEntryList);
+					
+					currentRestChars = "";
+
+					continue;
+				}
+			}
+
+			if (currentRestChars.length() == 2 && currentRestChars.charAt(0) == currentRestChars.charAt(1)
+					&& currentRestChars.charAt(0) != 'n') {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get("ttsu");
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "" + currentRestChars.charAt(1);
+
+				continue;
+			}
+
+			if (currentRestChars.equals("a") == true || currentRestChars.equals("i") == true
+					|| currentRestChars.equals("u") == true || currentRestChars.equals("e") == true
+					|| currentRestChars.equals("o") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ka") == true || currentRestChars.equals("ki") == true
+					|| currentRestChars.equals("ku") == true || currentRestChars.equals("ke") == true
+					|| currentRestChars.equals("ko") == true || currentRestChars.equals("kya") == true
+					|| currentRestChars.equals("kyu") == true || currentRestChars.equals("kyo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("sa") == true || currentRestChars.equals("shi") == true
+					|| currentRestChars.equals("sha") == true || currentRestChars.equals("shu") == true
+					|| currentRestChars.equals("sho") == true || currentRestChars.equals("she") == true
+					|| currentRestChars.equals("su") == true || currentRestChars.equals("se") == true
+					|| currentRestChars.equals("so") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ta") == true || currentRestChars.equals("tsu") == true
+					|| currentRestChars.equals("te") == true || currentRestChars.equals("to") == true
+					|| currentRestChars.equals("ti") == true || currentRestChars.equals("tu") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("chi") == true || currentRestChars.equals("cha") == true
+					|| currentRestChars.equals("chu") == true || currentRestChars.equals("cho") == true
+					|| currentRestChars.equals("che") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.startsWith("n") == true || currentRestChars.equals("n'") == true) {
+
+				boolean nProcessed = false;
+
+				if (currentRestChars.equals("n'") == true) {
+					List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get("n");
+
+					if (kanaEntryList == null) {
+						throw new DictionaryException("Can't find kanaEntry: " + word);
+					}
+
+					result.add(kanaEntryList);
+
+					currentRestChars = "";
+
+					nProcessed = true;
+				}
+
+				if (nProcessed == false
+						&& (currentRestChars.equals("na") == true || currentRestChars.equals("ni") == true
+								|| currentRestChars.equals("nu") == true || currentRestChars.equals("ne") == true
+								|| currentRestChars.equals("no") == true || currentRestChars.equals("nya") == true
+								|| currentRestChars.equals("nyu") == true || currentRestChars.equals("nyo") == true)) {
+
+					List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+					if (kanaEntryList == null) {
+						throw new DictionaryException("Can't find kanaEntry: " + word);
+					}
+
+					result.add(kanaEntryList);
+
+					currentRestChars = "";
+
+					nProcessed = true;
+				} else if (nProcessed == false && currentRestChars.length() > 1) {
+
+					if (currentRestChars.startsWith("ny") == false) {
+						
+						List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get("n");
+
+						if (kanaEntryList == null) {
+							throw new DictionaryException("Can't find kanaEntry: " + word);
+						}
+
+						result.add(kanaEntryList);
+
+						currentRestChars = currentRestChars.substring(1);
+
+						nProcessed = true;
+					}
+				}
+
+				if (nProcessed == false && currentRestChars.length() == 1 && idx == word.length() - 1) {
+					
+					List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get("n");
+
+					if (kanaEntryList == null) {
+						throw new DictionaryException("Can't find kanaEntry: " + word);
+					}
+
+					result.add(kanaEntryList);
+
+					currentRestChars = "";
+
+					nProcessed = true;
+				}
+			} else if (currentRestChars.equals("ha") == true || currentRestChars.equals("hi") == true
+					|| currentRestChars.equals("he") == true || currentRestChars.equals("ho") == true
+					|| currentRestChars.equals("hya") == true || currentRestChars.equals("hyu") == true
+					|| currentRestChars.equals("hyo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("fu") == true || currentRestChars.equals("fa") == true
+					|| currentRestChars.equals("fi") == true || currentRestChars.equals("fe") == true
+					|| currentRestChars.equals("fo") == true || currentRestChars.equals("fyu") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			
+			} else if (currentRestChars.equals("tsa") == true || currentRestChars.equals("tsi") == true
+					|| currentRestChars.equals("tse") == true || currentRestChars.equals("tso") == true
+					|| currentRestChars.equals("tyu") == true) {
+				
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ma") == true || currentRestChars.equals("mi") == true
+					|| currentRestChars.equals("mu") == true || currentRestChars.equals("me") == true
+					|| currentRestChars.equals("mo") == true || currentRestChars.equals("mya") == true
+					|| currentRestChars.equals("myu") == true || currentRestChars.equals("myo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ya") == true || currentRestChars.equals("yu") == true
+					|| currentRestChars.equals("yo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ra") == true || currentRestChars.equals("ri") == true
+					|| currentRestChars.equals("ru") == true || currentRestChars.equals("re") == true
+					|| currentRestChars.equals("ro") == true || currentRestChars.equals("rya") == true
+					|| currentRestChars.equals("ryu") == true || currentRestChars.equals("ryo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("wa") == true || currentRestChars.equals("wo") == true
+					|| currentRestChars.equals("wi") == true || currentRestChars.equals("we") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("va") == true || currentRestChars.equals("vi") == true || currentRestChars.equals("vu") == true 
+					|| currentRestChars.equals("ve") == true || currentRestChars.equals("vo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ga") == true || currentRestChars.equals("gi") == true
+					|| currentRestChars.equals("gu") == true || currentRestChars.equals("ge") == true
+					|| currentRestChars.equals("go") == true || currentRestChars.equals("gya") == true
+					|| currentRestChars.equals("gyu") == true || currentRestChars.equals("gyo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("za") == true || currentRestChars.equals("zu") == true
+					|| currentRestChars.equals("ze") == true || currentRestChars.equals("zo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ji") == true || currentRestChars.equals("ja") == true
+					|| currentRestChars.equals("ju") == true || currentRestChars.equals("jo") == true
+					|| currentRestChars.equals("je") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("da") == true || currentRestChars.equals("di") == true
+					|| currentRestChars.equals("du") == true || currentRestChars.equals("de") == true
+					|| currentRestChars.equals("do") == true || currentRestChars.equals("di") == true
+					|| currentRestChars.equals("dya") == true || currentRestChars.equals("dyu") == true
+					|| currentRestChars.equals("dyo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("ba") == true || currentRestChars.equals("bi") == true
+					|| currentRestChars.equals("bu") == true || currentRestChars.equals("be") == true
+					|| currentRestChars.equals("bo") == true || currentRestChars.equals("bya") == true
+					|| currentRestChars.equals("byu") == true || currentRestChars.equals("byo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			} else if (currentRestChars.equals("pa") == true || currentRestChars.equals("pi") == true
+					|| currentRestChars.equals("pu") == true || currentRestChars.equals("pe") == true
+					|| currentRestChars.equals("po") == true || currentRestChars.equals("pya") == true
+					|| currentRestChars.equals("pyu") == true || currentRestChars.equals("pyo") == true) {
+
+				List<KanaEntry> kanaEntryList = allKanaListCacheKanaRomajiAsKey.get(currentRestChars);
+
+				if (kanaEntryList == null) {
+					throw new DictionaryException("Can't find kanaEntry: " + word);
+				}
+
+				result.add(kanaEntryList);
+
+				currentRestChars = "";
+			}
+
+			remaingRestChars = currentRestChars;
+		}
+
+		if (remaingRestChars.trim().equals("") == false) {
+			throw new DictionaryException("Remaing rest chars: " + remaingRestChars);
+		}
+		
+		return result;
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 	private static boolean isVowel(char char_) {
 		if (char_ == 'e' || char_ == 'u' || char_ == 'i' || char_ == 'o' || char_ == 'a') {
@@ -1473,5 +1931,65 @@ public class KanaHelper {
 		}
 
 		return result.toString();
+	}
+	
+	public static class KanaWord {
+		public List<KanaEntry> kanaEntries;
+
+		public String remaingRestChars;
+	}
+	
+	public static class KanaWordFromRomaji {
+		
+		public List<KanaWord> kanaWordList = new ArrayList<KanaWord>();
+
+		public void add(List<KanaEntry> kanaEntryList) {
+			
+			if (kanaWordList.size() == 0) {
+				
+				for (KanaEntry kanaEntry : kanaEntryList) {
+					
+					KanaWord kanaWord = new KanaWord();					
+					kanaWord.kanaEntries = new ArrayList<KanaEntry>();
+					
+					kanaWord.kanaEntries.add(kanaEntry);
+					
+					//
+					
+					kanaWordList.add(kanaWord);					
+				}
+				
+			} else {
+				
+				if (kanaEntryList.size() == 1) {
+					
+					for (KanaWord kanaWord : kanaWordList) {						
+						kanaWord.kanaEntries.add(kanaEntryList.get(0));
+						
+					}
+					
+				} else { // wieksze niz 1
+					
+					List<KanaWord> newKanaWordList = new ArrayList<KanaWord>();
+					
+					for (KanaWord kanaWord : kanaWordList) {
+						
+						for (KanaEntry kanaEntry : kanaEntryList) {
+							
+							KanaWord newKanaWord = new KanaWord();							
+							newKanaWord.kanaEntries = new ArrayList<KanaEntry>();
+							
+							newKanaWord.kanaEntries.addAll(kanaWord.kanaEntries);
+							newKanaWord.kanaEntries.add(kanaEntry);
+							
+							newKanaWordList.add(newKanaWord);
+						}
+					}
+					
+					kanaWordList = newKanaWordList;					
+				}
+			}			
+		}
+		
 	}
 }
