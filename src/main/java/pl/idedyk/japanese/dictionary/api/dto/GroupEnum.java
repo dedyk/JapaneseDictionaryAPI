@@ -83,6 +83,17 @@ public enum GroupEnum {
 	JLPT_3("JLPT 3", 65),
 	JLPT_4("JLPT 4", 66),
 	JLPT_5("JLPT 5", 67),
+	
+	JOUYOU1("Jōyō 1", 68),
+	JOUYOU2("Jōyō 2", 69),
+	JOUYOU3("Jōyō 3", 70),
+	JOUYOU4("Jōyō 4", 71),
+	JOUYOU5("Jōyō 5", 72),
+	JOUYOU6("Jōyō 6", 73),
+	JOUYOU7("Jōyō 7", 74),
+	JOUYOU8("Jōyō 8", 75),
+	JOUYOU9("Jōyō 9", 76),
+	JOUYOU10("Jōyō 10", 77),
 
 	OTHER("Inne", 255);
 	

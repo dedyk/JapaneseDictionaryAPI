@@ -22,6 +22,8 @@ public class KanjiDic2Entry implements Serializable {
     private Integer jlpt;
 
     private Integer freq;
+    
+    private Integer jouyouGrade;
 
 	public String getKanji() {
 		return kanji;
@@ -87,6 +89,14 @@ public class KanjiDic2Entry implements Serializable {
 		this.freq = freq;
 	}
 	
+	public Integer getJouyouGrade() {
+		return jouyouGrade;
+	}
+
+	public void setJouyouGrade(Integer jouyouGrade) {
+		this.jouyouGrade = jouyouGrade;
+	}
+
 	@Override
 	public String toString() {
 		return "KanjiDic2Entry [kanji=" + kanji + ", strokeCount=" + strokeCount + ", onReading=" + onReading
