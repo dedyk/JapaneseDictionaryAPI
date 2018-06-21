@@ -102,6 +102,8 @@ public enum DictionaryEntryType {
 	WORD_EMPTY("pusty"),
 	
 	WORD_COPULA_DA("kopuła (łącznik, spójnik) da"),
+	
+	WORD_WORK("nazwa działa sztuki, literatury, muzyki"),
 
 	UNKNOWN("nieznany");
 
