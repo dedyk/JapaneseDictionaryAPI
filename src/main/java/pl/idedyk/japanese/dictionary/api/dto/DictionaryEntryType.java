@@ -73,7 +73,7 @@ public enum DictionaryEntryType {
 
 	WORD_SURNAME_NAME("nazwisko"),
 	
-	WORD_UNCLASS_NAME("bezklasowa nazwa"),
+	WORD_UNCLASS_NAME("niesklasyfikowana nazwa"),
 
 	WORD_PERSON("osoba"),
 	
@@ -157,12 +157,14 @@ public enum DictionaryEntryType {
 		addableDictionaryEntryList.add(WORD_MALE_NAME);
 		addableDictionaryEntryList.add(WORD_FEMALE_NAME);
 		addableDictionaryEntryList.add(WORD_SURNAME_NAME);
+		addableDictionaryEntryList.add(WORD_UNCLASS_NAME);
 		addableDictionaryEntryList.add(WORD_PERSON);
 		addableDictionaryEntryList.add(WORD_STATION_NAME);
 		addableDictionaryEntryList.add(WORD_PLACE);		
 		addableDictionaryEntryList.add(WORD_COMPANY_NAME);
 		addableDictionaryEntryList.add(WORD_PRODUCT_NAME);
 		addableDictionaryEntryList.add(WORD_ORGANIZATION_NAME);
+		addableDictionaryEntryList.add(WORD_WORK);
 		
 		Collections.sort(addableDictionaryEntryList, new Comparator<DictionaryEntryType>() {
 
