@@ -103,7 +103,7 @@ public enum DictionaryEntryType {
 	
 	WORD_COPULA_DA("kopuła (łącznik, spójnik) da"),
 	
-	WORD_WORK("nazwa działa sztuki, literatury, muzyki"),
+	WORD_WORK("nazwa dzieła sztuki, literatury, muzyki i etc"),
 
 	UNKNOWN("nieznany");
 
