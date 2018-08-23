@@ -15,9 +15,9 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 
 public interface IDatabaseConnector {
 
-	public int getDictionaryEntriesSize();
+	public int getDictionaryEntriesSize() throws DictionaryException;
 	
-	public int getDictionaryEntriesNameSize();
+	public int getDictionaryEntriesNameSize() throws DictionaryException;
 	
 	public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
 	
@@ -44,7 +44,7 @@ public interface IDatabaseConnector {
 	
 	public FindKanjiResult findKanji(FindKanjiRequest findKanjiRequest) throws DictionaryException;
 	
-	public List<GroupEnum> getDictionaryEntryGroupTypes();
+	public List<GroupEnum> getDictionaryEntryGroupTypes() throws DictionaryException;
 	
 	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException;
 	
