@@ -54,11 +54,75 @@ public interface IDatabaseConnector {
 	
 	//
 	
+	public class FindDictionaryEntriesInGrammaFormAndExamplesWrapper {
+		
+		private FindWordRequest findWordRequest;
+		
+		private FindWordResult findWordResult;
+		
+		public FindDictionaryEntriesInGrammaFormAndExamplesWrapper() {
+			// noop
+		}
+
+		public FindDictionaryEntriesInGrammaFormAndExamplesWrapper(FindWordRequest findWordRequest, FindWordResult findWordResult) {
+			this.findWordRequest = findWordRequest;
+			this.findWordResult = findWordResult;
+		}
+
+		public FindWordRequest getFindWordRequest() {
+			return findWordRequest;
+		}
+
+		public void setFindWordRequest(FindWordRequest findWordRequest) {
+			this.findWordRequest = findWordRequest;
+		}
+
+		public FindWordResult getFindWordResult() {
+			return findWordResult;
+		}
+
+		public void setFindWordResult(FindWordResult findWordResult) {
+			this.findWordResult = findWordResult;
+		}
+	}
+	
+	public class GetAllKanjisWrapper {
+		
+		private boolean withDetails;
+		
+		private boolean onlyUsed;
+		
+		public GetAllKanjisWrapper() {
+			// noop
+		}
+
+		public GetAllKanjisWrapper(boolean withDetails, boolean onlyUsed) {
+			this.withDetails = withDetails;
+			this.onlyUsed = onlyUsed;
+		}
+
+		public boolean isWithDetails() {
+			return withDetails;
+		}
+
+		public void setWithDetails(boolean withDetails) {
+			this.withDetails = withDetails;
+		}
+
+		public boolean isOnlyUsed() {
+			return onlyUsed;
+		}
+
+		public void setOnlyUsed(boolean onlyUsed) {
+			this.onlyUsed = onlyUsed;
+		}		
+	}
+	
     public class FindKanjisFromStrokeCountWrapper {
 
-        int from;
+        private int from;
 
-        int to;
+        private int to;
 
         public FindKanjisFromStrokeCountWrapper() {
             // noop
@@ -84,5 +148,37 @@ public interface IDatabaseConnector {
         public void setTo(int to) {
             this.to = to;
         }
+    }
+    
+    public class FindDictionaryEntriesInNamesWrapper {
+    	
+		private FindWordRequest findWordRequest;
+		
+		private FindWordResult findWordResult;
+		
+		public FindDictionaryEntriesInNamesWrapper() {
+			// noop
+		}
+
+		public FindDictionaryEntriesInNamesWrapper(FindWordRequest findWordRequest, FindWordResult findWordResult) {
+			this.findWordRequest = findWordRequest;
+			this.findWordResult = findWordResult;
+		}
+
+		public FindWordRequest getFindWordRequest() {
+			return findWordRequest;
+		}
+
+		public void setFindWordRequest(FindWordRequest findWordRequest) {
+			this.findWordRequest = findWordRequest;
+		}
+
+		public FindWordResult getFindWordResult() {
+			return findWordResult;
+		}
+
+		public void setFindWordResult(FindWordResult findWordResult) {
+			this.findWordResult = findWordResult;
+		}
     }
 }
