@@ -42,57 +42,67 @@ public abstract class DictionaryManagerAbstract {
 	
 	public abstract List<TransitiveIntransitivePair> getTransitiveIntransitivePairsList();
 	
-	public abstract void waitForDatabaseReady() throws DictionaryException;
+	public abstract void waitForDatabaseReady();
 
-	public int getWordGroupsNo(int groupSize) throws DictionaryException {
+	public int getWordGroupsNo(int groupSize) {
 		
 		waitForDatabaseReady();
 
-		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
-
-		int result = dictionaryEntriesSize / groupSize;
-
-		if (dictionaryEntriesSize % groupSize > 0) {
-			result++;
+		try {
+			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
+	
+			int result = dictionaryEntriesSize / groupSize;
+	
+			if (dictionaryEntriesSize % groupSize > 0) {
+				result++;
+			}
+	
+			return result;
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
 		}
-
-		return result;
 	}
 	
-	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) throws DictionaryException {
+	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) {
 		
 		waitForDatabaseReady();
 
-		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
+		try {
+			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
 
-		List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+			List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
 
-		for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-			DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryById(String.valueOf(idx + 1));
+			for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
+				DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryById(String.valueOf(idx + 1));
 
-			result.add(currentDictionaryEntry);
+				result.add(currentDictionaryEntry);
+			}
+
+			return result;
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
 		}
-
-		return result;
-		
 	}
 
-	public List<DictionaryEntry> getWordsNameGroup(int groupSize, int groupNo) throws DictionaryException {
+	public List<DictionaryEntry> getWordsNameGroup(int groupSize, int groupNo) {
 		
 		waitForDatabaseReady();
 
-		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesNameSize();
+		try {
+			int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesNameSize();
 
-		List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+			List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
 
-		for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-			DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryNameById(String.valueOf(idx + 1));
+			for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
+				DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryNameById(String.valueOf(idx + 1));
 
-			result.add(currentDictionaryEntry);
+				result.add(currentDictionaryEntry);
+			}
+
+			return result;
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
 		}
-
-		return result;
-		
 	}
 	
 	public FindWordResult findWord(final FindWordRequest findWordRequest) throws DictionaryException {
@@ -290,35 +300,51 @@ public abstract class DictionaryManagerAbstract {
 		return findWordResult;
 	}
 	
-	public int getDictionaryEntriesSize() throws DictionaryException {
+	public int getDictionaryEntriesSize() {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntriesSize();
+		try {
+			return databaseConnector.getDictionaryEntriesSize();
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public int getDictionaryEntriesNameSize() throws DictionaryException {
+	public int getDictionaryEntriesNameSize() {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntriesNameSize();
+		try {
+			return databaseConnector.getDictionaryEntriesNameSize();
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public DictionaryEntry getDictionaryEntryById(int id) throws DictionaryException {
+	public DictionaryEntry getDictionaryEntryById(int id) {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
+		try {
+			return databaseConnector.getDictionaryEntryById(String.valueOf(id));
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public DictionaryEntry getDictionaryEntryNameById(int id) throws DictionaryException {
+	public DictionaryEntry getDictionaryEntryNameById(int id) {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
+		try {
+			return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public List<KanjiEntry> findKnownKanji(String text) throws DictionaryException {
+	public List<KanjiEntry> findKnownKanji(String text) {
 		
 		waitForDatabaseReady();
 
@@ -328,7 +354,12 @@ public abstract class DictionaryManagerAbstract {
 
 			String currentChar = String.valueOf(text.charAt(idx));
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiEntry kanjiEntry = null;
+			try {
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			} catch (DictionaryException e) {
+				throw new RuntimeException(e);
+			}
 
 			if (kanjiEntry != null) {
 				result.add(kanjiEntry);
@@ -338,36 +369,56 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public KanjiEntry findKanji(String kanji) throws DictionaryException {
+	public KanjiEntry findKanji(String kanji) {
 		
 		waitForDatabaseReady();
 
-		KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(kanji);		
+		KanjiEntry kanjiEntry = null;
+
+		try {
+			kanjiEntry = databaseConnector.getKanjiEntry(kanji);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 
 		return kanjiEntry;
 	}
 
-	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException {
+	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getAllKanjis(withDetails, onlyUsed);
+		try {
+			return databaseConnector.getAllKanjis(withDetails, onlyUsed);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public KanjiEntry getKanjiEntryById(int id) throws DictionaryException {
+	public KanjiEntry getKanjiEntryById(int id) {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getKanjiEntryById(String.valueOf(id));
+		try {
+			return databaseConnector.getKanjiEntryById(String.valueOf(id));
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public abstract List<RadicalInfo> getRadicalList();
 	
-	public List<KanjiEntry> findKnownKanjiFromRadicals(String[] radicals) throws DictionaryException {
+	public List<KanjiEntry> findKnownKanjiFromRadicals(String[] radicals) {
 		
 		waitForDatabaseReady();
 
-		List<KanjiEntry> result = databaseConnector.findKanjiFromRadicals(radicals);
+		List<KanjiEntry> result = null;
+
+		try {
+			result = databaseConnector.findKanjiFromRadicals(radicals);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 
 		Collections.sort(result, new Comparator<KanjiEntry>() {
 
@@ -393,11 +444,17 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public FindKanjiResult findKanjisFromStrokeCount(int from, int to) throws DictionaryException {
+	public FindKanjiResult findKanjisFromStrokeCount(int from, int to) {
 		
 		waitForDatabaseReady();
 
-		FindKanjiResult result = databaseConnector.findKanjisFromStrokeCount(from, to);
+		FindKanjiResult result = null;
+
+		try {
+			result = databaseConnector.findKanjisFromStrokeCount(from, to);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 
 		Collections.sort(result.getResult(), new Comparator<KanjiEntry>() {
 
@@ -423,82 +480,91 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public Set<String> findAllAvailableRadicals(String[] radicals) throws DictionaryException {
+	public Set<String> findAllAvailableRadicals(String[] radicals) {
 		
 		waitForDatabaseReady();
 
-		return databaseConnector.findAllAvailableRadicals(radicals);
+		try {
+			return databaseConnector.findAllAvailableRadicals(radicals);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public FindKanjiResult findKanji(final FindKanjiRequest findKanjiRequest) throws DictionaryException {
+	public FindKanjiResult findKanji(final FindKanjiRequest findKanjiRequest) {
 
 		waitForDatabaseReady();
 		
-		FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
-		
-		Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiEntry>() {
+		try {
+			FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
+			
+			Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiEntry>() {
 
-			@Override
-			public int compare(KanjiEntry lhs, KanjiEntry rhs) {
-				
-				String findWord = findKanjiRequest.word;
-				
-				String lhsKanji = lhs.getKanji();
-				String rhsKanji = rhs.getKanji();
+				@Override
+				public int compare(KanjiEntry lhs, KanjiEntry rhs) {
+					
+					String findWord = findKanjiRequest.word;
+					
+					String lhsKanji = lhs.getKanji();
+					String rhsKanji = rhs.getKanji();
 
-				if (lhsKanji != null && lhsKanji.equals(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
-					return -1;
-				} else if (lhsKanji != null && lhsKanji.equals(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
-					return 1;
-				}
-									
-				List<String> lhsPolishTranslates = lhs.getPolishTranslates();
-
-				boolean islhsPolishTranslates = false;
-				
-				for (String currentLhsPolishTranslates : lhsPolishTranslates) {
-					if (Utils.removePolishChars(currentLhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
-						islhsPolishTranslates = true;
-						
-						continue;
+					if (lhsKanji != null && lhsKanji.equals(findWord) == true && rhsKanji != null && rhsKanji.equals(findWord) == false) {
+						return -1;
+					} else if (lhsKanji != null && lhsKanji.equals(findWord) == false && rhsKanji != null && rhsKanji.equals(findWord) == true) {
+						return 1;
 					}
-				}
-				
-				List<String> rhsPolishTranslates = rhs.getPolishTranslates();
+										
+					List<String> lhsPolishTranslates = lhs.getPolishTranslates();
 
-				boolean isRhsPolishTranslates = false;
-				
-				for (String currentRhsPolishTranslates : rhsPolishTranslates) {
-					if (Utils.removePolishChars(currentRhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
-						isRhsPolishTranslates = true;
-						
-						continue;
+					boolean islhsPolishTranslates = false;
+					
+					for (String currentLhsPolishTranslates : lhsPolishTranslates) {
+						if (Utils.removePolishChars(currentLhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
+							islhsPolishTranslates = true;
+							
+							continue;
+						}
 					}
-				}
-				
-				if (islhsPolishTranslates == true && isRhsPolishTranslates == false) {
-					return -1;
-				} else if (islhsPolishTranslates == false && isRhsPolishTranslates == true) {
-					return 1;
-				}
+					
+					List<String> rhsPolishTranslates = rhs.getPolishTranslates();
 
-				int lhsId = lhs.getId();
-				int rhsId = rhs.getId();
+					boolean isRhsPolishTranslates = false;
+					
+					for (String currentRhsPolishTranslates : rhsPolishTranslates) {
+						if (Utils.removePolishChars(currentRhsPolishTranslates).equalsIgnoreCase(findWord) == true) {
+							isRhsPolishTranslates = true;
+							
+							continue;
+						}
+					}
+					
+					if (islhsPolishTranslates == true && isRhsPolishTranslates == false) {
+						return -1;
+					} else if (islhsPolishTranslates == false && isRhsPolishTranslates == true) {
+						return 1;
+					}
 
-				if (lhsId < rhsId) {
-					return -1;
-				} else if (lhsId > rhsId) {
-					return 1;
-				} else {
-					return lhsKanji.compareTo(rhsKanji);
-				}
-			}				
-		});
-		
-		return findKanjiResult;		
+					int lhsId = lhs.getId();
+					int rhsId = rhs.getId();
+
+					if (lhsId < rhsId) {
+						return -1;
+					} else if (lhsId > rhsId) {
+						return 1;
+					} else {
+						return lhsKanji.compareTo(rhsKanji);
+					}
+				}				
+			});
+			
+			return findKanjiResult;
+			
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public List<KanjivgEntry> getStrokePathsForWord(String word) throws DictionaryException {
+	public List<KanjivgEntry> getStrokePathsForWord(String word) {
 		
 		waitForDatabaseReady();
 
@@ -514,7 +580,12 @@ public abstract class DictionaryManagerAbstract {
 
 			String currentChar = String.valueOf(word.charAt(idx));
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiEntry kanjiEntry = null;
+			try {
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			} catch (DictionaryException e) {
+				throw new RuntimeException(e);
+			}
 
 			if (kanjiEntry != null) {
 				result.add(kanjiEntry.getKanjivgEntry());
@@ -534,7 +605,7 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry) throws DictionaryException {
+	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry) {
 		
 		waitForDatabaseReady();
 
@@ -594,7 +665,7 @@ public abstract class DictionaryManagerAbstract {
 	}
 	*/
 
-	private List<FuriganaEntry> getFurigana(String kanji, String kana) throws DictionaryException {
+	private List<FuriganaEntry> getFurigana(String kanji, String kana) {
 
 		List<FuriganaEntry> furiganaEntries = new ArrayList<FuriganaEntry>();
 
@@ -607,7 +678,12 @@ public abstract class DictionaryManagerAbstract {
 
 			String currentChar = String.valueOf(kanji.charAt(idx));
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiEntry kanjiEntry = null;
+			try {
+				kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			} catch (DictionaryException e) {
+				throw new RuntimeException(e);
+			}
 
 			if (kanjiEntry == null) { // if hiragana
 
@@ -846,25 +922,37 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 	
-	public List<GroupEnum> getDictionaryEntryGroupTypes() throws DictionaryException {
+	public List<GroupEnum> getDictionaryEntryGroupTypes() {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryGroupTypes();
+		try {
+			return databaseConnector.getDictionaryEntryGroupTypes();
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException {
+	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) {
 		
 		waitForDatabaseReady();
 
-		return databaseConnector.getGroupDictionaryEntries(groupName);
+		try {
+			return databaseConnector.getGroupDictionaryEntries(groupName);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException {
+	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getTatoebaSentenceGroup(groupId);
+		try {
+			return databaseConnector.getTatoebaSentenceGroup(groupId);
+		} catch (DictionaryException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public TranslateJapaneseSentenceResult translateJapaneseSentenceTEST(String sentence) throws DictionaryException {
