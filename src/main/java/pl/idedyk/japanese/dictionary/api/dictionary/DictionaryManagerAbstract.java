@@ -17,6 +17,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultIte
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
+import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerResult;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
@@ -1033,6 +1034,8 @@ public abstract class DictionaryManagerAbstract {
 		
 		return result;
 	}
+	
+	public abstract WordPowerResult getWordPowerResult() throws DictionaryException;
 	
 	private String substringSentence(String sentence, int startIdx, int endIdx) {		
 		return sentence.substring(startIdx, endIdx);
