@@ -28,7 +28,7 @@ import pl.idedyk.japanese.dictionary.api.dto.KanjiDic2Entry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjivgEntry;
 import pl.idedyk.japanese.dictionary.api.dto.RadicalInfo;
-import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePair;
+import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
@@ -41,7 +41,7 @@ public abstract class DictionaryManagerAbstract {
 	
 	public abstract KeigoHelper getKeigoHelper();
 	
-	public abstract List<TransitiveIntransitivePair> getTransitiveIntransitivePairsList() throws DictionaryException;
+	public abstract List<TransitiveIntransitivePairWithDictionaryEntry> getTransitiveIntransitivePairsList() throws DictionaryException;
 	
 	public abstract void waitForDatabaseReady() throws DictionaryException;
 
