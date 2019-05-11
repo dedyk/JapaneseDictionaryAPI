@@ -11,6 +11,19 @@ public class QueueEventWrapper {
 	private String createDate;
 	
 	private Map<String, String> params;
+	
+	public QueueEventWrapper() {
+		
+	}
+
+	public QueueEventWrapper(String uuid, QueueEventOperation operation, String createDate,
+			Map<String, String> params) {
+		
+		this.uuid = uuid;
+		this.operation = operation;
+		this.createDate = createDate;
+		this.params = params;
+	}
 
 	public String getUuid() {
 		return uuid;

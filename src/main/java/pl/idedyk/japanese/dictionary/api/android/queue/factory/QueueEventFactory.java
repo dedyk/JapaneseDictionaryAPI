@@ -11,6 +11,7 @@ import pl.idedyk.japanese.dictionary.api.android.queue.event.QueueEventOperation
 import pl.idedyk.japanese.dictionary.api.android.queue.event.QueueEventWrapper;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.StatLogEventEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.StatLogScreenEvent;
+import pl.idedyk.japanese.dictionary.api.android.queue.event.StatStartAppEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.WordDictionaryMissingWordEvent;
 
 public class QueueEventFactory implements IQueueEventFactory {
@@ -68,6 +69,12 @@ public class QueueEventFactory implements IQueueEventFactory {
         IQueueEvent queueEvent = null;
 
         switch (queueEventOperation) {
+        	
+        	case STAT_START_APP_EVENT:
+        		
+        		queueEvent = new StatStartAppEvent(uuid, createDateDate, params);
+        		
+        		break;
 
             case STAT_LOG_SCREEN_EVENT:
 
