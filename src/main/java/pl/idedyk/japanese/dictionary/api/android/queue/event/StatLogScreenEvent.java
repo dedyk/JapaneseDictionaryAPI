@@ -8,16 +8,16 @@ public class StatLogScreenEvent extends QueueEventCommon {
 
     private String screenName;
 
-    public StatLogScreenEvent(String screenName) {
+    public StatLogScreenEvent(String userId, String screenName) {
 
-        super();
+        super(userId);
 
         this.screenName = screenName;
     }
     
-    public StatLogScreenEvent(String uuid, Date createDate, Map<String, String> paramsMap) {
+    public StatLogScreenEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {
     	
-        super(uuid, createDate);
+        super(id, userId, createDate);
 
         this.screenName = paramsMap.get("screenName");
     }

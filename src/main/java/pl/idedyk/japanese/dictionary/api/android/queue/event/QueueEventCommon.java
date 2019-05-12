@@ -8,32 +8,39 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 
 public abstract class QueueEventCommon implements IQueueEvent {
 
     //
 
-    protected String uuid;
+    protected Long id;
+    
+    protected String userId;
 
     protected Date createDate;
 
-    protected QueueEventCommon() {
-        this.uuid = UUID.randomUUID().toString();
-        this.createDate = new Date();
+    protected QueueEventCommon(String userId) {
+    	this.userId = userId;
+    	this.createDate = new Date();
     }
 
-    protected QueueEventCommon(String uuid, Date createDate) {
-        this.uuid = uuid;
+    protected QueueEventCommon(Long id, String userId, Date createDate) {
+        this.id = id;
+        this.userId = userId;
         this.createDate = createDate;
     }
 
     @Override
-    public String getUUID() {
-        return uuid;
+    public Long getId() {
+        return id;
     }
 
     @Override
+    public String getUserId() {
+		return userId;
+	}
+
+	@Override
     public Date getCreateDate() {
         return createDate;
     }
@@ -49,24 +56,7 @@ public abstract class QueueEventCommon implements IQueueEvent {
 
         return sdf.format(createDate);
     }
-
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (obj == null || obj instanceof QueueEventCommon == false) {
-            return false;
-        }
-
-        QueueEventCommon objAsQueueEventCommon = (QueueEventCommon)obj;
-
-        return uuid.equals(objAsQueueEventCommon.uuid);
-    }
-
+    
     @Override
     public String getParamsAsString() {
 
@@ -131,4 +121,8 @@ public abstract class QueueEventCommon implements IQueueEvent {
 
         return result;
     }
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 }

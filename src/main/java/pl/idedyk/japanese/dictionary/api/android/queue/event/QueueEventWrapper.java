@@ -4,7 +4,9 @@ import java.util.Map;
 
 public class QueueEventWrapper {
 	
-	private String uuid;
+	private Long id;
+	
+	private String userId;
 	
 	private QueueEventOperation operation;
 	
@@ -13,20 +15,24 @@ public class QueueEventWrapper {
 	private Map<String, String> params;
 	
 	public QueueEventWrapper() {
-		
 	}
 
-	public QueueEventWrapper(String uuid, QueueEventOperation operation, String createDate,
+	public QueueEventWrapper(Long id, String userId, QueueEventOperation operation, String createDate,
 			Map<String, String> params) {
 		
-		this.uuid = uuid;
+		this.id = id;
+		this.userId = userId;
 		this.operation = operation;
 		this.createDate = createDate;
 		this.params = params;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
-	public String getUuid() {
-		return uuid;
+	public String getUserId() {
+		return userId;
 	}
 
 	public QueueEventOperation getOperation() {
@@ -40,11 +46,7 @@ public class QueueEventWrapper {
 	public Map<String, String> getParams() {
 		return params;
 	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
+	
 	public void setOperation(QueueEventOperation operation) {
 		this.operation = operation;
 	}
@@ -55,5 +57,13 @@ public class QueueEventWrapper {
 
 	public void setParams(Map<String, String> params) {
 		this.params = params;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

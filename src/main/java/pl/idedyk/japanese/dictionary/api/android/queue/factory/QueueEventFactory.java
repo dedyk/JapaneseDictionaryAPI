@@ -17,9 +17,9 @@ import pl.idedyk.japanese.dictionary.api.android.queue.event.WordDictionaryMissi
 public class QueueEventFactory implements IQueueEventFactory {
 
     @Override
-    public IQueueEvent createQueueEvent(String uuid, String operation, String createDateString, String params) {
+    public IQueueEvent createQueueEvent(Long id, String userId, String operation, String createDateString, String params) {
 
-        if (operation == null || createDateString == null) {
+        if (operation == null || createDateString == null || userId == null) {
             return null;
         }
 
@@ -36,7 +36,8 @@ public class QueueEventFactory implements IQueueEventFactory {
         
         QueueEventWrapper queueEventWrapper = new QueueEventWrapper();
         
-        queueEventWrapper.setUuid(uuid);
+        queueEventWrapper.setId(id);
+        queueEventWrapper.setUserId(userId);
         queueEventWrapper.setOperation(queueEventOperation);
         queueEventWrapper.setCreateDate(createDateString);
         queueEventWrapper.setParams(QueueEventCommon.getParamsFromString(params));
@@ -47,7 +48,8 @@ public class QueueEventFactory implements IQueueEventFactory {
 	@Override
 	public IQueueEvent createQueueEvent(QueueEventWrapper queueEventWrapper) {
 		
-		String uuid = queueEventWrapper.getUuid();
+		Long id = queueEventWrapper.getId();
+		String userId = queueEventWrapper.getUserId();
 		String createDateString = queueEventWrapper.getCreateDate();
 		QueueEventOperation queueEventOperation = queueEventWrapper.getOperation();
 		Map<String, String> params = queueEventWrapper.getParams();
@@ -72,25 +74,25 @@ public class QueueEventFactory implements IQueueEventFactory {
         	
         	case STAT_START_APP_EVENT:
         		
-        		queueEvent = new StatStartAppEvent(uuid, createDateDate, params);
+        		queueEvent = new StatStartAppEvent(id, userId, createDateDate, params);
         		
         		break;
 
             case STAT_LOG_SCREEN_EVENT:
 
-                queueEvent = new StatLogScreenEvent(uuid, createDateDate, params);
+                queueEvent = new StatLogScreenEvent(id, userId, createDateDate, params);
 
                 break;
 
             case STAT_LOG_EVENT_EVENT:
 
-                queueEvent = new StatLogEventEvent(uuid, createDateDate, params);
+                queueEvent = new StatLogEventEvent(id, userId, createDateDate, params);
 
                 break;
 
             case WORD_DICTIONARY_MISSING_WORD_EVENT:
 
-                queueEvent = new WordDictionaryMissingWordEvent(uuid, createDateDate, params);
+                queueEvent = new WordDictionaryMissingWordEvent(id, userId, createDateDate, params);
 
                 break;
 

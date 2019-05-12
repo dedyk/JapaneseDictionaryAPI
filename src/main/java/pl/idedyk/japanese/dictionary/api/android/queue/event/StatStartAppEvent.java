@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class StatStartAppEvent extends QueueEventCommon {
 
-    public StatStartAppEvent() {
-        super();
+    public StatStartAppEvent(String userId) {
+        super(userId);
     }
     
-    public StatStartAppEvent(String uuid, Date createDate, Map<String, String> paramsMap) {    	
-        super(uuid, createDate);
+    public StatStartAppEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {    	
+        super(id, userId, createDate);
     }
 
     @Override

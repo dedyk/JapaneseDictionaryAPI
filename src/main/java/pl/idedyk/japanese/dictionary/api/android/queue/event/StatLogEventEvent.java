@@ -10,18 +10,18 @@ public class StatLogEventEvent extends QueueEventCommon {
     private String actionName;
     private String label;
 
-    public StatLogEventEvent(String screenName, String actionName, String label) {
+    public StatLogEventEvent(String userId, String screenName, String actionName, String label) {
 
-        super();
+        super(userId);
 
         this.screenName = screenName;
         this.actionName = actionName;
         this.label = label;
     }
 
-    public StatLogEventEvent(String uuid, Date createDate, Map<String, String> paramsMap) {
+    public StatLogEventEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {
 
-        super(uuid, createDate);
+        super(id, userId, createDate);
 
         this.screenName = paramsMap.get("screenName");
         this.actionName = paramsMap.get("actionName");

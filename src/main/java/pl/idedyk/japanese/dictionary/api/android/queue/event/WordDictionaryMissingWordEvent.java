@@ -12,17 +12,17 @@ public class WordDictionaryMissingWordEvent extends QueueEventCommon {
 
     private WordPlaceSearch wordPlaceSearch;
 
-    public WordDictionaryMissingWordEvent(String word, WordPlaceSearch wordPlaceSearch) {
+    public WordDictionaryMissingWordEvent(String userId, String word, WordPlaceSearch wordPlaceSearch) {
 
-        super();
+        super(userId);
 
         this.word = word;
         this.wordPlaceSearch = wordPlaceSearch;
     }
 
-    public WordDictionaryMissingWordEvent(String uuid, Date createDate, Map<String, String> paramsMap) {
+    public WordDictionaryMissingWordEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {
 
-        super(uuid, createDate);
+        super(id, userId, createDate);
 
         this.word = paramsMap.get("word");
         this.wordPlaceSearch = WordPlaceSearch.valueOf(paramsMap.get("wordPlaceSearch"));

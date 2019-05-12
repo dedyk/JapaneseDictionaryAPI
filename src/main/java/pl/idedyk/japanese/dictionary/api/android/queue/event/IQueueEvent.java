@@ -7,7 +7,9 @@ public interface IQueueEvent {
 
     public static String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
-    public String getUUID();
+    public Long getId();
+    
+    public String getUserId();
 
     public QueueEventOperation getQueryEventOperation();
 
