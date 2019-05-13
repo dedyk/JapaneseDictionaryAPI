@@ -9,6 +9,7 @@ import pl.idedyk.japanese.dictionary.api.android.queue.event.IQueueEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.QueueEventCommon;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.QueueEventOperation;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.QueueEventWrapper;
+import pl.idedyk.japanese.dictionary.api.android.queue.event.StatEndAppEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.StatLogEventEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.StatLogScreenEvent;
 import pl.idedyk.japanese.dictionary.api.android.queue.event.StatStartAppEvent;
@@ -79,6 +80,12 @@ public class QueueEventFactory implements IQueueEventFactory {
         		
         		break;
 
+        	case STAT_END_APP_EVENT:
+        		
+        		queueEvent = new StatEndAppEvent(id, userId, createDateDate, params);
+        		
+        		break;
+        	
             case STAT_LOG_SCREEN_EVENT:
 
                 queueEvent = new StatLogScreenEvent(id, userId, createDateDate, params);
