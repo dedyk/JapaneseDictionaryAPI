@@ -53,6 +53,7 @@ public class QueueEventFactory implements IQueueEventFactory {
 		String createDateString = queueEventWrapper.getCreateDate();
 		QueueEventOperation queueEventOperation = queueEventWrapper.getOperation();
 		Map<String, String> params = queueEventWrapper.getParams();
+		
         //
 		
         SimpleDateFormat sdf = new SimpleDateFormat(IQueueEvent.dateFormat);
