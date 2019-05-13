@@ -8,6 +8,7 @@ public interface IQueueEvent {
     public static String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
     public Long getId();
+    public void setId(Long id);
     
     public String getUserId();
 

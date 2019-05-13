@@ -35,7 +35,7 @@ public abstract class QueueEventCommon implements IQueueEvent {
         return id;
     }
 
-    @Override
+	@Override
     public String getUserId() {
 		return userId;
 	}
@@ -124,5 +124,10 @@ public abstract class QueueEventCommon implements IQueueEvent {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+    @Override
+    public void setId(Long id) {
+		this.id = id;
 	}
 }
