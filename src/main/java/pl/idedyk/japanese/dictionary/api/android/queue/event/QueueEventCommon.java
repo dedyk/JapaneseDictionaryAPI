@@ -18,16 +18,26 @@ public abstract class QueueEventCommon implements IQueueEvent {
     protected String userId;
 
     protected Date createDate;
+    
+    //
+    
+    protected String localeCountry;
+    protected String localeLanguage;
 
     protected QueueEventCommon(String userId) {
     	this.userId = userId;
     	this.createDate = new Date();
     }
 
-    protected QueueEventCommon(Long id, String userId, Date createDate) {
+    protected QueueEventCommon(Long id, String userId, Date createDate, Map<String, String> params) {
         this.id = id;
         this.userId = userId;
         this.createDate = createDate;
+        
+        //
+        
+        this.localeCountry = params.get("localeCountry");
+        this.localeLanguage = params.get("localeLanguage");
     }
 
     @Override
@@ -58,6 +68,42 @@ public abstract class QueueEventCommon implements IQueueEvent {
     }
     
     @Override
+    public String getLocaleCountry() {
+		return localeCountry;
+	}
+
+    @Override
+	public String getLocaleLanguage() {
+		return localeLanguage;
+	}
+
+    @Override
+	public void setLocaleCountry(String localeCountry) {
+		this.localeCountry = localeCountry;
+	}
+
+    @Override
+	public void setLocaleLanguage(String localeLanguage) {
+		this.localeLanguage = localeLanguage;
+	}
+    
+    @Override
+    public Map<String, String> getParams() {
+    	
+    	Map<String, String> params = new HashMap<>();
+    	
+        if (localeCountry != null) {
+        	params.put("localeCountry", localeCountry);
+        }
+        
+        if (localeLanguage != null) {
+        	params.put("localeLanguage", localeLanguage);
+        }        
+
+    	return params;
+    }
+    
+	@Override
     public String getParamsAsString() {
 
         Map<String, String> params = getParams();

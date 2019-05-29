@@ -1,7 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.android.queue.event;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
@@ -22,7 +21,7 @@ public class WordDictionaryMissingWordEvent extends QueueEventCommon {
 
     public WordDictionaryMissingWordEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {
 
-        super(id, userId, createDate);
+        super(id, userId, createDate, paramsMap);
 
         this.word = paramsMap.get("word");
         this.wordPlaceSearch = WordPlaceSearch.valueOf(paramsMap.get("wordPlaceSearch"));
@@ -36,7 +35,7 @@ public class WordDictionaryMissingWordEvent extends QueueEventCommon {
     @Override
     public Map<String, String> getParams() {
 
-        Map<String, String> result = new HashMap<>();
+    	Map<String, String> result = super.getParams();
 
         result.put("word", word);
         result.put("wordPlaceSearch", wordPlaceSearch.toString());

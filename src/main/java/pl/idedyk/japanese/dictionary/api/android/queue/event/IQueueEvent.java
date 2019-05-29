@@ -15,10 +15,14 @@ public interface IQueueEvent {
     public QueueEventOperation getQueryEventOperation();
 
     public Date getCreateDate();
-
     public String getCreateDateAsString();
 
     public Map<String, String> getParams();
-
     public String getParamsAsString();
+    
+    public void setLocaleCountry(String localeCountry);
+    public String getLocaleCountry();
+    
+    public void setLocaleLanguage(String localLanguage);
+    public String getLocaleLanguage();
 }

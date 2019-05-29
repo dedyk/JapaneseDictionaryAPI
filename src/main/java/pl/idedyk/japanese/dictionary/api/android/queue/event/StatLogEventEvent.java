@@ -1,7 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.android.queue.event;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class StatLogEventEvent extends QueueEventCommon {
@@ -21,7 +20,7 @@ public class StatLogEventEvent extends QueueEventCommon {
 
     public StatLogEventEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {
 
-        super(id, userId, createDate);
+        super(id, userId, createDate, paramsMap);
 
         this.screenName = paramsMap.get("screenName");
         this.actionName = paramsMap.get("actionName");
@@ -36,7 +35,7 @@ public class StatLogEventEvent extends QueueEventCommon {
     @Override
     public Map<String, String> getParams() {
 
-        Map<String, String> result = new HashMap<>();
+    	Map<String, String> result = super.getParams();
 
         result.put("screenName", screenName);
         result.put("actionName", actionName);

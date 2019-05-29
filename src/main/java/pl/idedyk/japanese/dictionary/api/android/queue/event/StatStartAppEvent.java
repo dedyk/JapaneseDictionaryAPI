@@ -1,7 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.android.queue.event;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class StatStartAppEvent extends QueueEventCommon {
@@ -11,7 +10,7 @@ public class StatStartAppEvent extends QueueEventCommon {
     }
     
     public StatStartAppEvent(Long id, String userId, Date createDate, Map<String, String> paramsMap) {    	
-        super(id, userId, createDate);
+        super(id, userId, createDate, paramsMap);
     }
 
     @Override
@@ -22,7 +21,7 @@ public class StatStartAppEvent extends QueueEventCommon {
     @Override
     public Map<String, String> getParams() {
 
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> result = super.getParams();
 
         return result;
     }
