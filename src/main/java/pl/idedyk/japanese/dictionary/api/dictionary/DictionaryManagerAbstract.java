@@ -347,6 +347,15 @@ public abstract class DictionaryManagerAbstract {
 
 		return kanjiEntry;
 	}
+	
+	public List<KanjiEntry> findKanjiList(List<String> kanjiList) throws DictionaryException {
+		
+		waitForDatabaseReady();
+
+		List<KanjiEntry> kanjiEntryList = databaseConnector.getKanjiEntryList(kanjiList);		
+
+		return kanjiEntryList;
+	}
 
 	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException {
 		
