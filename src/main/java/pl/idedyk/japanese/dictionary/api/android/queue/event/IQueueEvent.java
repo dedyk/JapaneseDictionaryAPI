@@ -20,6 +20,15 @@ public interface IQueueEvent {
     public Map<String, String> getParams();
     public String getParamsAsString();
     
+    public void setAndroidDeviceManufacturer(String androidDeviceManufacturer);
+    public String getAndroidDeviceManufacturer();
+    
+    public void setAndroidDeviceModel(String androidDeviceModel);
+    public String getAndroidDeviceModel();
+    
+    public void setAndroidVersion(String androidVersion);
+    public String getAndroidVersion();
+    
     public void setLocaleCountry(String localeCountry);
     public String getLocaleCountry();
     

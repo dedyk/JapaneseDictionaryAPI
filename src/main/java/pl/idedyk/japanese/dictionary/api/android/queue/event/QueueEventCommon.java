@@ -21,6 +21,11 @@ public abstract class QueueEventCommon implements IQueueEvent {
     
     //
     
+    protected String androidDeviceManufacturer;
+    protected String androidDeviceModel;
+    
+    protected String androidVersion;
+    
     protected String localeCountry;
     protected String localeLanguage;
 
@@ -35,6 +40,11 @@ public abstract class QueueEventCommon implements IQueueEvent {
         this.createDate = createDate;
         
         //
+        
+        this.androidDeviceManufacturer = params.get("androidDeviceManufacturer");
+        this.androidDeviceModel = params.get("androidDeviceModel");
+        
+        this.androidVersion = params.get("androidVersion");
         
         this.localeCountry = params.get("localeCountry");
         this.localeLanguage = params.get("localeLanguage");
@@ -68,6 +78,31 @@ public abstract class QueueEventCommon implements IQueueEvent {
     }
     
     @Override
+    public void setAndroidDeviceManufacturer(String androidDeviceManufacturer) {
+		this.androidDeviceManufacturer = androidDeviceManufacturer;
+	}
+
+    @Override
+	public void setAndroidDeviceModel(String androidDeviceModel) {
+		this.androidDeviceModel = androidDeviceModel;
+	}
+    
+    @Override
+	public String getAndroidDeviceManufacturer() {
+		return androidDeviceManufacturer;
+	}
+
+	@Override
+	public String getAndroidDeviceModel() {
+		return androidDeviceModel;
+	}
+
+	@Override
+    public String getAndroidVersion() {
+		return androidVersion;
+	}
+
+	@Override
     public String getLocaleCountry() {
 		return localeCountry;
 	}
@@ -76,8 +111,13 @@ public abstract class QueueEventCommon implements IQueueEvent {
 	public String getLocaleLanguage() {
 		return localeLanguage;
 	}
-
+    
     @Override
+    public void setAndroidVersion(String androidVersion) {
+		this.androidVersion = androidVersion;
+	}
+
+	@Override
 	public void setLocaleCountry(String localeCountry) {
 		this.localeCountry = localeCountry;
 	}
@@ -91,6 +131,18 @@ public abstract class QueueEventCommon implements IQueueEvent {
     public Map<String, String> getParams() {
     	
     	Map<String, String> params = new HashMap<>();
+    	
+    	if (androidDeviceManufacturer != null) {
+    		params.put("androidDeviceManufacturer", androidDeviceManufacturer);
+    	}
+    	
+    	if (androidDeviceModel != null) {
+    		params.put("androidDeviceModel", androidDeviceModel);
+    	}
+    	
+    	if (androidVersion != null) {
+    		params.put("androidVersion", androidVersion);
+    	}
     	
         if (localeCountry != null) {
         	params.put("localeCountry", localeCountry);
