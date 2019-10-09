@@ -162,7 +162,9 @@ public class KanaHelper {
 		hiraganaEntries.add(new KanaEntry("も", "mo", KanaType.HIRAGANA, KanaGroup.GOJUUON));
 
 		hiraganaEntries.add(new KanaEntry("や", "ya", KanaType.HIRAGANA, KanaGroup.GOJUUON));
+		hiraganaEntries.add(new KanaEntry("𛀆", "yi", KanaType.HIRAGANA, KanaGroup.GOJUUON, false));
 		hiraganaEntries.add(new KanaEntry("ゆ", "yu", KanaType.HIRAGANA, KanaGroup.GOJUUON));
+		hiraganaEntries.add(new KanaEntry("𛀁", "ye", KanaType.HIRAGANA, KanaGroup.GOJUUON, false));
 		hiraganaEntries.add(new KanaEntry("よ", "yo", KanaType.HIRAGANA, KanaGroup.GOJUUON));
 
 		hiraganaEntries.add(new KanaEntry("ら", "ra", KanaType.HIRAGANA, KanaGroup.GOJUUON));
