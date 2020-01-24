@@ -57,15 +57,28 @@ public enum GrammaFormConjugateGroupType {
 	
 	VERB_BA("Forma ba"),
 	
-	VERB_KEIGO("Keigo");
+	VERB_KEIGO("Keigo"),
+	
+	VERB_VIRTUAL("Grupa pomocnicza", false);
 	
 	private String name;
 	
+	private boolean show;
+	
 	GrammaFormConjugateGroupType(String name) {
+		this(name, true);
+	}
+	
+	GrammaFormConjugateGroupType(String name, boolean show) {
 		this.name = name;
+		this.show = show;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public boolean isShow() {
+		return show;
 	}
 }

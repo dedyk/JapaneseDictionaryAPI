@@ -113,7 +113,9 @@ public enum GrammaFormConjugateResultType {
 	VERB_BA_NEGATIVE("Przeczenie", true),
 	
 	VERB_KEIGO_HIGH("Forma honoryfikatywna (wywyższająca)", true),
-	VERB_KEIGO_LOW("Forma modestywna (skromna)", true);
+	VERB_KEIGO_LOW("Forma modestywna (skromna)", true),
+	
+	VERB_IMPERATIVE_FORM("Forma rozkazująca", false);
 	
 	private String name;
 	

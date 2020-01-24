@@ -92,6 +92,9 @@ public class AdjectiveIExampler {
 		// te mo
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_TE_MO, makeTeMoExample(dictionaryEntry, grammaFormCache));
 		
+		// rozkaz
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_NASAI, makeNasaiExample(dictionaryEntry));
+		
 		return result;
 	}
 	
@@ -482,5 +485,14 @@ public class AdjectiveIExampler {
 		exampleResult1.setAlternative(exampleResult2);
 		
 		return exampleResult1;
+	}
+	
+	private static ExampleResult makeNasaiExample(DictionaryEntry dictionaryEntry) {
+		
+		final String templateKanji = "%sであれ";
+		final String templateKana = "%sであれ";
+		final String templateRomaji = "%s de are";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
 	}
 }

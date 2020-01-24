@@ -106,6 +106,9 @@ public class NounExampler {
 		
 		// ni suru
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_NI_SURU, makeNiSuruExample(dictionaryEntry, grammaFormCache));
+
+		// rozkaz
+		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_NASAI, makeNasaiExample(dictionaryEntry));
 		
 		return result;
 	}
@@ -530,5 +533,14 @@ public class NounExampler {
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
 
 		return exampleResult1;
+	}
+	
+	private static ExampleResult makeNasaiExample(DictionaryEntry dictionaryEntry) {
+		
+		final String templateKanji = "%sであれ";
+		final String templateKana = "%sであれ";
+		final String templateRomaji = "%s de are";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
 	}
 }

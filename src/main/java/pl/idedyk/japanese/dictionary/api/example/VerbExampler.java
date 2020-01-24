@@ -1897,16 +1897,31 @@ public class VerbExampler {
 
 	private static ExampleResult makeNasai(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+				
+		//
+		
+		GrammaFormConjugateResult imperativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_IMPERATIVE_FORM);	
+		
+		String templateKanji1 = "%s";
+		String templateKana1 = "%s";
+		String templateRomaji1 = "%s";
 
-		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);
-
-		String templateKanji1 = "%sなさい";
-		String templateKana1 = "%sなさい";
-		String templateRomaji1 = "%snasai";
-
-		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji1,
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(imperativeForm, templateKanji1,
 				templateKana1, templateRomaji1, true);
+		
+		//
 
+		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);		
+
+		String templateKanji2 = "%sなさい";
+		String templateKana2 = "%sなさい";
+		String templateRomaji2 = "%snasai";
+
+		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji2,
+				templateKana2, templateRomaji2, true);
+		
+		exampleResult1.setAlternative(exampleResult2);
+		
 		return exampleResult1;
 	}
 

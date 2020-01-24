@@ -49,6 +49,8 @@ public enum ExampleGroupType {
 	ADJECTIVE_I_YOUNI("Podobny do ..., jak ..."),
 
 	ADJECTIVE_I_TE_MO("Nawet, jeśli"),
+	
+	ADJECTIVE_I_NASAI("Rozkaz (bądź)"),
 
 	ADJECTIVE_NA_II_GRADATION("Stopniowanie (II poziom, bardziej)"),
 
@@ -97,6 +99,8 @@ public enum ExampleGroupType {
 	ADJECTIVE_NA_YOUNI("Podobny do ..., jak ..."),
 
 	ADJECTIVE_NA_TE_MO("Nawet, jeśli"),
+	
+	ADJECTIVE_NA_NASAI("Rozkaz (bądź)"),
 
 	NOUN_NI_NARU("Stawać się"),
 	
@@ -152,6 +156,8 @@ public enum ExampleGroupType {
 	NOUN_TE_MO("Nawet, jeśli"),
 
 	NOUN_NI_SURU("Decydować się na"),
+	
+	NOUN_NASAI("Rozkaz (bądź)"),
 
 	VERB_TAI("Chcieć (I i II osoba)"),
 
