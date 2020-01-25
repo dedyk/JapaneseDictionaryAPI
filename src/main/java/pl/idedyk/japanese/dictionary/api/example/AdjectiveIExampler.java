@@ -93,7 +93,10 @@ public class AdjectiveIExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_TE_MO, makeTeMoExample(dictionaryEntry, grammaFormCache));
 		
 		// rozkaz
-		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_NASAI, makeNasaiExample(dictionaryEntry));
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_IMPERATIVE, makeImperativeExample(dictionaryEntry));
+		
+		// zakaz
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_IMPERATIVE_NOT, makeImperativeNotExample(dictionaryEntry));
 		
 		return result;
 	}
@@ -487,11 +490,20 @@ public class AdjectiveIExampler {
 		return exampleResult1;
 	}
 	
-	private static ExampleResult makeNasaiExample(DictionaryEntry dictionaryEntry) {
+	private static ExampleResult makeImperativeExample(DictionaryEntry dictionaryEntry) {
 		
 		final String templateKanji = "%sであれ";
 		final String templateKana = "%sであれ";
 		final String templateRomaji = "%s de are";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
+	}
+	
+	private static ExampleResult makeImperativeNotExample(DictionaryEntry dictionaryEntry) {
+		
+		final String templateKanji = "%sであるな";
+		final String templateKana = "%sであるな";
+		final String templateRomaji = "%s de aruna";
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
 	}

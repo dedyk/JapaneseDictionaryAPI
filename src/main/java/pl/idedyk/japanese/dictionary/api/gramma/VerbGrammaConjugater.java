@@ -451,6 +451,7 @@ public class VerbGrammaConjugater {
 		virtualForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_VIRTUAL);
 		
 		virtualForm.getGrammaFormConjugateResults().add(makeImperativeForm(dictionaryEntry));
+		virtualForm.getGrammaFormConjugateResults().add(makeImperativeNotForm(dictionaryEntry));
 		
 		result.add(virtualForm);
 				
@@ -3241,6 +3242,102 @@ public class VerbGrammaConjugater {
 		}
 		
 		throw new RuntimeException("makeImperativeFormForRomaji 3: " + dictionaryEntryType);
+	}
+	
+	private static GrammaFormConjugateResult makeImperativeNotForm(DictionaryEntry dictionaryEntry) {
+		
+		// make common
+		GrammaFormConjugateResult result = makeCommon(dictionaryEntry);
+
+		result.setResultType(GrammaFormConjugateResultType.VERB_IMPERATIVE_NOT_FORM);
+		
+		//
+		
+		DictionaryEntryType dictionaryEntryType = dictionaryEntry.getDictionaryEntryType();
+				
+		String kanji = dictionaryEntry.getKanji();
+		
+		if (kanji != null) { 			
+			result.setKanji(makeImperativeNotFormForKanjiOrKana(kanji, dictionaryEntryType));
+		}
+		
+		@SuppressWarnings("deprecation")
+		List<String> kanaList = dictionaryEntry.getKanaList();
+			
+		List<String> kanaListResult = new ArrayList<String>();
+		
+		for (String currentKanaList : kanaList) {			
+			kanaListResult.add(makeImperativeNotFormForKanjiOrKana(currentKanaList, dictionaryEntryType));
+		}
+		
+		result.setKanaList(kanaListResult);
+				
+		@SuppressWarnings("deprecation")
+		List<String> romajiList = dictionaryEntry.getRomajiList();
+		
+		List<String> romajiListResult = new ArrayList<String>();
+		
+		for (String currentRomajiList : romajiList) {			
+			romajiListResult.add(makeImperativeNotFormForRomaji(currentRomajiList, dictionaryEntryType));
+		}
+		
+		result.setRomajiList(romajiListResult);		
+				
+		return result;
+	}
+	
+	private static String makeImperativeNotFormForKanjiOrKana(String kana, DictionaryEntryType dictionaryEntryType) {
+				
+		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
+			return kana + "な";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {			
+			return kana + "な";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			
+			if (kana.endsWith("来る") == true) {
+				return removeChars(kana, 1) + "な";
+				
+			} else if (kana.endsWith("來る") == true) {
+				return removeChars(kana, 1) + "な";
+				
+			} else if (kana.endsWith("くる") == true) {
+				return removeChars(kana, 2) + "きな";
+			
+			} else if (kana.endsWith("為る") == true) {
+				return removeChars(kana, 1) + "な";				
+				
+			} else if (kana.endsWith("する") == true) {
+				return removeChars(kana, 2) + "しな";
+			} else {
+				throw new RuntimeException("makeImperativeNotFormForKanjiOrKana 1: " + kana);	
+			}
+		}
+		
+		throw new RuntimeException("makeImperativeNotFormForKanjiOrKana 2: " + dictionaryEntryType);
+	}
+	
+	private static String makeImperativeNotFormForRomaji(String romaji, DictionaryEntryType dictionaryEntryType) {
+				
+		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
+			return romaji + "na";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {			
+			return romaji + "na";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			
+			if (romaji.endsWith("kuru") == true) {
+				return removeChars(romaji, 4) + "kina";
+			} else if (romaji.endsWith("suru") == true) {
+				return removeChars(romaji, 4) + "shina";
+			} else {
+				throw new RuntimeException("makeImperativeNotFormForRomaji 1: " + romaji);
+			}
+		}
+		
+		throw new RuntimeException("makeImperativeNotFormForRomaji 2: " + dictionaryEntryType);
 	}
 
 	private static String replaceEndWith(String word, String wordEndWithToReplace, String replacement) {

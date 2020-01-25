@@ -52,6 +52,10 @@ public class VerbExampler {
 		// nai de kudasai
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAI_DE_KUDASAI,
 				makeNaiDeKudasai(dictionaryEntry, grammaFormCache));
+		
+		// imperative not (zakaz)
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_IMPERATIVE_NOT,
+				makeImperativeNot(dictionaryEntry, grammaFormCache));
 
 		// mada te imasen
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_MADA_TE_IMASEN,
@@ -1915,6 +1919,39 @@ public class VerbExampler {
 				
 		return exampleResult1;
 	}
+	
+	private static ExampleResult makeImperativeNot(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+				
+		//
+		
+		GrammaFormConjugateResult imperativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_IMPERATIVE_NOT_FORM);	
+		
+		String templateKanji1 = "%s";
+		String templateKana1 = "%s";
+		String templateRomaji1 = "%s";
+
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(imperativeForm, templateKanji1,
+				templateKana1, templateRomaji1, true);
+		
+		//
+		
+		if (dictionaryEntry.getDictionaryEntryType() == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+						
+			String templateKanji2 = "%sな";
+			String templateKana2 = "%sな";
+			String templateRomaji2 = "%sna";
+
+			ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji2,
+					templateKana2, templateRomaji2, true);
+
+			exampleResult1.setAlternative(exampleResult2);
+		}
+
+		
+		return exampleResult1;
+	}
+
 
 	private static ExampleResult makeNasai(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {

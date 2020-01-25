@@ -50,7 +50,9 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_I_TE_MO("Nawet, jeśli"),
 	
-	ADJECTIVE_I_NASAI("Rozkaz (bądź)"),
+	ADJECTIVE_I_IMPERATIVE("Rozkaz (bądź)"),
+	
+	ADJECTIVE_I_IMPERATIVE_NOT("Zakaz (nie bądź)"),
 
 	ADJECTIVE_NA_II_GRADATION("Stopniowanie (II poziom, bardziej)"),
 
@@ -100,8 +102,10 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_NA_TE_MO("Nawet, jeśli"),
 	
-	ADJECTIVE_NA_NASAI("Rozkaz (bądź)"),
+	ADJECTIVE_NA_IMPERATIVE("Rozkaz (bądź)"),
 
+	ADJECTIVE_NA_IMPERATIVE_NOT("Zakaz (nie bądź)"),
+	
 	NOUN_NI_NARU("Stawać się"),
 	
 	NOUN_SURU("Tworzenie czynności"),
@@ -157,7 +161,9 @@ public enum ExampleGroupType {
 
 	NOUN_NI_SURU("Decydować się na"),
 	
-	NOUN_NASAI("Rozkaz (bądź)"),
+	NOUN_IMPERATIVE("Rozkaz (bądź)"),
+	
+	NOUN_IMPERATIVE_NOT("Zakaz (nie bądź)"),
 
 	VERB_TAI("Chcieć (I i II osoba)"),
 
@@ -178,6 +184,8 @@ public enum ExampleGroupType {
 	VERB_TE_HA_IKEMASEN("Zakaz 1"),
 
 	VERB_NAI_DE_KUDASAI("Zakaz 2"),
+	
+	VERB_IMPERATIVE_NOT("Zakaz 3"),
 
 	VERB_MADA_TE_IMASEN("Jeszcze nie"),
 
