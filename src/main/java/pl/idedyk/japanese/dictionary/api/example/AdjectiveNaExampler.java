@@ -460,7 +460,7 @@ public class AdjectiveNaExampler {
 		
 		final String templateKanji = "%sであるな";
 		final String templateKana = "%sであるな";
-		final String templateRomaji = "%s de aruna";
+		final String templateRomaji = "%s de aru na";
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana, templateRomaji, true);
 	}

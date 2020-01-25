@@ -1933,22 +1933,7 @@ public class VerbExampler {
 
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(imperativeForm, templateKanji1,
 				templateKana1, templateRomaji1, true);
-		
-		//
-		
-		if (dictionaryEntry.getDictionaryEntryType() == DictionaryEntryType.WORD_VERB_IRREGULAR) {
-						
-			String templateKanji2 = "%sな";
-			String templateKana2 = "%sな";
-			String templateRomaji2 = "%sna";
-
-			ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji2,
-					templateKana2, templateRomaji2, true);
-
-			exampleResult1.setAlternative(exampleResult2);
-		}
-
-		
+				
 		return exampleResult1;
 	}
 

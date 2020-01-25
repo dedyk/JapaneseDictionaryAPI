@@ -3295,7 +3295,10 @@ public class VerbGrammaConjugater {
 			return kana + "な";
 			
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			return kana + "な";
 			
+			// to jest odmiana dla dialektu Kansai
+			/*
 			if (kana.endsWith("来る") == true) {
 				return removeChars(kana, 1) + "な";
 				
@@ -3313,6 +3316,7 @@ public class VerbGrammaConjugater {
 			} else {
 				throw new RuntimeException("makeImperativeNotFormForKanjiOrKana 1: " + kana);	
 			}
+			*/
 		}
 		
 		throw new RuntimeException("makeImperativeNotFormForKanjiOrKana 2: " + dictionaryEntryType);
@@ -3321,13 +3325,16 @@ public class VerbGrammaConjugater {
 	private static String makeImperativeNotFormForRomaji(String romaji, DictionaryEntryType dictionaryEntryType) {
 				
 		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
-			return romaji + "na";
+			return romaji + " na";
 			
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {			
-			return romaji + "na";
+			return romaji + " na";
 			
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			return romaji + " na";
 			
+			// to jest odmiana dla dialektu Kansai
+			/*
 			if (romaji.endsWith("kuru") == true) {
 				return removeChars(romaji, 4) + "kina";
 			} else if (romaji.endsWith("suru") == true) {
@@ -3335,6 +3342,7 @@ public class VerbGrammaConjugater {
 			} else {
 				throw new RuntimeException("makeImperativeNotFormForRomaji 1: " + romaji);
 			}
+			*/
 		}
 		
 		throw new RuntimeException("makeImperativeNotFormForRomaji 2: " + dictionaryEntryType);
