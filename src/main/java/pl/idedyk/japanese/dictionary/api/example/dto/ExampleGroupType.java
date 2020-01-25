@@ -281,7 +281,9 @@ public enum ExampleGroupType {
 
 	VERB_LET("Pozwalać komuś na zrobienie czegoś"),
 
-	VERB_NASAI("Rozkaz"),
+	VERB_IMPERATIVE("Rozkaz 1"),
+	
+	VERB_NASAI("Rozkaz 2", "Forma przestarzała"),
 
 	VERB_EBA("Jeśli ..., wtedy ..."),
 

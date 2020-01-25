@@ -262,6 +262,10 @@ public class VerbExampler {
 		// let verb
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_LET, makeLet(dictionaryEntry, grammaFormCache));
 
+		// imperative (rozkaz)
+		GrammaExampleHelper
+		.addExample(result, ExampleGroupType.VERB_IMPERATIVE, makeImperative(dictionaryEntry, grammaFormCache));
+		
 		// nasai
 		GrammaExampleHelper
 				.addExample(result, ExampleGroupType.VERB_NASAI, makeNasai(dictionaryEntry, grammaFormCache));
@@ -1894,8 +1898,8 @@ public class VerbExampler {
 
 		return exampleResult1;
 	}
-
-	private static ExampleResult makeNasai(DictionaryEntry dictionaryEntry,
+	
+	private static ExampleResult makeImperative(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 				
 		//
@@ -1908,20 +1912,22 @@ public class VerbExampler {
 
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(imperativeForm, templateKanji1,
 				templateKana1, templateRomaji1, true);
-		
-		//
+				
+		return exampleResult1;
+	}
 
+	private static ExampleResult makeNasai(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+				
 		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);		
 
-		String templateKanji2 = "%sなさい";
-		String templateKana2 = "%sなさい";
-		String templateRomaji2 = "%snasai";
+		String templateKanji1 = "%sなさい";
+		String templateKana1 = "%sなさい";
+		String templateRomaji1 = "%snasai";
 
-		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji2,
-				templateKana2, templateRomaji2, true);
-		
-		exampleResult1.setAlternative(exampleResult2);
-		
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji1,
+				templateKana1, templateRomaji1, true);
+				
 		return exampleResult1;
 	}
 
