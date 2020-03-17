@@ -22,6 +22,8 @@ public class KanjiEntry implements Serializable {
 	private boolean used;
 	
 	private List<GroupEnum> groups;
+	
+	private transient List<String> englishTranslateList;
 
 	public int getId() {
 		return id;
@@ -85,6 +87,14 @@ public class KanjiEntry implements Serializable {
 
 	public void setGroups(List<GroupEnum> groups) {
 		this.groups = groups;
+	}
+
+	public List<String> getEnglishTranslateList() {
+		return englishTranslateList;
+	}
+
+	public void setEnglishTranslateList(List<String> englishTranslateList) {
+		this.englishTranslateList = englishTranslateList;
 	}
 
 	@Override

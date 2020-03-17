@@ -64,7 +64,7 @@ public class Utils {
 	public static DictionaryEntry parseDictionaryEntry(String idString, Object dictionaryEntryTypeObject,
 			Object attributesObject, Object groupsObject, String prefixKanaString, String kanjiString,
 			String kanaString, String prefixRomajiString, String romajiString, Object translateListObject,
-			String infoString, Object exampleSentenceGroupIdsListObject) throws DictionaryException {
+			String infoString, Object exampleSentenceGroupIdsListObject, Object englishTranslateListObject) throws DictionaryException {
 
 		if (kanjiString.equals("") == true || kanjiString.equals("-") == true) {
 			kanjiString = null;
@@ -123,6 +123,15 @@ public class Utils {
 		} else {
 			entry.setExampleSentenceGroupIdsList(convertToListString(exampleSentenceGroupIdsListObject));
 		}
+		
+		if (englishTranslateListObject != null) {
+			
+			if (englishTranslateListObject instanceof String) {
+				entry.setEnglishTranslateList(parseStringIntoList((String) englishTranslateListObject, false));			
+			} else {
+				entry.setEnglishTranslateList(convertToListString(englishTranslateListObject));
+			}
+		}		
 				
 		return entry;
 	}
@@ -147,7 +156,7 @@ public class Utils {
 	public static KanjiEntry parseKanjiEntry(String idString, String kanjiString, String strokeCountString,
 			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList,
 			Object strokePathObject, List<String> polishTranslateList, String infoString, String usedString,
-			List<String> groupsList) throws DictionaryException {
+			List<String> groupsList, List<String> englishTranslateList) throws DictionaryException {
 
 		int id = Integer.parseInt(idString);
 
@@ -193,6 +202,8 @@ public class Utils {
 		entry.setGroups(GroupEnum.convertToListGroupEnum(groupsList));
 
 		entry.setKanjiDic2Entry(kanjiDic2Entry);
+		
+		entry.setEnglishTranslateList(englishTranslateList);
 
 		return entry;
 	}

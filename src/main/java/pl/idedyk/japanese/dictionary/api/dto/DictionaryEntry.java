@@ -34,6 +34,8 @@ public class DictionaryEntry implements Serializable {
 	
 	private List<String> exampleSentenceGroupIdsList;
 	
+	private transient List<String> englishTranslateList;
+	
 	private boolean name = false;
 	
 	public DictionaryEntryType getDictionaryEntryType() {
@@ -221,6 +223,14 @@ public class DictionaryEntry implements Serializable {
 
 	public void setName(boolean name) {
 		this.name = name;
+	}
+
+	public List<String> getEnglishTranslateList() {
+		return englishTranslateList;
+	}
+
+	public void setEnglishTranslateList(List<String> englishTranslateList) {
+		this.englishTranslateList = englishTranslateList;
 	}
 
 	@Override
