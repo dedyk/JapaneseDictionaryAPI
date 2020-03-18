@@ -34,7 +34,7 @@ public class DictionaryEntry implements Serializable {
 	
 	private List<String> exampleSentenceGroupIdsList;
 	
-	private transient List<String> englishTranslateList;
+	private List<String> englishTranslateList;
 	
 	private boolean name = false;
 	

@@ -23,7 +23,7 @@ public class KanjiEntry implements Serializable {
 	
 	private List<GroupEnum> groups;
 	
-	private transient List<String> englishTranslateList;
+	private List<String> englishTranslateList;
 
 	public int getId() {
 		return id;
