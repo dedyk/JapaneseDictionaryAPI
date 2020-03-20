@@ -523,14 +523,29 @@ public abstract class DictionaryManagerAbstract {
 		for (int idx = 0; idx < word.length(); ++idx) {
 
 			String currentChar = String.valueOf(word.charAt(idx));
+			String nextChar = idx + 1 < word.length() ? String.valueOf(word.charAt(idx + 1)) : null;
 
 			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
 
 			if (kanjiEntry != null) {
 				result.add(kanjiEntry.getKanjivgEntry());
+				
 			} else {
-				KanaEntry kanaEntry = kanaCache.get(currentChar);
-
+				
+				KanaEntry kanaEntry = null;
+				
+				if (nextChar != null) {					
+					kanaEntry = kanaCache.get(currentChar + nextChar); // sprawdzanie, czy nie chodzi o przypadek, np. ウォ
+					
+					if (kanaEntry != null) { // mamy to, zwiekszamy indeks					
+						idx++;						
+					}
+				}
+				
+				if (kanaEntry == null) { // dzialamy po staremu
+					kanaEntry = kanaCache.get(currentChar);
+				}
+				
 				if (kanaEntry != null) {
 					List<KanjivgEntry> strokePaths = kanaEntry.getStrokePaths();
 					
