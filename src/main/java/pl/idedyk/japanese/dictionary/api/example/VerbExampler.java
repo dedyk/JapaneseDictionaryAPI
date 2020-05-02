@@ -695,6 +695,10 @@ public class VerbExampler {
 
 		GrammaFormConjugateResult volitionalForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_VOLITIONAL);
 
+		if (volitionalForm == null) {
+			return null;
+		}
+		
 		ExampleResult toSuru = GrammaExampleHelper.makeSimpleTemplateExample(volitionalForm, templateKanji, templateKana,
 				templateRomaji, true);
 
