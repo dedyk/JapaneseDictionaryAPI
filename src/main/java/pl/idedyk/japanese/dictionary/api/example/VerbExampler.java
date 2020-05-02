@@ -98,7 +98,11 @@ public class VerbExampler {
 		// te miru
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_MIRU,
 				makeTeMiruExample(dictionaryEntry, grammaFormCache));
-
+		
+		// you to suru
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERV_YOU_TO_SURU,
+				makeYouToSuruExample(dictionaryEntry, grammaFormCache));
+		
 		// kamoshi remasen
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_KAMOSHI_REMASEN,
 				makeKamoshiRemasenExample(dictionaryEntry));
@@ -680,6 +684,21 @@ public class VerbExampler {
 				templateRomaji, true);
 
 		return teMiru;
+	}
+
+	private static ExampleResult makeYouToSuruExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		final String templateKanji = "%sとする";
+		final String templateKana = "%sとする";
+		final String templateRomaji = "%s to suru";
+
+		GrammaFormConjugateResult volitionalForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_VOLITIONAL);
+
+		ExampleResult toSuru = GrammaExampleHelper.makeSimpleTemplateExample(volitionalForm, templateKanji, templateKana,
+				templateRomaji, true);
+
+		return toSuru;
 	}
 
 	private static ExampleResult makeKamoshiRemasenExample(DictionaryEntry dictionaryEntry) {

@@ -201,7 +201,9 @@ public enum ExampleGroupType {
 
 	VERB_DESHOU("Prawdopodobnie, ok. 60%"),
 
-	VERB_TE_MIRU("Próbować"),
+	VERB_TE_MIRU("Próbować 1"),
+	
+	VERV_YOU_TO_SURU("Próbować 2 / Zamierzać / Usiłować"),
 
 	VERB_KAMOSHI_REMASEN("Prawdopodobnie, ok. 30%"),
 
