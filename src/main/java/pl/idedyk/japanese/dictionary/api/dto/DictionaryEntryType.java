@@ -61,8 +61,6 @@ public enum DictionaryEntryType {
 
 	WORD_ADVERBIAL_NOUN("rzeczownik przysłówkowy"),
 
-	WORD_COUNTER("klasyfikatory"),
-
 	WORD_PRONOUN("zaimki"),
 
 	WORD_NAME("imię"),
@@ -106,7 +104,31 @@ public enum DictionaryEntryType {
 	WORD_COPULA_DA("kopuła (łącznik, spójnik) da"),
 	
 	WORD_WORK("nazwa dzieła sztuki, literatury, muzyki i etc"),
+	
+	WORD_CHARACTER("postać"),
+	
+	WORD_COUNTER("klasyfikatory"),
+	
+	WORD_CREATURE("stworzenie"),
+	
+	WORD_DEITY("bóstwo"),
+	
+	WORD_EVENT("wydarzenie"),
 
+	WORD_FICT("fikcja"),
+	
+	WORD_LEGEND("legenda"),
+	
+	WORD_MYTHOLOGY("mitologia"),
+	
+	WORD_OBJECT("obiekt"),
+	
+	WORD_OTHER("inny"),
+	
+	WORD_RELIGION("religia"),
+	
+	WORD_SERVICE("usługa"),
+	
 	UNKNOWN("nieznany");
 
 	private String name;
