@@ -369,4 +369,180 @@ public class Utils {
 
 		return isAllJapaneseChars;
 	}
+
+	public static boolean isHalfWidthKanaCharacter(int c) {
+		return c >= 0xFF60 && c <= 0xFF9F;
+	}
+
+	public static char replaceHalfWidthKanaToFullWidth(char c) {
+
+		switch (c) {
+			case 'ｱ':
+				return 'ア';
+			case 'ｲ':
+				return 'イ';
+			case 'ｳ':
+				return 'ウ';
+			case 'ｴ':
+				return 'エ';
+			case 'ｵ':
+				return 'オ';
+			case 'ｶ':
+				return 'カ';
+			case 'ｷ':
+				return 'キ';
+			case 'ｸ':
+				return 'ク';
+			case 'ｹ':
+				return 'ケ';
+			case 'ｺ':
+				return 'コ';
+			case 'ｻ':
+				return 'サ';
+			case 'ｼ':
+				return 'シ';
+			case 'ｽ':
+				return 'ス';
+			case 'ｾ':
+				return 'セ';
+			case 'ｿ':
+				return 'ソ';
+			case 'ﾀ':
+				return 'タ';
+			case 'ﾁ':
+				return 'チ';
+			case 'ﾂ':
+				return 'ツ';
+			case 'ﾃ':
+				return 'テ';
+			case 'ﾄ':
+				return 'ト';
+			case 'ﾅ':
+				return 'ナ';
+			case 'ﾆ':
+				return 'ニ';
+			case 'ﾇ':
+				return 'ヌ';
+			case 'ﾈ':
+				return 'ネ';
+			case 'ﾉ':
+				return 'ノ';
+			case 'ﾊ':
+				return 'ハ';
+			case 'ﾋ':
+				return 'ヒ';
+			case 'ﾌ':
+				return 'フ';
+			case 'ﾍ':
+				return 'ヘ';
+			case 'ﾎ':
+				return 'ホ';
+			case 'ﾏ':
+				return 'マ';
+			case 'ﾐ':
+				return 'ミ';
+			case 'ﾑ':
+				return 'ム';
+			case 'ﾒ':
+				return 'メ';
+			case 'ﾓ':
+				return 'モ';
+			case 'ﾔ':
+				return 'ヤ';
+			case 'ﾕ':
+				return 'ユ';
+			case 'ﾖ':
+				return 'ヨ';
+			case 'ﾗ':
+				return 'ラ';
+			case 'ﾘ':
+				return 'リ';
+			case 'ﾙ':
+				return 'ル';
+			case 'ﾚ':
+				return 'レ';
+			case 'ﾛ':
+				return 'ロ';
+			case 'ﾜ':
+				return 'ワ';
+			case 'ｦ':
+				return 'ヲ';
+			case 'ﾝ':
+				return 'ン';
+			case 'ｯ':
+				return 'ッ';
+			case 'ｧ':
+				return 'ァ';
+			case 'ｨ':
+				return 'ィ';
+			case 'ｩ':
+				return 'ゥ';
+			case 'ｪ':
+				return 'ェ';
+			case 'ｫ':
+				return 'ォ';
+			case 'ｬ':
+				return 'ャ';
+			case 'ｭ':
+				return 'ュ';
+			case 'ｮ':
+				return 'ョ';
+			case 'ﾞ':
+				return '゙';
+			case 'ﾟ':
+				return '゚';
+			case 'ｰ':
+				return 'ー';
+			default:
+				return c;
+		}
+	}
+	
+	public static String convertHalfWidthKanaToFullKana(String text) {
+		
+		if (text == null) {
+			return text;
+		}
+		
+		// zamiana wstepna, gdyz poleczko i kreseczki to dwa znaki
+		text = text.replaceAll("ｶﾞ", "ガ");
+		text = text.replaceAll("ｷﾞ", "ギ");
+		text = text.replaceAll("ｸﾞ", "グ");
+		text = text.replaceAll("ｹﾞ", "ゲ");
+		text = text.replaceAll("ｺﾞ", "ゴ");
+		text = text.replaceAll("ｻﾞ", "ザ");
+		text = text.replaceAll("ｼﾞ", "ジ");
+		text = text.replaceAll("ｽﾞ", "ズ");
+		text = text.replaceAll("ｾﾞ", "ゼ");
+		text = text.replaceAll("ｿﾞ", "ゾ");
+		text = text.replaceAll("ﾀﾞ", "ダ");
+		text = text.replaceAll("ﾁﾞ", "ヂ");
+		text = text.replaceAll("ﾂﾞ", "ヅ");
+		text = text.replaceAll("ﾃﾞ", "デ");
+		text = text.replaceAll("ﾄﾞ", "ド");
+		text = text.replaceAll("ﾊﾞ", "バ");
+		text = text.replaceAll("ﾋﾞ", "ビ");
+		text = text.replaceAll("ﾌﾞ", "ブ");
+		text = text.replaceAll("ﾍﾞ", "ベ");
+		text = text.replaceAll("ﾎﾞ", "ボ");
+		text = text.replaceAll("ﾊﾟ", "パ");
+		text = text.replaceAll("ﾋﾟ", "ピ");
+		text = text.replaceAll("ﾌﾟ", "プ");
+		text = text.replaceAll("ﾍﾟ", "ペ");
+		text = text.replaceAll("ﾎﾟ", "ポ");
+		text = text.replaceAll("ｳﾞ", "ヴ");
+
+        //
+		
+		char[] textChars = text.toCharArray();
+		
+		// zamiana prostych znakow kana
+		for (int i = 0; i < textChars.length; ++i) {
+			textChars[i] = replaceHalfWidthKanaToFullWidth(textChars[i]);
+		}
+		
+		text = String.valueOf(textChars);
+
+		return text;
+	}
 }
