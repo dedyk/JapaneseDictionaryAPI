@@ -493,6 +493,8 @@ public class Utils {
 				return '゚';
 			case 'ｰ':
 				return 'ー';
+			case '･':
+				return '・';
 			default:
 				return c;
 		}
