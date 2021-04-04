@@ -39,7 +39,9 @@ public enum AttributeType {
 	
 	ALTERNATIVE("alternatywa", false),
 	
-	RELATED("słowo powiązanie", false);
+	RELATED("słowo powiązanie", false),
+	
+	PRIORITY("priorytet słowa", false);
 	
 	private String name;
 	

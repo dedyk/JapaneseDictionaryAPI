@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
@@ -18,6 +20,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenc
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerList;
+import pl.idedyk.japanese.dictionary.api.dto.Attribute;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
@@ -108,11 +111,164 @@ public abstract class DictionaryManagerAbstract {
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
 
 		//
-
-		final Map<String, KanaEntry> kanaCache = getKanaHelper().getKanaCache();
+				
+		// sortujemy
+		List<ResultItem> nameResultList = new ArrayList<>();		
+		List<ResultItem> kanjiMatchResultList = new ArrayList<>();
+		List<ResultItem> kanaMatchResultList = new ArrayList<>();
+		List<ResultItem> romajiMatchResultList = new ArrayList<>();
+		List<ResultItem> translateBeginWordResultList = new ArrayList<>();
+		List<ResultItem> translateBeginInAllWordResultList = new ArrayList<>();
+		List<ResultItem> translateBegin2WordResultList = new ArrayList<>();
+		List<ResultItem> otherResultList = new ArrayList<>();
 		
-		final String findWordWithoutPolishChars = Utils.removePolishChars(findWordRequest.word);
+		//
+		
+		Iterator<ResultItem> resultIterator = findWordResult.result.iterator();
+		
+		//
+		
+		String findWord = findWordRequest.word;
+		 
+		Pattern beginWordPattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE);
+		Pattern beginInAllWordPattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE);
+		Pattern beginWord2Pattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + ".*", Pattern.CASE_INSENSITIVE);
+		
+		MAIN_LOOP:
+		while (resultIterator.hasNext() == true) {
+			
+			ResultItem resultItem = resultIterator.next();
+						
+			// czy jest nazwa
+			if (resultItem.getDictionaryEntry().isName() == true) {
+				
+				nameResultList.add(resultItem);
+				
+				continue;
+			}
+			
+			// czy kanji dokladnie pasuje
+			String kanji = resultItem.getKanji();
+			
+			if (kanji != null && kanji.equals(findWord) == true) {
+				
+				kanjiMatchResultList.add(resultItem);
+				
+				continue;
+			}
+			
+			// czy kana dokladnie pasuje
+			List<String> kanaList = resultItem.getKanaList();
+			
+			if (kanaList.contains(findWord) == true) {
+				
+				kanaMatchResultList.add(resultItem);
+				
+				continue;
+			}
+			
+			// czy romaji dokladnie pasuje
+			List<String> romajiList = resultItem.getRomajiList();
+						
+			for (String currentRomaji : romajiList) {
+				
+				if (currentRomaji.equalsIgnoreCase(findWord) == true) {
+					
+					romajiMatchResultList.add(resultItem);
+										
+					continue MAIN_LOOP;
+				}
+			}
+			
+			List<String> translates = resultItem.getTranslates();
+			
+			// czy tlumaczenie zaczyna sie od slowa
+			for (String currentTranslate : translates) {
+				
+				if (beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+					
+					translateBeginWordResultList.add(resultItem);
+					
+					continue MAIN_LOOP;
+				}				
+			}
+									
+			// czy tlumaczenie zawiera slowo
+			for (String currentTranslate : translates) {
+				
+				if (beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+					
+					translateBeginInAllWordResultList.add(resultItem);
+					
+					continue MAIN_LOOP;
+				}				
+			}
+			
+			// czy tlumaczenie zaczyna sie od slowa
+			for (String currentTranslate : translates) {
+				
+				if (beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+					
+					translateBegin2WordResultList.add(resultItem);
+					
+					continue MAIN_LOOP;
+				}				
+			}
+			
+			// pozostale
+			otherResultList.add(resultItem);
+		}
+		
+		// przygotowanie listy wynikowe		
+		Comparator<ResultItem> priorityComparator = new Comparator<ResultItem>() {
 
+			@Override
+			public int compare(ResultItem o1, ResultItem o2) {
+				
+				List<Attribute> lhsPriorityAttributeList = o1.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
+				List<Attribute> rhsPriorityAttributeList = o2.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
+				
+				Integer lhsPriority = lhsPriorityAttributeList != null && lhsPriorityAttributeList.size() > 0 ? Integer.parseInt(lhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+				Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+				
+				return lhsPriority.compareTo(rhsPriority);
+			}			
+		};
+		
+		// sortujemy podlisty
+		Collections.sort(kanjiMatchResultList, priorityComparator);
+		Collections.sort(kanaMatchResultList, priorityComparator);
+		Collections.sort(romajiMatchResultList, priorityComparator);
+		Collections.sort(translateBeginWordResultList, priorityComparator);
+		Collections.sort(translateBeginInAllWordResultList, priorityComparator);
+		Collections.sort(translateBegin2WordResultList, priorityComparator);
+		Collections.sort(otherResultList, priorityComparator);
+		Collections.sort(nameResultList, priorityComparator);
+		
+		List<ResultItem> newResult = new ArrayList<>();
+		
+		//newResult.addAll(kanjiMatchResultList);
+		//newResult.addAll(kanaMatchResultList);
+		//newResult.addAll(romajiMatchResultList);
+		//newResult.addAll(translateBeginWordResultList);
+		//newResult.addAll(translateBeginInAllWordResultList);
+		newResult.addAll(translateBegin2WordResultList);
+		//newResult.addAll(otherResultList);
+		//newResult.addAll(nameResultList);
+		
+		findWordResult.result = newResult;
+		
+		/*
+		List<ResultItem> nameResultList = new ArrayList<>();		
+		List<ResultItem> kanjiMatchResultList = new ArrayList<>();
+		List<ResultItem> kanaMatchResultList = new ArrayList<>();
+		List<ResultItem> romajiMatchResultList = new ArrayList<>();
+		List<ResultItem> translateContaintWordResultList = new ArrayList<>();
+		List<ResultItem> translateBeginWordResultList = new ArrayList<>();
+		List<ResultItem> otherResultList = new ArrayList<>();
+		*/
+		
+		/*
 		try {
 			Collections.sort(findWordResult.result, new Comparator<ResultItem>() {
 	
@@ -209,6 +365,20 @@ public abstract class DictionaryManagerAbstract {
 						return 1;
 					}
 					
+					List<Attribute> lhsPriorityAttributeList = lhs.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
+					List<Attribute> rhsPriorityAttributeList = rhs.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
+					
+					Integer lhsPriority = lhsPriorityAttributeList != null && lhsPriorityAttributeList.size() > 0 ? Integer.parseInt(lhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+					Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+					
+					if (lhsPriority < rhsPriority) {
+						return -1;
+						
+					} else if (lhsPriority > rhsPriority) {
+						return 1;
+					}
+					
+					
 					boolean lhsContaintsCommon = lhs.getDictionaryEntry().getAttributeList().contains(AttributeType.COMMON_WORD);
 					boolean rhsContaintsCommon = rhs.getDictionaryEntry().getAttributeList().contains(AttributeType.COMMON_WORD);
 					
@@ -287,6 +457,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			throw new IllegalArgumentException(errorMessage.toString(), e);
 		}
+		*/
 			
 		return findWordResult;
 	}
