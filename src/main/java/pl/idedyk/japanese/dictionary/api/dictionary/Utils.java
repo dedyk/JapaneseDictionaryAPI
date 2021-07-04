@@ -15,9 +15,9 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 
 public class Utils {
 
-	public static int MAX_LIST_SIZE = 60;
+	//public static int MAX_LIST_SIZE = 60;
 
-	public static List<String> parseStringIntoList(String text, boolean limitSize) {
+	public static List<String> parseStringIntoList(String text /*, boolean limitSize */) {
 
 		if (text == null) {
 			return null;
@@ -35,9 +35,11 @@ public class Utils {
 			result.add(currentSplitedText);
 		}
 
+		/*
 		if (limitSize == true && result.size() > MAX_LIST_SIZE) {
 			throw new RuntimeException("parseStringIntoList max list size: " + text);
 		}
+		*/
 
 		return result;
 	}
@@ -82,7 +84,7 @@ public class Utils {
 
 		if (dictionaryEntryTypeObject instanceof String) {
 			entry.setDictionaryEntryTypeList(DictionaryEntryType.convertToListDictionaryEntryType(parseStringIntoList(
-					(String) dictionaryEntryTypeObject, false)));
+					(String) dictionaryEntryTypeObject /*, false */)));
 		} else {
 			entry.setDictionaryEntryTypeList(DictionaryEntryType
 					.convertToListDictionaryEntryType(convertToListString(dictionaryEntryTypeObject)));
@@ -90,14 +92,14 @@ public class Utils {
 
 		if (attributesObject instanceof String) {
 			entry.setAttributeList(AttributeList.parseAttributesStringList(parseStringIntoList(
-					(String) attributesObject, false)));
+					(String) attributesObject/*, false */)));
 		} else {
 			entry.setAttributeList(AttributeList.parseAttributesStringList((convertToListString(attributesObject))));
 		}
 
 		if (groupsObject instanceof String) {
 			entry.setGroups(GroupEnum.sortGroups(GroupEnum.convertToListGroupEnum(parseStringIntoList(
-					(String) groupsObject, false))));
+					(String) groupsObject /*, false */))));
 		} else {
 			entry.setGroups(GroupEnum.sortGroups(GroupEnum.convertToListGroupEnum(convertToListString(groupsObject))));
 		}
@@ -111,7 +113,7 @@ public class Utils {
 		entry.setRomaji(romajiString);
 
 		if (translateListObject instanceof String) {
-			entry.setTranslates(parseStringIntoList((String) translateListObject, true));
+			entry.setTranslates(parseStringIntoList((String) translateListObject/*, true */));
 		} else {
 			entry.setTranslates(convertToListString(translateListObject));
 		}
@@ -119,7 +121,7 @@ public class Utils {
 		entry.setInfo(infoString);
 		
 		if (exampleSentenceGroupIdsListObject instanceof String) {
-			entry.setExampleSentenceGroupIdsList(parseStringIntoList((String) exampleSentenceGroupIdsListObject, false));			
+			entry.setExampleSentenceGroupIdsList(parseStringIntoList((String) exampleSentenceGroupIdsListObject /*, false */));			
 		} else {
 			entry.setExampleSentenceGroupIdsList(convertToListString(exampleSentenceGroupIdsListObject));
 		}
@@ -178,7 +180,7 @@ public class Utils {
 		KanjivgEntry kanjivgEntry = new KanjivgEntry();
 		
 		if (strokePathObject instanceof String) {
-			kanjivgEntry.setStrokePaths(parseStringIntoList((String)strokePathObject, false));
+			kanjivgEntry.setStrokePaths(parseStringIntoList((String)strokePathObject /*, false */));
 			
 		} else {
 			kanjivgEntry.setStrokePaths(convertToListString(strokePathObject));
