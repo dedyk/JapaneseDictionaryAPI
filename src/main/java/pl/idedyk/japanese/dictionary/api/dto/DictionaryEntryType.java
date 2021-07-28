@@ -129,6 +129,8 @@ public enum DictionaryEntryType {
 	
 	WORD_SERVICE("usługa"),
 	
+	WORD_GROUP("grupa"),
+	
 	UNKNOWN("nieznany");
 
 	private String name;
