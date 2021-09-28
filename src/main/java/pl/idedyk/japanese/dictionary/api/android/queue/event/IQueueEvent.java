@@ -34,4 +34,7 @@ public interface IQueueEvent {
     
     public void setLocaleLanguage(String localLanguage);
     public String getLocaleLanguage();
+    
+    public void setThemeType(String themeType);
+    public String getThemeType();
 }

@@ -28,6 +28,8 @@ public abstract class QueueEventCommon implements IQueueEvent {
     
     protected String localeCountry;
     protected String localeLanguage;
+    
+    protected String themeType;
 
     protected QueueEventCommon(String userId) {
     	this.userId = userId;
@@ -48,6 +50,8 @@ public abstract class QueueEventCommon implements IQueueEvent {
         
         this.localeCountry = params.get("localeCountry");
         this.localeLanguage = params.get("localeLanguage");
+        
+        this.themeType = params.get("themeType");
     }
 
     @Override
@@ -128,6 +132,16 @@ public abstract class QueueEventCommon implements IQueueEvent {
 	}
     
     @Override
+    public String getThemeType() {
+		return themeType;
+	}
+
+    @Override
+	public void setThemeType(String themeType) {
+		this.themeType = themeType;
+	}
+
+	@Override
     public Map<String, String> getParams() {
     	
     	Map<String, String> params = new HashMap<>();
@@ -152,6 +166,10 @@ public abstract class QueueEventCommon implements IQueueEvent {
         	params.put("localeLanguage", localeLanguage);
         }        
 
+        if (themeType != null) {
+        	params.put("themeType", themeType);
+        }        
+        
     	return params;
     }
     
