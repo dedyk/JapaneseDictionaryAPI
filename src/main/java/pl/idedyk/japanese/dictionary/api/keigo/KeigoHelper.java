@@ -75,6 +75,10 @@ public class KeigoHelper {
 				KeigoEntryFindMatchType.END_WITH, DictionaryEntryType.WORD_VERB_U, "為さる", null, "なさる", null, "nasaru",
 				null, "為さい", "なさい", "nasai");
 
+		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_IRREGULAR, null, "する", "suru",
+				KeigoEntryFindMatchType.END_WITH, DictionaryEntryType.WORD_VERB_U, "爲さる", null, "なさる", null, "nasaru",
+				null, "爲さい", "なさい", "nasai");
+		
 		// taberu
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, "食べる", "たべる", "taberu", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "召し上がる", null, "めしあがる", null, "meshiagaru", null, null, null, null);
