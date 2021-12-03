@@ -35,6 +35,7 @@ import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDicti
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 
 public abstract class DictionaryManagerAbstract {
 	
@@ -370,6 +371,13 @@ public abstract class DictionaryManagerAbstract {
 		waitForDatabaseReady();
 		
 		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
+	}
+
+	public JMdict.Entry getDictionaryEntry2ById(int id) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ById(id);		
 	}
 	
 	public DictionaryEntry getDictionaryEntryNameById(int id) throws DictionaryException {

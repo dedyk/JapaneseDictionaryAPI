@@ -12,6 +12,7 @@ import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 
 public interface IDatabaseConnector {
 
@@ -27,6 +28,7 @@ public interface IDatabaseConnector {
 			FindWordResult findWordResult) throws DictionaryException;
 	
 	public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
+	public JMdict.Entry getDictionaryEntry2ById(Integer entryId) throws DictionaryException;	
 	
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	
