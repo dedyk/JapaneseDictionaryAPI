@@ -41,7 +41,9 @@ public enum AttributeType {
 	
 	RELATED("słowo powiązanie", false),
 	
-	PRIORITY("priorytet słowa", false);
+	PRIORITY("priorytet słowa", false),
+	
+	JMDICT_ENTRY_ID("identyfikator słowa w słowniku jmdict", false);
 	
 	private String name;
 	
