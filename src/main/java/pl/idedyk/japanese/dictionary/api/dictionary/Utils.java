@@ -45,6 +45,10 @@ public class Utils {
 	}
 
 	public static String convertListToString(List<String> list) {
+		return convertListToString(list, "\n");		
+	}
+	
+	public static String convertListToString(List<String> list, String separator) {
 		
 		if (list == null) {
 			return null;
@@ -56,7 +60,7 @@ public class Utils {
 			sb.append(list.get(idx));
 
 			if (idx != list.size() - 1) {
-				sb.append("\n");
+				sb.append(separator);
 			}
 		}
 
