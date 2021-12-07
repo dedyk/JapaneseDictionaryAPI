@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.GTypeEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
@@ -176,6 +177,31 @@ public class Dictionary2HelperCommon {
 		}
 
 		return null;
+	}
+	
+	public static String translateToPolishGlossType(GTypeEnum glossType) {
+		
+		if (glossType == null) {
+			return null;
+		}
+		
+		switch (glossType) {
+		
+		case EXPL:
+			return "wyjaśnienie";
+			
+		case FIG:
+			return "przenośna";
+			
+		case LIT:
+			return "literacko";
+		
+		case TM:
+			return "znak towarowy";
+			
+			default:
+				throw new RuntimeException("Unknown gloss type: " + glossType);
+		}
 	}
 
 	public static class KanjiKanaPair {
