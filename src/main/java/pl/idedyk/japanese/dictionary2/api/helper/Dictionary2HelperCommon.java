@@ -10,6 +10,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.GTypeEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSourceLsWaseiEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscEnum;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.PartOfSpeechEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
@@ -744,6 +745,190 @@ public class Dictionary2HelperCommon {
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
+	}
+	
+	public static List<String> translateToPolishPartOfSpeechEnum(Collection<PartOfSpeechEnum> partOfSpeechEnumList) {
+		
+		List<String> result = new ArrayList<>();
+
+		for (PartOfSpeechEnum partOfSpeechEnum : partOfSpeechEnumList) {
+			
+			switch (partOfSpeechEnum) {
+			
+			case NOUN_COMMON_FUTSUUMEISHI:
+				result.add("rzeczownik (powszechny) (futsuumeishi)"); break;
+			
+			case NOUN_USED_AS_A_PREFIX:
+				result.add("rzeczownik, używany jako przedrostek"); break;
+				
+			case NOUN_USED_AS_A_SUFFIX:
+				result.add("rzeczownik, używany jako przyrostek"); break;
+				
+			case ADJECTIVAL_NOUNS_OR_QUASI_ADJECTIVES_KEIYODOSHI:
+				result.add("rzeczowniki przymiotnikowe lub quasi-przymiotniki (keiyodoshi)"); break;
+				
+			case NOUN_OR_PARTICIPLE_WHICH_TAKES_THE_AUX_VERB_SURU:
+				result.add("rzeczownik lub imiesłów, który przyjmuje czasownik posiłkowy suru"); break;
+				
+			case NOUN_OR_VERB_ACTING_PRENOMINALLY:
+				result.add("rzeczownik lub czasownik działający prenominalnie"); break;
+				
+			case NOUNS_WHICH_MAY_TAKE_THE_GENITIVE_CASE_PARTICLE_NO:
+				result.add("rzeczownik, który przyjmuje partykułę 'no'"); break;
+				
+			case PRE_NOUN_ADJECTIVAL_RENTAISHI:
+				result.add("pre-rzeczownik przymiotnikowy (rentaishi)"); break;
+				
+			case PRONOUN:
+				result.add("zaimek"); break;
+				
+			case NUMERIC:
+				result.add("liczba"); break;
+				
+			case PARTICLE:
+				result.add("partykuła"); break;
+				
+			case PREFIX:
+				result.add("przedrostek"); break;
+				
+			case SUFFIX:
+				result.add("przyrostek"); break;
+				
+			case COPULA:
+				result.add("kopula"); break;
+				
+			case COUNTER:
+				result.add("klasyfikator"); break;
+				
+			case CONJUNCTION:
+				result.add("spójnik"); break;
+				
+			case ADJECTIVE_KEIYOUSHI:
+				result.add("przymiotnik (keiyoushi)"); break;
+				
+			case ADJECTIVE_KEIYOUSHI_YOI_II_CLASS:
+				result.add("przymiotnik (keiyoushi) - klasa yoi/ii"); break;
+				
+			case ADVERB_FUKUSHI:
+				result.add("przysłówek (fukushi)"); break;	
+			
+			case ADVERB_TAKING_THE_TO_PARTICLE:
+				result.add("przysłówek przyjmujący partykułę 'to'"); break;
+				
+			case AUXILIARY:
+				result.add("posiłkowy (pomocniczy)"); break;
+				
+			case AUXILIARY_ADJECTIVE:
+				result.add("przymiotnik posiłkowy (pomocniczy)"); break;
+				
+			case AUXILIARY_VERB:
+				result.add("czasownik posiłkowy (pomocniczy)"); break;
+				
+			case ARCHAIC_FORMAL_FORM_OF_NA_ADJECTIVE:
+				result.add("archaiczna/formalna forma na-przymiotnika"); break;
+				
+			case EXPRESSIONS_PHRASES_CLAUSES_ETC:
+				result.add("wyrażenie (zwrot, zdanie składowe i etc) "); break;
+				
+			case ICHIDAN_VERB:
+				result.add("czasownik ichidan (ru-czasownik)"); break;
+				
+			case TARU_ADJECTIVE:
+				result.add("przymiotnik taru"); break;
+				
+			case TRANSITIVE_VERB:
+				result.add("czasownik przechodni"); break;
+				
+			case INTRANSITIVE_VERB:
+				result.add("czasownik nieprzechodni"); break;
+				
+			case IRREGULAR_NU_VERB:
+				result.add("nieregularny nu-czasownik"); break;
+				
+			case INTERJECTION_KANDOUSHI:
+				result.add("wykrzyknik (kandoushi)"); break;
+				
+			case KU_ADJECTIVE_ARCHAIC:
+				result.add("ku-przymiotnik (archaiczny)"); break;
+				
+			case KURU_VERB_SPECIAL_CLASS:
+				result.add("czasownik kuru - klasa specjalna"); break;
+				
+			case SURU_VERB_INCLUDED:
+				result.add("czasownik suru"); break;
+				
+			case SURU_VERB_SPECIAL_CLASS:
+				result.add("czasownik suru - klasa specjalna"); break;
+				
+			case SU_VERB_PRECURSOR_TO_THE_MODERN_SURU:
+				result.add("czasownik su - prekursor współczesnego czasownika suru"); break;
+				
+			case GODAN_VERB_ARU_SPECIAL_CLASS:
+				result.add("czasownik godan (u-czasownik) - klasa specjalna aru"); break;
+				
+			case GODAN_VERB_IKU_YUKU_SPECIAL_CLASS:
+				result.add("czasownik godan (u-czasownik) - klasa specjalna iku/yuku"); break;
+				
+			case GODAN_VERB_WITH_BU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na bu"); break;
+
+			case GODAN_VERB_WITH_GU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na gu"); break;
+
+			case GODAN_VERB_WITH_KU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na ku"); break;
+
+			case GODAN_VERB_WITH_MU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na mu"); break;
+
+			case GODAN_VERB_WITH_NU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na nu"); break;
+
+			case GODAN_VERB_WITH_RU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na ru"); break;
+
+			case GODAN_VERB_WITH_RU_ENDING_IRREGULAR_VERB:
+				result.add("czasownik godan (u-czasownik) kończący się na ru, czasownik nieregularny"); break;
+
+			case GODAN_VERB_WITH_SU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na su"); break;
+
+			case GODAN_VERB_WITH_TSU_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na tsu"); break;
+
+			case GODAN_VERB_WITH_U_ENDING:
+				result.add("czasownik godan (u-czasownik) kończący się na u"); break;
+
+			case ICHIDAN_VERB_ZURU_VERB_ALTERNATIVE_FORM_OF_JIRU_VERBS:
+				result.add("czasownik ichidan (ru-czasownik) - czasownik zuru (alternatywna forma czasownika jiru)"); break;
+				
+			case NIDAN_VERB_LOWER_CLASS_WITH_HU_FU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na hu/fu (archaiczny)"); break;	
+
+			case NIDAN_VERB_LOWER_CLASS_WITH_RU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na ru (archaiczny)"); break;	
+
+			case NIDAN_VERB_LOWER_CLASS_WITH_SU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na su (archaiczny)"); break;	
+
+			case NIDAN_VERB_LOWER_CLASS_WITH_YU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na yu (archaiczny)"); break;	
+
+			case YODAN_VERB_WITH_KU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na ku (archaiczny)"); break;
+
+			case YODAN_VERB_WITH_RU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na ru (archaiczny)"); break;
+
+			case YODAN_VERB_WITH_SU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na su (archaiczny)"); break;
+			
+			default:				
+				throw new RuntimeException("Unknown part of speech enum: " + partOfSpeechEnum);				
+			}
+		}
+		
+		return result;
 	}
 
 	public static class KanjiKanaPair {
