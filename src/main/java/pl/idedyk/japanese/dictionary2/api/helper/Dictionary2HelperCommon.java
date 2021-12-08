@@ -385,6 +385,9 @@ public class Dictionary2HelperCommon {
 
 			case AVIATION:
 				result.add("lotnictwo"); break;
+
+			case GRAMMAR:
+				result.add("gramatyka"); break;
 				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);
