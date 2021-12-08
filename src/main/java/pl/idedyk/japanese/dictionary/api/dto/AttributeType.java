@@ -41,6 +41,8 @@ public enum AttributeType {
 	
 	RELATED("słowo powiązanie", false),
 	
+	ANTONYM("przeciwieństwo", false),
+	
 	PRIORITY("priorytet słowa", false),
 	
 	JMDICT_ENTRY_ID("identyfikator słowa w słowniku jmdict", false);
