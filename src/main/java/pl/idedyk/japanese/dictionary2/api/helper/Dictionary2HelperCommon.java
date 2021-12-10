@@ -11,11 +11,13 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSourceLsWaseiEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.PartOfSpeechEnum;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingAdditionalInfoEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiAdditionalInfoEnum;
 
 public class Dictionary2HelperCommon {
 	
@@ -912,6 +914,68 @@ public class Dictionary2HelperCommon {
 		return result;
 	}
 
+	public static List<String> translateToPolishKanjiAdditionalInfoEnum(Collection<KanjiAdditionalInfoEnum> kanjiAdditionalInfoEnumList) {
+		
+		List<String> result = new ArrayList<>();
+
+		for (KanjiAdditionalInfoEnum kanjiAdditionalInfoEnum : kanjiAdditionalInfoEnumList) {
+			
+			switch (kanjiAdditionalInfoEnum) {
+			
+			case ATEJI_PHONETIC_READING:
+				result.add("czytanie ateji (fonetyczne)"); break;
+			
+			case WORD_CONTAINING_OUT_DATED_KANJI_OR_KANJI_USAGE:
+				result.add("słowo zawierające przestarzałe kanji"); break;
+			
+			case IRREGULAR_OKURIGANA_USAGE:
+				result.add("nieregularne użycie okurigana"); break;
+				
+			case WORD_CONTAINING_IRREGULAR_KANA_USAGE:
+				result.add("słowo zawierające nieregularne użycie kana"); break;
+				
+			case WORD_CONTAINING_IRREGULAR_KANJI_USAGE:
+				result.add("słowo zawierające nieregularne użycie kanji"); break;
+				
+			case RARELY_USED_KANJI_FORM:
+				result.add("rzadko używana forma kanji"); break;
+			
+			default:				
+				throw new RuntimeException("Unknown kanji additional info enum: " + kanjiAdditionalInfoEnum);				
+			}
+		}
+		
+		return result;
+	}
+
+	public static List<String> translateToPolishReadingAdditionalInfoEnum(Collection<ReadingAdditionalInfoEnum> readingAdditionalInfoEnumList) {
+		
+		List<String> result = new ArrayList<>();
+
+		for (ReadingAdditionalInfoEnum readingAdditionalInfoEnum : readingAdditionalInfoEnumList) {
+			
+			switch (readingAdditionalInfoEnum) {
+			
+			case WORD_CONTAINING_IRREGULAR_KANA_USAGE:
+				result.add("słowo zawierające nieregularne użycie kana"); break;
+
+			case OUT_DATED_OR_OBSOLETE_KANA_USAGE:
+				result.add("przestarzałe lub nieużywane użycie kana"); break;
+			
+			case GIKUN_MEANING_AS_READING_OR_JUKUJIKUN_SPECIAL_KANJI_READING:
+				result.add("gikun (znaczenie jako czytanie) lub jukujikun (specjalne czytanie kanji)"); break;
+				
+			case WORD_USUALLY_WRITTEN_USING_KANJI_ALONE:
+				result.add("słowo zazwyczaj zapisywane wyłącznie z użyciem kanji"); break;
+			
+			default:				
+				throw new RuntimeException("Unknown reading additional info enum: " + readingAdditionalInfoEnum);				
+			}
+		}
+		
+		return result;
+	}
+	
 	public static class KanjiKanaPair {
 		
 		private KanjiInfo kanjiInfo;		
