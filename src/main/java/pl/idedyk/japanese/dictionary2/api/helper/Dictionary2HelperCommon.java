@@ -40,16 +40,8 @@ public class Dictionary2HelperCommon {
 				
 				ReadingInfo.ReNokanji noKanji = readingInfo.getNoKanji();
 				
-				if (noKanji == null) {
-										
-					String kana = readingInfo.getKana().getValue();
-					String romaji = readingInfo.getKana().getRomaji();
-					
-					ReadingInfoKanaType kanaType = readingInfo.getKana().getKanaType();
-					
-					//
-					
-					result.add(new KanjiKanaPair(null, kana, kanaType, romaji));
+				if (noKanji == null) {					
+					result.add(new KanjiKanaPair(null, readingInfo));
 				}
 			}
 			
@@ -68,13 +60,7 @@ public class Dictionary2HelperCommon {
 					if (noKanji != null) { 
 						continue;
 					}
-					
-					// pobierz kana
-					String kana = readingInfo.getKana().getValue();
-					String romaji = readingInfo.getKana().getRomaji();
-					
-					ReadingInfoKanaType kanaType = readingInfo.getKana().getKanaType();
-					
+										
 					List<String> kanjiRestrictedListForKana = readingInfo.getKanjiRestrictionList();
 					
 					boolean isRestricted = true;
@@ -95,7 +81,7 @@ public class Dictionary2HelperCommon {
 					}
 					
 					// mamy pare
-					result.add(new KanjiKanaPair(kanji, kana, kanaType, romaji));					
+					result.add(new KanjiKanaPair(kanjiInfo, readingInfo));					
 				}				
 			}
 		}
@@ -105,16 +91,8 @@ public class Dictionary2HelperCommon {
 			
 			ReadingInfo.ReNokanji noKanji = readingInfo.getNoKanji();
 			
-			if (noKanji != null) {
-								
-				String kana = readingInfo.getKana().getValue();
-				String romaji = readingInfo.getKana().getRomaji();
-				
-				ReadingInfoKanaType kanaType = readingInfo.getKana().getKanaType();
-				
-				//
-				
-				result.add(new KanjiKanaPair(null, kana, kanaType, romaji));
+			if (noKanji != null) {				
+				result.add(new KanjiKanaPair(null, readingInfo));
 			}
 		}
 		
@@ -123,8 +101,8 @@ public class Dictionary2HelperCommon {
 				
 		for (KanjiKanaPair kanjiKanaPair : result) {
 			
-			String kanji = kanjiKanaPair.kanji;
-			String kana = kanjiKanaPair.kana;
+			String kanji = kanjiKanaPair.getKanji();
+			String kana = kanjiKanaPair.getKana();
 			
 			// chodzimy po wszystkich sense i sprawdzamy, czy mozemy je dodac do naszej pary kanji i kana
 			for (Sense sense : entrySenseList) {
@@ -174,8 +152,8 @@ public class Dictionary2HelperCommon {
 		
 		for (KanjiKanaPair kanjiKanaPair : kanjiKanaPairList) {
 			
-			String kanjiKanaPair$Kanji = kanjiKanaPair.kanji != null ? kanjiKanaPair.kanji : "";
-			String kanjiKanaPair$Kana = kanjiKanaPair.kana != null ? kanjiKanaPair.kana : "";
+			String kanjiKanaPair$Kanji = kanjiKanaPair.getKanji() != null ? kanjiKanaPair.getKanji() : "";
+			String kanjiKanaPair$Kana = kanjiKanaPair.getKana() != null ? kanjiKanaPair.getKana() : "";
 			
 			if (dictionaryEntry$Kanji.equals(kanjiKanaPair$Kanji) == true && dictionaryEntry$Kana.equals(kanjiKanaPair$Kana) == true) {
 				return kanjiKanaPair;
@@ -936,29 +914,67 @@ public class Dictionary2HelperCommon {
 
 	public static class KanjiKanaPair {
 		
-		public String kanji;
-		
-		public String kana;
-		public ReadingInfoKanaType kanaType;
-		
-		public String romaji;
-		
-		public List<Sense> senseList = new ArrayList<>();
+		private KanjiInfo kanjiInfo;		
+		private ReadingInfo readingInfo;
+				
+		private List<Sense> senseList = new ArrayList<>();
 
-		public KanjiKanaPair(String kanji, String kana, ReadingInfoKanaType kanaType, String romaji) {
-			this.kanji = kanji;
-			this.kana = kana;
-			this.kanaType = kanaType;
-			this.romaji = romaji;
+		public KanjiKanaPair(KanjiInfo kanjiInfo, ReadingInfo readingInfo) {
+			this.kanjiInfo = kanjiInfo;
+			this.readingInfo = readingInfo;
+		}
+
+		public KanjiInfo getKanjiInfo() {
+			return kanjiInfo;
+		}
+
+		public ReadingInfo getReadingInfo() {
+			return readingInfo;
 		}
 
 		public List<Sense> getSenseList() {
 			return senseList;
 		}
+		
+		public String getKanji() {
+			
+			if (kanjiInfo == null) {
+				return null;
+			}
+			
+			return kanjiInfo.getKanji();			
+		}
+		
+		public String getKana() {
+			
+			if (readingInfo == null) {
+				return null;
+			}
+
+			return readingInfo.getKana().getValue();
+		}
+		
+		public String romaji() {
+
+			if (readingInfo == null) {
+				return null;
+			}
+
+			return readingInfo.getKana().getRomaji();
+		}
+		
+		public ReadingInfoKanaType getKanaType() {
+			
+			if (readingInfo == null) {
+				return null;
+			}
+
+			return readingInfo.getKana().getKanaType();
+		}
 
 		@Override
 		public String toString() {
-			return "KanjiKanaPair [kanji=" + kanji + ", kana=" + kana + "]";
+			return "KanjiKanaPair [kanji=" + kanjiInfo + ", kana=" + readingInfo + "]";
 		}
 	}
 }
