@@ -369,6 +369,9 @@ public class Dictionary2HelperCommon {
 			case GRAMMAR:
 				result.add("gramatyka"); break;
 				
+			case PHYSIOLOGY:
+				result.add("fizjologia"); break;
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);
 			
