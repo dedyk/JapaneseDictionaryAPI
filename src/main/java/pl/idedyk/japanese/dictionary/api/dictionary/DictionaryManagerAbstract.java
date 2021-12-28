@@ -320,13 +320,13 @@ public abstract class DictionaryManagerAbstract {
 		
 		// dokladne dopasowanie kanji
 		newResult.addAll(kanjiMatchResultList);
-		
-		// zaczyna sie od kanji
-		newResult.addAll(kanjiBeginResultList);
 
 		// dokladne dopasowanie kana i romaji
 		newResult.addAll(kanaMatchResultList);
 		newResult.addAll(romajiMatchResultList);
+		
+		// zaczyna sie od kanji
+		newResult.addAll(kanjiBeginResultList);
 		
 		// tlumaczenie
 		newResult.addAll(translateBeginWordResultList);
