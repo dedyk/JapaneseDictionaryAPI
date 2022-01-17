@@ -479,6 +479,9 @@ public class Dictionary2HelperCommon {
 			case POETICAL_TERM:
 				result.add("poetycki termin"); break;
 				
+			case LEGEND:
+				result.add("legenda"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
