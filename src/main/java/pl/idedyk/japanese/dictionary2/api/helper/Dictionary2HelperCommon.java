@@ -644,6 +644,9 @@ public class Dictionary2HelperCommon {
 		case "hin":
 			return "hin";
 			
+		case "yid":
+			return "jid";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -742,6 +745,9 @@ public class Dictionary2HelperCommon {
 			
 		case "hin":
 			return "słowo pochodzenia indyjskiego";
+			
+		case "yid":
+			return "słowo pochodzenia żydowskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
@@ -924,6 +930,9 @@ public class Dictionary2HelperCommon {
 			case YODAN_VERB_WITH_SU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na su (archaiczny)"); break;
 			
+			case SHIKU_ADJECTIVE_ARCHAIC:
+				result.add("przymiotnik shiku (archaiczny)"); break;
+				
 			default:				
 				throw new RuntimeException("Unknown part of speech enum: " + partOfSpeechEnum);				
 			}
