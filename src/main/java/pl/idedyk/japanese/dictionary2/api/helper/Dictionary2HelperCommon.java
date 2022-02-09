@@ -906,6 +906,9 @@ public class Dictionary2HelperCommon {
 			case GODAN_VERB_WITH_U_ENDING:
 				result.add("czasownik godan (u-czasownik) kończący się na u"); break;
 
+			case GODAN_VERB_WITH_U_ENDING_SPECIAL_CLASS:
+				result.add("czasownik godan (u-czasownik) kończący się na u - klasa specjalna"); break;
+				
 			case ICHIDAN_VERB_ZURU_VERB_ALTERNATIVE_FORM_OF_JIRU_VERBS:
 				result.add("czasownik ichidan (ru-czasownik) - czasownik zuru (alternatywna forma czasownika jiru)"); break;
 				
