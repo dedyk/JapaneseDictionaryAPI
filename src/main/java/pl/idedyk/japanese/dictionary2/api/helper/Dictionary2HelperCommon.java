@@ -372,6 +372,9 @@ public class Dictionary2HelperCommon {
 			case PHYSIOLOGY:
 				result.add("fizjologia"); break;
 				
+			case BIOCHEMISTRY:
+				result.add("biochemia"); break;				
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);
 			
