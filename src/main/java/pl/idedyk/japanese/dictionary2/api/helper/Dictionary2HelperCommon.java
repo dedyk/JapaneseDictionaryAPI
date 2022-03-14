@@ -650,6 +650,9 @@ public class Dictionary2HelperCommon {
 		case "yid":
 			return "jid";
 			
+		case "dan":
+			return "duń";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -751,6 +754,9 @@ public class Dictionary2HelperCommon {
 			
 		case "yid":
 			return "słowo pochodzenia żydowskiego";
+			
+		case "dan":
+			return "słowo pochodzenia duńskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
