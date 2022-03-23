@@ -180,7 +180,7 @@ public class Dictionary2HelperCommon {
 			return "przenośna";
 			
 		case LIT:
-			return "literacko";
+			return "dosłownie";
 		
 		case TM:
 			return "znak towarowy";
