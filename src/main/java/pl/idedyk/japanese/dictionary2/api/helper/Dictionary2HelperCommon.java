@@ -945,6 +945,9 @@ public class Dictionary2HelperCommon {
 			case SHIKU_ADJECTIVE_ARCHAIC:
 				result.add("przymiotnik shiku (archaiczny)"); break;
 				
+			case UNCLASSIFIED:
+				result.add("niesklasyfikowany"); break;				
+				
 			default:				
 				throw new RuntimeException("Unknown part of speech enum: " + partOfSpeechEnum);				
 			}
