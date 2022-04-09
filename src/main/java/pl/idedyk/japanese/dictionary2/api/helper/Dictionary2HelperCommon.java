@@ -1018,6 +1018,14 @@ public class Dictionary2HelperCommon {
 		return result;
 	}
 	
+	public static PrintableSense getPrintableSense(DictionaryEntry dictionaryEntry, KanjiKanaPair kanjiKanaPair) {
+		
+		int fixme = 1; // !!!!!!!!!1
+		
+		
+		return null;
+	}
+	
 	public static class KanjiKanaPair {
 		
 		private KanjiInfo kanjiInfo;		
@@ -1081,6 +1089,69 @@ public class Dictionary2HelperCommon {
 		@Override
 		public String toString() {
 			return "KanjiKanaPair [kanji=" + kanjiInfo + ", kana=" + readingInfo + "]";
+		}
+	}
+	
+	public static class PrintableSense {
+		
+		private List<PrintableSenseEntry> senseEntryList = new ArrayList<>();
+		
+		public List<PrintableSenseEntry> getSenseEntryList() {
+			return senseEntryList;
+		}
+		
+		public void addSenseEntry(PrintableSenseEntry senseEntry) {
+			senseEntryList.add(senseEntry);
+		}
+	}
+	
+	public static class PrintableSenseEntry {
+		
+		private String polishPartOfSpeechValue;
+		
+		private List<PrintableSenseEntryGloss> glossList = new ArrayList<>();
+		
+		private String additionalInfoValue;
+		
+		public PrintableSenseEntry(String polishPartOfSpeechValue, String additionalInfoValue) {
+			this.polishPartOfSpeechValue = polishPartOfSpeechValue;
+			this.additionalInfoValue = additionalInfoValue;
+		}
+
+		public String getPolishPartOfSpeechValue() {
+			return polishPartOfSpeechValue;
+		}
+
+		public String getAdditionalInfoValue() {
+			return additionalInfoValue;
+		}
+		
+		public List<PrintableSenseEntryGloss> getGlossList() {
+			return glossList;
+		}
+		
+		public void addGloss(PrintableSenseEntryGloss gloss) {
+			glossList.add(gloss);
+		}
+	}
+	
+	public static class PrintableSenseEntryGloss {
+		
+		private String glossValue;
+		
+		private String glossValueGType;
+
+		public PrintableSenseEntryGloss(String glossValue, String glossValueGType) {
+			this.glossValue = glossValue;
+			this.glossValueGType = glossValueGType;
+		}
+
+		public String getGlossValue() {
+			return glossValue;
+		}
+
+		public String getGlossValueGType() {
+			return glossValueGType;
 		}
 	}
 }
