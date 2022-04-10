@@ -3,11 +3,15 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.DialectEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.FieldEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.GTypeEnum;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.Gloss;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSource;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSourceLsWaseiEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.PartOfSpeechEnum;
@@ -15,6 +19,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingAdditionalInfoEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.SenseAdditionalInfo;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiAdditionalInfoEnum;
@@ -1018,12 +1023,108 @@ public class Dictionary2HelperCommon {
 		return result;
 	}
 	
-	public static PrintableSense getPrintableSense(DictionaryEntry dictionaryEntry, KanjiKanaPair kanjiKanaPair) {
+	public static PrintableSense getPrintableSense(KanjiKanaPair kanjiKanaPair) {
 		
-		int fixme = 1; // !!!!!!!!!1
+		PrintableSense printableSense = new PrintableSense();
 		
-		
-		return null;
+		for (int senseIdx = 0; senseIdx < kanjiKanaPair.getSenseList().size(); ++senseIdx) {
+			
+			PrintableSenseEntry printableSenseEntry = new PrintableSenseEntry();
+			
+			Sense sense = kanjiKanaPair.getSenseList().get(senseIdx);
+			
+			List<Gloss> glossList = sense.getGlossList();
+			List<SenseAdditionalInfo> senseAdditionalInfoList = sense.getAdditionalInfoList();
+			List<LanguageSource> senseLanguageSourceList = sense.getLanguageSourceList();
+			List<FieldEnum> senseFieldList = sense.getFieldList();
+			List<MiscEnum> senseMiscList = sense.getMiscList();
+			List<DialectEnum> senseDialectList = sense.getDialectList();
+			List<PartOfSpeechEnum> partOfSpeechList = sense.getPartOfSpeechList();
+										
+			// pobieramy polskie tlumaczenia
+			List<Gloss> glossPolList = glossList.stream().filter(gloss -> (gloss.getLang().equals("pol") == true)).collect(Collectors.toList());
+			
+			// i informacje dodatkowe
+			Optional<SenseAdditionalInfo> senseAdditionalPolOptional = senseAdditionalInfoList.stream().filter(additionalInfo -> (additionalInfo.getLang().equals("pol") == true)).findFirst();				
+						
+			// czesci mowy
+			if (partOfSpeechList.size() > 0) {				
+				List<String> translateToPolishPartOfSpeechEnum = Dictionary2HelperCommon.translateToPolishPartOfSpeechEnum(partOfSpeechList);
+				
+				printableSenseEntry.setPolishPartOfSpeechValue(pl.idedyk.japanese.dictionary.api.dictionary.Utils.convertListToString(translateToPolishPartOfSpeechEnum, "; "));
+			}				
+			
+			for (Gloss currentGlossPol : glossPolList) {
+				
+				PrintableSenseEntryGloss printableSenseEntryGloss = new PrintableSenseEntryGloss();
+				
+				// dodanie pojedynczego znaczenia
+				printableSenseEntryGloss.setGlossValue(currentGlossPol.getValue());
+								
+				// sprawdzenie, czy wystepuje dodatkowy typ znaczenia
+				if (currentGlossPol.getGType() != null) {
+					printableSenseEntryGloss.setGlossValueGType(Dictionary2HelperCommon.translateToPolishGlossType(currentGlossPol.getGType()));					
+				}
+				
+				printableSenseEntry.getGlossList().add(printableSenseEntryGloss);
+			}
+			
+			// informacje dodatkowe
+			List<String> additionalInfoToAddList = new ArrayList<>();
+			
+			// dziedzina
+			if (senseFieldList.size() > 0) {
+				additionalInfoToAddList.addAll(Dictionary2HelperCommon.translateToPolishFieldEnumList(senseFieldList));						
+			}
+			
+			// rozne informacje
+			if (senseMiscList.size() > 0) {
+				additionalInfoToAddList.addAll(Dictionary2HelperCommon.translateToPolishMiscEnumList(senseMiscList));
+			}
+			
+			// dialekt
+			if (senseDialectList.size() > 0) {
+				additionalInfoToAddList.addAll(Dictionary2HelperCommon.translateToPolishDialectEnumList(senseDialectList));
+			}
+			
+			if (senseAdditionalPolOptional.isPresent() == true) { // czy informacje dodatkowe istnieja				
+				String senseAdditionalPolOptionalValue = senseAdditionalPolOptional.get().getValue();
+				
+				additionalInfoToAddList.add(senseAdditionalPolOptionalValue);
+			}
+			
+			// czy sa informacje o zagranicznym pochodzeniu slow
+			if (senseLanguageSourceList != null && senseLanguageSourceList.size() > 0) {
+				
+				for (LanguageSource languageSource : senseLanguageSourceList) {
+											
+					String languageCodeInPolish = Dictionary2HelperCommon.translateToPolishLanguageCode(languageSource.getLang());
+					String languageValue = languageSource.getValue();
+					String languageLsWasei = Dictionary2HelperCommon.translateToPolishLanguageSourceLsWaseiEnum(languageSource.getLsWasei());
+					
+					if (languageValue != null && languageValue.trim().equals("") == false) {
+						additionalInfoToAddList.add(languageCodeInPolish + ": " + languageValue);
+						
+					} else {
+						additionalInfoToAddList.add(Dictionary2HelperCommon.translateToPolishLanguageCodeWithoutValue(languageSource.getLang()));
+					}
+					
+					if (languageLsWasei != null) {
+						additionalInfoToAddList.add(languageLsWasei);
+					}
+				}
+			}
+							
+			if (additionalInfoToAddList.size() > 0) {
+				printableSenseEntry.setAdditionalInfoValue(pl.idedyk.japanese.dictionary.api.dictionary.Utils.convertListToString(additionalInfoToAddList, "; "));
+			}
+			
+			//
+			
+			printableSense.getSenseEntryList().add(printableSenseEntry);
+		}
+				
+		return printableSense;
 	}
 	
 	public static class KanjiKanaPair {
@@ -1112,26 +1213,29 @@ public class Dictionary2HelperCommon {
 		private List<PrintableSenseEntryGloss> glossList = new ArrayList<>();
 		
 		private String additionalInfoValue;
-		
-		public PrintableSenseEntry(String polishPartOfSpeechValue, String additionalInfoValue) {
-			this.polishPartOfSpeechValue = polishPartOfSpeechValue;
-			this.additionalInfoValue = additionalInfoValue;
-		}
-
+				
 		public String getPolishPartOfSpeechValue() {
 			return polishPartOfSpeechValue;
+		}
+
+		public void setPolishPartOfSpeechValue(String polishPartOfSpeechValue) {
+			this.polishPartOfSpeechValue = polishPartOfSpeechValue;
+		}
+
+		public List<PrintableSenseEntryGloss> getGlossList() {
+			return glossList;
+		}
+
+		public void setGlossList(List<PrintableSenseEntryGloss> glossList) {
+			this.glossList = glossList;
 		}
 
 		public String getAdditionalInfoValue() {
 			return additionalInfoValue;
 		}
-		
-		public List<PrintableSenseEntryGloss> getGlossList() {
-			return glossList;
-		}
-		
-		public void addGloss(PrintableSenseEntryGloss gloss) {
-			glossList.add(gloss);
+
+		public void setAdditionalInfoValue(String additionalInfoValue) {
+			this.additionalInfoValue = additionalInfoValue;
 		}
 	}
 	
@@ -1141,17 +1245,20 @@ public class Dictionary2HelperCommon {
 		
 		private String glossValueGType;
 
-		public PrintableSenseEntryGloss(String glossValue, String glossValueGType) {
-			this.glossValue = glossValue;
-			this.glossValueGType = glossValueGType;
-		}
-
 		public String getGlossValue() {
 			return glossValue;
 		}
 
+		public void setGlossValue(String glossValue) {
+			this.glossValue = glossValue;
+		}
+
 		public String getGlossValueGType() {
 			return glossValueGType;
+		}
+
+		public void setGlossValueGType(String glossValueGType) {
+			this.glossValueGType = glossValueGType;
 		}
 	}
 }
