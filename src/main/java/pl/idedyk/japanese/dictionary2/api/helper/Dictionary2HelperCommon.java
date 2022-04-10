@@ -499,6 +499,24 @@ public class Dictionary2HelperCommon {
 		return result;
 	}
 	
+	public static Collection<MiscEnum> filterPolishMiscEnumList(Collection<MiscEnum> miscEnumList) {
+				
+		List<MiscEnum> result = new ArrayList<>();
+		
+		for (MiscEnum miscEnum : miscEnumList) {
+			
+			if (	miscEnum == MiscEnum.WORD_USUALLY_WRITTEN_USING_KANA_ALONE ||
+					miscEnum == MiscEnum.YOJIJUKUGO ||
+					miscEnum == MiscEnum.ONOMATOPOEIC_OR_MIMETIC_WORD) {
+				continue;
+			}
+			
+			result.add(miscEnum);			
+		}
+		
+		return result;
+	}
+	
 	public static List<String> translateToPolishDialectEnumList(Collection<DialectEnum> dialectEnumList) {
 		
 		List<String> result = new ArrayList<>();
