@@ -3,8 +3,6 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.DialectEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.FieldEnum;
@@ -1060,10 +1058,10 @@ public class Dictionary2HelperCommon {
 			List<PartOfSpeechEnum> partOfSpeechList = sense.getPartOfSpeechList();
 										
 			// pobieramy polskie tlumaczenia
-			List<Gloss> glossPolList = glossList.stream().filter(gloss -> (gloss.getLang().equals("pol") == true)).collect(Collectors.toList());
+			List<Gloss> glossPolList = getPolishGlossList(glossList);
 			
 			// i informacje dodatkowe
-			Optional<SenseAdditionalInfo> senseAdditionalPolOptional = senseAdditionalInfoList.stream().filter(additionalInfo -> (additionalInfo.getLang().equals("pol") == true)).findFirst();				
+			SenseAdditionalInfo senseAdditionalPol = findFirstAdditionalInfo(senseAdditionalInfoList);				
 						
 			// czesci mowy
 			if (partOfSpeechList.size() > 0) {				
@@ -1105,10 +1103,10 @@ public class Dictionary2HelperCommon {
 				additionalInfoToAddList.addAll(Dictionary2HelperCommon.translateToPolishDialectEnumList(senseDialectList));
 			}
 			
-			if (senseAdditionalPolOptional.isPresent() == true) { // czy informacje dodatkowe istnieja				
-				String senseAdditionalPolOptionalValue = senseAdditionalPolOptional.get().getValue();
+			if (senseAdditionalPol != null) { // czy informacje dodatkowe istnieja				
+				String senseAdditionalPolValue = senseAdditionalPol.getValue();
 				
-				additionalInfoToAddList.add(senseAdditionalPolOptionalValue);
+				additionalInfoToAddList.add(senseAdditionalPolValue);
 			}
 			
 			// czy sa informacje o zagranicznym pochodzeniu slow
@@ -1143,6 +1141,30 @@ public class Dictionary2HelperCommon {
 		}
 				
 		return printableSense;
+	}
+	
+	private static List<Gloss> getPolishGlossList(List<Gloss> glossPolList) {
+				
+		List<Gloss> result = new ArrayList<>();
+		
+		for (Gloss gloss : glossPolList) {
+			if (gloss.getLang().equals("pol") == true) {
+				result.add(gloss);
+			}
+		}
+		
+		return result;
+	}
+	
+	private static SenseAdditionalInfo findFirstAdditionalInfo(List<SenseAdditionalInfo> additionalInfo) {
+		
+		for (SenseAdditionalInfo senseAdditionalInfo : additionalInfo) {
+			if (senseAdditionalInfo.getLang().equals("pol") == true) {
+				return senseAdditionalInfo;
+			}
+		}
+		
+		return null;
 	}
 	
 	public static class KanjiKanaPair {
