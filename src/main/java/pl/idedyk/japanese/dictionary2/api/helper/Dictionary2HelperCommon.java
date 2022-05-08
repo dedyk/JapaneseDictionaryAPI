@@ -877,7 +877,7 @@ public class Dictionary2HelperCommon {
 				result.add("archaiczna/formalna forma na-przymiotnika"); break;
 				
 			case EXPRESSIONS_PHRASES_CLAUSES_ETC:
-				result.add("wyrażenie (zwrot, zdanie składowe i etc) "); break;
+				result.add("wyrażenie (zwrot, zdanie składowe i etc)"); break;
 				
 			case ICHIDAN_VERB:
 				result.add("czasownik ichidan (ru-czasownik)"); break;
