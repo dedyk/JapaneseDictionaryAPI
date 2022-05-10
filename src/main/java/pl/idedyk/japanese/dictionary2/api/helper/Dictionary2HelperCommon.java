@@ -376,11 +376,13 @@ public class Dictionary2HelperCommon {
 				result.add("fizjologia"); break;
 				
 			case BIOCHEMISTRY:
-				result.add("biochemia"); break;				
+				result.add("biochemia"); break;
+				
+			case GEOMETRY:
+				result.add("geometria"); break;
 				
 			default:
-				throw new RuntimeException("Unknown field enum: " + fieldEnum);
-			
+				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
 		}
 		
