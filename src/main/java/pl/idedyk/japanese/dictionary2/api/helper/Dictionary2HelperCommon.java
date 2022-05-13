@@ -682,6 +682,9 @@ public class Dictionary2HelperCommon {
 		case "tib":
 			return "tib";
 			
+		case "per":
+			return "per";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -792,6 +795,9 @@ public class Dictionary2HelperCommon {
 			
 		case "tib":
 			return "słowo pochodzenia tybetańskiego";
+			
+		case "per":
+			return "słowo pochodzenia perskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
