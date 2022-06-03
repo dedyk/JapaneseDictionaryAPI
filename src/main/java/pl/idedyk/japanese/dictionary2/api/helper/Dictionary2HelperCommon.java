@@ -977,6 +977,9 @@ public class Dictionary2HelperCommon {
 			case ICHIDAN_VERB_ZURU_VERB_ALTERNATIVE_FORM_OF_JIRU_VERBS:
 				result.add("czasownik ichidan (ru-czasownik) - czasownik zuru (alternatywna forma czasownika jiru)"); break;
 				
+			case NIDAN_VERB_LOWER_CLASS_WITH_KU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na ku (archaiczny)"); break;
+				
 			case NIDAN_VERB_LOWER_CLASS_WITH_HU_FU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na hu/fu (archaiczny)"); break;	
 
@@ -988,7 +991,7 @@ public class Dictionary2HelperCommon {
 
 			case NIDAN_VERB_LOWER_CLASS_WITH_YU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na yu (archaiczny)"); break;	
-
+				
 			case YODAN_VERB_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na ku (archaiczny)"); break;
 
@@ -997,6 +1000,9 @@ public class Dictionary2HelperCommon {
 
 			case YODAN_VERB_WITH_SU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na su (archaiczny)"); break;
+
+			case YODAN_VERB_WITH_MU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na mu (archaiczny)"); break;
 				
 			case YODAN_VERB_WITH_BU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na bu (archaiczny)"); break;
