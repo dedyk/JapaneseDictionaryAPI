@@ -382,7 +382,10 @@ public class Dictionary2HelperCommon {
 				result.add("geometria"); break;
 				
 			case ORNITHOLOGY:
-				result.add("ornitologia"); break;				
+				result.add("ornitologia"); break;
+				
+			case FISHING:
+				result.add("wędkarstwo"); break;
 				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
