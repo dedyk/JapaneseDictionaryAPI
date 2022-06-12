@@ -697,6 +697,9 @@ public class Dictionary2HelperCommon {
 		case "glg":
 			return "gal";
 			
+		case "fin":
+			return "fin";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -816,6 +819,9 @@ public class Dictionary2HelperCommon {
 			
 		case "glg":
 			return "słowo pochodzenia galicyjskiego";
+			
+		case "fin":
+			return "słowo pochodzenia fińskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
