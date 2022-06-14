@@ -387,6 +387,9 @@ public class Dictionary2HelperCommon {
 			case FISHING:
 				result.add("wędkarstwo"); break;
 				
+			case PATHOLOGY:
+				result.add("patologia"); break;
+								
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
