@@ -131,6 +131,8 @@ public enum DictionaryEntryType {
 	
 	WORD_GROUP("grupa"),
 	
+	WORD_DOCUMENT("dokument"),
+	
 	UNKNOWN("nieznany");
 
 	private String name;
