@@ -389,7 +389,34 @@ public class Dictionary2HelperCommon {
 				
 			case PATHOLOGY:
 				result.add("patologia"); break;
-								
+				
+			case GOLF:
+				result.add("golf"); break;
+				
+			case AUDIOVISUAL:
+				result.add("audiowizualny"); break;
+				
+			case ECOLOGY:
+				result.add("ekologia"); break;
+				
+			case EMBRYOLOGY:
+				result.add("embriologia"); break;
+				
+			case GARDENING_HORTICULTURE:
+				result.add("ogrodnictwo, sadownictwo"); break;
+				
+			case GEOGRAPHY:
+				result.add("geografia"); break;
+				
+			case GREEK_MYTHOLOGY:
+				result.add("mitologia grecka"); break;
+				
+			case MECHANICAL_ENGINEERING:
+				result.add("inżynieria mechaniczna"); break;
+				
+			case PSYCHIATRY:
+				result.add("psychiatry"); break;
+							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
