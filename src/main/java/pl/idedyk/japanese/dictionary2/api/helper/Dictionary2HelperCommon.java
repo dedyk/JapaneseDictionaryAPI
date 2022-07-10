@@ -526,6 +526,9 @@ public class Dictionary2HelperCommon {
 			case LEGEND:
 				result.add("legenda"); break;
 				
+			case WORK_OF_ART_LITERATURE_MUSIC_ETC_NAME:
+				result.add("dzieło artystyczne, np. literatura, muzyka i etc"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
