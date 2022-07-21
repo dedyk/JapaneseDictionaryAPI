@@ -299,16 +299,17 @@
 	<xsd:simpleType name="misc">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="abbreviation" />
-			<xsd:enumeration value="archaism" />
+			<xsd:enumeration value="archaic" />
 			<xsd:enumeration value="character" />
 			<xsd:enumeration value="children's language" />
-			<xsd:enumeration value="colloquialism" />
+			<xsd:enumeration value="colloquial" />
 			<xsd:enumeration value="company name" />
 			<xsd:enumeration value="creature" />
 			<xsd:enumeration value="dated term" />
 			<xsd:enumeration value="deity" />
 			<xsd:enumeration value="derogatory" />
 			<xsd:enumeration value="document" />
+			<xsd:enumeration value="euphemistic" />
 			<xsd:enumeration value="event" />
 			<xsd:enumeration value="familiar language" />
 			<xsd:enumeration value="female term or language" />
@@ -328,7 +329,6 @@
 			<xsd:enumeration value="Internet slang" />
 			<xsd:enumeration value="object" />
 			<xsd:enumeration value="obsolete term" />
-			<xsd:enumeration value="obscure term" />
 			<xsd:enumeration value="onomatopoeic or mimetic word" />
 			<xsd:enumeration value="organization name" />
 			<xsd:enumeration value="other" />
@@ -339,7 +339,7 @@
 			<xsd:enumeration value="product name" />
 			<xsd:enumeration value="proverb" />
 			<xsd:enumeration value="quotation" />
-			<xsd:enumeration value="rare" />
+			<xsd:enumeration value="rare term" />
 			<xsd:enumeration value="religion" />
 			<xsd:enumeration value="sensitive" />
 			<xsd:enumeration value="service" />

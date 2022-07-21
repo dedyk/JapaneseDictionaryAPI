@@ -19,7 +19,7 @@ public enum AttributeType {
 	KANJI_ALONE("Zwykle pisany przy użyciu kanji", true),
 	KANA_ALONE("zwykle pisany przy użyciu kana", true),
 	
-	ARCHAISM("archaizm", true),
+	ARCHAIC("archaizm", true),
 	
 	OBSCURE("słowo mało znane, zapomniane", true),
 	

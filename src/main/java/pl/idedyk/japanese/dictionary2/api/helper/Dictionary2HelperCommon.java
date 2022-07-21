@@ -435,18 +435,15 @@ public class Dictionary2HelperCommon {
 			
 			case WORD_USUALLY_WRITTEN_USING_KANA_ALONE:
 				result.add("pisanie zwykle z użyciem kana"); break;			
-			
-			case OBSCURE_TERM:
-				result.add("mało znane słowo"); break;
-				
+							
 			case YOJIJUKUGO:
 				result.add("słowo składające się z czterech znaków"); break;
 				
 			case ABBREVIATION:
 				result.add("skrót"); break;
 				
-			case COLLOQUIALISM:
-				result.add("kolokwializm"); break;
+			case COLLOQUIAL:
+				result.add("kolokwialny"); break;
 				
 			case DEROGATORY:
 				result.add("poniżająco"); break;
@@ -460,8 +457,8 @@ public class Dictionary2HelperCommon {
 			case IDIOMATIC_EXPRESSION:
 				result.add("wyrażenie idiomatyczne"); break;
 				
-			case ARCHAISM:
-				result.add("archaizm"); break;
+			case ARCHAIC:
+				result.add("archaiczny"); break;
 				
 			case HONORIFIC_OR_RESPECTFUL_SONKEIGO_LANGUAGE:
 				result.add("honoryfikatywnie"); break;
