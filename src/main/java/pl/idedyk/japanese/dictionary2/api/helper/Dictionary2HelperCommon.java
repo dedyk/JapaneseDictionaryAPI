@@ -526,6 +526,9 @@ public class Dictionary2HelperCommon {
 			case WORK_OF_ART_LITERATURE_MUSIC_ETC_NAME:
 				result.add("dzieło artystyczne, np. literatura, muzyka i etc"); break;
 				
+			case RARE_TERM:
+				result.add("rzadko używane określenie"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
