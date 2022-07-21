@@ -443,7 +443,7 @@ public class Dictionary2HelperCommon {
 				result.add("skrót"); break;
 				
 			case COLLOQUIAL:
-				result.add("kolokwialny"); break;
+				result.add("potocznie"); break;
 				
 			case DEROGATORY:
 				result.add("poniżająco"); break;
@@ -458,7 +458,7 @@ public class Dictionary2HelperCommon {
 				result.add("wyrażenie idiomatyczne"); break;
 				
 			case ARCHAIC:
-				result.add("archaiczny"); break;
+				result.add("archaizm"); break;
 				
 			case HONORIFIC_OR_RESPECTFUL_SONKEIGO_LANGUAGE:
 				result.add("honoryfikatywnie"); break;
