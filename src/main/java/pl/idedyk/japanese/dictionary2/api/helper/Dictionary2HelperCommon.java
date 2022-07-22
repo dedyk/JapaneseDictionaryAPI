@@ -282,8 +282,8 @@ public class Dictionary2HelperCommon {
 			case SHOGI:
 				result.add("shogi"); break;
 				
-			case PHARMACY:
-				result.add("farmacja"); break;
+			case PHARMACOLOGY:
+				result.add("farmakologia"); break;
 				
 			case STATISTICS:
 				result.add("statystyka"); break;
