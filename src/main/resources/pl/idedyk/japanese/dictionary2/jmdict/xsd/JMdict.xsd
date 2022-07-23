@@ -397,7 +397,7 @@
 			<xsd:enumeration value="botany" />
 			<xsd:enumeration value="Buddhism" />
 			<xsd:enumeration value="business" />
-			<xsd:enumeration value="cards" />
+			<xsd:enumeration value="card games" />
 			<xsd:enumeration value="chemistry" />
 			<xsd:enumeration value="Christianity" />
 			<xsd:enumeration value="clothing" />
