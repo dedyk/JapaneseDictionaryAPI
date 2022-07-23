@@ -532,6 +532,9 @@ public class Dictionary2HelperCommon {
 			case RARE_TERM:
 				result.add("rzadko używane określenie"); break;
 				
+			case EUPHEMISTIC:
+				result.add("wyrażenie eufemistyczne"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
