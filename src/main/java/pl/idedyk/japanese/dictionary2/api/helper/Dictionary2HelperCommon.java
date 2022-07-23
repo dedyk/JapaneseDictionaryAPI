@@ -416,6 +416,9 @@ public class Dictionary2HelperCommon {
 				
 			case PSYCHIATRY:
 				result.add("psychiatry"); break;
+				
+			case CARD_GAMES:
+				result.add("gra w karty"); break;
 							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
