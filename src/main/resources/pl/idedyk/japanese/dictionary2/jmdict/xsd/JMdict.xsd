@@ -343,6 +343,7 @@
 			<xsd:enumeration value="religion" />
 			<xsd:enumeration value="sensitive" />
 			<xsd:enumeration value="service" />
+			<xsd:enumeration value="ship name" />
 			<xsd:enumeration value="slang" />
 			<xsd:enumeration value="railway station" />
 			<xsd:enumeration value="family or surname" />

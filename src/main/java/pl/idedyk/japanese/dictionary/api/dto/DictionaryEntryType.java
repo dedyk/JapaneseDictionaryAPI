@@ -129,6 +129,8 @@ public enum DictionaryEntryType {
 	
 	WORD_SERVICE("usługa"),
 	
+	WORD_SHIP_NAME("nazwa statku"),
+	
 	WORD_GROUP("grupa"),
 	
 	WORD_DOCUMENT("dokument"),
