@@ -745,6 +745,9 @@ public class Dictionary2HelperCommon {
 		case "cze":
 			return "cze";
 			
+		case "urd":
+			return "urd";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -873,6 +876,9 @@ public class Dictionary2HelperCommon {
 			
 		case "cze":
 			return "słowo pochodzenia czeskiego";
+			
+		case "urd":
+			return "słowo pochodzenia z języka urdu";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
