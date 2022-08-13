@@ -1121,6 +1121,9 @@ public class Dictionary2HelperCommon {
 				
 			case RARELY_USED_KANJI_FORM:
 				result.add("rzadko używana forma kanji"); break;
+				
+			case SEARCH_ONLY_KANJI_FORM:
+				result.add("forma kanji tylko do wyszukiwania"); break;
 			
 			default:				
 				throw new RuntimeException("Unknown kanji additional info enum: " + kanjiAdditionalInfoEnum);				
