@@ -134,6 +134,7 @@
 			<xsd:enumeration value="irregular okurigana usage" />
 			<xsd:enumeration value="word containing out-dated kanji or kanji usage" />
 			<xsd:enumeration value="rarely-used kanji form" />
+			<xsd:enumeration value="search-only kanji form" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
@@ -378,7 +379,7 @@
 			<xsd:enumeration value="gikun (meaning as reading) or jukujikun (special kanji reading)" />
 			<xsd:enumeration value="word containing irregular kana usage" />
 			<xsd:enumeration value="out-dated or obsolete kana usage" />
-			<xsd:enumeration value="word usually written using kanji alone" />
+			<xsd:enumeration value="search-only kana form" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

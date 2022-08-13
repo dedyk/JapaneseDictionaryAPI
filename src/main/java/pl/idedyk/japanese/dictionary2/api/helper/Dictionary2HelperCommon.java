@@ -1147,9 +1147,9 @@ public class Dictionary2HelperCommon {
 			case GIKUN_MEANING_AS_READING_OR_JUKUJIKUN_SPECIAL_KANJI_READING:
 				result.add("gikun (znaczenie jako czytanie) lub jukujikun (specjalne czytanie kanji)"); break;
 				
-			case WORD_USUALLY_WRITTEN_USING_KANJI_ALONE:
-				result.add("słowo zazwyczaj zapisywane wyłącznie z użyciem kanji"); break;
-			
+			// case WORD_USUALLY_WRITTEN_USING_KANJI_ALONE:
+			//	result.add("słowo zazwyczaj zapisywane wyłącznie z użyciem kanji"); break;
+							
 			default:				
 				throw new RuntimeException("Unknown reading additional info enum: " + readingAdditionalInfoEnum);				
 			}
