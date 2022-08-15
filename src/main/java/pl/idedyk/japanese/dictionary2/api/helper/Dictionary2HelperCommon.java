@@ -1152,7 +1152,10 @@ public class Dictionary2HelperCommon {
 				
 			// case WORD_USUALLY_WRITTEN_USING_KANJI_ALONE:
 			//	result.add("słowo zazwyczaj zapisywane wyłącznie z użyciem kanji"); break;
-							
+				
+			case SEARCH_ONLY_KANA_FORM:
+				result.add("forma kana tylko do wyszukiwania"); break;
+				
 			default:				
 				throw new RuntimeException("Unknown reading additional info enum: " + readingAdditionalInfoEnum);				
 			}
