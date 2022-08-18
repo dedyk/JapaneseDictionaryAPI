@@ -419,6 +419,9 @@ public class Dictionary2HelperCommon {
 				
 			case CARD_GAMES:
 				result.add("gra w karty"); break;
+				
+			case ROMAN_MYTHOLOGY:
+				result.add("mitologia rzymska"); break;
 							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
