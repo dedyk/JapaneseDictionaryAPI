@@ -422,6 +422,15 @@ public class Dictionary2HelperCommon {
 				
 			case ROMAN_MYTHOLOGY:
 				result.add("mitologia rzymska"); break;
+				
+			case KABUKI:
+				result.add("kabuki"); break;
+				
+			case FILM:
+				result.add("film"); break;
+				
+			case TELEVISION:
+				result.add("telewizja"); break;
 							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
