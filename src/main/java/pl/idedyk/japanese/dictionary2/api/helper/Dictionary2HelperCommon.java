@@ -763,6 +763,9 @@ public class Dictionary2HelperCommon {
 		case "mon":
 			return "mon";
 			
+		case "est":
+			return "est";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -897,6 +900,9 @@ public class Dictionary2HelperCommon {
 			
 		case "mon":
 			return "słowo pochodzenia mongolskiego";
+			
+		case "est":
+			return "słowo pochodzenia estońskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
