@@ -70,10 +70,12 @@
 			<xsd:enumeration value="company name" />
 			<xsd:enumeration value="creature" />
 			<xsd:enumeration value="deity" />
+			<xsd:enumeration value="document" />
 			<xsd:enumeration value="event" />
 			<xsd:enumeration value="female given name or forename" />
 			<xsd:enumeration value="fiction" />
 			<xsd:enumeration value="given name or forename, gender not specified" />
+			<xsd:enumeration value="group" />
 			<xsd:enumeration value="legend" />
 			<xsd:enumeration value="male given name or forename" />
 			<xsd:enumeration value="mythology" />
@@ -85,6 +87,7 @@
 			<xsd:enumeration value="product name" />
 			<xsd:enumeration value="religion" />
 			<xsd:enumeration value="service" />
+			<xsd:enumeration value="ship name" />
 			<xsd:enumeration value="railway station" />
 			<xsd:enumeration value="family or surname" />
 			<xsd:enumeration value="unclassified name" />
