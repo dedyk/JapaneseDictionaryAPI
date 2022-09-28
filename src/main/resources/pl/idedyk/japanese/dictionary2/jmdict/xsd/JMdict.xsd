@@ -442,6 +442,7 @@
 			<xsd:enumeration value="military" />
 			<xsd:enumeration value="mining" />
 			<xsd:enumeration value="music" />
+			<xsd:enumeration value="noh" />
 			<xsd:enumeration value="ornithology" />
 			<xsd:enumeration value="paleontology" />
 			<xsd:enumeration value="pathology" />

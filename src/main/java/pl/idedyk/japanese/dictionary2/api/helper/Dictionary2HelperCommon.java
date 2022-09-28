@@ -225,6 +225,9 @@ public class Dictionary2HelperCommon {
 			case MUSIC:
 				result.add("muzyka"); break;
 				
+			case NOH:
+				result.add("teatr no"); break;
+				
 			case MARTIAL_ARTS:
 				result.add("sztuki walki"); break;
 				
