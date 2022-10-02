@@ -434,7 +434,10 @@ public class Dictionary2HelperCommon {
 				
 			case TELEVISION:
 				result.add("telewizja"); break;
-							
+				
+			case POLITICS:
+				result.add("polityka"); break;
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
@@ -781,6 +784,9 @@ public class Dictionary2HelperCommon {
 		case "swa":
 			return "swa";
 			
+		case "amh":
+			return "amh";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -930,6 +936,9 @@ public class Dictionary2HelperCommon {
 			
 		case "swa":
 			return "słowo pochodzenia z języka suahili (swahili)";
+			
+		case "amh":
+			return "słowo pochodzenia z języka amharskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
