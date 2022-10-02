@@ -222,6 +222,38 @@ public class DictionaryEntry implements Serializable {
 	public void setName(boolean name) {
 		this.name = name;
 	}
+	
+	public Integer getJmdictEntryId() {
+		
+		if (attributeList == null) {
+			return null;
+		}
+		
+		List<Attribute> jmdictEntryIdAttributeList = attributeList.getAttributeList(AttributeType.JMDICT_ENTRY_ID);
+
+		if (jmdictEntryIdAttributeList != null && jmdictEntryIdAttributeList.size() > 0) {
+			return Integer.parseInt(jmdictEntryIdAttributeList.get(0).getAttributeValue().get(0));
+			
+		} else {
+			return null;
+		}
+	}
+	
+	public String getUniqueKey() {
+		
+		if (attributeList == null) {
+			return null;
+		}
+		
+		List<Attribute> uniqueKeyAttributeList = attributeList.getAttributeList(AttributeType.UNIQUE_KEY);
+
+		if (uniqueKeyAttributeList != null && uniqueKeyAttributeList.size() > 0) {
+			return uniqueKeyAttributeList.get(0).getAttributeValue().get(0);
+			
+		} else {
+			return null;
+		}		
+	}
 
 	@Override
 	public String toString() {

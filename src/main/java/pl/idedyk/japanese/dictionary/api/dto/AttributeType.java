@@ -45,7 +45,9 @@ public enum AttributeType {
 	
 	PRIORITY("priorytet słowa", false),
 	
-	JMDICT_ENTRY_ID("identyfikator słowa w słowniku jmdict", false);
+	JMDICT_ENTRY_ID("identyfikator słowa w słowniku jmdict", false),
+	
+	UNIQUE_KEY("unikalny identyfikator słowa", false);
 	
 	private String name;
 	
