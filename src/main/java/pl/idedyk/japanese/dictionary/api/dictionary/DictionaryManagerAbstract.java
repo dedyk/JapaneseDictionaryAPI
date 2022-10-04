@@ -373,6 +373,13 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
 	}
 
+	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntryByUniqueKey(uniqueKey);
+	}
+
 	public JMdict.Entry getDictionaryEntry2ById(int id) throws DictionaryException {
 		
 		waitForDatabaseReady();
@@ -386,7 +393,14 @@ public abstract class DictionaryManagerAbstract {
 		
 		return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
 	}
-	
+
+	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntryNameByUniqueKey(uniqueKey);
+	}
+
 	public List<KanjiEntry> findKnownKanji(String text) throws DictionaryException {
 		
 		waitForDatabaseReady();

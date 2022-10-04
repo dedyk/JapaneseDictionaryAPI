@@ -28,9 +28,12 @@ public interface IDatabaseConnector {
 			FindWordResult findWordResult) throws DictionaryException;
 	
 	public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
+	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException;
+	
 	public JMdict.Entry getDictionaryEntry2ById(Integer entryId) throws DictionaryException;	
 	
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
+	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
 	
 	public KanjiEntry getKanjiEntryById(String id) throws DictionaryException;
 	
