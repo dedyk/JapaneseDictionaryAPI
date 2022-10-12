@@ -615,6 +615,15 @@ public class Dictionary2HelperCommon {
 			case KYOTO_BEN:
 				result.add("dialekt Kyoto"); break;
 				
+			case TSUGARU_BEN:
+				result.add("dialekt Tsugaru"); break;
+				
+			case NAGANO_BEN:
+				result.add("dialekt Nagano"); break;
+				
+			case TOSA_BEN:
+				result.add("dialekt Tosa"); break;
+				
 			default:
 				throw new RuntimeException("Unknown dialect enum: " + dialectEnum);
 				
