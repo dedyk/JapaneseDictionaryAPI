@@ -796,6 +796,9 @@ public class Dictionary2HelperCommon {
 		case "amh":
 			return "amh";
 			
+		case "mao":
+			return "mao";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -948,6 +951,9 @@ public class Dictionary2HelperCommon {
 			
 		case "amh":
 			return "słowo pochodzenia z języka amharskiego";
+			
+		case "mao":
+			return "słowo pochodzenia maoryskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
