@@ -799,6 +799,9 @@ public class Dictionary2HelperCommon {
 		case "mao":
 			return "mao";
 			
+		case "mal":
+			return "mal";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -929,7 +932,7 @@ public class Dictionary2HelperCommon {
 			return "słowo pochodzenia czeskiego";
 			
 		case "urd":
-			return "słowo pochodzenia z języka urdu";
+			return "słowo pochodzi z języka urdu";
 			
 		case "mon":
 			return "słowo pochodzenia mongolskiego";
@@ -941,19 +944,22 @@ public class Dictionary2HelperCommon {
 			return "słowo pochodzenia słoweńskiego";
 			
 		case "tam":
-			return "słowo pochodzenia z języka tamilskiego";
+			return "słowo pochodzi z języka tamilskiego";
 			
 		case "nor":
 			return "słowo pochodzenia norweskiego";
 			
 		case "swa":
-			return "słowo pochodzenia z języka suahili (swahili)";
+			return "słowo pochodzi z języka suahili (swahili)";
 			
 		case "amh":
-			return "słowo pochodzenia z języka amharskiego";
+			return "słowo pochodzi z języka amharskiego";
 			
 		case "mao":
 			return "słowo pochodzenia maoryskiego";
+			
+		case "mal":
+			return "słowo pochodzi z języka malajalam";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
