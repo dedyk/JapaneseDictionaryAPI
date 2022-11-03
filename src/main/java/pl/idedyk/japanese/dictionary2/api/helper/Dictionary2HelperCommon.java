@@ -437,7 +437,25 @@ public class Dictionary2HelperCommon {
 				
 			case POLITICS:
 				result.add("polityka"); break;
+			
+			case DENTISTRY:
+				result.add("dentystyka"); break;
 				
+			case MANGA:
+				result.add("manga"); break;
+				
+			case MINING:
+				result.add("górnictwo"); break;
+			
+			case PSYCHOANALYSIS:
+				result.add("psychoanaliza"); break;
+				
+			case SKIING:
+				result.add("narciarstwo"); break;
+				
+			case STOCK_MARKET:
+				result.add("giełda papierów wartościowych"); break;
+							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
