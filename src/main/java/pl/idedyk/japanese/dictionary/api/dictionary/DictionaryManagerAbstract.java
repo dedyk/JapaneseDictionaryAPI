@@ -142,7 +142,7 @@ public abstract class DictionaryManagerAbstract {
 		
 		//
 		
-		String findWord = findWordRequest.word;
+		String findWord = findWordRequest.word.replace("\\", "\\\\");
 		 
 		Pattern beginWordPattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa
 		Pattern beginInAllWordPattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies znajduje sie slowo
