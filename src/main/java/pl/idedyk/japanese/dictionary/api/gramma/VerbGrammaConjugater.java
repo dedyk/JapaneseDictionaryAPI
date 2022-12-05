@@ -298,6 +298,7 @@ public class VerbGrammaConjugater {
 			potentialTeForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_POTENTIAL_TE);
 			
 			potentialTeForm.getGrammaFormConjugateResults().add(makePotentialTeForm(potentialFormInformalPresentForm));
+			potentialTeForm.getGrammaFormConjugateResults().add(makeNegativePotentialTeForm(potentialFormInformalPresentForm));
 			
 			result.add(potentialTeForm);
 			
@@ -343,6 +344,7 @@ public class VerbGrammaConjugater {
 			passiveTeForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_PASSIVE_TE);
 			
 			passiveTeForm.getGrammaFormConjugateResults().add(makePassiveTeForm(passiveFormInformalPresentForm));
+			passiveTeForm.getGrammaFormConjugateResults().add(makeNegativePassiveTeForm(passiveFormInformalPresentForm));
 			
 			result.add(passiveTeForm);	
 		}
@@ -379,6 +381,7 @@ public class VerbGrammaConjugater {
 			causativeTeForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_CAUSATIVE_TE);
 			
 			causativeTeForm.getGrammaFormConjugateResults().add(makeCausativeTeForm(causativeFormInformalPresentForm));
+			causativeTeForm.getGrammaFormConjugateResults().add(makeNegativeCausativeTeForm(causativeFormInformalPresentForm));
 			
 			result.add(causativeTeForm);	
 		}
@@ -415,6 +418,7 @@ public class VerbGrammaConjugater {
 			causativePassiveTeForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_CAUSATIVE_PASSIVE_TE);
 			
 			causativePassiveTeForm.getGrammaFormConjugateResults().add(makeCausativePassiveTeForm(causativePassiveFormInformalPresentForm));
+			causativePassiveTeForm.getGrammaFormConjugateResults().add(makeNegativeCausativePassiveTeForm(causativePassiveFormInformalPresentForm));
 			
 			result.add(causativePassiveTeForm);
 		}		
@@ -1822,7 +1826,34 @@ public class VerbGrammaConjugater {
 		
 		return potentialTeForm;
 	}
-
+	
+	private static GrammaFormConjugateResult makeNegativePotentialTeForm(GrammaFormConjugateResult potentialFormInformalPresentForm) {
+		
+		// convert to dictionary entry
+		DictionaryEntry potentialFormInformalPresentFormAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(potentialFormInformalPresentForm, DictionaryEntryType.WORD_VERB_RU);
+		
+		// make form
+		GrammaFormConjugateResult potentialTeForm = makeNegativeTeForm(potentialFormInformalPresentFormAsDictionaryEntry);
+		
+		// replace result type
+		potentialTeForm.setResultType(GrammaFormConjugateResultType.VERB_POTENTIAL_TE_NEGATIVE);
+		
+		GrammaFormConjugateResult alternative = potentialFormInformalPresentForm.getAlternative();
+		
+		if (alternative != null) {
+			
+			DictionaryEntry alternativeAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(alternative, DictionaryEntryType.WORD_VERB_RU);
+			
+			GrammaFormConjugateResult alternativeTeForm = makeNegativeTeForm(alternativeAsDictionaryEntry);
+			
+			alternativeTeForm.setResultType(GrammaFormConjugateResultType.VERB_POTENTIAL_TE_NEGATIVE);
+			
+			potentialTeForm.setAlternative(alternativeTeForm);
+		}
+		
+		return potentialTeForm;
+	}
+	
 	private static String makePotentialFormForKanjiOrKana(String kana, DictionaryEntryType dictionaryEntryType, String ruPostfixKana) {
 		
 		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
@@ -2645,7 +2676,21 @@ public class VerbGrammaConjugater {
 		
 		return passiveTeForm;
 	}
-	
+
+	private static GrammaFormConjugateResult makeNegativePassiveTeForm(GrammaFormConjugateResult passiveFormInformalPresentForm) {
+		
+		// convert to dictionary entry
+		DictionaryEntry passiveFormInformalPresentFormAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(passiveFormInformalPresentForm, DictionaryEntryType.WORD_VERB_RU);
+		
+		// make form
+		GrammaFormConjugateResult passiveTeForm = makeNegativeTeForm(passiveFormInformalPresentFormAsDictionaryEntry);
+		
+		// replace result type
+		passiveTeForm.setResultType(GrammaFormConjugateResultType.VERB_PASSIVE_TE_NEGATIVE);
+		
+		return passiveTeForm;
+	}
+
 	private static GrammaFormConjugateResult makeCausativeFormInformalPresentForm(DictionaryEntry dictionaryEntry) {
 		
 		final String postfixKana = "せる";
@@ -2891,7 +2936,21 @@ public class VerbGrammaConjugater {
 		
 		return causativeTeForm;
 	}
-	
+
+	private static GrammaFormConjugateResult makeNegativeCausativeTeForm(GrammaFormConjugateResult causativeFormInformalPresentForm) {
+		
+		// convert to dictionary entry
+		DictionaryEntry causativeFormInformalPresentFormAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(causativeFormInformalPresentForm, DictionaryEntryType.WORD_VERB_RU);
+		
+		// make form
+		GrammaFormConjugateResult causativeTeForm = makeNegativeTeForm(causativeFormInformalPresentFormAsDictionaryEntry);
+		
+		// replace result type
+		causativeTeForm.setResultType(GrammaFormConjugateResultType.VERB_CAUSATIVE_TE_NEGATIVE);
+		
+		return causativeTeForm;
+	}
+
 	private static GrammaFormConjugateResult makeCausativePassiveFormInformalPresentForm(DictionaryEntry dictionaryEntry) {
 				
 		// make common
@@ -3274,6 +3333,38 @@ public class VerbGrammaConjugater {
 		
 		return causativePassiveTeForm;
 	}
+
+	
+	
+	
+	private static GrammaFormConjugateResult makeNegativeCausativePassiveTeForm(GrammaFormConjugateResult causativePassiveFormInformalPresentForm) {
+		
+		// convert to dictionary entry
+		DictionaryEntry causativePassiveFormInformalPresentFormAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(causativePassiveFormInformalPresentForm, DictionaryEntryType.WORD_VERB_RU);
+		
+		// make form
+		GrammaFormConjugateResult causativePassiveTeForm = makeNegativeTeForm(causativePassiveFormInformalPresentFormAsDictionaryEntry);
+		
+		// replace result type
+		causativePassiveTeForm.setResultType(GrammaFormConjugateResultType.VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE);
+		
+		GrammaFormConjugateResult alternative = causativePassiveFormInformalPresentForm.getAlternative();
+		
+		if (alternative != null) {
+			
+			DictionaryEntry alternativeAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(alternative, DictionaryEntryType.WORD_VERB_RU);
+			
+			GrammaFormConjugateResult causativePassiveAlternativeTeForm = makeTeForm(alternativeAsDictionaryEntry);
+			
+			causativePassiveAlternativeTeForm.setResultType(GrammaFormConjugateResultType.VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE);
+			
+			causativePassiveTeForm.setAlternative(causativePassiveAlternativeTeForm);
+		}
+		
+		return causativePassiveTeForm;
+	}
+
+	
 	
 	private static GrammaFormConjugateResult makeImperativeForm(DictionaryEntry dictionaryEntry) {
 		

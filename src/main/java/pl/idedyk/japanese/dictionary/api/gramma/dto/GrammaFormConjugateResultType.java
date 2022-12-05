@@ -76,7 +76,8 @@ public enum GrammaFormConjugateResultType {
 	VERB_POTENTIAL_FORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_POTENTIAL_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
-	VERB_POTENTIAL_TE("Forma te", false),
+	VERB_POTENTIAL_TE("Twierdzenie", true),
+	VERB_POTENTIAL_TE_NEGATIVE("Przeczenie", true),
 
 	VERB_PASSIVE_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	VERB_PASSIVE_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
@@ -88,7 +89,8 @@ public enum GrammaFormConjugateResultType {
 	VERB_PASSIVE_FORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_PASSIVE_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
-	VERB_PASSIVE_TE("Forma te", false),
+	VERB_PASSIVE_TE("Twierdzenie", true),
+	VERB_PASSIVE_TE_NEGATIVE("Przeczenie", true),
 
 	VERB_CAUSATIVE_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
@@ -100,7 +102,8 @@ public enum GrammaFormConjugateResultType {
 	VERB_CAUSATIVE_FORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_CAUSATIVE_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
-	VERB_CAUSATIVE_TE("Forma te", false),
+	VERB_CAUSATIVE_TE("Twierdzenie", true),
+	VERB_CAUSATIVE_TE_NEGATIVE("Przeczenie", true),
 
 	VERB_CAUSATIVE_PASSIVE_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_PASSIVE_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
@@ -112,7 +115,8 @@ public enum GrammaFormConjugateResultType {
 	VERB_CAUSATIVE_PASSIVE_FORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_CAUSATIVE_PASSIVE_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
-	VERB_CAUSATIVE_PASSIVE_TE("Forma te", false),
+	VERB_CAUSATIVE_PASSIVE_TE("Twierdzenie", true),
+	VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE("Twierdzenie", true),
 	
 	VERB_VOLITIONAL("Forma wolicjonalna", false),
 	
