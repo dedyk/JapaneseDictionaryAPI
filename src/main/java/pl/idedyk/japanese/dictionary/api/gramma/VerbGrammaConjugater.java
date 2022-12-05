@@ -3333,9 +3333,6 @@ public class VerbGrammaConjugater {
 		
 		return causativePassiveTeForm;
 	}
-
-	
-	
 	
 	private static GrammaFormConjugateResult makeNegativeCausativePassiveTeForm(GrammaFormConjugateResult causativePassiveFormInformalPresentForm) {
 		
@@ -3354,7 +3351,7 @@ public class VerbGrammaConjugater {
 			
 			DictionaryEntry alternativeAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(alternative, DictionaryEntryType.WORD_VERB_RU);
 			
-			GrammaFormConjugateResult causativePassiveAlternativeTeForm = makeTeForm(alternativeAsDictionaryEntry);
+			GrammaFormConjugateResult causativePassiveAlternativeTeForm = makeNegativeTeForm(alternativeAsDictionaryEntry);
 			
 			causativePassiveAlternativeTeForm.setResultType(GrammaFormConjugateResultType.VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE);
 			
@@ -3363,8 +3360,6 @@ public class VerbGrammaConjugater {
 		
 		return causativePassiveTeForm;
 	}
-
-	
 	
 	private static GrammaFormConjugateResult makeImperativeForm(DictionaryEntry dictionaryEntry) {
 		
