@@ -50,10 +50,17 @@ public enum GrammaFormConjugateResultType {
 	VERB_INFORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_INFORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
-	VERB_TE("Forma te", false),
-	ADJECTIVE_I_TE("Forma te", false),
-	ADJECTIVE_NA_TE("Forma te", false),
-	NOUN_TE("Forma te", false),
+	VERB_TE("Twierdzenie", true),
+	VERB_TE_NEGATIVE("Przeczenie", true),
+	
+	ADJECTIVE_I_TE("Twierdzenie", true),
+	ADJECTIVE_I_TE_NEGATIVE("Przeczenie", true),
+	
+	ADJECTIVE_NA_TE("Twierdzenie", true),
+	ADJECTIVE_NA_TE_NEGATIVE("Przeczenie", true),
+	
+	NOUN_TE("Twierdzenie", true),
+	NOUN_TE_NEGATIVE("Przeczenie", true),
 	
 	VERB_STEM("Temat czasownika (ang: stem)", false),
 	

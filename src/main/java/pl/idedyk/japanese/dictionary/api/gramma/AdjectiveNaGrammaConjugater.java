@@ -53,6 +53,7 @@ public class AdjectiveNaGrammaConjugater {
 		teForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_NA_TE);
 
 		teForm.getGrammaFormConjugateResults().add(makeTeForm(dictionaryEntry));
+		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(dictionaryEntry));
 
 		result.add(teForm);
 
@@ -295,7 +296,17 @@ public class AdjectiveNaGrammaConjugater {
 		return makeAdjectiveGrammaConjugateForm(dictionaryEntry, GrammaFormConjugateResultType.ADJECTIVE_NA_TE,
 				postfixKana, postfixRomaji);
 	}
+	
+	private static GrammaFormConjugateResult makeNegativeTeForm(DictionaryEntry dictionaryEntry) {
+		// forma te
 
+		final String postfixKana = "じゃなくて";
+		final String postfixRomaji = " ja nakute";
+
+		return makeAdjectiveGrammaConjugateForm(dictionaryEntry, GrammaFormConjugateResultType.ADJECTIVE_NA_TE_NEGATIVE,
+				postfixKana, postfixRomaji);
+	}
+	
 	private static GrammaFormConjugateResult makeKeigoLowForm(DictionaryEntry dictionaryEntry) {
 
 		// keigo low

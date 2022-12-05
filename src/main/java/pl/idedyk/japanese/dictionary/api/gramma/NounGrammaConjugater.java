@@ -52,6 +52,7 @@ public class NounGrammaConjugater {
 		teForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.NOUN_TE);
 
 		teForm.getGrammaFormConjugateResults().add(makeTeForm(dictionaryEntry));
+		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(dictionaryEntry));
 
 		result.add(teForm);
 
@@ -274,6 +275,16 @@ public class NounGrammaConjugater {
 				postfixRomaji);
 	}
 
+	private static GrammaFormConjugateResult makeNegativeTeForm(DictionaryEntry dictionaryEntry) {
+		// forma te
+
+		final String postfixKana = "じゃなくて";
+		final String postfixRomaji = " ja nakute";
+
+		return makeNounGrammaConjugateForm(dictionaryEntry, GrammaFormConjugateResultType.NOUN_TE_NEGATIVE,
+				postfixKana, postfixRomaji);
+	}
+	
 	private static GrammaFormConjugateResult makeKeigoLowForm(DictionaryEntry dictionaryEntry) {
 
 		// keigo low

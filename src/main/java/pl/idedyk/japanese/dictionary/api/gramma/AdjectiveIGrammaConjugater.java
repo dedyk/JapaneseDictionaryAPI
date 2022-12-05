@@ -56,6 +56,7 @@ public class AdjectiveIGrammaConjugater {
 		teForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_TE);
 		
 		teForm.getGrammaFormConjugateResults().add(makeTeForm(dictionaryEntry));
+		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(dictionaryEntry));
 		
 		result.add(teForm);
 		
@@ -223,7 +224,7 @@ public class AdjectiveIGrammaConjugater {
 		String kanji = dictionaryEntry.getKanji();
 
 		if (kanji != null) {
-			kanji = getKanaToConjugate(kanji, grammaFormConjugateResultType);
+			kanji = getKanaToConjugate(kanji, dictionaryEntry.getRomaji(), grammaFormConjugateResultType);
 			
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
@@ -234,7 +235,7 @@ public class AdjectiveIGrammaConjugater {
 		List<String> kanaListResult = new ArrayList<String>();
 
 		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateResultType);
+			currentKana = getKanaToConjugate(currentKana, dictionaryEntry.getRomaji(), grammaFormConjugateResultType);
 
 			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
 		}
@@ -257,13 +258,16 @@ public class AdjectiveIGrammaConjugater {
 		return result; 
 	}
 
-	private static String getKanaToConjugate(String kana, GrammaFormConjugateResultType grammaFormConjugateResultType) {
+	private static String getKanaToConjugate(String kana, String romaji, GrammaFormConjugateResultType grammaFormConjugateResultType) {
 
 		if (grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT && 
 				grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT) {
 
 			if (kana.endsWith("いい") == true) {
-				return kana.substring(0, kana.length() - 2) + "よい";
+				
+				if (romaji.equals("ii") == true || romaji.endsWith(" ii") == true) {
+					return kana.substring(0, kana.length() - 2) + "よい";
+				}
 			}
 		}
 
@@ -365,7 +369,7 @@ public class AdjectiveIGrammaConjugater {
 		String kanji = dictionaryEntry.getKanji();
 
 		if (kanji != null) {
-			kanji = getKanaToConjugate(kanji, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+			kanji = getKanaToConjugate(kanji, dictionaryEntry.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
 			
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
@@ -376,7 +380,7 @@ public class AdjectiveIGrammaConjugater {
 		List<String> kanaListResult = new ArrayList<String>();
 
 		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+			currentKana = getKanaToConjugate(currentKana, dictionaryEntry.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
 
 			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
 		}
@@ -390,6 +394,54 @@ public class AdjectiveIGrammaConjugater {
 
 		for (String currentRomaji : romajiList) {
 			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+
+			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
+		}
+
+		result.setRomajiList(romajiListResult);		
+		
+		return result;
+	}
+	
+	private static GrammaFormConjugateResult makeNegativeTeForm(DictionaryEntry dictionaryEntry) {
+		// forma te
+		
+		String postfixKana = "くなくて";
+		String postfixRomaji = "kunakute";
+		
+		// make common
+		GrammaFormConjugateResult result = makeCommon(dictionaryEntry);
+		
+		result.setResultType(GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+		
+		String kanji = dictionaryEntry.getKanji();
+
+		if (kanji != null) {
+			kanji = getKanaToConjugate(kanji, dictionaryEntry.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+			
+			result.setKanji(removeLastChar(kanji) + postfixKana);
+		}
+
+		@SuppressWarnings("deprecation")
+		List<String> kanaList = dictionaryEntry.getKanaList();
+
+		List<String> kanaListResult = new ArrayList<String>();
+
+		for (String currentKana : kanaList) {			
+			currentKana = getKanaToConjugate(currentKana, dictionaryEntry.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+
+			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
+		}
+
+		result.setKanaList(kanaListResult);		
+
+		@SuppressWarnings("deprecation")
+		List<String> romajiList = dictionaryEntry.getRomajiList();
+
+		List<String> romajiListResult = new ArrayList<String>();
+
+		for (String currentRomaji : romajiList) {
+			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
 
 			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
 		}

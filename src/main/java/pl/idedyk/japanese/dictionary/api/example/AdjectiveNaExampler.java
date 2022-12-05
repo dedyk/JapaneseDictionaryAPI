@@ -87,7 +87,10 @@ public class AdjectiveNaExampler {
 		
 		// te mo
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_TE_MO, makeTeMoExample(dictionaryEntry, grammaFormCache));
-		
+
+		// te mo
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_TE_MO_NEGATIVE, makeNegativeTeMoExample(dictionaryEntry, grammaFormCache));
+
 		// rozkaz
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_IMPERATIVE, makeImperativeExample(dictionaryEntry));
 
@@ -311,13 +314,13 @@ public class AdjectiveNaExampler {
 	private static ExampleResult makeNakuteMoIiDesu(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
-		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_NA_INFORMAL_PRESENT_NEGATIVE);
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_NA_TE_NEGATIVE);
 		
-		final String templateKanji2 = "%sくてもいいです";
-		final String templateKana2 = "%sくてもいいです";
-		final String templateRomaji2 = "%skute mo ii desu";
+		final String templateKanji2 = "%sもいいです";
+		final String templateKana2 = "%sもいいです";
+		final String templateRomaji2 = "%s mo ii desu";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
+		return GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
 	}
 	
 	private static ExampleResult makeMitaiDesuExample(DictionaryEntry dictionaryEntry,
@@ -433,20 +436,23 @@ public class AdjectiveNaExampler {
 		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_NA_TE);
 		
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1, templateKana1, templateRomaji1, true);
-		
-		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_NA_INFORMAL_PRESENT_NEGATIVE);
-		
-		final String templateKanji2 = "%sくても";
-		final String templateKana2 = "%sくても";
-		final String templateRomaji2 = "%skute mo";
-		
-		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
-
-		exampleResult1.setAlternative(exampleResult2);
-		
+				
 		return exampleResult1;
 	}
-	
+
+	private static ExampleResult makeNegativeTeMoExample(DictionaryEntry dictionaryEntry, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		final String templateKanji1 = "%sも";
+		final String templateKana1 = "%sも";
+		final String templateRomaji1 = "%s mo";
+		
+		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_NA_TE_NEGATIVE);
+		
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1, templateKana1, templateRomaji1, true);
+				
+		return exampleResult1;
+	}
+
 	private static ExampleResult makeImperativeExample(DictionaryEntry dictionaryEntry) {
 		
 		final String templateKanji = "%sであれ";

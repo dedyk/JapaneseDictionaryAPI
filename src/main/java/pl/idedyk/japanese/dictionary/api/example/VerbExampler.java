@@ -284,9 +284,13 @@ public class VerbExampler {
 		// noni
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NONI, makeNoni(dictionaryEntry, grammaFormCache));
 
-		// te mo
+		// te mo, pozytywny
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_MO,
-				makeTeMoExample(dictionaryEntry, grammaFormCache));
+				makePositiveTeMoExample(dictionaryEntry, grammaFormCache));
+
+		// te mo, negatywny
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_MO_NEGATIVE,
+				makeNegativeTeMoExample(dictionaryEntry, grammaFormCache));
 
 		// koto ni suru
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_KOTO_NI_SURU,
@@ -972,8 +976,8 @@ public class VerbExampler {
 
 		String[][] templates = new String[][] {
 				{ "%sくださって、ありがとうございました", "%sくださって、ありがとうございました", "%s kudasatte, arigatou gozaimashita" },
-				{ "%sくてくれて、ありがとう", "%sくてくれて、ありがとう", "%skute kurete, arigatou" },
-				{ "%sくて、ありがとう", "%sくて、ありがとう", "%skute, arigatou" } };
+				{ "%sくてくれて、ありがとう", "%sくてくれて、ありがとう", "%skute kurete, arigatou" }, // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
+				{ "%sくて、ありがとう", "%sくて、ありがとう", "%skute, arigatou" } }; // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
 				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
@@ -1033,11 +1037,11 @@ public class VerbExampler {
 	private static ExampleResult makeKuteSumimasen(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
-		String[][] templates = new String[][] { { "%sくて、すみませんでした", "%sくて、すみませんでした", "%skute, sumimasen deshita" },
-				{ "%sくて、すみません", "%sくて、すみません", "%skute, sumimasen" }, { "%sくて、ごめん", "%sくて、ごめん", "%skute, gomen" } };
+		String[][] templates = new String[][] { { "%s、すみませんでした", "%s、すみませんでした", "%s, sumimasen deshita" },
+				{ "%s、すみません", "%s、すみません", "%s, sumimasen" }, { "%s、ごめん", "%s、ごめん", "%s, gomen" } };
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				.get(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
 
 		ExampleResult currentExampleResult = null;
 		ExampleResult startExampleResult = null;
@@ -1046,11 +1050,11 @@ public class VerbExampler {
 
 			if (idx == 0) {
 				startExampleResult = currentExampleResult = GrammaExampleHelper
-						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+						.makeSimpleTemplateExample(informalPresentNegativeForm, templates[idx][0],
 								templates[idx][1], templates[idx][2], true);
 			} else {
 				ExampleResult alternativeExampleResult = GrammaExampleHelper
-						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+						.makeSimpleTemplateExample(informalPresentNegativeForm, templates[idx][0],
 								templates[idx][1], templates[idx][2], true);
 
 				currentExampleResult.setAlternative(alternativeExampleResult);
@@ -1104,13 +1108,13 @@ public class VerbExampler {
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				.get(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
 
-		final String templateKanji2 = "%sくてもいいです";
-		final String templateKana2 = "%sくてもいいです";
-		final String templateRomaji2 = "%skute mo ii desu";
+		final String templateKanji2 = "%sもいいです";
+		final String templateKana2 = "%sもいいです";
+		final String templateRomaji2 = "%s mo ii desu";
 
-		return GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm,
+		return GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm,
 				templateKanji2, templateKana2, templateRomaji2, true);
 	}
 
@@ -1352,13 +1356,13 @@ public class VerbExampler {
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				.get(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
 
-		final String templateKanji2 = "%sくてよかった";
-		final String templateKana2 = "%sくてよかった";
-		final String templateRomaji2 = "%skute yokatta";
+		final String templateKanji2 = "%sよかった";
+		final String templateKana2 = "%sよかった";
+		final String templateRomaji2 = "%s yokatta";
 
-		return GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm,
+		return GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm,
 				templateKanji2, templateKana2, templateRomaji2, true);
 	}
 
@@ -2016,7 +2020,7 @@ public class VerbExampler {
 		return exampleResult1;
 	}
 
-	private static ExampleResult makeTeMoExample(DictionaryEntry dictionaryEntry,
+	private static ExampleResult makePositiveTeMoExample(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		final String templateKanji1 = "%sも";
@@ -2028,17 +2032,20 @@ public class VerbExampler {
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1,
 				templateKana1, templateRomaji1, true);
 
-		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+		return exampleResult1;
+	}
 
-		final String templateKanji2 = "%sくても";
-		final String templateKana2 = "%sくても";
-		final String templateRomaji2 = "%skute mo";
+	private static ExampleResult makeNegativeTeMoExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
-		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
+		final String templateKanji1 = "%sも";
+		final String templateKana1 = "%sも";
+		final String templateRomaji1 = "%s mo";
 
-		exampleResult1.setAlternative(exampleResult2);
+		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
+
+		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1,
+				templateKana1, templateRomaji1, true);
 
 		return exampleResult1;
 	}
@@ -2208,11 +2215,11 @@ public class VerbExampler {
 	private static ExampleResult makeNakuteMoKamawanai(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
-		String[][] templates = new String[][] { { "%sくてもかまわない", "%sくてもかまわない", "%skute mo kamawanai" },
-				{ "%sくてもかまいません", "%sくてもかまいません", "%skute mo kamaimasen" } };
+		String[][] templates = new String[][] { { "%sもかまわない", "%sもかまわない", "%s mo kamawanai" },
+				{ "%sもかまいません", "%sもかまいません", "%s mo kamaimasen" } };
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				.get(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
 
 		ExampleResult currentExampleResult = null;
 		ExampleResult startExampleResult = null;
@@ -2221,11 +2228,11 @@ public class VerbExampler {
 
 			if (idx == 0) {
 				startExampleResult = currentExampleResult = GrammaExampleHelper
-						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+						.makeSimpleTemplateExample(informalPresentNegativeForm, templates[idx][0],
 								templates[idx][1], templates[idx][2], true);
 			} else {
 				ExampleResult alternativeExampleResult = GrammaExampleHelper
-						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+						.makeSimpleTemplateExample(informalPresentNegativeForm, templates[idx][0],
 								templates[idx][1], templates[idx][2], true);
 
 				currentExampleResult.setAlternative(alternativeExampleResult);
@@ -2241,8 +2248,9 @@ public class VerbExampler {
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		String[][] templates = new String[][] { { "%sければならない", "%sければならない", "%skereba naranai" },
-				{ "%sければなりません", "sければなりません", "%skereba narimasen" }, { "%sくてはならない", "%sくてはならない", "%skute wa naranai" },
-				{ "%sくてはなりません", "%sくてはなりません", "%skute wa narimasen" }
+				{ "%sければなりません", "sければなりません", "%skereba narimasen" }, 
+				{ "%sくてはならない", "%sくてはならない", "%skute wa naranai" }, // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
+				{ "%sくてはなりません", "%sくてはなりません", "%skute wa narimasen" } // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
 
 		};
 

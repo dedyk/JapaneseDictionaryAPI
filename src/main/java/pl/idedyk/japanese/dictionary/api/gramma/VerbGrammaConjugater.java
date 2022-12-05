@@ -261,6 +261,7 @@ public class VerbGrammaConjugater {
 		teForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_TE);
 		
 		teForm.getGrammaFormConjugateResults().add(makeTeForm(dictionaryEntry));
+		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(dictionaryEntry));
 		
 		result.add(teForm);
 		
@@ -887,7 +888,7 @@ public class VerbGrammaConjugater {
 	
 	private static GrammaFormConjugateResult makeTeForm(DictionaryEntry dictionaryEntry) {
 		
-		// forma te
+		// forma te - twierdzenie
 		
 		// make common
 		GrammaFormConjugateResult result = makeCommon(dictionaryEntry);
@@ -932,7 +933,55 @@ public class VerbGrammaConjugater {
 
 		return result;
 	}
+	
+	private static GrammaFormConjugateResult makeNegativeTeForm(DictionaryEntry dictionaryEntry) {
+		
+		// forma te - przeczenie
+		
+		// make common
+		GrammaFormConjugateResult result = makeCommon(dictionaryEntry);
+		
+		DictionaryEntryType dictionaryEntryType = dictionaryEntry.getDictionaryEntryType();
 
+		result.setResultType(GrammaFormConjugateResultType.VERB_TE_NEGATIVE);
+
+		String kanji = dictionaryEntry.getKanji();
+		
+		if (kanji != null) {
+			String teFormKanji = makeNegativeTeFormForKanjiOrKana(kanji, dictionaryEntryType);
+
+			result.setKanji(teFormKanji);
+		}
+		
+		@SuppressWarnings("deprecation")
+		List<String> kanaList = dictionaryEntry.getKanaList();
+
+		List<String> kanaListResult = new ArrayList<String>();
+
+		for (String currentKana : kanaList) {			
+			String teFormKana = makeNegativeTeFormForKanjiOrKana(currentKana, dictionaryEntryType);
+			
+			kanaListResult.add(teFormKana);
+		}
+
+		result.setKanaList(kanaListResult);
+		
+		@SuppressWarnings("deprecation")
+		List<String> romajiList = dictionaryEntry.getRomajiList();
+
+		List<String> romajiListResult = new ArrayList<String>();
+
+		for (String currentRomaji : romajiList) {
+			String teFormRomaji = makeNegativeTeFormForRomaji(currentRomaji, dictionaryEntryType);
+			
+			romajiListResult.add(teFormRomaji);
+		}
+
+		result.setRomajiList(romajiListResult);
+
+		return result;
+	}
+	
 	private static String makeTeFormForKanjiOrKana(String text, DictionaryEntryType dictionaryEntryType) {
 		
 		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
@@ -1033,6 +1082,113 @@ public class VerbGrammaConjugater {
 			}
 		} else {
 			throw new RuntimeException("makeTeFormForRomaji 3: " + dictionaryEntryType);
+		}
+	}
+	
+	private static String makeNegativeTeFormForKanjiOrKana(String text, DictionaryEntryType dictionaryEntryType) {
+		
+		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
+			return removeLastChar(text) + "なくて";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {
+			
+			boolean aruException = false;
+			
+			if (text.equals("有る") == true || text.endsWith("有る") == true ||
+					text.equals("ある") == true || text.endsWith("ある") == true) {
+
+				aruException = true;
+			}
+			
+			if (aruException == false) {
+				
+				String lastChar = getLastChars(text, 1);
+				
+				String postfix = lastKanaCharsMapperToAChar.get(lastChar);
+				
+				if (postfix == null) {
+					throw new RuntimeException("postfix == null: " + text);
+				}
+				
+				return removeLastChar(text) + postfix + "なくて";
+				
+			} else {
+				return removeChars(text, 2) + "なくて";
+			}
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			
+			if (text.endsWith("来る") == true) {
+				return removeChars(text, 2) + "来なくて";
+				
+			} else if (text.endsWith("來る") == true) {
+				return removeChars(text, 2) + "來なくて";
+				
+			} else if (text.endsWith("くる") == true) {
+				return removeChars(text, 2) + "こなくて";
+				
+			} else if (text.endsWith("為る") == true) {
+				return removeChars(text, 1) + "なくて";
+				
+			} else if (text.endsWith("する") == true) {
+				return removeChars(text, 2) + "しなくて";
+				
+			} else {
+				throw new RuntimeException("makeNegativeTeFormForKanjiOrKana 1: " + text);	
+			}
+		}
+		
+		throw new RuntimeException("makeNegativeTeFormForKanjiOrKana 2: " + dictionaryEntryType);
+	}	
+	
+	private static String makeNegativeTeFormForRomaji(String romaji, DictionaryEntryType dictionaryEntryType) {
+		
+		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {			
+			return removeChars(romaji, 2) + "nakute";
+			
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {
+			
+			boolean aruException = false;
+			
+			if (romaji.equals("aru") == true || romaji.endsWith(" aru") == true) {
+				aruException = true;
+			}
+			
+			if (aruException == false) {
+				
+				String romajiLastThreeChars = getLastChars(romaji, 3);
+				
+				if (romajiLastThreeChars != null && lastRomajiCharsMapperToAChar.containsKey(romajiLastThreeChars) == true) {
+					return removeChars(romaji, 3) + lastRomajiCharsMapperToAChar.get(romajiLastThreeChars) + "nakute";
+				}
+				
+				String romajiLastTwoChars = getLastChars(romaji, 2);
+				
+				if (romajiLastTwoChars != null && lastRomajiCharsMapperToAChar.containsKey(romajiLastTwoChars) == true) {
+					return removeChars(romaji, 2) + lastRomajiCharsMapperToAChar.get(romajiLastTwoChars) + "nakute";
+				}
+				
+				String romajiLastOneChar = getLastChars(romaji, 1);
+				
+				if (romajiLastOneChar != null && lastRomajiCharsMapperToAChar.containsKey(romajiLastOneChar) == true) {
+					return removeChars(romaji, 1) + lastRomajiCharsMapperToAChar.get(romajiLastOneChar) + "nakute";
+				}
+				
+				throw new RuntimeException("makeNegativeTeFormForRomaji 1: " + romaji);
+
+			} else {				
+				return removeChars(romaji, 3) + "nai";
+			}
+		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
+			
+			if (romaji.endsWith("kuru") == true) {
+				return removeChars(romaji, 4) + "konakute";
+			} else if (romaji.endsWith("suru") == true) {
+				return removeChars(romaji, 4) + "shinakute";
+			} else {
+				throw new RuntimeException("makeNegativeTeFormForRomaji 2: " + romaji);
+			}
+		} else {
+			throw new RuntimeException("makeNegativeTeFormForRomaji 3: " + dictionaryEntryType);
 		}
 	}
 	

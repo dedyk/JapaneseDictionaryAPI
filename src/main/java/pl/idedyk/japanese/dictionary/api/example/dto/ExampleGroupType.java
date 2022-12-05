@@ -49,6 +49,7 @@ public enum ExampleGroupType {
 	ADJECTIVE_I_YOUNI("Podobny do ..., jak ..."),
 
 	ADJECTIVE_I_TE_MO("Nawet, jeśli"),
+	ADJECTIVE_I_TE_MO_NEGATIVE("Nawet, jeśli nie"),
 	
 	ADJECTIVE_I_IMPERATIVE("Rozkaz (bądź)"),
 	
@@ -101,6 +102,7 @@ public enum ExampleGroupType {
 	ADJECTIVE_NA_YOUNI("Podobny do ..., jak ..."),
 
 	ADJECTIVE_NA_TE_MO("Nawet, jeśli"),
+	ADJECTIVE_NA_TE_MO_NEGATIVE("Nawet, jeśli nie"),
 	
 	ADJECTIVE_NA_IMPERATIVE("Rozkaz (bądź)"),
 
@@ -158,6 +160,7 @@ public enum ExampleGroupType {
 	NOUN_YOUNA("Podobny do ..., jak ..."),
 
 	NOUN_TE_MO("Nawet, jeśli"),
+	NOUN_TE_MO_NEGATIVE("Nawet, jeśli nie"),
 
 	NOUN_NI_SURU("Decydować się na"),
 	
@@ -300,6 +303,7 @@ public enum ExampleGroupType {
 	VERB_NONI("Mimo że ..., to ..."),
 
 	VERB_TE_MO("Nawet, jeśli"),
+	VERB_TE_MO_NEGATIVE("Nawet, jeśli nie"),
 
 	VERB_KOTO_NI_SURU("Decydować się na"),
 
