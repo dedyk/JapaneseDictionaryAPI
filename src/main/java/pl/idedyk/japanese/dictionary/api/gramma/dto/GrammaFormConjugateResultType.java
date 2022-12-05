@@ -116,7 +116,7 @@ public enum GrammaFormConjugateResultType {
 	VERB_CAUSATIVE_PASSIVE_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
 	VERB_CAUSATIVE_PASSIVE_TE("Twierdzenie", true),
-	VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE("Twierdzenie", true),
+	VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE("Przeczenie", true),
 	
 	VERB_VOLITIONAL("Forma wolicjonalna", false),
 	
