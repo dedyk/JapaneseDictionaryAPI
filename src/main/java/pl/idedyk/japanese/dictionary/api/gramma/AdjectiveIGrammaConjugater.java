@@ -50,6 +50,15 @@ public class AdjectiveIGrammaConjugater {
 
 		result.add(informal);
 		
+		// forma przyslowkowa
+		GrammaFormConjugateGroupTypeElements adverbForm = new GrammaFormConjugateGroupTypeElements();
+		
+		adverbForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_ADVERB);
+		
+		adverbForm.getGrammaFormConjugateResults().add(makeAdverbForm(dictionaryEntry));
+		
+		result.add(adverbForm);
+		
 		// forma te
 		GrammaFormConjugateGroupTypeElements teForm = new GrammaFormConjugateGroupTypeElements();
 		
@@ -354,6 +363,15 @@ public class AdjectiveIGrammaConjugater {
 		
 		return false;
 	}
+	
+	private static GrammaFormConjugateResult makeAdverbForm(DictionaryEntry dictionaryEntry) {
+				
+		GrammaFormConjugateResult virtualForm = makeAdjectiveGrammaConjugateForm(dictionaryEntry, GrammaFormConjugateResultType.ADJECTIVE_I_ADVERB,
+				"く", "ku");
+				
+		return virtualForm;
+	}
+
 	
 	private static GrammaFormConjugateResult makeTeForm(DictionaryEntry dictionaryEntry) {
 		// forma te

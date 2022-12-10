@@ -47,6 +47,15 @@ public class AdjectiveNaGrammaConjugater {
 
 		result.add(informal);
 
+		// forma przyslowkowa
+		GrammaFormConjugateGroupTypeElements adverbForm = new GrammaFormConjugateGroupTypeElements();
+		
+		adverbForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_NA_ADVERB);
+		
+		adverbForm.getGrammaFormConjugateResults().add(makeAdverbForm(dictionaryEntry));
+		
+		result.add(adverbForm);
+		
 		// forma te
 		GrammaFormConjugateGroupTypeElements teForm = new GrammaFormConjugateGroupTypeElements();
 
@@ -287,6 +296,16 @@ public class AdjectiveNaGrammaConjugater {
 		}
 	}
 
+	private static GrammaFormConjugateResult makeAdverbForm(DictionaryEntry dictionaryEntry) {
+		// forma te
+
+		final String postfixKana = "に";
+		final String postfixRomaji = " ni";
+
+		return makeAdjectiveGrammaConjugateForm(dictionaryEntry, GrammaFormConjugateResultType.ADJECTIVE_NA_ADVERB,
+				postfixKana, postfixRomaji);
+	}
+	
 	private static GrammaFormConjugateResult makeTeForm(DictionaryEntry dictionaryEntry) {
 		// forma te
 

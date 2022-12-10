@@ -59,6 +59,9 @@ public enum GrammaFormConjugateResultType {
 	ADJECTIVE_NA_TE("Twierdzenie", true),
 	ADJECTIVE_NA_TE_NEGATIVE("Przeczenie", true),
 	
+	ADJECTIVE_I_ADVERB("Forma przysłówkowa", false),
+	ADJECTIVE_NA_ADVERB("Forma przysłówkowa", false),
+	
 	NOUN_TE("Twierdzenie", true),
 	NOUN_TE_NEGATIVE("Przeczenie", true),
 	
