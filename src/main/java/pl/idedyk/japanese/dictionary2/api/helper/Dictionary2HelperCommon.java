@@ -1142,6 +1142,9 @@ public class Dictionary2HelperCommon {
 			case ICHIDAN_VERB_ZURU_VERB_ALTERNATIVE_FORM_OF_JIRU_VERBS:
 				result.add("czasownik ichidan (ru-czasownik) - czasownik zuru (alternatywna forma czasownika jiru)"); break;
 				
+			case ICHIDAN_VERB_KURERU_SPECIAL_CLASS:
+				result.add("czasownik ichidan (ru-czasownik) - specjalna klasa kureru"); break;
+				
 			case NIDAN_VERB_LOWER_CLASS_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na ku (archaiczny)"); break;
 				
