@@ -820,6 +820,9 @@ public class Dictionary2HelperCommon {
 		case "mal":
 			return "mal";
 			
+		case "ind":
+			return "indo";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -978,6 +981,9 @@ public class Dictionary2HelperCommon {
 			
 		case "mal":
 			return "słowo pochodzi z języka malajalam";
+			
+		case "ind":
+			return "słowo pochodzenia indonezyjskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
