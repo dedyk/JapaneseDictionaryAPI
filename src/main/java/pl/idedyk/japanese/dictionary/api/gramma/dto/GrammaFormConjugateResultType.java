@@ -100,14 +100,27 @@ public enum GrammaFormConjugateResultType {
 	VERB_CAUSATIVE_INFORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_CAUSATIVE_INFORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 
+	VERB_CAUSATIVE_COLLOQUIAL_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
+	VERB_CAUSATIVE_COLLOQUIAL_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
+	VERB_CAUSATIVE_COLLOQUIAL_INFORMAL_PAST("Twierdzenie, czas przeszły", true),
+	VERB_CAUSATIVE_COLLOQUIAL_INFORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
+	
 	VERB_CAUSATIVE_FORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_FORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_FORMAL_PAST("Twierdzenie, czas przeszły", true),
 	VERB_CAUSATIVE_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
+
+	VERB_CAUSATIVE_COLLOQUIAL_FORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
+	VERB_CAUSATIVE_COLLOQUIAL_FORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
+	VERB_CAUSATIVE_COLLOQUIAL_FORMAL_PAST("Twierdzenie, czas przeszły", true),
+	VERB_CAUSATIVE_COLLOQUIAL_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
 	
 	VERB_CAUSATIVE_TE("Twierdzenie", true),
 	VERB_CAUSATIVE_TE_NEGATIVE("Przeczenie", true),
 
+	VERB_CAUSATIVE_COLLOQUIAL_TE("Twierdzenie", true),
+	VERB_CAUSATIVE_COLLOQUIAL_TE_NEGATIVE("Przeczenie", true),
+	
 	VERB_CAUSATIVE_PASSIVE_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_PASSIVE_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
 	VERB_CAUSATIVE_PASSIVE_INFORMAL_PAST("Twierdzenie, czas przeszły", true),

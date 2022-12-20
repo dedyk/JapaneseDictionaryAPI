@@ -44,11 +44,14 @@ public enum GrammaFormConjugateGroupType {
 	
 	VERB_PASSIVE_TE("Forma bierna, forma te"),
 
-	VERB_CAUSATIVE_INFORMAL("Forma sprawcza (prosta)"),
+	VERB_CAUSATIVE_INFORMAL("Forma sprawcza (kauzatywna, prosta)"),	
+	VERB_CAUSATIVE_COLLOQUIAL_INFORMAL("Forma sprawcza (kauzatywna, potoczna, prosta)"),
 	
-	VERB_CAUSATIVE_FORMAL("Forma sprawcza (formalna)"),
+	VERB_CAUSATIVE_FORMAL("Forma sprawcza (kauzatywna, formalna)"),	
+	VERB_CAUSATIVE_COLLOQUIAL_FORMAL("Forma sprawcza (kauzatywna, potoczna, formalna)"),
 	
-	VERB_CAUSATIVE_TE("Forma sprawcza, forma te"),
+	VERB_CAUSATIVE_TE("Forma sprawcza (kauzatywna), forma te"),
+	VERB_CAUSATIVE_COLLOQUIAL_TE("Forma sprawcza (kauzatywna, potoczna), forma te"),
 
 	VERB_CAUSATIVE_PASSIVE_INFORMAL("Forma sprawczo-bierna (prosta)"),
 	
