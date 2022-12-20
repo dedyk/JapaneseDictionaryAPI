@@ -1169,8 +1169,11 @@ public class Dictionary2HelperCommon {
 			case NIDAN_VERB_LOWER_CLASS_WITH_MU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na mu (archaiczny)"); break;
 				
+			case NIDAN_VERB_LOWER_CLASS_WITH_DZU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na dzu (archaiczny)"); break;
+				
 			case NIDAN_VERB_UPPER_CLASS_WITH_TSU_ENDING_ARCHAIC:
-				result.add("czasownik nidan (wyższa klasa) kończący się na tsu (archaiczny)"); break;
+				result.add("czasownik nidan (wyższa klasa) kończący się na tsu (archaiczny)"); break;								
 				
 			case YODAN_VERB_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na ku (archaiczny)"); break;
