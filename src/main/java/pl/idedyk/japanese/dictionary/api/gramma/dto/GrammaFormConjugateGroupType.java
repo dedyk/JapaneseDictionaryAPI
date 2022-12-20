@@ -25,6 +25,8 @@ public enum GrammaFormConjugateGroupType {
 	NOUN_TE("Forma te"),
 	VERB_TE("Forma te"),
 	
+	VERB_MASU_TE("Forma te od masu"),
+	
 	ADJECTIVE_I_ADVERB("Forma przysłówkowa"),
 	ADJECTIVE_NA_ADVERB("Forma przysłówkowa"),
 	

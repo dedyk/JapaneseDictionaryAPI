@@ -52,6 +52,8 @@ public enum GrammaFormConjugateResultType {
 	
 	VERB_TE("Twierdzenie", true),
 	VERB_TE_NEGATIVE("Przeczenie", true),
+
+	VERB_MASU_TE("Forma te od masu", false),
 	
 	ADJECTIVE_I_TE("Twierdzenie", true),
 	ADJECTIVE_I_TE_NEGATIVE("Przeczenie", true),

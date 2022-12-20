@@ -218,7 +218,9 @@ public class VerbGrammaConjugater {
 
 		formal.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_FORMAL);
 
-		formal.getGrammaFormConjugateResults().add(makeFormalPresentForm(keigoHelper, dictionaryEntry, isKeigoHigh, isKeigoLow));
+		GrammaFormConjugateResult formalPresentForm = makeFormalPresentForm(keigoHelper, dictionaryEntry, isKeigoHigh, isKeigoLow);
+		
+		formal.getGrammaFormConjugateResults().add(formalPresentForm);
 		formal.getGrammaFormConjugateResults().add(makeFormalPresentNegativeForm(keigoHelper, dictionaryEntry, isKeigoHigh, isKeigoLow));
 		formal.getGrammaFormConjugateResults().add(makeFormalPastForm(keigoHelper, dictionaryEntry, isKeigoHigh, isKeigoLow));
 		formal.getGrammaFormConjugateResults().add(makeFormalPastNegativeForm(keigoHelper, dictionaryEntry, isKeigoHigh, isKeigoLow));
@@ -264,6 +266,15 @@ public class VerbGrammaConjugater {
 		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(dictionaryEntry));
 		
 		result.add(teForm);
+		
+		// forma te od masu
+		GrammaFormConjugateGroupTypeElements teMasuForm = new GrammaFormConjugateGroupTypeElements();
+
+		teMasuForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_MASU_TE);
+
+		teMasuForm.getGrammaFormConjugateResults().add(makeTeMasuForm(formalPresentForm));
+		
+		result.add(teMasuForm);
 		
 		if (isAruVerb == false && isGozaruVerb == false) {
 			
@@ -1243,6 +1254,20 @@ public class VerbGrammaConjugater {
 		} else {
 			throw new RuntimeException("makeNegativeTeFormForRomaji 3: " + dictionaryEntryType);
 		}
+	}
+	
+	private static GrammaFormConjugateResult makeTeMasuForm(GrammaFormConjugateResult formalPresentForm) {
+		
+		// convert to dictionary entry
+		DictionaryEntry formalPresentFormAsDictionaryEntry = convertGrammaFormConjugateResultToDictionaryEntry(formalPresentForm, DictionaryEntryType.WORD_VERB_U);
+
+		// make te form
+		GrammaFormConjugateResult teMasuForm = makeTeForm(formalPresentFormAsDictionaryEntry);
+		
+		// replace result type
+		teMasuForm.setResultType(GrammaFormConjugateResultType.VERB_MASU_TE);
+		
+		return teMasuForm;
 	}
 	
 	@SuppressWarnings("deprecation")
