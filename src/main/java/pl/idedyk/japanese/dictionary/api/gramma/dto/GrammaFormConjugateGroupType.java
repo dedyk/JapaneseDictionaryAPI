@@ -61,9 +61,11 @@ public enum GrammaFormConjugateGroupType {
 	
 	VERB_CAUSATIVE_PASSIVE_TE("Forma sprawczo-bierna, forma te"),
 	
-	VERB_VOLITIONAL("Forma wolicjonalna"),
+	VERB_VOLITIONAL("Forma hortatywna (wolicjonalna)"),
 	
-	VERB_BA("Forma ba"),
+	VERB_CONJECTURAL("Forma przypuszczająca"),
+	
+	VERB_BA("Forma warunkowa (forma ba)"),
 	
 	VERB_KEIGO("Keigo"),
 	

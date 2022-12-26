@@ -189,7 +189,7 @@ public enum ExampleGroupType {
 
 	VERB_NAI_DE_KUDASAI("Zakaz 2"),
 	
-	VERB_IMPERATIVE_NOT("Zakaz 3"),
+	VERB_IMPERATIVE_NOT("Zakaz 3 (forma prohibitywna)"),
 
 	VERB_MADA_TE_IMASEN("Jeszcze nie"),
 

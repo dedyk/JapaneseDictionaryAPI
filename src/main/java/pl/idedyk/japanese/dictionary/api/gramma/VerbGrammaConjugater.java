@@ -321,6 +321,15 @@ public class VerbGrammaConjugater {
 			volitionalForm.getGrammaFormConjugateResults().add(makeVolitionalForm(dictionaryEntry));
 			
 			result.add(volitionalForm);
+			
+			// forma przypuszczajaca
+			GrammaFormConjugateGroupTypeElements conjecturalForm = new GrammaFormConjugateGroupTypeElements();
+
+			conjecturalForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_CONJECTURAL);
+			
+			conjecturalForm.getGrammaFormConjugateResults().add(makeConjecturalForm(dictionaryEntry));
+			
+			result.add(conjecturalForm);
 		}
 		
 		// forma bierna
@@ -499,7 +508,8 @@ public class VerbGrammaConjugater {
 		keigoForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.VERB_KEIGO);
 		
 		if (isAruVerb == false && isGozaruVerb == false && isKeigoHigh == false && isKeigoLow == false) {
-			keigoForm.getGrammaFormConjugateResults().add(makeKeigoHighForm(keigoHelper, dictionaryEntry));
+			keigoForm.getGrammaFormConjugateResults().add(makeKeigoHighForm1(keigoHelper, dictionaryEntry));
+			keigoForm.getGrammaFormConjugateResults().add(makeKeigoHighForm2(keigoHelper, dictionaryEntry));
 		}
 		
 		if (isKeigoHigh == false && isKeigoLow == false) {
@@ -2125,6 +2135,55 @@ public class VerbGrammaConjugater {
 		throw new RuntimeException("makeVolitionalFormForRomaji 3: " + dictionaryEntryType);
 	}
 	
+	private static GrammaFormConjugateResult makeConjecturalForm(DictionaryEntry dictionaryEntry) {
+		
+		// homofonicznie z forma wolicjonalna (hortatywna)
+		GrammaFormConjugateResult conjecturalForm1 = makeVolitionalForm(dictionaryEntry);
+		
+		conjecturalForm1.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
+		conjecturalForm1.setInfo("homofonicznie z formą hortatywną (wolicjonalną)");
+		
+		// alternatywy
+		
+		// postac mówiona 1
+		final String saying1PostfixKanjiKana = "%sだろう";
+		final String saying1PostfixRomaji = "%s darou";
+		
+		GrammaFormConjugateResult conjecturalForm2 = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(dictionaryEntry, 
+				saying1PostfixKanjiKana, saying1PostfixKanjiKana, saying1PostfixRomaji, true);
+
+		conjecturalForm2.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
+		conjecturalForm2.setInfo("postać mówiona 1");
+		
+		conjecturalForm1.setAlternative(conjecturalForm2);
+		
+		// postac mówiona 2
+		final String saying2PostfixKanjiKana = "%sでしょう";
+		final String saying2PostfixRomaji = "%s deshou";
+		
+		GrammaFormConjugateResult conjecturalForm3 = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(dictionaryEntry, 
+				saying2PostfixKanjiKana, saying2PostfixKanjiKana, saying2PostfixRomaji, true);
+
+		conjecturalForm3.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
+		conjecturalForm3.setInfo("postać mówiona 2");
+			
+		conjecturalForm2.setAlternative(conjecturalForm3);
+		
+		// styl pisany
+		final String writingPostfixKanjiKana = "%sであろう";
+		final String writingPostfixRomaji = "%s de arou";
+		
+		GrammaFormConjugateResult conjecturalForm4 = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(dictionaryEntry, 
+				writingPostfixKanjiKana, writingPostfixKanjiKana, writingPostfixRomaji, true);
+
+		conjecturalForm4.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
+		conjecturalForm4.setInfo("styl pisany");
+			
+		conjecturalForm3.setAlternative(conjecturalForm4);		
+		
+		return conjecturalForm1;
+	}
+	
 	private static DictionaryEntry convertGrammaFormConjugateResultToDictionaryEntry(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntryType dictionaryEntryType) {
 		
 		DictionaryEntry dictionaryEntry = new DictionaryEntry();
@@ -2295,7 +2354,7 @@ public class VerbGrammaConjugater {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private static GrammaFormConjugateResult makeKeigoHighForm(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry) {
+	private static GrammaFormConjugateResult makeKeigoHighForm1(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry) {
 		
 		KeigoEntry keigoEntry = keigoHelper.findKeigoHighEntry(dictionaryEntry.getDictionaryEntryType(), dictionaryEntry.getKanji(), dictionaryEntry.getKanaList(), dictionaryEntry.getRomajiList());
 		
@@ -2378,15 +2437,34 @@ public class VerbGrammaConjugater {
 
 				masuResult.setRomajiList(masuRomajiListResult);
 				
-				masuResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH);
+				masuResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH_1);
 
 				result.setAlternative(masuResult);
 			}			
 		}
 				
-		result.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH);
+		result.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH_1);
 		
 		return result;
+	}
+	
+	private static GrammaFormConjugateResult makeKeigoHighForm2(KeigoHelper keigoHelper, DictionaryEntry dictionaryEntry) {
+
+		// utworzenie strony biernej
+		GrammaFormConjugateResult keigoHigh2PresentResult = makePassiveFormInformalPresentForm(dictionaryEntry);
+		
+		keigoHigh2PresentResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH_2);
+		keigoHigh2PresentResult.setInfo("twierdzenie w czasie teraźniejszo-przyszłym");
+		
+		// i jeszcze przeczenie
+		GrammaFormConjugateResult keigoHigh2PresentNegativeResult = makePassiveFormInformalPresentNegativeForm(keigoHigh2PresentResult);
+		
+		keigoHigh2PresentNegativeResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH_2);
+		keigoHigh2PresentNegativeResult.setInfo("przeczenie w czasie teraźniejszo-przyszłym");
+		
+		keigoHigh2PresentResult.setAlternative(keigoHigh2PresentNegativeResult);
+		
+		return keigoHigh2PresentResult;		
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -3778,13 +3856,13 @@ public class VerbGrammaConjugater {
 	private static String makeImperativeNotFormForRomaji(String romaji, DictionaryEntryType dictionaryEntryType) {
 				
 		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU) {
-			return romaji + " na";
+			return romaji + "na";
 			
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U) {			
-			return romaji + " na";
+			return romaji + "na";
 			
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
-			return romaji + " na";
+			return romaji + "na";
 			
 			// to jest odmiana dla dialektu Kansai
 			/*

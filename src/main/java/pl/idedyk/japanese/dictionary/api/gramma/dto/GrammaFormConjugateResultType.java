@@ -136,12 +136,15 @@ public enum GrammaFormConjugateResultType {
 	VERB_CAUSATIVE_PASSIVE_TE("Twierdzenie", true),
 	VERB_CAUSATIVE_PASSIVE_TE_NEGATIVE("Przeczenie", true),
 	
-	VERB_VOLITIONAL("Forma wolicjonalna", false),
+	VERB_VOLITIONAL("Forma hortatywna (wolicjonalna)", false),
+	
+	VERB_CONJECTURAL("Forma przypuszczająca", false),
 	
 	VERB_BA_AFFIRMATIVE("Twierdzenie", true),
 	VERB_BA_NEGATIVE("Przeczenie", true),
 	
-	VERB_KEIGO_HIGH("Forma honoryfikatywna (wywyższająca)", true),
+	VERB_KEIGO_HIGH_1("Forma honoryfikatywna (wywyższająca) 1", true),
+	VERB_KEIGO_HIGH_2("Forma honoryfikatywna (wywyższająca) 2", "Forma homofoniczna ze stroną bierną", true),
 	VERB_KEIGO_LOW("Forma modestywna (skromna)", true),
 	
 	VERB_IMPERATIVE_FORM("Forma rozkazująca", false),
