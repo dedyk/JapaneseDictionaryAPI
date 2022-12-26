@@ -149,6 +149,8 @@ public enum GrammaFormConjugateResultType {
 	
 	private String name;
 	
+	private String info;
+	
 	private boolean show;
 	
 	GrammaFormConjugateResultType(String name, boolean show) {
@@ -156,8 +158,18 @@ public enum GrammaFormConjugateResultType {
 		this.show = show;
 	}
 
+	GrammaFormConjugateResultType(String name, String info, boolean show) {
+		this.name = name;
+		this.info = info;
+		this.show = show;
+	}
+
 	public String getName() {
 		return name;
+	}	
+
+	public String getInfo() {
+		return info;
 	}
 
 	public boolean isShow() {

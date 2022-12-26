@@ -19,6 +19,8 @@ public class GrammaFormConjugateResult implements Serializable {
 	
 	private List<String> romajiList;
 	
+	private String info;
+	
 	private GrammaFormConjugateResult alternative;
 
 	public String getKanji() {
@@ -83,5 +85,13 @@ public class GrammaFormConjugateResult implements Serializable {
 
 	public void setPrefixRomaji(String prefixRomaji) {
 		this.prefixRomaji = prefixRomaji;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 }

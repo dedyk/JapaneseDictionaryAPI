@@ -112,7 +112,8 @@ public enum ExampleGroupType {
 	
 	NOUN_SURU("Tworzenie czynności"),
 
-	NOUN_LIKE("Lubić"), NOUN_DISLIKE("Nie lubić"),
+	NOUN_LIKE("Lubić"),
+	NOUN_DISLIKE("Nie lubić"),
 
 	NOUN_NA_DESU("Forma wyjaśniająca"),
 
