@@ -73,9 +73,9 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TAI,
 				makeTaiExample(dictionaryEntry, grammaFormCache));
 
-		// tagatte iru
-		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TAGATTE_IRU,
-				makeTagatteIruExample(dictionaryEntry, grammaFormCache));
+		// tagaru
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TAGARU,
+				makeTagaruExample(dictionaryEntry, grammaFormCache));
 
 		// n desu
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_N_DESU, makeNDesuExample(dictionaryEntry));
@@ -535,25 +535,57 @@ public class VerbExampler {
 			romajiList = newRomajiList;
 		}
 
-		final String templateKanji = "%sたいです";
-		final String templateKana = "%sたいです";
-		final String templateRomaji = "%stai desu";
+		final String templateKanji = "%sたい";
+		final String templateKana = "%sたい";
+		final String templateRomaji = "%stai";
 
-		return GrammaExampleHelper.makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList,
+		ExampleResult taiExample = GrammaExampleHelper.makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList,
 				templateKanji, templateKana, templateRomaji, true);
+		
+		taiExample.setInfo("Odmiana, jak przy i-przymiotnikach");
+
+		//
+		
+		final String template2Kanji = "%sたいです";
+		final String template2Kana = "%sたいです";
+		final String template2Romaji = "%stai desu";
+
+		ExampleResult tai2Example = GrammaExampleHelper.makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList,
+				template2Kanji, template2Kana, template2Romaji, true);
+
+		taiExample.setAlternative(tai2Example);
+		
+		return taiExample;
 	}
 
-	private static ExampleResult makeTagatteIruExample(DictionaryEntry dictionaryEntry,
+	private static ExampleResult makeTagaruExample(DictionaryEntry dictionaryEntry,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);
 
-		final String templateKanji = "%sたがっている";
-		final String templateKana = "%sたがっている";
-		final String templateRomaji = "%stagatte iru";
+		final String tagaruTemplateKanji = "%sたがる";
+		final String tagaruTemplateKana = "%sたがる";
+		final String tagaruTemplateRomaji = "%stagaru";
+		
+		ExampleResult tagaruExample = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, tagaruTemplateKanji, tagaruTemplateKana, tagaruTemplateRomaji,
+				true); 
+		
+		tagaruExample.setInfo("Odmiana, jak przy u-czasownikach");
+		
+		//
+		
+		final String tagatteIruTemplateKanji = "%sたがっている";
+		final String tagatteIruTemplateKana = "%sたがっている";
+		final String tagatteIruTemplateRomaji = "%stagatte iru";
 
-		return GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji, templateKana, templateRomaji,
+		ExampleResult tagatteExample =  GrammaExampleHelper.makeSimpleTemplateExample(stemForm, tagatteIruTemplateKanji, tagatteIruTemplateKana, tagatteIruTemplateRomaji,
 				true);
+		
+		tagatteExample.setInfo("Forma te + iru");
+		
+		tagaruExample.setAlternative(tagatteExample);
+		
+		return tagaruExample;
 	}
 
 	private static ExampleResult makeNDesuExample(DictionaryEntry dictionaryEntry) {

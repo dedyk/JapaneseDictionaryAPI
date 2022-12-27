@@ -169,9 +169,9 @@ public enum ExampleGroupType {
 	
 	NOUN_IMPERATIVE_NOT("Zakaz (nie bądź)"),
 
-	VERB_TAI("Chcieć (I i II osoba)"),
+	VERB_TAI("Chcieć (I i II osoba)", "Forma wolitywna"),
 
-	VERB_TAGATTE_IRU("Chcieć (III osoba)"),
+	VERB_TAGARU("Chcieć (III osoba)", "Forma wolitywna"),
 
 	VERB_SUGIRU("Zbyt wiele"),
 
