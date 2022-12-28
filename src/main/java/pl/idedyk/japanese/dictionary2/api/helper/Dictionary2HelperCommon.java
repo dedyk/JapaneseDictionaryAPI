@@ -1193,6 +1193,9 @@ public class Dictionary2HelperCommon {
 			case YODAN_VERB_WITH_HU_FU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na hu/fu (archaiczny)"); break;
 				
+			case YODAN_VERB_WITH_GU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na gu (archaiczny)"); break;
+				
 			case SHIKU_ADJECTIVE_ARCHAIC:
 				result.add("przymiotnik shiku (archaiczny)"); break;
 				
