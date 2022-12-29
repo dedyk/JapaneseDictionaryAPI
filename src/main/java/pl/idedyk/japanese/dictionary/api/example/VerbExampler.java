@@ -335,6 +335,10 @@ public class VerbExampler {
 		// ka mo shirenai
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_KA_MO_SHIRENAI,
 				makeKaMoShirenai(dictionaryEntry, grammaFormCache));
+		
+		// mai
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_MAI,
+				makeMai(dictionaryEntry, grammaFormCache));
 
 		return result;
 	}
@@ -2367,5 +2371,29 @@ public class VerbExampler {
 		exampleResult1.setAlternative(exampleResult2);
 
 		return exampleResult1;
+	}
+	
+	private static ExampleResult makeMai(DictionaryEntry dictionaryEntry, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		boolean isRuVerb = dictionaryEntry.getDictionaryEntryTypeList().contains(DictionaryEntryType.WORD_VERB_RU);
+				
+		final String templateKanji = "%sまい";
+		final String templateKana = "%sまい";
+		final String templateRomaji = "%smai";
+
+		ExampleResult maiExample = GrammaExampleHelper.makeSimpleTemplateExample(dictionaryEntry, templateKanji, templateKana,
+				templateRomaji, true);
+
+		if (isRuVerb == true) { // alternatywa dla ru-czasownikow
+			
+			GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);
+			
+			ExampleResult mai2Example = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji, templateKana,
+					templateRomaji, true);
+
+			maiExample.setAlternative(mai2Example);
+		}
+		
+		return maiExample;
 	}
 }

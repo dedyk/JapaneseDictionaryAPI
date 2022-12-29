@@ -329,7 +329,9 @@ public enum ExampleGroupType {
 
 	VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI("Musieć 2 / Trzeba"),
 
-	VERB_KA_MO_SHIRENAI("Być może");
+	VERB_KA_MO_SHIRENAI("Być może"),
+	
+	VERB_MAI("Forma negatywno-przypuszczająca");
 
 	// nakereba naranai
 	// nakute wa naranai
