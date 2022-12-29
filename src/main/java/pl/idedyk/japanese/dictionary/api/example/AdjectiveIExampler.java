@@ -212,11 +212,11 @@ public class AdjectiveIExampler {
 		
 		String templateKanji1 = "%sそうです";
 		String templateKana1 = "%sそうです";
-		String templateRomaji1 = "%s sou desu";	
+		String templateRomaji1 = "%ssou desu";	
 		
 		String templateKanji2 = "%sさそうです";
 		String templateKana2 = "%sさそうです";
-		String templateRomaji2 = "%s sasou desu";
+		String templateRomaji2 = "%ssasou desu";
 		
 		ExampleResult souDesuResult = null;
 		
@@ -226,10 +226,16 @@ public class AdjectiveIExampler {
 			souDesuResult = GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji2, templateKana2, templateRomaji2, true);
 		}
 		
+		souDesuResult.setInfo("Twierdzenie, zachowuje się jak na-przymiotnik");
+		
+		//
+		
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT_NEGATIVE);
 		
-		souDesuResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true));
+		ExampleResult souDesuNegativeResult = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);		
+		souDesuNegativeResult.setInfo("Przeczenie, zachowuje się jak na-przymiotnik");
+		
+		souDesuResult.setAlternative(souDesuNegativeResult);
 		
 		return souDesuResult;
 	}

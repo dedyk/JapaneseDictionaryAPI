@@ -14,8 +14,8 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_I_DESHOU("Prawdopodobnie, ok. 60%"),
 
-	ADJECTIVE_I_SOU_DESU_LOOKS_LIKE("Wygląda na",
-			"Bardziej używane do odbieranych przez zmysły informacji, tylko do przymiotników"),
+	ADJECTIVE_I_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)",
+			"Bardziej używane do odbieranych przez zmysły informacji"),
 
 	ADJECTIVE_I_KAMOSHI_REMASEN("Prawdopodobnie, ok. 30%"),
 
@@ -67,8 +67,8 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_NA_DESHOU("Prawdopodobnie, ok. 60%"),
 
-	ADJECTIVE_NA_SOU_DESU_LOOKS_LIKE("Wygląda na",
-			"Bardziej używane do odbieranych przez zmysły informacji, tylko do przymiotników"),
+	ADJECTIVE_NA_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)",
+			"Bardziej używane do odbieranych przez zmysły informacji"),
 
 	ADJECTIVE_NA_KAMOSHI_REMASEN("Prawdopodobnie, ok. 30%"),
 
