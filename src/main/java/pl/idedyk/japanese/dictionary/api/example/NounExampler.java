@@ -353,14 +353,20 @@ public class NounExampler {
 		
 		ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji1, templateKana1, templateRomaji1, true);
 		
+		exampleResult.setInfo("twierdzenie");
+		
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PRESENT_NEGATIVE);
 		
 		final String templateKanji2 = "%sかったら、...";
 		final String templateKana2 = "%sかったら、...";
 		final String templateRomaji2 = "%skattara, ...";		
 		
-		exampleResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true));
+		ExampleResult alternativeExample = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample.setInfo("przeczenie");
+		
+		exampleResult.setAlternative(alternativeExample);
 		
 		return exampleResult;
 	}
