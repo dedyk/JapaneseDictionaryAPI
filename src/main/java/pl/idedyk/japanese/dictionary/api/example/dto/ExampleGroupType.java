@@ -244,6 +244,8 @@ public enum ExampleGroupType {
 	VERB_KUTE_SUMIMASEN("Przepraszam, że nie zrobiłem"),
 
 	VERB_SOU_DESU_HEAR("Słyszałem, że ..."),
+	
+	VERB_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)"),
 
 	VERB_TTE("Forma tte", "Zastępuje そうです oraz と言っていました"),
 

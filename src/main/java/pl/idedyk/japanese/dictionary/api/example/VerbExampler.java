@@ -173,6 +173,9 @@ public class VerbExampler {
 		// sou desu (hear)
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TTE, makeTte(dictionaryEntry, grammaFormCache));
 
+		// sou desu (looks like)
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_SOU_DESU_LOOKS_LIKE, makeSouLooksLikeExample(dictionaryEntry, grammaFormCache));		
+		
 		// tara
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TARA,
 				makeTaraExample(dictionaryEntry, grammaFormCache));
@@ -1115,6 +1118,38 @@ public class VerbExampler {
 				templateKana, templateRomaji, true));
 
 		return exampleResult;
+	}
+	
+	private static ExampleResult makeSouLooksLikeExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);
+
+		// twierdzenie
+		final String templatePositiveKanji = "%sそう";
+		final String templatePositiveKana = "%sそう";
+		final String templatePositiveRomaji = "%ssou";
+
+		ExampleResult positiveExample = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templatePositiveKanji, templatePositiveKana, templatePositiveRomaji,
+				true);
+		
+		positiveExample.setInfo("Twierdzenie, zachowuje się, jak na-przymiotnik");
+		
+		// przeczenie
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+		
+		final String templateNegativeKanji = "%sさそう";
+		final String templateNegativeKana = "%sさそう";
+		final String templateNegativeRomaji = "%ssasou";
+		
+		ExampleResult negativeExample = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, 
+				templateNegativeKanji, templateNegativeKana, templateNegativeRomaji, true);
+
+		negativeExample.setInfo("Przeczenie, zachowuje się, jak na-przymiotnik");
+		
+		positiveExample.setAlternative(negativeExample);
+		
+		return positiveExample;
 	}
 
 	private static ExampleResult makeTte(DictionaryEntry dictionaryEntry,
