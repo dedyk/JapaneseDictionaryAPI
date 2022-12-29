@@ -423,7 +423,7 @@ public class VerbExampler {
 
 		final String templateKanji = "%sでください";
 		final String templateKana = "%sでください";
-		final String templateRomaji = "%s de kudasai";
+		final String templateRomaji = "%sde kudasai";
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
 				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
@@ -1886,7 +1886,7 @@ public class VerbExampler {
 
 		final String templateKanji = "%sで、...";
 		final String templateKana = "%sで、...";
-		final String templateRomaji = "%s de, ...";
+		final String templateRomaji = "%sde, ...";
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
 				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);

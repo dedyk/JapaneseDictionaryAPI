@@ -281,7 +281,7 @@ public enum ExampleGroupType {
 
 	VERB_HAZU_DESU("Powinnien / Miał"),
 
-	VERB_NAI_DE("Nie robiąc, ..."),
+	VERB_NAI_DE("Nie robiąc, ... (forma adnegatywna)"),
 
 	VERB_QUESTIONS_WITH_LARGER_SENTENCES("Pytania w zdaniach"),
 

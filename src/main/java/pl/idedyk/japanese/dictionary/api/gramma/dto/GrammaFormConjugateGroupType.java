@@ -23,14 +23,14 @@ public enum GrammaFormConjugateGroupType {
 	ADJECTIVE_I_TE("Forma te"),
 	ADJECTIVE_NA_TE("Forma te"),
 	NOUN_TE("Forma te"),
-	VERB_TE("Forma te"),
+	VERB_TE("Forma te (forma niefinitywna 2)"),
 	
 	VERB_MASU_TE("Forma te od masu"),
 	
 	ADJECTIVE_I_ADVERB("Forma przysłówkowa"),
 	ADJECTIVE_NA_ADVERB("Forma przysłówkowa"),
 	
-	VERB_STEM("Forma niefinitywna (ang: stem)"),
+	VERB_STEM("Temat czasownika (forma niefinitywna 1, ang: stem)"),
 	
 	VERB_MASHOU("Forma mashou"),
 	

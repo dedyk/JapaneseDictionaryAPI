@@ -67,7 +67,7 @@ public enum GrammaFormConjugateResultType {
 	NOUN_TE("Twierdzenie", true),
 	NOUN_TE_NEGATIVE("Przeczenie", true),
 	
-	VERB_STEM("Forma niefinitywna (ang: stem)", false),
+	VERB_STEM("Temat czasownika (forma niefinitywna 1, ang: stem)", false),
 	
 	VERB_MASHOU("Forma mashou", false),
 	
