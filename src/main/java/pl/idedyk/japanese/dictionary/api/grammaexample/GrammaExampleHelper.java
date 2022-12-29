@@ -128,6 +128,19 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 
+	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(ExampleResult exampleResult,
+			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
+		
+		String prefixKana = exampleResult.getPrefixKana();
+		String kanji = exampleResult.getKanji();
+		
+		List<String> kanaList = exampleResult.getKanaList();		
+		String prefixRomaji = exampleResult.getPrefixRomaji();
+		List<String> romajiList = exampleResult.getRomajiList();
+		
+		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
+	}
+	
 	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(DictionaryEntry dictionaryEntry,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
@@ -144,6 +157,7 @@ public class GrammaExampleHelper {
 		
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
+
 
 	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(GrammaFormConjugateResult grammaFormConjugateResult,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {

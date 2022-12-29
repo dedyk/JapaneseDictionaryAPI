@@ -180,6 +180,14 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TARA,
 				makeTaraExample(dictionaryEntry, grammaFormCache));
 
+		// tari
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TARI,
+				makeTariExample(dictionaryEntry, grammaFormCache));
+
+		// tarou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TAROU,
+				makeTarouExample(dictionaryEntry, grammaFormCache));
+		
 		// nakute mo ii desu
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKUTE_MO_II_DESU,
 				makeNakuteMoIiDesu(dictionaryEntry, grammaFormCache));
@@ -773,6 +781,8 @@ public class VerbExampler {
 
 		exampleResult.setInfo("twierdzenie");
 		
+		//
+		
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
 				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
 
@@ -786,6 +796,100 @@ public class VerbExampler {
 		alternativeExample.setInfo("przeczenie");
 		
 		exampleResult.setAlternative(alternativeExample);
+		
+		// od formy wolitywnej (tai)
+		ExampleResult taiExample = makeTaiExample(dictionaryEntry, grammaFormCache);
+		
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample2.setInfo("od formy wolitywnej (gdybym chciał)");
+		
+		alternativeExample.setAlternative(alternativeExample2);
+
+		return exampleResult;
+	}
+	
+	private static ExampleResult makeTariExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		GrammaFormConjugateResult informalPastForm = grammaFormCache
+				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PAST);
+
+		final String templateKanji1 = "%sり、...";
+		final String templateKana1 = "%sり、...";
+		final String templateRomaji1 = "%sri, ...";
+
+		ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji1,
+				templateKana1, templateRomaji1, true);
+
+		exampleResult.setInfo("twierdzenie");
+		
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
+				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+
+		final String templateKanji2 = "%sかったり、...";
+		final String templateKana2 = "%sかったり、...";
+		final String templateRomaji2 = "%skattari, ...";
+
+		ExampleResult alternativeExample = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample.setInfo("przeczenie");
+		
+		exampleResult.setAlternative(alternativeExample);
+		
+		// od formy wolitywnej (tai)
+		ExampleResult taiExample = makeTaiExample(dictionaryEntry, grammaFormCache);
+		
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample2.setInfo("od formy wolitywnej");
+		
+		alternativeExample.setAlternative(alternativeExample2);
+
+		return exampleResult;
+	}
+
+	private static ExampleResult makeTarouExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		GrammaFormConjugateResult informalPastForm = grammaFormCache
+				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PAST);
+
+		final String templateKanji1 = "%sろう、...";
+		final String templateKana1 = "%sろう、...";
+		final String templateRomaji1 = "%srou, ...";
+
+		ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji1,
+				templateKana1, templateRomaji1, true);
+
+		exampleResult.setInfo("twierdzenie");
+		
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
+				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+
+		final String templateKanji2 = "%sかったろう、...";
+		final String templateKana2 = "%sかったろう、...";
+		final String templateRomaji2 = "%skattarou, ...";
+
+		ExampleResult alternativeExample = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample.setInfo("przeczenie");
+		
+		exampleResult.setAlternative(alternativeExample);
+		
+		// od formy wolitywnej (tai)
+		ExampleResult taiExample = makeTaiExample(dictionaryEntry, grammaFormCache);
+		
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample2.setInfo("od formy wolitywnej (chyba chciał)");
+		
+		alternativeExample.setAlternative(alternativeExample2);
 
 		return exampleResult;
 	}
