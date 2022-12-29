@@ -260,7 +260,7 @@ public enum ExampleGroupType {
 	VERB_TO("Kiedy A staje się, wtedy również B staje się",
 			"Mówi o rzeczach oczywistych, z której druga wynika z pierwszej"),
 
-	VERB_NAGARA("W trakcie czynności, robię ...", "Musi być ten sam podmiot"),
+	VERB_NAGARA("W trakcie czynności, robię ... (forma gerundialna)", "Musi być ten sam podmiot"),
 
 	VERB_BA_YOKATTA("Dobrze byłoby, gdybym zrobił"),
 

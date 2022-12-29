@@ -30,7 +30,7 @@ public enum GrammaFormConjugateGroupType {
 	ADJECTIVE_I_ADVERB("Forma przysłówkowa"),
 	ADJECTIVE_NA_ADVERB("Forma przysłówkowa"),
 	
-	VERB_STEM("Temat czasownika (ang: stem)"),
+	VERB_STEM("Forma niefinitywna (ang: stem)"),
 	
 	VERB_MASHOU("Forma mashou"),
 	

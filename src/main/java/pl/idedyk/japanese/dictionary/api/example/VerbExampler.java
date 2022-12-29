@@ -1354,7 +1354,7 @@ public class VerbExampler {
 
 		final String templateKanji = "%sながら, ...";
 		final String templateKana = "%sながら, ...";
-		final String templateRomaji = "%s nagara, ...";
+		final String templateRomaji = "%snagara, ...";
 
 		return GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templateKanji, templateKana, templateRomaji,
 				true);
