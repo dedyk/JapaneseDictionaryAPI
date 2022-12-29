@@ -1130,9 +1130,9 @@ public class VerbExampler {
 		GrammaFormConjugateResult stemForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_STEM);
 
 		// twierdzenie
-		final String templatePositiveKanji = "%sそう";
-		final String templatePositiveKana = "%sそう";
-		final String templatePositiveRomaji = "%ssou";
+		final String templatePositiveKanji = "%sそうです";
+		final String templatePositiveKana = "%sそうです";
+		final String templatePositiveRomaji = "%ssou desu";
 
 		ExampleResult positiveExample = GrammaExampleHelper.makeSimpleTemplateExample(stemForm, templatePositiveKanji, templatePositiveKana, templatePositiveRomaji,
 				true);
@@ -1142,9 +1142,9 @@ public class VerbExampler {
 		// przeczenie
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
 		
-		final String templateNegativeKanji = "%sさそう";
-		final String templateNegativeKana = "%sさそう";
-		final String templateNegativeRomaji = "%ssasou";
+		final String templateNegativeKanji = "%sさそうです";
+		final String templateNegativeKana = "%sさそうです";
+		final String templateNegativeRomaji = "%ssasou desu";
 		
 		ExampleResult negativeExample = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, 
 				templateNegativeKanji, templateNegativeKana, templateNegativeRomaji, true);
