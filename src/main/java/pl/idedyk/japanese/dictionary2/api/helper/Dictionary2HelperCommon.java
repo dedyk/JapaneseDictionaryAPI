@@ -46,7 +46,7 @@ public class Dictionary2HelperCommon {
 				ReadingInfo.ReNokanji noKanji = readingInfo.getNoKanji();
 				
 				if (noKanji == null) {					
-					result.add(new KanjiKanaPair(null, readingInfo));
+					result.add(new KanjiKanaPair(entry, null, readingInfo));
 				}
 			}
 			
@@ -86,7 +86,7 @@ public class Dictionary2HelperCommon {
 					}
 					
 					// mamy pare
-					result.add(new KanjiKanaPair(kanjiInfo, readingInfo));					
+					result.add(new KanjiKanaPair(entry, kanjiInfo, readingInfo));					
 				}				
 			}
 		}
@@ -97,7 +97,7 @@ public class Dictionary2HelperCommon {
 			ReadingInfo.ReNokanji noKanji = readingInfo.getNoKanji();
 			
 			if (noKanji != null) {				
-				result.add(new KanjiKanaPair(null, readingInfo));
+				result.add(new KanjiKanaPair(entry, null, readingInfo));
 			}
 		}
 		
@@ -1408,12 +1408,15 @@ public class Dictionary2HelperCommon {
 	
 	public static class KanjiKanaPair {
 		
+		private Entry entry;
+		
 		private KanjiInfo kanjiInfo;		
 		private ReadingInfo readingInfo;
 				
 		private List<Sense> senseList = new ArrayList<>();
 
-		public KanjiKanaPair(KanjiInfo kanjiInfo, ReadingInfo readingInfo) {
+		public KanjiKanaPair(Entry entry, KanjiInfo kanjiInfo, ReadingInfo readingInfo) {
+			this.entry = entry;
 			this.kanjiInfo = kanjiInfo;
 			this.readingInfo = readingInfo;
 		}
@@ -1466,9 +1469,13 @@ public class Dictionary2HelperCommon {
 			return readingInfo.getKana().getKanaType();
 		}
 
+		public Entry getEntry() {
+			return entry;
+		}
+
 		@Override
 		public String toString() {
-			return "KanjiKanaPair [kanji=" + kanjiInfo + ", kana=" + readingInfo + "]";
+			return "KanjiKanaPair [entryId=" + entry.getEntryId() + ", kanji=" + kanjiInfo + ", kana=" + readingInfo + "]";
 		}
 	}
 	
