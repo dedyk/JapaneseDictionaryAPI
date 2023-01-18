@@ -181,7 +181,9 @@ public enum ExampleGroupType {
 
 	VERB_TE_IRU("Trwanie czynności/stanu"),
 
-	VERB_TE_KUDASAI("Prośba"),
+	VERB_TE_KUDASAI("Prośba 1", "Honoryfikatywny tryb rozkazujący"),
+	VERB_TE_KURE("Prośba 2", "Niehonoryfikatywny tryb rozkazujący"),
+	VERB_TE_CHOUDAI("Prośba 3", "Niehonoryfikatywny tryb rozkazujący"),
 
 	VERB_TE_MO_II("Pozwolenie 1", "Dosłowne: nawet jeśli coś zrobisz, będzie dobrze"),
 

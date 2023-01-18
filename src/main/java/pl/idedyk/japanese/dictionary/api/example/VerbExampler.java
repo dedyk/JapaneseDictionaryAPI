@@ -41,6 +41,14 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_KUDASAI,
 				makeTeKudasaiExample(dictionaryEntry, grammaFormCache));
 
+		// te kure
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_KURE,
+				makeTeKureExample(dictionaryEntry, grammaFormCache));		
+
+		// te choudai
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_CHOUDAI,
+				makeTeChoudaiExample(dictionaryEntry, grammaFormCache));		
+		
 		// te mo ii desu
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_MO_II,
 				makeTeMoIiExample(dictionaryEntry, grammaFormCache));
@@ -394,6 +402,30 @@ public class VerbExampler {
 		final String templateKanji = "%sください";
 		final String templateKana = "%sください";
 		final String templateRomaji = "%s kudasai";
+
+		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
+
+		return GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true);
+	}
+
+	private static ExampleResult makeTeKureExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		final String templateKanji = "%sくれ";
+		final String templateKana = "%sくれ";
+		final String templateRomaji = "%s kure";
+
+		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
+
+		return GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true);
+	}
+
+	private static ExampleResult makeTeChoudaiExample(DictionaryEntry dictionaryEntry,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+
+		final String templateKanji = "%sちょうだい";
+		final String templateKana = "%sちょうだい";
+		final String templateRomaji = "%s choudai";
 
 		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
 
