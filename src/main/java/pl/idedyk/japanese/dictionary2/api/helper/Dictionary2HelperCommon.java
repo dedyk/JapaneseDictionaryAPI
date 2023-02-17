@@ -1151,6 +1151,9 @@ public class Dictionary2HelperCommon {
 			case ICHIDAN_VERB_KURERU_SPECIAL_CLASS:
 				result.add("czasownik ichidan (ru-czasownik) - specjalna klasa kureru"); break;
 				
+			case IRREGULAR_RU_VERB_PLAIN_FORM_ENDS_WITH_RI:
+				result.add("nieregularny ru-czasownik z formą prostą kończącą się na ri"); break;
+				
 			case NIDAN_VERB_LOWER_CLASS_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na ku (archaiczny)"); break;
 				
