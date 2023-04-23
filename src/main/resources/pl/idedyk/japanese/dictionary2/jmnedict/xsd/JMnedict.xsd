@@ -37,7 +37,7 @@
 
 	<xsd:simpleType name="relativePriority">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="-mock-" />
+			<xsd:enumeration value="spec1" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
