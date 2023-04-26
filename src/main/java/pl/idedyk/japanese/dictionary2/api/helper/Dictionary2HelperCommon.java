@@ -571,6 +571,9 @@ public class Dictionary2HelperCommon {
 			case EUPHEMISTIC:
 				result.add("wyrażenie eufemistyczne"); break;
 				
+			case PRODUCT_NAME:
+				result.add("nazwa produktu"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
