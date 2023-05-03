@@ -580,6 +580,9 @@ public class Dictionary2HelperCommon {
 			case MYTHOLOGY:
 				result.add("mitologia"); break;
 				
+			case COMPANY_NAME:
+				result.add("nazwa firmy"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
