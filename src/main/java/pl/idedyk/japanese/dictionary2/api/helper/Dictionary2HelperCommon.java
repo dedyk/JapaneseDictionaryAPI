@@ -574,6 +574,9 @@ public class Dictionary2HelperCommon {
 			case PRODUCT_NAME:
 				result.add("nazwa produktu"); break;
 				
+			case DEITY:
+				result.add("bóstwo"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
