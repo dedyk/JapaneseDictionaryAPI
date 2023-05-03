@@ -577,6 +577,9 @@ public class Dictionary2HelperCommon {
 			case DEITY:
 				result.add("bóstwo"); break;
 				
+			case MYTHOLOGY:
+				result.add("mitologia"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
