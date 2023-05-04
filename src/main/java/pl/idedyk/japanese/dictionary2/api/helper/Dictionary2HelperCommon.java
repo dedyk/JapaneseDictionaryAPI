@@ -583,6 +583,15 @@ public class Dictionary2HelperCommon {
 			case COMPANY_NAME:
 				result.add("nazwa firmy"); break;
 				
+			case PLACE_NAME:
+				result.add("nazwa miejsca"); break;
+				
+			case FAMILY_OR_SURNAME:
+				result.add("rodzina lub nazwisko"); break;
+				
+			case ORGANIZATION_NAME:
+				result.add("nazwa organizacji"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
