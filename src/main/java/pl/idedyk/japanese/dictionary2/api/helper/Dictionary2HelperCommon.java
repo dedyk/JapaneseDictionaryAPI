@@ -592,6 +592,18 @@ public class Dictionary2HelperCommon {
 			case ORGANIZATION_NAME:
 				result.add("nazwa organizacji"); break;
 				
+			case CHARACTER:
+				result.add("postać"); break;
+				
+			case FICTION:
+				result.add("fikcja"); break;
+				
+			case OBJECT:
+				result.add("przedmiot"); break;
+				
+			case EVENT:
+				result.add("wydarzenie"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
