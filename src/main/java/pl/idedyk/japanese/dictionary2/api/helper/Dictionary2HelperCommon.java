@@ -604,6 +604,9 @@ public class Dictionary2HelperCommon {
 			case EVENT:
 				result.add("wydarzenie"); break;
 				
+			case CREATURE:
+				result.add("stworzenie"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
@@ -859,6 +862,9 @@ public class Dictionary2HelperCommon {
 		case "arn":
 			return "map";
 			
+		case "bul":
+			return "buł";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1023,6 +1029,9 @@ public class Dictionary2HelperCommon {
 			
 		case "arn":
 			return "słowo pochodzi z języka mapudungun";
+			
+		case "bul":
+			return "słowo pochodzenia bułgarskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
