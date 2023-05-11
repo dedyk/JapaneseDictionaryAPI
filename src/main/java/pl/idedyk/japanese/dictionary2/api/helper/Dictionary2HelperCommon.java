@@ -607,6 +607,9 @@ public class Dictionary2HelperCommon {
 			case CREATURE:
 				result.add("stworzenie"); break;
 				
+			case SERVICE:
+				result.add("usługa"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
