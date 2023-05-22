@@ -610,6 +610,9 @@ public class Dictionary2HelperCommon {
 			case SERVICE:
 				result.add("usługa"); break;
 				
+			case GIVEN_NAME_OR_FORENAME_GENDER_NOT_SPECIFIED:
+				result.add("imię bez określonej płci"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
