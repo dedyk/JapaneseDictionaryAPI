@@ -613,6 +613,9 @@ public class Dictionary2HelperCommon {
 			case GIVEN_NAME_OR_FORENAME_GENDER_NOT_SPECIFIED:
 				result.add("imię bez określonej płci"); break;
 				
+			case UNCLASSIFIED_NAME:
+				result.add("niesklasikowana nazwa"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
