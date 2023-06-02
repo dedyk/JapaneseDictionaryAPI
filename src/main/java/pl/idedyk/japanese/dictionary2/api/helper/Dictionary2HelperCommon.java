@@ -616,6 +616,9 @@ public class Dictionary2HelperCommon {
 			case UNCLASSIFIED_NAME:
 				result.add("niesklasikowana nazwa"); break;
 				
+			case SHIP_NAME:
+				result.add("nazwa statku"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
