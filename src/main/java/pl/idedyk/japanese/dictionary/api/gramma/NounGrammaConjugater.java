@@ -92,7 +92,7 @@ public class NounGrammaConjugater {
 	private static GrammaFormConjugateResult makeFormalPresentNegativeForm(DictionaryEntry dictionaryEntry) {
 		// czas terazniejszy, przeczenie, forma formalna (prosta), -dewa arimasen
 
-		final String postfixKana = "でわありません";
+		final String postfixKana = "ではありません";
 		final String postfixRomaji = " dewa arimasen";
 
 		GrammaFormConjugateResult grammaFormConjugateResult = makeNounGrammaConjugateForm(dictionaryEntry,
@@ -127,7 +127,7 @@ public class NounGrammaConjugater {
 	private static GrammaFormConjugateResult makeFormalPastNegativeForm(DictionaryEntry dictionaryEntry) {
 		// czas przesly, przeczenie, forma formalna, -dewa arimasen deshita
 
-		final String postfixKana = "でわありませんでした";
+		final String postfixKana = "ではありませんでした";
 		final String postfixRomaji = " dewa arimasen deshita";
 
 		GrammaFormConjugateResult grammaFormConjugateResult = makeNounGrammaConjugateForm(dictionaryEntry,
