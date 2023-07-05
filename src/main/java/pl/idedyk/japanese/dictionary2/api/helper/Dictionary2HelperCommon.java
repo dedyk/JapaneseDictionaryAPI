@@ -1214,6 +1214,9 @@ public class Dictionary2HelperCommon {
 			case IRREGULAR_RU_VERB_PLAIN_FORM_ENDS_WITH_RI:
 				result.add("nieregularny ru-czasownik z formą prostą kończącą się na ri"); break;
 				
+			case NIDAN_VERB_WITH_U_ENDING_ARCHAIC:
+				result.add("czasownik nidan kończący się na u (archaiczny)"); break;
+				
 			case NIDAN_VERB_LOWER_CLASS_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na ku (archaiczny)"); break;
 				
@@ -1270,6 +1273,9 @@ public class Dictionary2HelperCommon {
 				
 			case SHIKU_ADJECTIVE_ARCHAIC:
 				result.add("przymiotnik shiku (archaiczny)"); break;
+				
+			case VERB_UNSPECIFIED:
+				result.add("czasownik nieokreślony"); break;
 				
 			case UNCLASSIFIED:
 				result.add("niesklasyfikowany"); break;				
