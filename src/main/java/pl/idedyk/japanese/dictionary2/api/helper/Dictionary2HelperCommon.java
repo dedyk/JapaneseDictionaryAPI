@@ -619,6 +619,9 @@ public class Dictionary2HelperCommon {
 			case SHIP_NAME:
 				result.add("nazwa statku"); break;
 				
+			case GROUP:
+				result.add("grupa"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
