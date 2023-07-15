@@ -1476,4 +1476,30 @@ public class KanaHelper {
 
 		return result.toString();
 	}
+	
+	public String[] getVisuallySimilarKana(String kana) {
+		String[][] similarKanaTable = 
+			{
+				{ "き", "さ" },
+				{ "ち", "つ" },
+				{ "め", "ぬ" },
+				{ "は", "ほ", "わ" },
+				{ "る", "ろ" },
+				
+				{ "ぎ", "ざ" },
+				{ "ぢ", "づ" },
+				
+				{ "ば", "ぼ", "ぱ", "ぽ" },
+				{ "ぶ", "ぷ" },
+				{ "び", "ぴ" },
+				{ "べ", "ぺ" },
+				
+				{ "びゃ", "ぴゃ" },
+				{ "びゅ", "ぴゅ" },
+				{ "びょ", "ぴょ" }
+			};
+		
+		
+		
+	}
 }
