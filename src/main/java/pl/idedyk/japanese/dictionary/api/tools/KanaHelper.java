@@ -1499,7 +1499,15 @@ public class KanaHelper {
 				{ "びょ", "ぴょ" }
 			};
 		
+		// szukanie podobnych kana
+		for (String[] row : similarKanaTable) {
+			for (String rowColumn : row) {
+				if (rowColumn.equals(kana) == true) {
+					return row;
+				}
+			}
+		}
 		
-		
+		return null;
 	}
 }
