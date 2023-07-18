@@ -880,6 +880,9 @@ public class Dictionary2HelperCommon {
 		case "bul":
 			return "buł";
 			
+		case "lit":
+			return "lit";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1047,6 +1050,9 @@ public class Dictionary2HelperCommon {
 			
 		case "bul":
 			return "słowo pochodzenia bułgarskiego";
+			
+		case "lit":
+			return "słowo pochodzenia litewskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
