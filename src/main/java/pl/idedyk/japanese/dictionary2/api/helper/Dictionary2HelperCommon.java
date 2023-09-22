@@ -883,6 +883,9 @@ public class Dictionary2HelperCommon {
 		case "lit":
 			return "lit";
 			
+		case "khm":
+			return "khm";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1053,6 +1056,9 @@ public class Dictionary2HelperCommon {
 			
 		case "lit":
 			return "słowo pochodzenia litewskiego";
+			
+		case "khm":
+			return "słowo pochodzi z języka khmerskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
