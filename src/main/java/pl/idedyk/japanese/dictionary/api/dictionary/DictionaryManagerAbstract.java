@@ -11,6 +11,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
@@ -38,6 +41,8 @@ import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 
 public abstract class DictionaryManagerAbstract {
+	
+	private static final Logger logger = LogManager.getLogger(DictionaryManagerAbstract.class);
 	
 	protected IDatabaseConnector databaseConnector;
 		
@@ -102,6 +107,12 @@ public abstract class DictionaryManagerAbstract {
 	
 	public FindWordResult findWord(final FindWordRequest findWordRequest) throws DictionaryException {
 		
+		boolean debug = false;
+		
+		if (findWordRequest.getWord().equals("kot") == true) {
+			debug = true;
+		}
+		
 		waitForDatabaseReady();
 
 		FindWordResult findWordResult = null;
@@ -153,18 +164,26 @@ public abstract class DictionaryManagerAbstract {
 			
 			ResultItem resultItem = resultIterator.next();
 						
+			if (debug == true) {
+				logger.info("DEBUG: resultItem: " + resultItem.getDictionaryEntry());
+			}
+			
 			// czy jest nazwa
 			if (resultItem.getDictionaryEntry().isName() == true) {
 				
 				nameResultList.add(resultItem);
 				
 				continue;
-			}
+			}			
 						
 			// czy kanji dokladnie pasuje
 			String kanji = resultItem.getKanji();
 			
 			if (kanji != null && kanji.equals(findWord) == true) {
+				
+				if (debug == true) {
+					logger.info("DEBUG: czy kanji dokladnie pasuje: " + resultItem.getDictionaryEntry());
+				}
 				
 				kanjiMatchResultList.add(resultItem);
 				
@@ -173,6 +192,10 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy kanji zaczyna sie od
 			if (kanji != null && beginWord2Pattern.matcher(kanji).find() == true) {
+				
+				if (debug == true) {
+					logger.info("DEBUG: czy kanji zaczyna sie od: " + resultItem.getDictionaryEntry());
+				}
 				
 				kanjiBeginResultList.add(resultItem);
 				
@@ -183,6 +206,10 @@ public abstract class DictionaryManagerAbstract {
 			List<String> kanaList = resultItem.getKanaList();
 			
 			if (kanaList.contains(findWord) == true) {
+				
+				if (debug == true) {
+					logger.info("DEBUG: czy kana dokladnie pasuje: " + resultItem.getDictionaryEntry());
+				}
 				
 				kanaMatchResultList.add(resultItem);
 				
@@ -195,6 +222,10 @@ public abstract class DictionaryManagerAbstract {
 			for (String currentRomaji : romajiList) {
 				
 				if (currentRomaji.equalsIgnoreCase(findWord) == true) {
+					
+					if (debug == true) {
+						logger.info("DEBUG: czy romaji dokladnie pasuje: " + resultItem.getDictionaryEntry());
+					}
 					
 					romajiMatchResultList.add(resultItem);
 										
@@ -209,6 +240,10 @@ public abstract class DictionaryManagerAbstract {
 				
 				if (beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
 					
+					if (debug == true) {
+						logger.info("DEBUG: czy tlumaczenie zaczyna sie od slowa: " + resultItem.getDictionaryEntry());
+					}
+					
 					translateBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -219,6 +254,10 @@ public abstract class DictionaryManagerAbstract {
 			for (String currentTranslate : translates) {
 				
 				if (beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+					
+					if (debug == true) {
+						logger.info("DEBUG: czy tlumaczenie zawiera slowo: " + resultItem.getDictionaryEntry());
+					}
 					
 					translateBeginInAllWordResultList.add(resultItem);
 					
@@ -231,6 +270,10 @@ public abstract class DictionaryManagerAbstract {
 				
 				if (beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
 					
+					if (debug == true) {
+						logger.info("DEBUG: czy tlumaczenie zaczyna sie od slowa: " + resultItem.getDictionaryEntry());
+					}
+					
 					translateBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -241,6 +284,10 @@ public abstract class DictionaryManagerAbstract {
 			for (String currentKana : kanaList) {
 				
 				if (beginWord2Pattern.matcher(currentKana).find() == true) {
+					
+					if (debug == true) {
+						logger.info("DEBUG: czy kana zaczyna sie od: " + resultItem.getDictionaryEntry());
+					}
 					
 					kanaBeginResultList.add(resultItem);
 					
@@ -253,6 +300,10 @@ public abstract class DictionaryManagerAbstract {
 				
 				if (beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
 					
+					if (debug == true) {
+						logger.info("DEBUG: czy romaji zaczyna sie od slowa: " + resultItem.getDictionaryEntry());
+					}
+					
 					romajiBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -263,6 +314,10 @@ public abstract class DictionaryManagerAbstract {
 			for (String currentRomaji : romajiList) {
 				
 				if (beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
+					
+					if (debug == true) {
+						logger.info("DEBUG: czy romaji zawiera slowo: " + resultItem.getDictionaryEntry());
+					}
 					
 					romajiBeginInAllWordResultList.add(resultItem);
 					
@@ -275,6 +330,10 @@ public abstract class DictionaryManagerAbstract {
 				
 				if (beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
 					
+					if (debug == true) {
+						logger.info("DEBUG: czy romaji zaczyna sie od slowa: " + resultItem.getDictionaryEntry());
+					}
+					
 					romajiBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -284,6 +343,8 @@ public abstract class DictionaryManagerAbstract {
 			// pozostale
 			otherResultList.add(resultItem);
 		}
+		
+		final boolean debug2 = debug;
 		
 		// przygotowanie listy wynikowe		
 		Comparator<ResultItem> priorityComparator = new Comparator<ResultItem>() {
@@ -297,9 +358,29 @@ public abstract class DictionaryManagerAbstract {
 				Integer lhsPriority = lhsPriorityAttributeList != null && lhsPriorityAttributeList.size() > 0 ? Integer.parseInt(lhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
 				Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
 				
+				if (debug2 == true) {
+					logger.info("DEBUG: sort compare: " + o1.getDictionaryEntry() + " - " + o2.getDictionaryEntry());
+				}
+				
 				return lhsPriority.compareTo(rhsPriority);
 			}			
 		};
+		
+		if (debug == true) {
+			logger.info("kanjiMatchResultList: " + kanjiMatchResultList.size());
+			logger.info("kanjiBeginResultList: " + kanjiBeginResultList.size());
+			logger.info("kanaMatchResultList: " +  kanaMatchResultList.size());
+			logger.info("kanaBeginResultList: " + kanaBeginResultList.size());
+			logger.info("romajiMatchResultList: " + romajiMatchResultList.size());
+			logger.info("translateBeginWordResultList: " + translateBeginWordResultList.size());
+			logger.info("translateBeginInAllWordResultList: " + translateBeginInAllWordResultList.size());
+			logger.info("translateBegin2WordResultList: " + translateBegin2WordResultList.size());
+			logger.info("romajiBeginWordResultList: " + romajiBeginWordResultList.size());
+			logger.info("romajiBeginInAllWordResultList: " + romajiBeginInAllWordResultList.size());
+			logger.info("romajiBegin2WordResultList: " + romajiBegin2WordResultList.size());
+			logger.info("otherResultList: " + otherResultList.size());
+			logger.info("nameResultList: " + nameResultList.size());
+		}
 		
 		// sortujemy podlisty
 		Collections.sort(kanjiMatchResultList, priorityComparator);
@@ -315,6 +396,23 @@ public abstract class DictionaryManagerAbstract {
 		Collections.sort(romajiBegin2WordResultList, priorityComparator);
 		Collections.sort(otherResultList, priorityComparator);
 		Collections.sort(nameResultList, priorityComparator);
+		
+		if (debug == true) {
+			logger.info("kanjiMatchResultList 2: " + kanjiMatchResultList.size());
+			logger.info("kanjiBeginResultList 2: " + kanjiBeginResultList.size());
+			logger.info("kanaMatchResultList 2: " +  kanaMatchResultList.size());
+			logger.info("kanaBeginResultList 2: " + kanaBeginResultList.size());
+			logger.info("romajiMatchResultList 2: " + romajiMatchResultList.size());
+			logger.info("translateBeginWordResultList 2: " + translateBeginWordResultList.size());
+			logger.info("translateBeginInAllWordResultList 2: " + translateBeginInAllWordResultList.size());
+			logger.info("translateBegin2WordResultList 2: " + translateBegin2WordResultList.size());
+			logger.info("romajiBeginWordResultList 2: " + romajiBeginWordResultList.size());
+			logger.info("romajiBeginInAllWordResultList2 : " + romajiBeginInAllWordResultList.size());
+			logger.info("romajiBegin2WordResultList2 : " + romajiBegin2WordResultList.size());
+			logger.info("otherResultList2 : " + otherResultList.size());
+			logger.info("nameResultList2 : " + nameResultList.size());
+		}
+
 		
 		List<ResultItem> newResult = new ArrayList<>();
 		
@@ -348,6 +446,13 @@ public abstract class DictionaryManagerAbstract {
 		newResult.addAll(nameResultList);
 		
 		findWordResult.result = newResult;
+		
+		if (debug == true) {
+			for (ResultItem resultItem : findWordResult.result) {
+				logger.info("Result: " + resultItem.getDictionaryEntry());
+				
+			}
+		}
 					
 		return findWordResult;
 	}
