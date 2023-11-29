@@ -397,11 +397,14 @@
 			<xsd:enumeration value="biochemistry" />
 			<xsd:enumeration value="biology" />
 			<xsd:enumeration value="botany" />
+			<xsd:enumeration value="boxing" />
 			<xsd:enumeration value="Buddhism" />
 			<xsd:enumeration value="business" />
 			<xsd:enumeration value="card games" />
 			<xsd:enumeration value="chemistry" />
+			<xsd:enumeration value="Chinese mythology" />
 			<xsd:enumeration value="Christianity" />
+			<xsd:enumeration value="civil engineering" />
 			<xsd:enumeration value="clothing" />
 			<xsd:enumeration value="computing" />
 			<xsd:enumeration value="crystallography" />
@@ -413,6 +416,7 @@
 			<xsd:enumeration value="embryology" />
 			<xsd:enumeration value="engineering" />
 			<xsd:enumeration value="entomology" />
+			<xsd:enumeration value="figure skating" />
 			<xsd:enumeration value="film" />
 			<xsd:enumeration value="finance" />
 			<xsd:enumeration value="fishing" />
@@ -428,6 +432,8 @@
 			<xsd:enumeration value="Greek mythology" />
 			<xsd:enumeration value="hanafuda" />
 			<xsd:enumeration value="horse racing" />
+			<xsd:enumeration value="networking, WWW" />
+			<xsd:enumeration value="Japanese mythology" />
 			<xsd:enumeration value="kabuki" />
 			<xsd:enumeration value="law" />
 			<xsd:enumeration value="linguistics" />
@@ -440,7 +446,9 @@
 			<xsd:enumeration value="medicine" />
 			<xsd:enumeration value="meteorology" />
 			<xsd:enumeration value="military" />
+			<xsd:enumeration value="mineralogy" />
 			<xsd:enumeration value="mining" />
+			<xsd:enumeration value="motorsport" />
 			<xsd:enumeration value="music" />
 			<xsd:enumeration value="noh" />
 			<xsd:enumeration value="ornithology" />
@@ -453,7 +461,8 @@
 			<xsd:enumeration value="physics" />
 			<xsd:enumeration value="physiology" />
 			<xsd:enumeration value="politics" />
-			<xsd:enumeration value="printing" />			
+			<xsd:enumeration value="printing" />
+			<xsd:enumeration value="professional wrestling" />
 			<xsd:enumeration value="psychiatry" />
 			<xsd:enumeration value="psychoanalysis" />
 			<xsd:enumeration value="psychology" />
@@ -466,9 +475,11 @@
 			<xsd:enumeration value="statistics" />
 			<xsd:enumeration value="stock market" />
 			<xsd:enumeration value="sumo" />
+			<xsd:enumeration value="surgery" />
 			<xsd:enumeration value="telecommunications" />
 			<xsd:enumeration value="trademark" />
 			<xsd:enumeration value="television" />
+			<xsd:enumeration value="veterinary terms" />
 			<xsd:enumeration value="video games" />
 			<xsd:enumeration value="zoology" />
 		</xsd:restriction>
