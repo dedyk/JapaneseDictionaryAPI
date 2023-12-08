@@ -1381,6 +1381,9 @@ public class Dictionary2HelperCommon {
 			case SEARCH_ONLY_KANA_FORM:
 				result.add("forma kana tylko do wyszukiwania"); break;
 				
+			case RARELY_USED_KANA_FORM:
+				result.add("rzadko używana forma kana"); break;
+				
 			default:				
 				throw new RuntimeException("Unknown reading additional info enum: " + readingAdditionalInfoEnum);				
 			}
