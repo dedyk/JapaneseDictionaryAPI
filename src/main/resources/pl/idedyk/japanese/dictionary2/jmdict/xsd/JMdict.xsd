@@ -433,7 +433,7 @@
 			<xsd:enumeration value="Greek mythology" />
 			<xsd:enumeration value="hanafuda" />
 			<xsd:enumeration value="horse racing" />
-			<xsd:enumeration value="networking, WWW" />
+			<xsd:enumeration value="internet" />
 			<xsd:enumeration value="Japanese mythology" />
 			<xsd:enumeration value="kabuki" />
 			<xsd:enumeration value="law" />

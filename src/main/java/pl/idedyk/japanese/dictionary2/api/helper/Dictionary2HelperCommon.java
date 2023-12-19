@@ -456,8 +456,8 @@ public class Dictionary2HelperCommon {
 			case STOCK_MARKET:
 				result.add("giełda papierów wartościowych"); break;
 				
-			case NETWORKING_WWW:
-				result.add("sieć www"); break;
+			case INTERNET:
+				result.add("internet"); break;
 							
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
