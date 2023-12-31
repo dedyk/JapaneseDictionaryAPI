@@ -458,7 +458,10 @@ public class Dictionary2HelperCommon {
 				
 			case INTERNET:
 				result.add("internet"); break;
-							
+				
+			case PROFESSIONAL_WRESTLING:
+				result.add("zapasy zawodowe"); break;	
+			
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
