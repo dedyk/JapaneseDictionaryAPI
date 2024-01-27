@@ -470,6 +470,9 @@ public class Dictionary2HelperCommon {
 				
 			case CHINESE_MYTHOLOGY:
 				result.add("chińska mitologia"); break;
+		
+			case CIVIL_ENGINEERING:
+				result.add("inżynieria lądowa"); break;
 				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
