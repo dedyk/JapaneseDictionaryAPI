@@ -629,7 +629,7 @@ public class Dictionary2HelperCommon {
 				result.add("imię bez określonej płci"); break;
 				
 			case UNCLASSIFIED_NAME:
-				result.add("niesklasikowana nazwa"); break;
+				result.add("niesklasyfikowana nazwa"); break;
 				
 			case SHIP_NAME:
 				result.add("nazwa statku"); break;
