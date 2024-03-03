@@ -418,7 +418,7 @@ public class Dictionary2HelperCommon {
 				result.add("inżynieria mechaniczna"); break;
 				
 			case PSYCHIATRY:
-				result.add("psychiatry"); break;
+				result.add("psychiatria"); break;
 				
 			case CARD_GAMES:
 				result.add("gra w karty"); break;
