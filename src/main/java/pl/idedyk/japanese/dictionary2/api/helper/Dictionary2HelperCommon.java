@@ -477,6 +477,9 @@ public class Dictionary2HelperCommon {
 			case JAPANESE_MYTHOLOGY:
 				result.add("japońska mitologia"); break;
 				
+			case VETERINARY_TERMS:
+				result.add("termin weterynaryjny"); break;
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
