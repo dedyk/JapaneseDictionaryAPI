@@ -480,6 +480,9 @@ public class Dictionary2HelperCommon {
 			case VETERINARY_TERMS:
 				result.add("termin weterynaryjny"); break;
 				
+			case MINERALOGY:
+				result.add("mineralogia"); break;				
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
