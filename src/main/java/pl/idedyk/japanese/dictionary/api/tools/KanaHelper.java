@@ -1319,6 +1319,8 @@ public class KanaHelper {
 	public KanaWord convertKanaStringIntoKanaWord(String kana, Map<String, KanaEntry> kanaCache,
 			boolean ignoreUnknownChars) {
 
+		kana = kana.replaceAll("、", "");
+		
 		List<KanaEntry> kanaResultEntries = new ArrayList<KanaEntry>();
 
 		int pos = 0;
