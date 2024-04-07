@@ -143,10 +143,28 @@ public abstract class DictionaryManagerAbstract {
 		//
 		
 		String findWord = findWordRequest.word.replace("\\", "\\\\");
-		 
-		Pattern beginWordPattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa
-		Pattern beginInAllWordPattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies znajduje sie slowo
-		Pattern beginWord2Pattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + ".*", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies istnieje slowo, ktore zaczyna sie od
+		
+		Pattern beginWordPattern = null;
+		Pattern beginInAllWordPattern = null;
+		Pattern beginWord2Pattern = null;
+		
+		try {
+			beginWordPattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa	
+		} catch (Exception e) {
+			// noop
+		}
+		
+		try {
+			beginInAllWordPattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies znajduje sie slowo
+		} catch (Exception e) {
+			// noop
+		}
+
+		try {
+			beginWord2Pattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + ".*", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies istnieje slowo, ktore zaczyna sie od
+		} catch (Exception e) {
+			// noop
+		}
 		
 		MAIN_LOOP:
 		while (resultIterator.hasNext() == true) {
@@ -172,7 +190,7 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy kanji zaczyna sie od
-			if (kanji != null && beginWord2Pattern.matcher(kanji).find() == true) {
+			if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {
 				
 				kanjiBeginResultList.add(resultItem);
 				
@@ -207,7 +225,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {
 				
-				if (beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
 					
 					translateBeginWordResultList.add(resultItem);
 					
@@ -218,7 +236,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zawiera slowo
 			for (String currentTranslate : translates) {
 				
-				if (beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
 					
 					translateBeginInAllWordResultList.add(resultItem);
 					
@@ -229,7 +247,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {
 				
-				if (beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
 					
 					translateBegin2WordResultList.add(resultItem);
 					
@@ -240,7 +258,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy kana zaczyna sie od
 			for (String currentKana : kanaList) {
 				
-				if (beginWord2Pattern.matcher(currentKana).find() == true) {
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {
 					
 					kanaBeginResultList.add(resultItem);
 					
@@ -251,7 +269,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {
 				
-				if (beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
 					
 					romajiBeginWordResultList.add(resultItem);
 					
@@ -262,7 +280,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zawiera slowo
 			for (String currentRomaji : romajiList) {
 				
-				if (beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
 					
 					romajiBeginInAllWordResultList.add(resultItem);
 					
@@ -273,7 +291,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {
 				
-				if (beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
 					
 					romajiBegin2WordResultList.add(resultItem);
 					
