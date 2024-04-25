@@ -483,6 +483,12 @@ public class Dictionary2HelperCommon {
 			case MINERALOGY:
 				result.add("mineralogia"); break;				
 				
+			case FIGURE_SKATING:
+				result.add("łyżwiarstwo figurowe"); break;
+				
+			case SURGERY:
+				result.add("chirurgia"); break;
+				
 			default:
 				throw new RuntimeException("Unknown field enum: " + fieldEnum);			
 			}
