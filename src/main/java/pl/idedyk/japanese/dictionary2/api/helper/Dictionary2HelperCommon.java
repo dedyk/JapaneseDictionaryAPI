@@ -654,6 +654,9 @@ public class Dictionary2HelperCommon {
 				
 			case GROUP:
 				result.add("grupa"); break;
+			
+			case DOCUMENT:
+				result.add("dokument"); break;
 				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
