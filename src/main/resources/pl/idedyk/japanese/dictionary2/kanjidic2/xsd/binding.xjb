@@ -102,7 +102,11 @@
 			<jxb:property name="type" />
 		</jxb:bindings>
 
-		<jxb:bindings node="//xsd:attribute[@name='m_lang']">
+		<jxb:bindings node="//xsd:complexType[@name='readingMeaningInfoReadingMeaningGroupMeaning']/xsd:simpleContent/xsd:extension/xsd:attribute[@name='m_lang']">
+			<jxb:property name="lang" />
+		</jxb:bindings>
+
+		<jxb:bindings node="//xsd:complexType[@name='readingMeaningInfoReadingMeaningGroupAdditionalInfo']/xsd:simpleContent/xsd:extension/xsd:attribute[@name='m_lang']">
 			<jxb:property name="lang" />
 		</jxb:bindings>
 

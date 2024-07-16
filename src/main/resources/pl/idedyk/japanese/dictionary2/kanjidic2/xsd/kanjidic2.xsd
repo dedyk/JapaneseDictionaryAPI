@@ -213,6 +213,7 @@
 		<xsd:sequence>
 			<xsd:element name="reading" minOccurs="0" maxOccurs="unbounded" type="readingMeaningInfoReadingMeaningGroupReading" /> <!-- element grupujacy czytania -->
 			<xsd:element name="meaning" minOccurs="0" maxOccurs="unbounded" type="readingMeaningInfoReadingMeaningGroupMeaning" /> <!-- znaczenie znaku -->
+			<xsd:element name="additionalInfo" minOccurs="0" maxOccurs="unbounded" type="readingMeaningInfoReadingMeaningGroupAdditionalInfo" /> <!-- informacje dodatkowe, moja modyfikacja -->
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -243,6 +244,14 @@
 		</xsd:simpleContent>
 	</xsd:complexType>
 
+	<xsd:complexType name="readingMeaningInfoReadingMeaningGroupAdditionalInfo">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="m_lang" use="optional" type="readingMeaningInfoReadingMeaningGroupMeaningLang" /> <!-- jezyk informacji dodatkowej -->
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
 	<xsd:simpleType name="readingMeaningInfoReadingMeaningGroupMeaningLang">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="en" />
