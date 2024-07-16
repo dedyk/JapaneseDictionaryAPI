@@ -98,6 +98,10 @@
 			<jxb:property name="meaningList" />
 		</jxb:bindings>
 
+		<jxb:bindings node="//xsd:element[@name='additionalInfo']">
+			<jxb:property name="additionalInfoList" />
+		</jxb:bindings>
+
 		<jxb:bindings node="//xsd:attribute[@name='r_type']">
 			<jxb:property name="type" />
 		</jxb:bindings>
