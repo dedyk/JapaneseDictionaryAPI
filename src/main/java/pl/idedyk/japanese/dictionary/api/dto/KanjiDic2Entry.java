@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary.api.dto;
 import java.io.Serializable;
 import java.util.List;
 
+@Deprecated
 public class KanjiDic2Entry implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
