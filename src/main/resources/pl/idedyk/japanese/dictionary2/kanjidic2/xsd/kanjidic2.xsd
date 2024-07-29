@@ -25,6 +25,7 @@
 			<xsd:element name="codepoint" minOccurs="1" maxOccurs="1" type="codePointInfo" /> <!-- informacja o kodowaniu w wybranych standardach -->
 			<xsd:element name="radical" minOccurs="1" maxOccurs="1" type="radicalInfo" /> <!-- ??? -->
 			<xsd:element name="misc" minOccurs="1" maxOccurs="1" type="miscInfo" /> <!-- rozne informacje -->
+			<xsd:element name="misc2" minOccurs="0" maxOccurs="1" type="misc2Info" /> <!-- moja modyfikacja: rozne dodatkowe informacje, dodatkowy element, gdyz misc to element z kanjidic2, a misc2 to calkowicie moj element -->
 			<xsd:element name="dic_number" minOccurs="0" maxOccurs="1" type="dictionaryNumberInfo" /> <!-- odnosniki do innych slownikow -->
 			<xsd:element name="query_code" minOccurs="0" maxOccurs="1" type="queryCodeInfo" /> <!-- informacje pomocne do wyszukiwania znakow -->
 			<xsd:element name="reading_meaning" minOccurs="0" maxOccurs="1" type="readingMeaningInfo" /> <!-- informacje o czytaniu i znaczeniu -->
@@ -120,6 +121,57 @@
 			<xsd:enumeration value="nelson_c" />
 			<xsd:enumeration value="oneill" />
 			<xsd:enumeration value="ucs" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="misc2Info">
+		<xsd:sequence>
+			<xsd:element name="groups" minOccurs="0" maxOccurs="unbounded" type="misc2InfoGroup" />
+			<xsd:element name="used" minOccurs="1" maxOccurs="1" type="xsd:boolean" />	
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="misc2InfoGroup">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Genki kanji 1-3" />
+			<xsd:enumeration value="Genki kanji 1-4" />
+			<xsd:enumeration value="Genki kanji 1-5" />
+			<xsd:enumeration value="Genki kanji 1-6" />
+			<xsd:enumeration value="Genki kanji 1-7" />
+			<xsd:enumeration value="Genki kanji 1-8" />
+			<xsd:enumeration value="Genki kanji 1-9" />
+			<xsd:enumeration value="Genki kanji 1-10" />
+			<xsd:enumeration value="Genki kanji 1-11" />
+			<xsd:enumeration value="Genki kanji 1-12" />
+			
+			<xsd:enumeration value="Genki kanji 2-13" />
+			<xsd:enumeration value="Genki kanji 2-14" />
+			<xsd:enumeration value="Genki kanji 2-15" />
+			<xsd:enumeration value="Genki kanji 2-16" />
+			<xsd:enumeration value="Genki kanji 2-17" />
+			<xsd:enumeration value="Genki kanji 2-18" />
+			<xsd:enumeration value="Genki kanji 2-19" />
+			<xsd:enumeration value="Genki kanji 2-20" />
+			<xsd:enumeration value="Genki kanji 2-21" />
+			<xsd:enumeration value="Genki kanji 2-22" />
+			<xsd:enumeration value="Genki kanji 2-23" />
+			
+			<xsd:enumeration value="Jōyō 1" />
+			<xsd:enumeration value="Jōyō 2" />
+			<xsd:enumeration value="Jōyō 3" />
+			<xsd:enumeration value="Jōyō 4" />
+			<xsd:enumeration value="Jōyō 5" />
+			<xsd:enumeration value="Jōyō 6" />
+			<xsd:enumeration value="Jōyō 7" />
+			<xsd:enumeration value="Jōyō 8" />
+			<xsd:enumeration value="Jōyō 9" />
+			<xsd:enumeration value="Jōyō 10" />
+			
+			<xsd:enumeration value="JLPT 1" />
+			<xsd:enumeration value="JLPT 2" />
+			<xsd:enumeration value="JLPT 3" />
+			<xsd:enumeration value="JLPT 4" />
+			<xsd:enumeration value="JLPT 5" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
