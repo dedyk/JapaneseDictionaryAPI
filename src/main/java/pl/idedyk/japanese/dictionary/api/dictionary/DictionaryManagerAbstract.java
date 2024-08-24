@@ -608,8 +608,59 @@ public abstract class DictionaryManagerAbstract {
 		return findKanjiResult;		
 	}
 	
+	public boolean isAllCharactersStrokePathsAvailableForWord(String word) throws DictionaryException {
+
+		// INFO: podobny kod znajduje sie w metodzie getStrokePathsForWord, jezeli cos tutaj zmieniasz zmien i tam
+		waitForDatabaseReady();
+
+		if (word == null) {
+			return false;
+		}
+
+		Map<String, KanaEntry> kanaCache = getKanaHelper().getKanaCache();
+
+		for (int idx = 0; idx < word.length(); ++idx) {
+
+			String currentChar = String.valueOf(word.charAt(idx));
+			String nextChar = idx + 1 < word.length() ? String.valueOf(word.charAt(idx + 1)) : null;
+
+			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+
+			if (kanjiEntry != null) {
+				KanjivgEntry kanjivgEntry = kanjiEntry.getKanjivgEntry();
+				
+				if (kanjivgEntry == null || kanjivgEntry.getStrokePaths() == null || kanjivgEntry.getStrokePaths().size() == 0) {
+					return false;
+				}
+
+			} else {
+				
+				KanaEntry kanaEntry = null;
+				
+				if (nextChar != null) {					
+					kanaEntry = kanaCache.get(currentChar + nextChar); // sprawdzanie, czy nie chodzi o przypadek, np. ウォ
+					
+					if (kanaEntry != null) { // mamy to, zwiekszamy indeks					
+						idx++;						
+					}
+				}
+				
+				if (kanaEntry == null) { // dzialamy po staremu
+					kanaEntry = kanaCache.get(currentChar);
+				}
+				
+				if (kanaEntry == null || kanaEntry.getStrokePaths() == null || kanaEntry.getStrokePaths().size() == 0) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+	
 	public List<KanjivgEntry> getStrokePathsForWord(String word) throws DictionaryException {
 		
+		// INFO: podobny kod znajduje sie w metodzie isAllCharactersStrokePathsAvailableForWord, jezeli cos tutaj zmieniasz zmien i tam
 		waitForDatabaseReady();
 
 		List<KanjivgEntry> result = new ArrayList<KanjivgEntry>();
