@@ -934,6 +934,9 @@ public class Dictionary2HelperCommon {
 		case "uzb":
 			return "uzb";
 			
+		case "bre":
+			return "bre";
+			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1119,6 +1122,9 @@ public class Dictionary2HelperCommon {
 			
 		case "uzb":
 			return "słowo pochodzi z języka uzbeckiego";
+			
+		case "bre":
+			return "słowo pochodzi z języka bretońskiego";
 			
 			default:
 				throw new RuntimeException("Unknown language: " + language);
