@@ -90,10 +90,15 @@ public enum GroupEnum {
 	JOUYOU4("Jōyō 4", 71),
 	JOUYOU5("Jōyō 5", 72),
 	JOUYOU6("Jōyō 6", 73),
+	
+	JOUYOUS("Jōyō S", 73),
+	
+	/*
 	JOUYOU7("Jōyō 7", 74),
 	JOUYOU8("Jōyō 8", 75),
 	JOUYOU9("Jōyō 9", 76),
 	JOUYOU10("Jōyō 10", 77),
+	*/
 
 	OTHER("Inne", 255);
 	
