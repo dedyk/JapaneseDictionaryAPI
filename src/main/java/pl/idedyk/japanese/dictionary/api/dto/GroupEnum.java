@@ -91,7 +91,10 @@ public enum GroupEnum {
 	JOUYOU5("Jōyō 5", 72),
 	JOUYOU6("Jōyō 6", 73),
 	
-	JOUYOUS("Jōyō S", 73),
+	JOUYOUS("Jōyō S", 74),
+	
+	JINMEIYOU("Jinmeiyou", 75),
+	JINMEIYOU_JOUYOU("Jinmeiyou (wariant Jōyō)", 76),
 	
 	/*
 	JOUYOU7("Jōyō 7", 74),
