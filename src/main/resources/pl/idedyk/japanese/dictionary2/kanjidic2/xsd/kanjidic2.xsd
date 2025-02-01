@@ -156,17 +156,23 @@
 			<xsd:enumeration value="Genki kanji 2-22" />
 			<xsd:enumeration value="Genki kanji 2-23" />
 			
+			<!-- 
 			<xsd:enumeration value="Jōyō 1" />
 			<xsd:enumeration value="Jōyō 2" />
 			<xsd:enumeration value="Jōyō 3" />
 			<xsd:enumeration value="Jōyō 4" />
 			<xsd:enumeration value="Jōyō 5" />
 			<xsd:enumeration value="Jōyō 6" />
+			<xsd:enumeration value="Jōyō 7" />
+			<xsd:enumeration value="Jōyō 8" />
+			<xsd:enumeration value="Jōyō 9" />
+			<xsd:enumeration value="Jōyō 10" />
 
 			<xsd:enumeration value="Jōyō S" />
 			<xsd:enumeration value="Jinmeiyou" />
 			<xsd:enumeration value="Jinmeiyou (wariant Jōyō)" />
-			
+			-->
+			 
 			<xsd:enumeration value="JLPT 1" />
 			<xsd:enumeration value="JLPT 2" />
 			<xsd:enumeration value="JLPT 3" />
