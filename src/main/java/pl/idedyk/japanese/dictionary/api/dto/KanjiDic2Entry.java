@@ -12,8 +12,8 @@ public class KanjiDic2Entry implements Serializable {
 	private int strokeCount;
 	
 	private List<String> onReading;
-	
 	private List<String> kunReading;
+	private List<String> nanoriReading;
 	
 	private List<String> radicals;
 	
@@ -40,6 +40,10 @@ public class KanjiDic2Entry implements Serializable {
 	public List<String> getKunReading() {
 		return kunReading;
 	}
+	
+	public List<String> getNanoriReading() {
+		return nanoriReading;
+	}
 
 	public void setKanji(String kanji) {
 		this.kanji = kanji;
@@ -55,6 +59,10 @@ public class KanjiDic2Entry implements Serializable {
 
 	public void setKunReading(List<String> kunReading) {
 		this.kunReading = kunReading;
+	}
+	
+	public void setNanoriReading(List<String> nanoriReading) {
+		this.nanoriReading = nanoriReading;
 	}
 
 	public List<String> getRadicals() {
