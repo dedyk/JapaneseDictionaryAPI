@@ -897,6 +897,20 @@ public abstract class DictionaryManagerAbstract {
 				}
 			}
 		}
+		
+		List<String> nanoriReading = kanjiDic2Entry.getNanoriReading();
+
+		if (nanoriReading != null && nanoriReading.size() > 0) {
+
+			for (String currentNanoriReading : nanoriReading) {
+
+				List<String> readingVariantList = getReadingVariant(currentNanoriReading);
+
+				if (readingVariantList != null) {
+					result.addAll(readingVariantList);
+				}
+			}
+		}
 
 		// generate additional
 

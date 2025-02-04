@@ -151,7 +151,7 @@ public class Utils {
 	}
 
 	public static KanjiEntry parseKanjiEntry(String idString, String kanjiString, String strokeCountString,
-			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList,
+			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList, List<String> nanoriReadingList,
 			Object strokePathObject, List<String> polishTranslateList, String infoString, String usedString,
 			List<String> groupsList) throws DictionaryException {
 
@@ -174,6 +174,7 @@ public class Utils {
 			kanjiDic2Entry.setRadicals(radicalsList);
 			kanjiDic2Entry.setKunReading(kunReadingList);
 			kanjiDic2Entry.setOnReading(onReadingList);
+			kanjiDic2Entry.setNanoriReading(nanoriReadingList);
 		}
 
 		KanjiEntry entry = new KanjiEntry();
