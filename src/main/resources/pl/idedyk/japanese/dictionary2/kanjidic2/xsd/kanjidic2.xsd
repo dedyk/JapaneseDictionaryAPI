@@ -21,6 +21,7 @@
 
 	<xsd:complexType name="characterInfo">
 		<xsd:sequence>
+			<xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:integer" /> <!-- moja modyfikacja: unikalny identyfikator znaku -->
 			<xsd:element name="literal" minOccurs="1" maxOccurs="1" type="xsd:string" /> <!-- znak kanji -->
 			<xsd:element name="codepoint" minOccurs="1" maxOccurs="1" type="codePointInfo" /> <!-- informacja o kodowaniu w wybranych standardach -->
 			<xsd:element name="radical" minOccurs="1" maxOccurs="1" type="radicalInfo" /> <!-- ??? -->
@@ -126,8 +127,9 @@
 	
 	<xsd:complexType name="misc2Info">
 		<xsd:sequence>
-			<xsd:element name="groups" minOccurs="0" maxOccurs="unbounded" type="misc2InfoGroup" />
-			<xsd:element name="used" minOccurs="1" maxOccurs="1" type="xsd:boolean" />	
+			<xsd:element name="groups" minOccurs="0" maxOccurs="unbounded" type="misc2InfoGroup" /> <!-- nazwy grup, do ktorych nalezy znak kanji -->
+			<xsd:element name="used" minOccurs="1" maxOccurs="1" type="xsd:boolean" />	 <!-- czy znak uzywany w slowach -->
+			<xsd:element name="strokePaths" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- kolejnosc pisania kresek -->
 		</xsd:sequence>
 	</xsd:complexType>
 	
