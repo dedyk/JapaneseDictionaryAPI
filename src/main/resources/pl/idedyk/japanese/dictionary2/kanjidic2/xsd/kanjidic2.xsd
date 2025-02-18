@@ -130,6 +130,7 @@
 			<xsd:element name="groups" minOccurs="0" maxOccurs="unbounded" type="misc2InfoGroup" /> <!-- nazwy grup, do ktorych nalezy znak kanji -->
 			<xsd:element name="used" minOccurs="1" maxOccurs="1" type="xsd:boolean" />	 <!-- czy znak uzywany w slowach -->
 			<xsd:element name="strokePaths" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- kolejnosc pisania kresek -->
+			<xsd:element name="radicals" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- lista elementow podstawowych --> 
 		</xsd:sequence>
 	</xsd:complexType>
 	
