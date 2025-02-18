@@ -150,6 +150,7 @@ public class Utils {
 		return result;
 	}
 
+	@Deprecated
 	public static KanjiEntry parseKanjiEntry(String idString, String kanjiString, String strokeCountString,
 			List<String> radicalsList, List<String> onReadingList, List<String> kunReadingList, List<String> nanoriReadingList,
 			Object strokePathObject, List<String> polishTranslateList, String infoString, String usedString,
