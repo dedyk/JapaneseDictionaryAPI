@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary.api.dictionary;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary.api.dto.AttributeList;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
@@ -12,6 +13,10 @@ import pl.idedyk.japanese.dictionary.api.dto.KanjiDic2Entry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjivgEntry;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.CharacterInfo;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfo;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroup;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroupMeaningLangEnum;
 
 public class Utils {
 
@@ -555,4 +560,37 @@ public class Utils {
 
 		return text;
 	}
+	
+	public static List<String> getPolishTranslates(CharacterInfo kanjiCharacterInfo) {
+		List<String> result = new ArrayList<>();
+		
+		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
+		
+		if (readingMeaning != null) {
+			ReadingMeaningInfoReadingMeaningGroup readingMeaningGroup = readingMeaning.getReadingMeaningGroup();
+			
+			if (readingMeaningGroup != null) {
+				result.addAll(readingMeaningGroup.getMeaningList().stream().filter(f -> f.getLang() == ReadingMeaningInfoReadingMeaningGroupMeaningLangEnum.PL).
+					map(f -> f.getValue()).collect(Collectors.toList()));				
+			}
+		}
+		
+		return result;		
+	}
+	
+	public static String getPolishAdditionalInfo(CharacterInfo kanjiCharacterInfo) {		
+		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
+		
+		if (readingMeaning != null) {
+			ReadingMeaningInfoReadingMeaningGroup readingMeaningGroup = readingMeaning.getReadingMeaningGroup();
+			
+			if (readingMeaningGroup != null) {
+				return readingMeaningGroup.getAdditionalInfoList().stream().filter(f -> f.getLang() == ReadingMeaningInfoReadingMeaningGroupMeaningLangEnum.PL).
+					map(f -> f.getValue()).findFirst().orElse(null);				
+			}
+		}
+		
+		return null;		
+	}
+
 }
