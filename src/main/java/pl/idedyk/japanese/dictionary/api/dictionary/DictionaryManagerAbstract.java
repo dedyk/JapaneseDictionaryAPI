@@ -36,6 +36,7 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.CharacterInfo;
 
 public abstract class DictionaryManagerAbstract {
 	
@@ -419,42 +420,42 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntryNameByUniqueKey(uniqueKey);
 	}
 
-	public List<KanjiEntry> findKnownKanji(String text) throws DictionaryException {
+	public List<CharacterInfo> findKnownKanji(String text) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		List<KanjiEntry> result = new ArrayList<KanjiEntry>();
+		List<CharacterInfo> result = new ArrayList<CharacterInfo>();
 
 		for (int idx = 0; idx < text.length(); ++idx) {
 
 			String currentChar = String.valueOf(text.charAt(idx));
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			CharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(currentChar);
 
-			if (kanjiEntry != null) {
-				result.add(kanjiEntry);
+			if (kanjiCharacterInfo != null) {
+				result.add(kanjiCharacterInfo);
 			}
 		}
 
 		return result;
 	}
 
-	public KanjiEntry findKanji(String kanji) throws DictionaryException {
+	public CharacterInfo findKanji(String kanji) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(kanji);		
+		CharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(kanji);		
 
-		return kanjiEntry;
+		return kanjiCharacterInfo;
 	}
 	
-	public List<KanjiEntry> findKanjiList(List<String> kanjiList) throws DictionaryException {
+	public List<CharacterInfo> findKanjiList(List<String> kanjiList) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		List<KanjiEntry> kanjiEntryList = databaseConnector.getKanjiEntryList(kanjiList);		
+		List<CharacterInfo> kanjiCharacterInfoList = databaseConnector.getKanjiEntryList(kanjiList);		
 
-		return kanjiEntryList;
+		return kanjiCharacterInfoList;
 	}
 
 	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException {
