@@ -12,7 +12,7 @@ import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
-import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.CharacterInfo;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 
 public interface IDatabaseConnector {
 
@@ -35,15 +35,15 @@ public interface IDatabaseConnector {
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
 	
-	public CharacterInfo getKanjiEntryById(String id) throws DictionaryException;
+	public KanjiCharacterInfo getKanjiEntryById(String id) throws DictionaryException;
 	
-	public CharacterInfo getKanjiEntry(String kanji) throws DictionaryException;
+	public KanjiCharacterInfo getKanjiEntry(String kanji) throws DictionaryException;
 	
-	public List<CharacterInfo> getKanjiEntryList(List<String> kanjiList) throws DictionaryException;
+	public List<KanjiCharacterInfo> getKanjiEntryList(List<String> kanjiList) throws DictionaryException;
 	
-	public List<CharacterInfo> getAllKanjis(boolean onlyUsed) throws DictionaryException;
+	public List<KanjiCharacterInfo> getAllKanjis(boolean onlyUsed) throws DictionaryException;
 	
-	public List<CharacterInfo> findKanjiFromRadicals(String[] radicals) throws DictionaryException;
+	public List<KanjiCharacterInfo> findKanjiFromRadicals(String[] radicals) throws DictionaryException;
 	
 	public FindKanjiResult findKanjisFromStrokeCount(int from, int to) throws DictionaryException;
 	

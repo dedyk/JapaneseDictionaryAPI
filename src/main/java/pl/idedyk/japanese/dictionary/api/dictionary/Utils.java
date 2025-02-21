@@ -13,7 +13,7 @@ import pl.idedyk.japanese.dictionary.api.dto.KanjiDic2Entry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjivgEntry;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
-import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.CharacterInfo;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroup;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroupMeaningLangEnum;
@@ -561,7 +561,7 @@ public class Utils {
 		return text;
 	}
 	
-	public static List<String> getPolishTranslates(CharacterInfo kanjiCharacterInfo) {
+	public static List<String> getPolishTranslates(KanjiCharacterInfo kanjiCharacterInfo) {
 		List<String> result = new ArrayList<>();
 		
 		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
@@ -578,7 +578,7 @@ public class Utils {
 		return result;		
 	}
 	
-	public static String getPolishAdditionalInfo(CharacterInfo kanjiCharacterInfo) {		
+	public static String getPolishAdditionalInfo(KanjiCharacterInfo kanjiCharacterInfo) {		
 		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
 		
 		if (readingMeaning != null) {

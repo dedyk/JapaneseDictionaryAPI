@@ -36,7 +36,6 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
-import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.CharacterInfo;
 
 public abstract class DictionaryManagerAbstract {
 	
@@ -449,7 +448,7 @@ public abstract class DictionaryManagerAbstract {
 		return kanjiCharacterInfo;
 	}
 	
-	public List<CharacterInfo> findKanjiList(List<String> kanjiList) throws DictionaryException {
+	public List<KanjiCharacterInfo> findKanjiList(List<String> kanjiList) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
