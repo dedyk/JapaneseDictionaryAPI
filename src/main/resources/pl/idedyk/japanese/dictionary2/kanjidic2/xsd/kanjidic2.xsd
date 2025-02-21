@@ -6,7 +6,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="header" minOccurs="1" maxOccurs="1" type="headerInfo" /> <!-- naglowek slownika -->
-				<xsd:element name="character" minOccurs="0" maxOccurs="unbounded" type="characterInfo" /> <!-- lista znakow kanji -->
+				<xsd:element name="character" minOccurs="0" maxOccurs="unbounded" type="kanjiCharacterInfo" /> <!-- lista znakow kanji -->
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -19,7 +19,7 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="characterInfo">
+	<xsd:complexType name="kanjiCharacterInfo">
 		<xsd:sequence>
 			<xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:integer" /> <!-- moja modyfikacja: unikalny identyfikator znaku -->
 			<xsd:element name="literal" minOccurs="1" maxOccurs="1" type="xsd:string" /> <!-- znak kanji -->
