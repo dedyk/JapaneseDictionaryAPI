@@ -27,8 +27,6 @@ import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.dto.KanaEntry;
-import pl.idedyk.japanese.dictionary.api.dto.KanjiDic2Entry;
-import pl.idedyk.japanese.dictionary.api.dto.KanjiEntry;
 import pl.idedyk.japanese.dictionary.api.dto.KanjivgEntry;
 import pl.idedyk.japanese.dictionary.api.dto.RadicalInfo;
 import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDictionaryEntry;
@@ -36,6 +34,8 @@ import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
 
 public abstract class DictionaryManagerAbstract {
 	
@@ -419,17 +419,17 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntryNameByUniqueKey(uniqueKey);
 	}
 
-	public List<CharacterInfo> findKnownKanji(String text) throws DictionaryException {
+	public List<KanjiCharacterInfo> findKnownKanji(String text) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		List<CharacterInfo> result = new ArrayList<CharacterInfo>();
+		List<KanjiCharacterInfo> result = new ArrayList<KanjiCharacterInfo>();
 
 		for (int idx = 0; idx < text.length(); ++idx) {
 
 			String currentChar = String.valueOf(text.charAt(idx));
 
-			CharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(currentChar);
+			KanjiCharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(currentChar);
 
 			if (kanjiCharacterInfo != null) {
 				result.add(kanjiCharacterInfo);
@@ -439,11 +439,11 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public CharacterInfo findKanji(String kanji) throws DictionaryException {
+	public KanjiCharacterInfo findKanji(String kanji) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		CharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(kanji);		
+		KanjiCharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(kanji);		
 
 		return kanjiCharacterInfo;
 	}
@@ -452,19 +452,19 @@ public abstract class DictionaryManagerAbstract {
 		
 		waitForDatabaseReady();
 
-		List<CharacterInfo> kanjiCharacterInfoList = databaseConnector.getKanjiEntryList(kanjiList);		
+		List<KanjiCharacterInfo> kanjiCharacterInfoList = databaseConnector.getKanjiEntryList(kanjiList);		
 
 		return kanjiCharacterInfoList;
 	}
 
-	public List<KanjiEntry> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException {
+	public List<KanjiCharacterInfo> getAllKanjis(boolean onlyUsed) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getAllKanjis(withDetails, onlyUsed);
+		return databaseConnector.getAllKanjis(onlyUsed);
 	}
 	
-	public KanjiEntry getKanjiEntryById(int id) throws DictionaryException {
+	public KanjiCharacterInfo getKanjiEntryById(int id) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
@@ -473,16 +473,16 @@ public abstract class DictionaryManagerAbstract {
 	
 	public abstract List<RadicalInfo> getRadicalList();
 	
-	public List<KanjiEntry> findKnownKanjiFromRadicals(String[] radicals) throws DictionaryException {
+	public List<KanjiCharacterInfo> findKnownKanjiFromRadicals(String[] radicals) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		List<KanjiEntry> result = databaseConnector.findKanjiFromRadicals(radicals);
+		List<KanjiCharacterInfo> result = databaseConnector.findKanjiFromRadicals(radicals);
 
-		Collections.sort(result, new Comparator<KanjiEntry>() {
+		Collections.sort(result, new Comparator<KanjiCharacterInfo>() {
 
 			@Override
-			public int compare(KanjiEntry lhs, KanjiEntry rhs) {
+			public int compare(KanjiCharacterInfo lhs, KanjiCharacterInfo rhs) {
 
 				int lhsId = lhs.getId();
 				int rhsId = rhs.getId();
@@ -509,10 +509,10 @@ public abstract class DictionaryManagerAbstract {
 
 		FindKanjiResult result = databaseConnector.findKanjisFromStrokeCount(from, to);
 
-		Collections.sort(result.getResult(), new Comparator<KanjiEntry>() {
+		Collections.sort(result.getResult(), new Comparator<KanjiCharacterInfo>() {
 
 			@Override
-			public int compare(KanjiEntry lhs, KanjiEntry rhs) {
+			public int compare(KanjiCharacterInfo lhs, KanjiCharacterInfo rhs) {
 
 				int lhsId = lhs.getId();
 				int rhsId = rhs.getId();
@@ -546,10 +546,10 @@ public abstract class DictionaryManagerAbstract {
 		
 		FindKanjiResult findKanjiResult = databaseConnector.findKanji(findKanjiRequest);
 		
-		Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiEntry>() {
+		Collections.sort(findKanjiResult.getResult(), new Comparator<KanjiCharacterInfo>() {
 
 			@Override
-			public int compare(KanjiEntry lhs, KanjiEntry rhs) {
+			public int compare(KanjiCharacterInfo lhs, KanjiCharacterInfo rhs) {
 				
 				String findWord = findKanjiRequest.word;
 				
@@ -562,7 +562,7 @@ public abstract class DictionaryManagerAbstract {
 					return 1;
 				}
 									
-				List<String> lhsPolishTranslates = lhs.getPolishTranslates();
+				List<String> lhsPolishTranslates = Utils.getPolishTranslates(lhs);
 
 				boolean islhsPolishTranslates = false;
 				
@@ -574,7 +574,7 @@ public abstract class DictionaryManagerAbstract {
 					}
 				}
 				
-				List<String> rhsPolishTranslates = rhs.getPolishTranslates();
+				List<String> rhsPolishTranslates = Utils.getPolishTranslates(rhs);
 
 				boolean isRhsPolishTranslates = false;
 				
@@ -624,12 +624,12 @@ public abstract class DictionaryManagerAbstract {
 			String currentChar = String.valueOf(word.charAt(idx));
 			String nextChar = idx + 1 < word.length() ? String.valueOf(word.charAt(idx + 1)) : null;
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiCharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(currentChar);
 
-			if (kanjiEntry != null) {
-				KanjivgEntry kanjivgEntry = kanjiEntry.getKanjivgEntry();
-				
-				if (kanjivgEntry == null || kanjivgEntry.getStrokePaths() == null || kanjivgEntry.getStrokePaths().size() == 0) {
+			if (kanjiCharacterInfo != null) {
+				Misc2Info kanjiCharacterInfoMisc2 = kanjiCharacterInfo.getMisc2();
+								
+				if (kanjiCharacterInfoMisc2 == null || kanjiCharacterInfoMisc2.getStrokePaths() == null || kanjiCharacterInfoMisc2.getStrokePaths().size() == 0) {
 					return false;
 				}
 
@@ -676,10 +676,16 @@ public abstract class DictionaryManagerAbstract {
 			String currentChar = String.valueOf(word.charAt(idx));
 			String nextChar = idx + 1 < word.length() ? String.valueOf(word.charAt(idx + 1)) : null;
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiCharacterInfo kanjiCharacterInfo = databaseConnector.getKanjiEntry(currentChar);
 
-			if (kanjiEntry != null) {
-				result.add(kanjiEntry.getKanjivgEntry());
+			if (kanjiCharacterInfo != null && kanjiCharacterInfo.getMisc2().getStrokePaths().size() > 0) {
+				
+				KanjivgEntry kanjivgEntry = new KanjivgEntry();
+				
+				kanjivgEntry.setKanji(kanjiCharacterInfo.getKanji());
+				kanjivgEntry.setStrokePaths(kanjiCharacterInfo.getMisc2().getStrokePaths());
+				
+				result.add(kanjivgEntry);
 				
 			} else {
 				
@@ -783,7 +789,7 @@ public abstract class DictionaryManagerAbstract {
 
 			String currentChar = String.valueOf(kanji.charAt(idx));
 
-			KanjiEntry kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
+			KanjiCharacterInfo kanjiEntry = databaseConnector.getKanjiEntry(currentChar);
 
 			if (kanjiEntry == null) { // if hiragana
 
@@ -848,17 +854,11 @@ public abstract class DictionaryManagerAbstract {
 		return furiganaEntries;
 	}
 
-	private List<String> normalizeKanjiReading(KanjiEntry kanjiEntry) {
+	private List<String> normalizeKanjiReading(KanjiCharacterInfo kanjiCharacterInfo) {
 
 		List<String> result = new ArrayList<String>();
 
-		KanjiDic2Entry kanjiDic2Entry = kanjiEntry.getKanjiDic2Entry();
-
-		if (kanjiDic2Entry == null) {
-			return result;
-		}
-
-		List<String> kunReading = kanjiDic2Entry.getKunReading();
+		List<String> kunReading = Utils.getKunReading(kanjiCharacterInfo);
 
 		if (kunReading != null && kunReading.size() > 0) {
 
@@ -872,7 +872,7 @@ public abstract class DictionaryManagerAbstract {
 			}
 		}
 
-		List<String> onReading = kanjiDic2Entry.getOnReading();
+		List<String> onReading = Utils.getOnReading(kanjiCharacterInfo);
 
 		if (onReading != null && onReading.size() > 0) {
 
@@ -898,7 +898,7 @@ public abstract class DictionaryManagerAbstract {
 			}
 		}
 		
-		List<String> nanoriReading = kanjiDic2Entry.getNanoriReading();
+		List<String> nanoriReading = Utils.getNanoriReading(kanjiCharacterInfo);
 
 		if (nanoriReading != null && nanoriReading.size() > 0) {
 

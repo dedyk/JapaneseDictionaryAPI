@@ -17,6 +17,7 @@ import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroup;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroupMeaningLangEnum;
+import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.ReadingMeaningInfoReadingMeaningGroupReadingTypeEnum;
 
 public class Utils {
 
@@ -592,5 +593,46 @@ public class Utils {
 		
 		return null;		
 	}
-
+	
+	public static List<String> getKunReading(KanjiCharacterInfo kanjiCharacterInfo) {
+		List<String> result = new ArrayList<>();
+		
+		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
+		
+		if (readingMeaning != null) {
+			ReadingMeaningInfoReadingMeaningGroup readingMeaningGroup = readingMeaning.getReadingMeaningGroup();
+			
+			result.addAll(readingMeaningGroup.getReadingList().stream().filter(f -> f.getType() == ReadingMeaningInfoReadingMeaningGroupReadingTypeEnum.JA_KUN).
+					map(f -> f.getValue()).collect(Collectors.toList()));			
+		}
+		
+		return result;
+	}
+	
+	public static List<String> getOnReading(KanjiCharacterInfo kanjiCharacterInfo) {
+		List<String> result = new ArrayList<>();
+		
+		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
+		
+		if (readingMeaning != null) {
+			ReadingMeaningInfoReadingMeaningGroup readingMeaningGroup = readingMeaning.getReadingMeaningGroup();
+			
+			result.addAll(readingMeaningGroup.getReadingList().stream().filter(f -> f.getType() == ReadingMeaningInfoReadingMeaningGroupReadingTypeEnum.JA_ON).
+					map(f -> f.getValue()).collect(Collectors.toList()));			
+		}
+		
+		return result;
+	}
+	
+	public static List<String> getNanoriReading(KanjiCharacterInfo kanjiCharacterInfo) {
+		List<String> result = new ArrayList<>();
+		
+		ReadingMeaningInfo readingMeaning = kanjiCharacterInfo.getReadingMeaning();
+		
+		if (readingMeaning != null) {
+			result.addAll(readingMeaning.getNanoriList());			
+		}
+		
+		return result;
+	}
 }
