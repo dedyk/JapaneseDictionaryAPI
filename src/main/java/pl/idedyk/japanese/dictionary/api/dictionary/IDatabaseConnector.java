@@ -94,17 +94,28 @@ public interface IDatabaseConnector {
 	}
 	
 	public class GetAllKanjisWrapper {
-				
+		
+		private boolean withDetails;
+		
 		private boolean onlyUsed;
 		
 		public GetAllKanjisWrapper() {
 			// noop
 		}
 
-		public GetAllKanjisWrapper(boolean onlyUsed) {
+		public GetAllKanjisWrapper(boolean withDetails, boolean onlyUsed) {
+			this.withDetails = withDetails;
 			this.onlyUsed = onlyUsed;
 		}
-		
+
+		public boolean isWithDetails() {
+			return withDetails;
+		}
+
+		public void setWithDetails(boolean withDetails) {
+			this.withDetails = withDetails;
+		}
+
 		public boolean isOnlyUsed() {
 			return onlyUsed;
 		}
