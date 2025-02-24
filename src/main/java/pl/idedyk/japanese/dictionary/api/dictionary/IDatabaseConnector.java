@@ -35,7 +35,7 @@ public interface IDatabaseConnector {
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
 	
-	public KanjiCharacterInfo getKanjiEntryById(String id) throws DictionaryException;
+	public KanjiCharacterInfo getKanjiCharacterInfoById(String id) throws DictionaryException;
 	
 	public KanjiCharacterInfo getKanjiEntry(String kanji) throws DictionaryException;
 	
@@ -94,28 +94,17 @@ public interface IDatabaseConnector {
 	}
 	
 	public class GetAllKanjisWrapper {
-		
-		private boolean withDetails;
-		
+				
 		private boolean onlyUsed;
 		
 		public GetAllKanjisWrapper() {
 			// noop
 		}
 
-		public GetAllKanjisWrapper(boolean withDetails, boolean onlyUsed) {
-			this.withDetails = withDetails;
+		public GetAllKanjisWrapper(boolean onlyUsed) {
 			this.onlyUsed = onlyUsed;
 		}
-
-		public boolean isWithDetails() {
-			return withDetails;
-		}
-
-		public void setWithDetails(boolean withDetails) {
-			this.withDetails = withDetails;
-		}
-
+		
 		public boolean isOnlyUsed() {
 			return onlyUsed;
 		}
