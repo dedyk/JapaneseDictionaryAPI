@@ -35,7 +35,7 @@ public interface IDatabaseConnector {
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
 	
-	public KanjiCharacterInfo getKanjiCharacterInfoById(String id) throws DictionaryException;
+	public KanjiCharacterInfo getKanjiEntryById(String id) throws DictionaryException;
 	
 	public KanjiCharacterInfo getKanjiEntry(String kanji) throws DictionaryException;
 	

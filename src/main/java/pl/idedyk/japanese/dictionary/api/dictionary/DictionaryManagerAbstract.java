@@ -464,11 +464,11 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getAllKanjis(onlyUsed);
 	}
 	
-	public KanjiCharacterInfo getKanjiCharacterInfoById(int id) throws DictionaryException {
+	public KanjiCharacterInfo getKanjiEntryById(int id) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getKanjiCharacterInfoById(String.valueOf(id));
+		return databaseConnector.getKanjiEntryById(String.valueOf(id));
 	}
 	
 	public abstract List<RadicalInfo> getRadicalList();
