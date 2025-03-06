@@ -102,6 +102,15 @@
 			<jxb:property name="additionalInfoList" />
 		</jxb:bindings>
 
+		<jxb:bindings node="//xsd:element[@name='groups']">
+			<jxb:property>
+				<jxb:baseType>
+					<jxb:javaType name="pl.idedyk.japanese.dictionary.api.dto.GroupEnum" parseMethod="pl.idedyk.japanese.dictionary.api.dto.GroupEnumConverter.unmarshal"
+						printMethod="pl.idedyk.japanese.dictionary.api.dto.GroupEnumConverter.marshal" />
+				</jxb:baseType>
+			</jxb:property>
+		</jxb:bindings>
+
 		<jxb:bindings node="//xsd:attribute[@name='r_type']">
 			<jxb:property name="type" />
 		</jxb:bindings>
