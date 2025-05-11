@@ -457,11 +457,11 @@ public abstract class DictionaryManagerAbstract {
 		return kanjiCharacterInfoList;
 	}
 
-	public List<KanjiCharacterInfo> getAllKanjis(boolean onlyUsed) throws DictionaryException {
+	public List<KanjiCharacterInfo> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getAllKanjis(onlyUsed);
+		return databaseConnector.getAllKanjis(withDetails, onlyUsed);
 	}
 	
 	public KanjiCharacterInfo getKanjiEntryById(int id) throws DictionaryException {

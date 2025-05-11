@@ -41,7 +41,7 @@ public interface IDatabaseConnector {
 	
 	public List<KanjiCharacterInfo> getKanjiEntryList(List<String> kanjiList) throws DictionaryException;
 	
-	public List<KanjiCharacterInfo> getAllKanjis(boolean onlyUsed) throws DictionaryException;
+	public List<KanjiCharacterInfo> getAllKanjis(boolean withDetails, boolean onlyUsed) throws DictionaryException;
 	
 	public List<KanjiCharacterInfo> findKanjiFromRadicals(String[] radicals) throws DictionaryException;
 	
