@@ -27,22 +27,22 @@ public class KeigoHelper {
 
 		// iru
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, null, "いる", "iru", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "いらっしゃる", null, "irassharu", null, null, "いらっしゃい",
+				DictionaryEntryType.WORD_VERB_U, "居らっしゃる", null, "いらっしゃる", null, "irassharu", null, "居らっしゃい", "いらっしゃい",
 				"irasshai");
 
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, "居る", "いる", "iru", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "いらっしゃる", null, "irassharu", null, null, "いらっしゃい",
+				DictionaryEntryType.WORD_VERB_U, "居らっしゃる", null, "いらっしゃる", null, "irassharu", null, "居らっしゃい", "いらっしゃい",
 				"irasshai");
 
 		// iku
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_U, "行く", "いく", "iku", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "いらっしゃる", null, "irassharu", null, null, "いらっしゃい",
+				DictionaryEntryType.WORD_VERB_U, "居らっしゃる", null, "いらっしゃる", null, "irassharu", null, "居らっしゃい", "いらっしゃい",
 				"irasshai");
 
 		// kuru
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_IRREGULAR, "来る", "くる", "kuru",
-				KeigoEntryFindMatchType.END_WITH, DictionaryEntryType.WORD_VERB_U, null, null, "いらっしゃる", null,
-				"irassharu", null, null, "いらっしゃい", "irasshai");
+				KeigoEntryFindMatchType.END_WITH, DictionaryEntryType.WORD_VERB_U, "居らっしゃる", null, "いらっしゃる", null,
+				"irassharu", null, "居らっしゃい", "いらっしゃい", "irasshai");
 
 		// miru
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, "見る", "みる", "miru", KeigoEntryFindMatchType.END_WITH,
@@ -111,7 +111,7 @@ public class KeigoHelper {
 				DictionaryEntryType.WORD_VERB_U, "お休み", "になる", "おやすみ", "になる", "oyasumi", "ni naru", null, null, null);
 
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, null, "ている", "te iru", KeigoEntryFindMatchType.END_WITH,
-				DictionaryEntryType.WORD_VERB_U, null, null, "ていらっしゃる", null, "te irassharu", null, null, "ていらっしゃい",
+				DictionaryEntryType.WORD_VERB_U, "て居らっしゃる", null, "ていらっしゃる", null, "te irassharu", null, "て居らっしゃい", "ていらっしゃい",
 				"te irasshai");
 
 		// *** low ***
