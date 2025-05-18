@@ -24,7 +24,7 @@
 			<xsd:element name="id" minOccurs="0" maxOccurs="1" type="xsd:integer" /> <!-- moja modyfikacja: unikalny identyfikator znaku -->
 			<xsd:element name="literal" minOccurs="1" maxOccurs="1" type="xsd:string" /> <!-- znak kanji -->
 			<xsd:element name="codepoint" minOccurs="1" maxOccurs="1" type="codePointInfo" /> <!-- informacja o kodowaniu w wybranych standardach -->
-			<xsd:element name="radical" minOccurs="1" maxOccurs="1" type="radicalInfo" /> <!-- ??? -->
+			<xsd:element name="radical" minOccurs="0" maxOccurs="1" type="radicalInfo" /> <!-- ???, zmiana wymagalnosci na 0 -->
 			<xsd:element name="misc" minOccurs="1" maxOccurs="1" type="miscInfo" /> <!-- rozne informacje -->
 			<xsd:element name="misc2" minOccurs="0" maxOccurs="1" type="misc2Info" /> <!-- moja modyfikacja: rozne dodatkowe informacje, dodatkowy element, gdyz misc to element z kanjidic2, a misc2 to calkowicie moj element -->
 			<xsd:element name="dic_number" minOccurs="0" maxOccurs="1" type="dictionaryNumberInfo" /> <!-- odnosniki do innych slownikow -->
