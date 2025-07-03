@@ -199,6 +199,9 @@ public class KeigoHelper {
 		addKeigoLowEntry(DictionaryEntryType.UNKNOWN, null, "です", "desu", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "でご座る", null, "でござる", null, "de gozaru", null, "でご座い", "でござい", "de gozai");
 
+		addKeigoLowEntry(DictionaryEntryType.UNKNOWN, null, "です", "desu", KeigoEntryFindMatchType.END_WITH,
+				DictionaryEntryType.WORD_VERB_U, "で厶る", null, "でござる", null, "de gozaru", null, "でご厶い", "でござい", "de gozai");
+
 		// te iru - special
 		addKeigoLowEntry(DictionaryEntryType.WORD_VERB_RU, null, "ている", "te iru", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, null, null, "ておる", null, "te oru", null, null, null, null);
