@@ -108,9 +108,11 @@ public abstract class DictionaryManagerAbstract {
 
 		findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
+		// FM_FIXME: do naprawy
+		/*
 		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);		
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
-
+		*/
 		//
 				
 		// sortujemy
@@ -172,7 +174,7 @@ public abstract class DictionaryManagerAbstract {
 			ResultItem resultItem = resultIterator.next();
 						
 			// czy jest nazwa
-			if (resultItem.getDictionaryEntry().isName() == true) {
+			if (resultItem.isName() == true) {
 				
 				nameResultList.add(resultItem);
 				
@@ -180,28 +182,28 @@ public abstract class DictionaryManagerAbstract {
 			}
 						
 			// czy kanji dokladnie pasuje
-			String kanji = resultItem.getKanji();
+			List<String> kanjiList = resultItem.getKanjiList();
 			
-			if (kanji != null && kanji.equals(findWord) == true) {
-				
+			if (kanjiList.contains(findWord) == true) {				
 				kanjiMatchResultList.add(resultItem);
 				
 				continue;
 			}
 			
 			// czy kanji zaczyna sie od
-			if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {
-				
-				kanjiBeginResultList.add(resultItem);
-				
-				continue;				
+			for (String kanji : kanjiList) {
+				if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {				
+					kanjiBeginResultList.add(resultItem);
+					
+					continue MAIN_LOOP;			
+				}
 			}
+			
 			
 			// czy kana dokladnie pasuje
 			List<String> kanaList = resultItem.getKanaList();
 			
-			if (kanaList.contains(findWord) == true) {
-				
+			if (kanaList.contains(findWord) == true) {				
 				kanaMatchResultList.add(resultItem);
 				
 				continue;
@@ -210,10 +212,8 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji dokladnie pasuje
 			List<String> romajiList = resultItem.getRomajiList();
 						
-			for (String currentRomaji : romajiList) {
-				
-				if (currentRomaji.equalsIgnoreCase(findWord) == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (currentRomaji.equalsIgnoreCase(findWord) == true) {					
 					romajiMatchResultList.add(resultItem);
 										
 					continue MAIN_LOOP;
@@ -223,10 +223,8 @@ public abstract class DictionaryManagerAbstract {
 			List<String> translates = resultItem.getTranslates();
 			
 			// czy tlumaczenie zaczyna sie od slowa
-			for (String currentTranslate : translates) {
-				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -234,10 +232,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 									
 			// czy tlumaczenie zawiera slowo
-			for (String currentTranslate : translates) {
-				
-				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBeginInAllWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -245,10 +241,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy tlumaczenie zaczyna sie od slowa
-			for (String currentTranslate : translates) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -256,10 +250,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy kana zaczyna sie od
-			for (String currentKana : kanaList) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {
-					
+			for (String currentKana : kanaList) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {					
 					kanaBeginResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -267,10 +259,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy romaji zaczyna sie od slowa
-			for (String currentRomaji : romajiList) {
-				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -278,10 +268,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 									
 			// czy romaji zawiera slowo
-			for (String currentRomaji : romajiList) {
-				
-				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBeginInAllWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -289,10 +277,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy romaji zaczyna sie od slowa
-			for (String currentRomaji : romajiList) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -303,12 +289,14 @@ public abstract class DictionaryManagerAbstract {
 			otherResultList.add(resultItem);
 		}
 		
-		// przygotowanie listy wynikowe		
+		// przygotowanie listy wynikowe	
 		Comparator<ResultItem> priorityComparator = new Comparator<ResultItem>() {
 
 			@Override
 			public int compare(ResultItem o1, ResultItem o2) {
 				
+				// FM_FIXME: do naprawy, gdy bedzie informacja o wyliczonym w czasie generowania slowniku priorytecie
+				/*
 				List<Attribute> lhsPriorityAttributeList = o1.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
 				List<Attribute> rhsPriorityAttributeList = o2.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
 				
@@ -316,6 +304,9 @@ public abstract class DictionaryManagerAbstract {
 				Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
 				
 				return lhsPriority.compareTo(rhsPriority);
+				*/
+				
+				return 0; // FM_FIXME: do naprawy
 			}			
 		};
 		

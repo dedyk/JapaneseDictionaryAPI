@@ -1,12 +1,12 @@
 package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
-import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
-import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
-import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
 
 public class FindWordResult implements Serializable {
 	
@@ -17,7 +17,6 @@ public class FindWordResult implements Serializable {
 	public boolean moreElemetsExists = false;
 	
 	public boolean foundGrammaAndExamples = false;
-	
 	public boolean foundNames = false;
 
 	public List<ResultItem> getResult() {
@@ -56,39 +55,80 @@ public class FindWordResult implements Serializable {
 		
 		private static final long serialVersionUID = 1L;
 
-		private DictionaryEntry dictionaryEntry;
+		private Entry entry;
 		
-		@Deprecated
-		private GrammaFormConjugateResult grammaFormConjugateResult;
+		private boolean isName;
+		private boolean isGrammaFormOrExamples;
 		
-		@Deprecated
-		private ExampleResult exampleResult;
-		
-		@Deprecated
-		private ExampleGroupType exampleGroupType;
-		
-		@Deprecated
-		private DictionaryEntry relatedDictionaryEntryById;
-		
-		public ResultItem(DictionaryEntry dictionaryEntry) {
-			this.dictionaryEntry = dictionaryEntry;
+		public ResultItem(Entry entry, boolean isName, boolean isGrammaFormOrExamples) {
+			this.entry = entry;
+			this.isName = isName;
+			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
+				
+		public Entry getEntry() {
+			return entry;
+		}
+
+		public boolean isName() {
+			return isName;
+		}
+
+		public boolean isGrammaFormOrExamples() {
+			return isGrammaFormOrExamples;
+		}		
+		
+		public List<String> getKanjiList() {
+			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
+			
+			if (entry != null) {
+				return entry.getKanjiInfoList().stream().filter(f -> f.getKanji() != null).map(f -> f.getKanji()).collect(Collectors.toList());
+			}
+						
+			throw new RuntimeException("getKanji");
+		}
+
+		
+		public List<String> getKanaList() {
+			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
+			
+			if (entry != null) {
+				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getValue()).collect(Collectors.toList());
+			}			
+			
+			throw new RuntimeException("getKanaList");
+		}
+		
+		public List<String> getRomajiList() {
+			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
+			
+			if (entry != null) {
+				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getRomaji()).collect(Collectors.toList());
+			}
+			
+			throw new RuntimeException("getRomajiList");
+		}
+		
+		public List<String> getTranslates() {
+			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
+			
+			if (entry != null) {
+				List<String> result = new ArrayList<>();
+				
+				for (Sense sense : entry.getSenseList()) {
+					sense.getGlossList().stream().filter(f -> f.getLang().equals("pol") == true).forEach(c -> result.add(c.getValue()));					
+				}
+				
+				return result;
+			}
+						
+			throw new RuntimeException("getTranslates");
+		}
+
+
+		// FM_FIXME: do wyczyszczenia kodu
 		
 		/*
-		public ResultItem(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntry relatedDictionaryEntryById) {
-			this.grammaFormConjugateResult = grammaFormConjugateResult;
-			
-			this.relatedDictionaryEntryById = relatedDictionaryEntryById;
-		}
-
-		public ResultItem(ExampleResult exampleResult, ExampleGroupType exampleGroupType, DictionaryEntry relatedDictionaryEntryById) {
-			this.exampleResult = exampleResult;
-			this.exampleGroupType = exampleGroupType;
-			
-			this.relatedDictionaryEntryById = relatedDictionaryEntryById;
-		}
-		*/
-
 		public DictionaryEntry getDictionaryEntry() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry;
@@ -112,18 +152,6 @@ public class FindWordResult implements Serializable {
 			throw new RuntimeException("isKanjiExists");
 		}
 
-		public String getKanji() {
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getKanji();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getKanji();
-			} else if (exampleResult != null) {
-				return exampleResult.getKanji();
-			}
-			
-			throw new RuntimeException("getKanji");
-		}
-
 		public String getPrefixKana() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getPrefixKana();
@@ -134,19 +162,6 @@ public class FindWordResult implements Serializable {
 			}
 			
 			throw new RuntimeException("getPrefixKana");
-		}
-
-		@SuppressWarnings("deprecation")
-		public List<String> getKanaList() {
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getKanaList();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getKanaList();
-			} else if (exampleResult != null) {
-				return exampleResult.getKanaList();
-			}
-			
-			throw new RuntimeException("getKanaList");
 		}
 
 		public String getPrefixRomaji() {
@@ -160,32 +175,7 @@ public class FindWordResult implements Serializable {
 			
 			throw new RuntimeException("getPrefixRomaji");
 		}
-
-		@SuppressWarnings("deprecation")
-		public List<String> getRomajiList() {
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getRomajiList();
-			} else if (grammaFormConjugateResult != null) {
-				return grammaFormConjugateResult.getRomajiList();
-			} else if (exampleResult != null) {
-				return exampleResult.getRomajiList();
-			}
-			
-			throw new RuntimeException("getRomajiList");
-		}
-
-		public List<String> getTranslates() {
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getTranslates();
-			} else if (grammaFormConjugateResult != null) {
-				return relatedDictionaryEntryById.getTranslates();
-			} else if (exampleResult != null) {
-				return relatedDictionaryEntryById.getTranslates();
-			}
-			
-			throw new RuntimeException("getTranslates");
-		}
-
+		
 		public String getInfo() {
 			if (dictionaryEntry != null) {
 				return dictionaryEntry.getInfo();
@@ -219,5 +209,6 @@ public class FindWordResult implements Serializable {
 			
 			throw new RuntimeException("getInfo");
 		}
+		*/
 	}
 }
