@@ -497,6 +497,7 @@
 		<xsd:sequence>
 			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoEntriesInfo" />
 			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
+			<xsd:element name="attributeList" minOccurs="0" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoAttributeListInfo" />
 		</xsd:sequence>
 		
 		<xsd:attribute name="notExistsInJMdict" use="optional" type="xsd:boolean" /> <!-- czy to slowko nie istnieje w JMdict i zostalo dodatkowo dogenerowane ze starego slownika -->
@@ -507,5 +508,11 @@
 		<xsd:attribute name="kanji" use="optional" type="xsd:string" />
 		<xsd:attribute name="kana" use="required" type="xsd:string" />
 		<xsd:attribute name="romaji" use="required" type="xsd:string" />
+		<xsd:attribute name="uniqueKey" use="optional" type="xsd:string" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="oldPolishJapaneseDictionaryInfoAttributeListInfo"> <!-- moja modyfikacja, lista atrybutow ze starego slownika -->
+		<xsd:attribute name="type" use="required" type="xsd:string" />
+		<xsd:attribute name="value" use="optional" type="xsd:string" />
 	</xsd:complexType>
 </xsd:schema>
