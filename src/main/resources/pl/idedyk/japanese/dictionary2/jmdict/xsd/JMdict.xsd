@@ -496,6 +496,7 @@
 	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
 		<xsd:sequence>
 			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoEntriesInfo" />
+			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
 		</xsd:sequence>
 		
 		<xsd:attribute name="notExistsInJMdict" use="optional" type="xsd:boolean" /> <!-- czy to slowko nie istnieje w JMdict i zostalo dodatkowo dogenerowane ze starego slownika -->
