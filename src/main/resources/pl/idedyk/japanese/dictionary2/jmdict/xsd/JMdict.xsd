@@ -14,6 +14,7 @@
 							<xsd:element name="k_ele" minOccurs="0" maxOccurs="unbounded" type="kanjiInfo" /> <!-- informacja o kanji -->
 							<xsd:element name="r_ele" minOccurs="1" maxOccurs="unbounded" type="readingInfo" /> <!-- informacja o czytaniu -->
 							<xsd:element name="sense" minOccurs="1" maxOccurs="unbounded" type="sense" /> <!-- tlumaczenie -->
+							<xsd:element name="misc" minOccurs="0" maxOccurs="1" type="miscInfo" /> <!-- moja modyfikacja: rozne dodatkowe informacje, dodatkowy element, to calkowicie moj element -->
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
@@ -485,4 +486,25 @@
 			<xsd:enumeration value="zoology" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:complexType name="miscInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje -->
+		<xsd:sequence>
+			<xsd:element name="oldPolishJapaneseDictionary" minOccurs="0" maxOccurs="1" type="oldPolishJapaneseDictionaryInfo" />		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
+		<xsd:sequence>
+			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoEntriesInfo" />
+		</xsd:sequence>
+		
+		<xsd:attribute name="notExistsInJMdict" use="optional" type="xsd:boolean" /> <!-- czy to slowko nie istnieje w JMdict i zostalo dodatkowo dogenerowane ze starego slownika -->
+	</xsd:complexType>
+	
+	<xsd:complexType name="oldPolishJapaneseDictionaryInfoEntriesInfo"> <!-- moja modyfikacja, informacja o wpisie ze starego slownika -->
+		<xsd:attribute name="id" use="required" type="xsd:long" />
+		<xsd:attribute name="kanji" use="optional" type="xsd:string" />
+		<xsd:attribute name="kana" use="required" type="xsd:string" />
+		<xsd:attribute name="romaji" use="required" type="xsd:string" />
+	</xsd:complexType>
 </xsd:schema>
