@@ -499,7 +499,7 @@
 			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
 			<xsd:element name="attributeList" minOccurs="0" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoAttributeListInfo" />
 			<xsd:element name="groupsList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
-			<xsd:element name="exampleSentenceGroupIdsList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />			
+			<xsd:element name="exampleSentenceGroupIdsList" minOccurs="0" maxOccurs="unbounded" type="xsd:string" />			
 		</xsd:sequence>
 		
 		<xsd:attribute name="notExistsInJMdict" use="optional" type="xsd:boolean" /> <!-- czy to slowko nie istnieje w JMdict i zostalo dodatkowo dogenerowane ze starego slownika -->
