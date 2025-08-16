@@ -1483,7 +1483,7 @@ public class Dictionary2HelperCommon {
 			List<Gloss> glossPolList = getPolishGlossList(glossList);
 			
 			// i informacje dodatkowe
-			SenseAdditionalInfo senseAdditionalPol = findFirstAdditionalInfo(senseAdditionalInfoList);				
+			SenseAdditionalInfo senseAdditionalPol = findFirstPolishAdditionalInfo(senseAdditionalInfoList);				
 						
 			// czesci mowy
 			if (partOfSpeechList.size() > 0) {				
@@ -1565,7 +1565,7 @@ public class Dictionary2HelperCommon {
 		return printableSense;
 	}
 	
-	private static List<Gloss> getPolishGlossList(List<Gloss> glossPolList) {
+	public static List<Gloss> getPolishGlossList(List<Gloss> glossPolList) {
 				
 		List<Gloss> result = new ArrayList<>();
 		
@@ -1578,7 +1578,7 @@ public class Dictionary2HelperCommon {
 		return result;
 	}
 	
-	private static SenseAdditionalInfo findFirstAdditionalInfo(List<SenseAdditionalInfo> additionalInfo) {
+	public static SenseAdditionalInfo findFirstPolishAdditionalInfo(List<SenseAdditionalInfo> additionalInfo) {
 		
 		for (SenseAdditionalInfo senseAdditionalInfo : additionalInfo) {
 			if (senseAdditionalInfo.getLang().equals("pol") == true) {
