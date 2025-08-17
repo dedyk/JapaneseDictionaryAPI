@@ -2,15 +2,17 @@ package pl.idedyk.japanese.dictionary.api.gramma.dto;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pl.idedyk.japanese.dictionary.api.dto.AttributeList;
+import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
 import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoAttributeListInfo;
 
 public class GrammaFormConjugateRequest implements Serializable {
 
@@ -31,7 +33,7 @@ public class GrammaFormConjugateRequest implements Serializable {
 		this.kanjiKanaPair = kanjiKanaPair;		
 	}
 
-	public List<DictionaryEntryType> getDictionaryEntryType() {
+	public List<DictionaryEntryType> getDictionaryEntryTypeList() {
 		
 		if (dictionaryEntry != null) {
 			return dictionaryEntry.getDictionaryEntryTypeList();
@@ -52,6 +54,11 @@ public class GrammaFormConjugateRequest implements Serializable {
 		}		
 		
 		throw new RuntimeException();
+	}
+	
+	public DictionaryEntryType getDictionaryEntryType() {
+		// FM_FIXME: byc moze to jeszcze bedzie do zmiany - do sprawdzenia
+		return getDictionaryEntryTypeList().get(0);
 	}
 
 	public String getPrefixKana() {
@@ -116,6 +123,38 @@ public class GrammaFormConjugateRequest implements Serializable {
 		
 		if (kanjiKanaPair != null) {
 			return Arrays.asList(kanjiKanaPair.getRomaji());
+		}
+		
+		throw new RuntimeException();
+	}
+
+	public String getRomaji() {
+		return getRomajiList().get(0);
+	}
+
+	public AttributeList getAttributeList() {
+		if (dictionaryEntry != null) {
+			return dictionaryEntry.getAttributeList();
+		}
+		
+		if (kanjiKanaPair != null) { // musza byc zapisane do Entry dane ze starego slownika, aby to dzialalo; standardowy Entry nie zadziala
+			MiscInfo misc = kanjiKanaPair.getEntry().getMisc();
+			
+			if (misc != null) {
+				OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = misc.getOldPolishJapaneseDictionary();
+				
+				if (oldPolishJapaneseDictionary != null) {
+					List<OldPolishJapaneseDictionaryInfoAttributeListInfo> oldPolishJapaneseDictionaryAttributeList = oldPolishJapaneseDictionary.getAttributeList();
+					
+					AttributeList attributeList = new AttributeList();
+					
+					for (OldPolishJapaneseDictionaryInfoAttributeListInfo oldPolishJapaneseDictionaryInfoAttributeListInfo : oldPolishJapaneseDictionaryAttributeList) {
+						attributeList.addAttributeValue(AttributeType.valueOf(oldPolishJapaneseDictionaryInfoAttributeListInfo.getType()), oldPolishJapaneseDictionaryInfoAttributeListInfo.getValue());
+					}					
+					
+					return attributeList;
+				}
+			}
 		}
 		
 		throw new RuntimeException();

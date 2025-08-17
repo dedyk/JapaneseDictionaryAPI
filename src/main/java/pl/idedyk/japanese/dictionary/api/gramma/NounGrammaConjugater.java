@@ -241,25 +241,25 @@ public class NounGrammaConjugater {
 	private static void validateDictionaryEntry(GrammaFormConjugateRequest grammaFormConjugateRequest,
 			DictionaryEntryType forceDictionaryEntryType) {
 
-		List<DictionaryEntryType> dictionaryEntryType = null;
+		List<DictionaryEntryType> dictionaryEntryTypeList = null;
 
 		if (forceDictionaryEntryType == null) {
-			dictionaryEntryType = grammaFormConjugateRequest.getDictionaryEntryType();
+			dictionaryEntryTypeList = grammaFormConjugateRequest.getDictionaryEntryTypeList();
 		} else {
-			dictionaryEntryType = Arrays.asList(forceDictionaryEntryType);
+			dictionaryEntryTypeList = Arrays.asList(forceDictionaryEntryType);
 		}
 
-		if (	dictionaryEntryType.contains(DictionaryEntryType.WORD_NOUN) == false && 
-				dictionaryEntryType.contains(DictionaryEntryType.WORD_ADJECTIVE_NO) == false &&
-				dictionaryEntryType.contains(DictionaryEntryType.WORD_TEMPORAL_NOUN) == false &&
-				dictionaryEntryType.contains(DictionaryEntryType.WORD_ADVERBIAL_NOUN) == false &&
-				dictionaryEntryType.contains(DictionaryEntryType.WORD_PROPER_NOUN) == false) {
+		if (	dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_NOUN) == false && 
+				dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_ADJECTIVE_NO) == false &&
+				dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_TEMPORAL_NOUN) == false &&
+				dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_ADVERBIAL_NOUN) == false &&
+				dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_PROPER_NOUN) == false) {
 			
 			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_NOUN && "
 					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_NO && "
 					+ "dictionaryEntryType != DictionaryEntryType.WORD_TEMPORAL_NOUN && "
 					+ "dictionaryEntryType != DictionaryEntryType.WORD_ADVERBIAL_NOUN && "
-					+ "dictionaryEntryType != DictionaryEntryType.WORD_PROPER_NOUN: " + dictionaryEntryType);
+					+ "dictionaryEntryType != DictionaryEntryType.WORD_PROPER_NOUN: " + dictionaryEntryTypeList);
 		}
 	}
 
