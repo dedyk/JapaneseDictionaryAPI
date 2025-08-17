@@ -1634,7 +1634,7 @@ public class Dictionary2HelperCommon {
 			return readingInfo.getKana().getValue();
 		}
 		
-		public String romaji() {
+		public String getRomaji() {
 
 			if (readingInfo == null) {
 				return null;
