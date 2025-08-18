@@ -7,6 +7,7 @@ import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupTypeElements;
+import pl.idedyk.japanese.dictionary.api.example.dto.ExampleRequest;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
@@ -68,19 +69,17 @@ public class GrammaExampleHelper {
 		return result;
 	}
 	
-	public static ExampleResult makeSimpleTemplateExample(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExample(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
@@ -140,19 +139,17 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
@@ -173,19 +170,17 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 
-	public static ExampleResult makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
