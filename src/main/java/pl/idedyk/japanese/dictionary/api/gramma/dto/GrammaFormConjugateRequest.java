@@ -57,7 +57,7 @@ public class GrammaFormConjugateRequest implements Serializable {
 	}
 	
 	public DictionaryEntryType getDictionaryEntryType() {
-		// FM_FIXME: byc moze to jeszcze bedzie do zmiany - do sprawdzenia
+		// FM_FIXME: byc moze to jeszcze bedzie do zmiany - do sprawdzenia - byc moze do usuniecia
 		return getDictionaryEntryTypeList().get(0);
 	}
 
@@ -112,6 +112,10 @@ public class GrammaFormConjugateRequest implements Serializable {
 		}
 		
 		throw new RuntimeException();
+	}
+	
+	public String getKana() {
+		return getKanaList().get(0);
 	}
 
 	@SuppressWarnings("deprecation")

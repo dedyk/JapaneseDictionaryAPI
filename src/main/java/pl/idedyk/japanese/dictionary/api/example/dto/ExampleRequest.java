@@ -3,10 +3,12 @@ package pl.idedyk.japanese.dictionary.api.example.dto;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary.api.dto.AttributeList;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
+import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
 import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
@@ -28,6 +30,34 @@ public class ExampleRequest implements Serializable {
 	
 	public ExampleRequest(KanjiKanaPair kanjiKanaPair) {
 		this.kanjiKanaPair = kanjiKanaPair;		
+	}
+	
+	public List<DictionaryEntryType> getDictionaryEntryTypeList() {
+		
+		if (dictionaryEntry != null) {
+			return dictionaryEntry.getDictionaryEntryTypeList();
+		}
+		
+		if (kanjiKanaPair != null) { // musza byc zapisane do Entry dane ze starego slownika, aby to dzialalo; standardowy Entry nie zadziala
+			MiscInfo misc = kanjiKanaPair.getEntry().getMisc();
+			
+			if (misc != null) {
+				OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = misc.getOldPolishJapaneseDictionary();
+				
+				if (oldPolishJapaneseDictionary != null) {
+					List<String> dictionaryEntryTypeAsStringList = oldPolishJapaneseDictionary.getDictionaryEntryTypeList();
+
+					return dictionaryEntryTypeAsStringList.stream().map(m -> DictionaryEntryType.valueOf(m)).collect(Collectors.toList());					
+				}				
+			}
+		}		
+		
+		throw new RuntimeException();
+	}
+	
+	public DictionaryEntryType getDictionaryEntryType() {
+		// FM_FIXME: byc moze to jeszcze bedzie do zmiany - do sprawdzenia - byc moze do usuniecia
+		return getDictionaryEntryTypeList().get(0);
 	}
 
 	public String getPrefixKana() {
@@ -82,6 +112,10 @@ public class ExampleRequest implements Serializable {
 		
 		throw new RuntimeException();
 	}
+	
+	public String getKana() {
+		return getKanaList().get(0);
+	}
 
 	@SuppressWarnings("deprecation")
 	public List<String> getRomajiList() {
@@ -95,6 +129,10 @@ public class ExampleRequest implements Serializable {
 		}
 		
 		throw new RuntimeException();
+	}
+	
+	public String getRomaji() {
+		return getRomajiList().get(0);
 	}
 	
 	public AttributeList getAttributeList() {
