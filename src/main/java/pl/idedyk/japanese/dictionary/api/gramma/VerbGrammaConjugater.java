@@ -888,13 +888,13 @@ public class VerbGrammaConjugater {
 		String kanji = grammaFormConjugateRequest.getKanji();
 		
 		if (kanji != null) {
-			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == false && kanji.endsWith("る") == false) {
+			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == true && kanji.endsWith("る") == false) {
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU && kanji.endsWith(る) == false): " + kanji);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == false && getLastCharConvertedToI(kanji) == null) {	
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == true && getLastCharConvertedToI(kanji) == null) {	
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_U && getLastCharConvertedToI(kanji) == null" + kanji);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == false) {
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
 				
 				if (kanji.endsWith("来る") == false && kanji.endsWith("くる") == false && kanji.endsWith("する") == false && kanji.endsWith("為る") == false && kanji.endsWith("來る") == false) {
 					throw new RuntimeException("kanji.endsWith(来る) == false && kanji.endsWith(くる) == false && kanji.endsWith(する) == false && kanji.endsWith(為る) == false && kanji.endsWith(來る) == false: " + kanji);
@@ -905,13 +905,13 @@ public class VerbGrammaConjugater {
 		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		for (String currentKana : kanaList) {
-			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == false && currentKana.endsWith("る") == false) {
+			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == true && currentKana.endsWith("る") == false) {
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU && kanji.endsWith(る) == false): " + currentKana);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == false && getLastCharConvertedToI(currentKana) == null) {
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == true && getLastCharConvertedToI(currentKana) == null) {
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_U && getLastCharConvertedToI(kanji) == null: " + currentKana);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == false) {
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
 				
 				if (currentKana.endsWith("する") == false && currentKana.endsWith("くる") == false) {
 					throw new RuntimeException("currentKana.endsWith(する) == false && currentKana.endsWith(くる) == false: " + currentKana);
@@ -922,13 +922,13 @@ public class VerbGrammaConjugater {
 		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
 
 		for (String currentRomaji : romajiList) {
-			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == false && currentRomaji.endsWith("ru") == false) {
+			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_RU) == true && currentRomaji.endsWith("ru") == false) {
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU && kanji.endsWith(ru) == false): " + currentRomaji);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == false && currentRomaji.endsWith("u") == false) {
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_U) == true && currentRomaji.endsWith("u") == false) {
 				throw new RuntimeException("dictionaryEntryType == DictionaryEntryType.WORD_VERB_U && kanji.endsWith(u) == false): " + currentRomaji);
 			
-			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == false) {
+			} else if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
 				
 				if (currentRomaji.endsWith("suru") == false && currentRomaji.endsWith("kuru") == false) {
 					throw new RuntimeException("currentRomaji.endsWith(suru) == false && currentRomaji.endsWith(kuru) == false: " + currentRomaji);
