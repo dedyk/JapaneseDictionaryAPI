@@ -163,6 +163,8 @@ public class VerbGrammaConjugater {
 
 	public static List<GrammaFormConjugateGroupTypeElements> makeAll(KeigoHelper keigoHelper, GrammaFormConjugateRequest grammaFormConjugateRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
+		// FM_FIXME: zrobic to inaczej
+		
 		// validate DictionaryEntry
 		validateDictionaryEntry(grammaFormConjugateRequest);
 		
