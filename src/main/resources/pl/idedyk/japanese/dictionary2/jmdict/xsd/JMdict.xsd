@@ -496,7 +496,6 @@
 	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
 		<xsd:sequence>
 			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoEntriesInfo" />
-			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
 			<xsd:element name="attributeList" minOccurs="0" maxOccurs="unbounded" type="oldPolishJapaneseDictionaryInfoAttributeListInfo" />
 			<xsd:element name="groupsList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
 			<xsd:element name="exampleSentenceGroupIdsList" minOccurs="0" maxOccurs="unbounded" type="xsd:string" />			
@@ -507,6 +506,7 @@
 	
 	<xsd:complexType name="oldPolishJapaneseDictionaryInfoEntriesInfo"> <!-- moja modyfikacja, informacja o wpisie ze starego slownika -->
 		<xsd:attribute name="id" use="required" type="xsd:long" />
+		<xsd:attribute name="dictionaryEntryTypeList" type="xsd:string" />
 		<xsd:attribute name="kanji" use="optional" type="xsd:string" />
 		<xsd:attribute name="kana" use="required" type="xsd:string" />
 		<xsd:attribute name="romaji" use="required" type="xsd:string" />
