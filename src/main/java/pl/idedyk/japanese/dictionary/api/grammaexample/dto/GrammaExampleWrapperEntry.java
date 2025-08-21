@@ -1,7 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.grammaexample.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +71,8 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 			}
 		}		
 		
-		return new ArrayList<DictionaryEntryType>();
+		// to nigdy nie powinno zdarzyc sie, a jesli zdarzylo sie, to znaczy, ze slownik nie zostal w pelni zsynchronizowany
+		return Arrays.asList(DictionaryEntryType.UNKNOWN);
 	}
 	
 	public DictionaryEntryType getDictionaryEntryType() {
