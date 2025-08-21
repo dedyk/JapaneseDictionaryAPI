@@ -17,7 +17,7 @@ public class AdjectiveIGrammaConjugater {
 	public static List<GrammaFormConjugateGroupTypeElements> makeAll(GrammaFormConjugateRequest grammaFormConjugateRequest, 
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
-		if (isKanaIorEorDash(grammaFormConjugateRequest) == true) { // nie liczymy dla i lub e lub ー dla kany
+		if (isKanaI(grammaFormConjugateRequest) == true) { // nie liczymy dla i dla kany
 			return null;
 		}
 		
@@ -340,9 +340,7 @@ public class AdjectiveIGrammaConjugater {
 		}		
 	}
 	
-	private static boolean isKanaIorEorDash(GrammaFormConjugateRequest grammaFormConjugateRequest) {
-		
-		// FM_FIXME: zrobic to inaczej
+	private static boolean isKanaI(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
 		String kanji = grammaFormConjugateRequest.getKanji();
 
@@ -353,7 +351,7 @@ public class AdjectiveIGrammaConjugater {
 		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		for (String currentKana : kanaList) {
-			if (currentKana.endsWith("イ") == true || currentKana.endsWith("え") == true || currentKana.endsWith("ぇ") == true || currentKana.endsWith("ー") == true) {
+			if (currentKana.endsWith("イ") == true) {
 				return true;
 			}			
 		}		
