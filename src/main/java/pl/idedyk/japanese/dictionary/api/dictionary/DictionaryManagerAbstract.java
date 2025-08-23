@@ -109,11 +109,8 @@ public abstract class DictionaryManagerAbstract {
 		findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
 		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
-		
-		// FM_FIXME: do naprawy
-		/*
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
-		*/
+
 		//
 				
 		// sortujemy

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
 
@@ -56,6 +57,7 @@ public class FindWordResult implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		private Entry entry;
+		private DictionaryEntry oldDictionaryEntry;
 		
 		private boolean isName;
 		private boolean isGrammaFormOrExamples;
@@ -65,9 +67,19 @@ public class FindWordResult implements Serializable {
 			this.isName = isName;
 			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
+		
+		public ResultItem(DictionaryEntry oldDictionaryEntry, boolean isName, boolean isGrammaFormOrExamples) {
+			this.oldDictionaryEntry = oldDictionaryEntry;
+			this.isName = isName;
+			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
+		}
 				
 		public Entry getEntry() {
 			return entry;
+		}
+
+		public DictionaryEntry getOldDictionaryEntry() {
+			return oldDictionaryEntry;
 		}
 
 		public boolean isName() {
