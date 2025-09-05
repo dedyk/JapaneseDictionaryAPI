@@ -658,6 +658,18 @@ public class Dictionary2HelperCommon {
 			case DOCUMENT:
 				result.add("dokument"); break;
 				
+			case RAILWAY_STATION:
+				result.add("stacja kolejowa"); break;
+				
+			case RELIGION:
+				result.add("religia"); break;
+				
+			case RUDE_OR_X_RATED_TERM_NOT_DISPLAYED_IN_EDUCATIONAL_SOFTWARE:
+				result.add("wulgarne lub oznaczone kategorią wiekową X"); break;
+				
+			case OTHER:
+				result.add("inny"); break;
+				
 			default:
 				throw new RuntimeException("Unknown misc enum: " + miscEnum);
 			
@@ -877,6 +889,9 @@ public class Dictionary2HelperCommon {
 		case "cze":
 			return "cze";
 			
+		case "slo":
+			return "slo";
+			
 		case "urd":
 			return "urd";
 			
@@ -937,8 +952,32 @@ public class Dictionary2HelperCommon {
 		case "bre":
 			return "bre";
 			
-			default:
-				throw new RuntimeException("Unknown language: " + language);
+		case "epo":
+			return "epo";
+			
+		case "tah":
+			return "tah";
+			
+		case "alg":
+			return "alg";
+			
+		case "bur":
+			return "bir";
+			
+		case "bnt":
+			return "ban";
+			
+		case "fil":
+			return "fil";
+			
+		case "som":
+			return "som";
+			
+		case "kur":
+			return "kur";
+						
+		default:
+			throw new RuntimeException("Unknown language: " + language);
 		}
 	}
 	
@@ -1065,7 +1104,10 @@ public class Dictionary2HelperCommon {
 			
 		case "cze":
 			return "słowo pochodzenia czeskiego";
-			
+
+		case "slo":
+			return "słowo pochodzenia słowackiego";
+
 		case "urd":
 			return "słowo pochodzi z języka urdu";
 			
@@ -1126,8 +1168,32 @@ public class Dictionary2HelperCommon {
 		case "bre":
 			return "słowo pochodzi z języka bretońskiego";
 			
-			default:
-				throw new RuntimeException("Unknown language: " + language);
+		case "epo":
+			return "słowo pochodzi z języka esperanto";
+			
+		case "tah":
+			return "słowo pochodzi z języka tahitańskiego";
+			
+		case "alg":
+			return "słowo pochodzi z języka algonkiańskiego";
+			
+		case "bur":
+			return "słowo pochodzi z języka birmańskiego";
+			
+		case "bnt":
+			return "słowo pochodzi z języka bantu";
+			
+		case "fil":
+			return "słowo pochodzi z języka filipińskiego";
+			
+		case "som":
+			return "słowo pochodzi z języka somalijskiego";
+			
+		case "kur":
+			return "słowo pochodzi z języka kurdyjskiego";
+			
+		default:
+			throw new RuntimeException("Unknown language: " + language);
 		}
 	}
 	
@@ -1283,6 +1349,9 @@ public class Dictionary2HelperCommon {
 			case GODAN_VERB_WITH_U_ENDING:
 				result.add("czasownik godan (u-czasownik) kończący się na u"); break;
 
+			case GODAN_VERB_URU_OLD_CLASS_VERB_OLD_FORM_OF_ERU:
+				result.add("czasownik godan (u-czasownik), stary czasownik klasy uru (stara forma eru)"); break;
+				
 			case GODAN_VERB_WITH_U_ENDING_SPECIAL_CLASS:
 				result.add("czasownik godan (u-czasownik) kończący się na u - klasa specjalna"); break;
 				
@@ -1316,6 +1385,12 @@ public class Dictionary2HelperCommon {
 			case NIDAN_VERB_LOWER_CLASS_WITH_MU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na mu (archaiczny)"); break;
 				
+			case NIDAN_VERB_LOWER_CLASS_WITH_BU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na bu (archaiczny)"); break;
+
+			case NIDAN_VERB_LOWER_CLASS_WITH_ZU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na zu (archaiczny)"); break;
+
 			case NIDAN_VERB_LOWER_CLASS_WITH_DZU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na dzu (archaiczny)"); break;
 				
@@ -1327,6 +1402,9 @@ public class Dictionary2HelperCommon {
 				
 			case NIDAN_VERB_LOWER_CLASS_WITH_TSU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (niższa klasa) kończący się na tsu (archaiczny)"); break;
+				
+			case NIDAN_VERB_LOWER_CLASS_WITH_U_ENDING_AND_WE_CONJUGATION_ARCHAIC:
+				result.add("czasownik nidan (niższa klasa) kończący się na u i z koniugacją we (archaiczny)"); break;
 				
 			case NIDAN_VERB_UPPER_CLASS_WITH_TSU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (wyższa klasa) kończący się na tsu (archaiczny)"); break;								
@@ -1349,6 +1427,12 @@ public class Dictionary2HelperCommon {
 			case NIDAN_VERB_UPPER_CLASS_WITH_RU_ENDING_ARCHAIC:
 				result.add("czasownik nidan (wyższa klasa) kończący się na ru (archaiczny)"); break;
 				
+			case NIDAN_VERB_UPPER_CLASS_WITH_DZU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (wyższa klasa) kończący się na dzu (archaiczny)"); break;
+
+			case NIDAN_VERB_UPPER_CLASS_WITH_MU_ENDING_ARCHAIC:
+				result.add("czasownik nidan (wyższa klasa) kończący się na mu (archaiczny)"); break;
+
 			case YODAN_VERB_WITH_KU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na ku (archaiczny)"); break;
 
@@ -1373,6 +1457,9 @@ public class Dictionary2HelperCommon {
 			case YODAN_VERB_WITH_TSU_ENDING_ARCHAIC:
 				result.add("czasownik yodan kończący się na tsu (archaiczny)"); break;
 				
+			case YODAN_VERB_WITH_NU_ENDING_ARCHAIC:
+				result.add("czasownik yodan kończący się na nu (archaiczny)"); break;
+				
 			case SHIKU_ADJECTIVE_ARCHAIC:
 				result.add("przymiotnik shiku (archaiczny)"); break;
 				
@@ -1380,7 +1467,19 @@ public class Dictionary2HelperCommon {
 				result.add("czasownik nieokreślony"); break;
 				
 			case UNCLASSIFIED:
-				result.add("niesklasyfikowany"); break;				
+				result.add("niesklasyfikowany"); break;
+				
+			case KARI_ADJECTIVE_ARCHAIC:
+				result.add("przymiotnik kari (archaiczny)"); break;
+				
+			case ADVERBIAL_NOUN_FUKUSHITEKIMEISHI:
+				result.add("rzeczownik przysłówkowy (fukushitekimeishi)"); break;
+				
+			case NOUN_TEMPORAL_JISOUMEISHI:
+				result.add("rzeczownik (przejściowy) (jisoumeishi)"); break;
+			
+			case PROPER_NOUN:
+				result.add("nazwa własna"); break;
 				
 			default:				
 				throw new RuntimeException("Unknown part of speech enum: " + partOfSpeechEnum);				
