@@ -64,18 +64,16 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 	
-	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) throws DictionaryException {
+	public List<JMdict.Entry> getWordsGroup(int dictionaryEntriesSize, int groupSize, int groupNo) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
-
-		List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+		List<JMdict.Entry> result = new ArrayList<JMdict.Entry>();
 
 		for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-			DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryById(String.valueOf(idx + 1));
+			JMdict.Entry entry = databaseConnector.getDictionaryEntry2ByCounter(idx + 1);
 
-			result.add(currentDictionaryEntry);
+			result.add(entry);
 		}
 
 		return result;
