@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.DialectEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.FieldEnum;
@@ -24,11 +25,11 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiAdditionalInfoEnum;
 
 public class Dictionary2HelperCommon {
 	
-	protected List<KanjiKanaPair> getKanjiKanaPairList(Entry entry) {
-		return getKanjiKanaPairListStatic(entry);		
+	protected List<KanjiKanaPair> getKanjiKanaPairList(Entry entry, boolean filterSearchOnly) {
+		return getKanjiKanaPairListStatic(entry, filterSearchOnly);		
 	}
 	
-	public static List<KanjiKanaPair> getKanjiKanaPairListStatic(Entry entry) {
+	public static List<KanjiKanaPair> getKanjiKanaPairListStatic(Entry entry, boolean filterSearchOnly) {
 		
 		List<KanjiKanaPair> result = new ArrayList<>();
 		
@@ -36,6 +37,21 @@ public class Dictionary2HelperCommon {
 		
 		List<KanjiInfo> kanjiInfoList = entry.getKanjiInfoList();
 		List<ReadingInfo> readingInfoList = entry.getReadingInfoList();
+		
+		if (filterSearchOnly == true) { // pozbycie sie search only
+			
+			kanjiInfoList = kanjiInfoList.stream().filter(kanjiInfo -> {
+				boolean isKanjiSearchOnly = kanjiInfo != null && kanjiInfo.getKanjiAdditionalInfoList().contains(KanjiAdditionalInfoEnum.SEARCH_ONLY_KANJI_FORM) == true;
+				
+				return isKanjiSearchOnly == false;
+			}).collect(Collectors.toList());
+			
+			readingInfoList = readingInfoList.stream().filter(readingInfo -> {
+				boolean isKanaSearchOnly = readingInfo.getReadingAdditionalInfoList().contains(ReadingAdditionalInfoEnum.SEARCH_ONLY_KANA_FORM) == true;
+				
+				return isKanaSearchOnly == false;				
+			}).collect(Collectors.toList());			
+		}
 		
 		// jesli nie ma kanji
 		if (kanjiInfoList.size() == 0) {
@@ -167,7 +183,7 @@ public class Dictionary2HelperCommon {
 
 		return null;
 	}
-	
+		
 	public static String translateToPolishGlossType(GTypeEnum glossType) {
 		
 		if (glossType == null) {
