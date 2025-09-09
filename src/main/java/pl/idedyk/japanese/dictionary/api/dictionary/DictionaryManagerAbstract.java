@@ -384,6 +384,20 @@ public abstract class DictionaryManagerAbstract {
 		
 		return databaseConnector.getDictionaryEntryByUniqueKey(uniqueKey);
 	}
+	
+	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByCounter(counter);
+	}
+	
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryId(long oldPolishJapaneseDictionaryId) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByOldPolishJapaneseDictionaryId(oldPolishJapaneseDictionaryId);
+	}
 
 	public JMdict.Entry getDictionaryEntry2ById(int id) throws DictionaryException {
 		
