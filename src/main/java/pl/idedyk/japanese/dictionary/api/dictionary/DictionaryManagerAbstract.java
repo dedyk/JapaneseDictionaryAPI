@@ -20,8 +20,6 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenc
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerList;
-import pl.idedyk.japanese.dictionary.api.dto.Attribute;
-import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
@@ -371,14 +369,18 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntriesNameSize();
 	}
 	
-	public DictionaryEntry getDictionaryEntryById(int id) throws DictionaryException {
+	public DictionaryEntry getDictionaryEntryById_TO_DELETE(int id) throws DictionaryException {
+		
+		// FM_FIXME: do usuniecia
 		
 		waitForDatabaseReady();
 		
 		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
 	}
 
-	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException {
+	public DictionaryEntry getDictionaryEntryByUniqueKey_TO_DELETE(String uniqueKey) throws DictionaryException {
+		
+		// FM_FIXME: do usuniecia
 		
 		waitForDatabaseReady();
 		
