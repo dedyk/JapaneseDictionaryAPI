@@ -33,6 +33,7 @@ public interface IDatabaseConnector {
 	public JMdict.Entry getDictionaryEntry2ById(Integer entryId) throws DictionaryException;	
 	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException;
 	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryId(long oldPolishJapaneseDictionaryId) throws DictionaryException;
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uiqueKey) throws DictionaryException;
 	
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;

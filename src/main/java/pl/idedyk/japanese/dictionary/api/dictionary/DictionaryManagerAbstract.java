@@ -400,6 +400,13 @@ public abstract class DictionaryManagerAbstract {
 		
 		return databaseConnector.getDictionaryEntry2ByOldPolishJapaneseDictionaryId(oldPolishJapaneseDictionaryId);
 	}
+	
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uniqueKey) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(uniqueKey);
+	}
 
 	public JMdict.Entry getDictionaryEntry2ById(int id) throws DictionaryException {
 		
