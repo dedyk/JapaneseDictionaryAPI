@@ -491,9 +491,6 @@
 		<xsd:sequence>
 			<xsd:element name="oldPolishJapaneseDictionary" minOccurs="0" maxOccurs="1" type="oldPolishJapaneseDictionaryInfo" />
 		</xsd:sequence>
-		
-		<xsd:attribute name="uniqueKanjiKey" use="optional" type="xsd:string" />
-		<xsd:attribute name="uniqueKanaKey" use="optional" type="xsd:string" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
