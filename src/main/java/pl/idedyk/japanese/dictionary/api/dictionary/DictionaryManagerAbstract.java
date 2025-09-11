@@ -31,6 +31,7 @@ import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDicti
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
+import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
@@ -726,35 +727,43 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry) throws DictionaryException {
+	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry, KanjiKanaPair kanjiKanaPair) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		if (dictionaryEntry == null) {
+		if (dictionaryEntry == null && kanjiKanaPair == null) {
 			return null;
 		}
-
-		String kanji = dictionaryEntry.getKanji();
+		
+		String kanji;
+		String kana;
+		
+		if (dictionaryEntry != null) {
+			kanji = dictionaryEntry.getKanji();
+			kana = dictionaryEntry.getKana();
+			
+		} else if (kanjiKanaPair != null) {
+			kanji = kanjiKanaPair.getKanji();
+			kana = kanjiKanaPair.getKana();
+			
+		} else {
+			throw new RuntimeException(); // to nigdy nie powinno wydarzyc sie
+		}
 
 		if (kanji == null) {
 			return null;
 		}
 		
-		@SuppressWarnings("deprecation")
-		List<String> kana = dictionaryEntry.getKanaList();
-
 		List<FuriganaEntry> result = new ArrayList<FuriganaEntry>();
+		
+		List<FuriganaEntry> currentFurigana = getFurigana(kanji, kana);
 
-		for (String currentKana : kana) {
-			List<FuriganaEntry> currentFurigana = getFurigana(kanji, currentKana);
-
-			if (currentFurigana != null) {
-				result.addAll(currentFurigana);
-			} else {
-				// Log.d("FuriganaError", kanji + " - " + currentKana);
-			}
+		if (currentFurigana != null) {
+			result.addAll(currentFurigana);
+		} else {
+			// Log.d("FuriganaError", kanji + " - " + currentKana);
 		}
-
+		
 		List<FuriganaEntry> newResult = new ArrayList<FuriganaEntry>();
 
 		for (FuriganaEntry currentFuriganaEntry : result) {
