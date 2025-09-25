@@ -1,16 +1,19 @@
 package pl.idedyk.japanese.dictionary2.api.helper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.DialectEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.FieldEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.GTypeEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Gloss;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSource;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSourceLsWaseiEnum;
@@ -21,7 +24,12 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.SenseAdditionalInfo;
+import pl.idedyk.japanese.dictionary.api.dto.AttributeList;
+import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
+import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
+import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
+import pl.idedyk.japanese.dictionary.api.dto.WordType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiAdditionalInfoEnum;
 
@@ -1743,6 +1751,76 @@ public class Dictionary2HelperCommon {
 		}
 		
 		return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
+	}
+	
+	public static DictionaryEntry convertKanjiKanaPairToOldDictionaryEntry(KanjiKanaPair kanjiKanaPair) {
+		
+		final String kanjiKanaPairKanji = kanjiKanaPair.getKanji() != null ? kanjiKanaPair.getKanji() : "-";
+		final String kanjiKanaPairKana = kanjiKanaPair.getKana();
+						
+		// szukamy starego elementu
+		JMdict.Entry dictionaryEntry2 = kanjiKanaPair.getEntry();
+		
+		if (dictionaryEntry2 == null || dictionaryEntry2.getMisc() == null || dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary() == null) {
+			return null;
+		}
+				
+		DictionaryEntry oldDictionaryEntry = dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary().getEntries().stream().filter(oldPolishJapaneseDictionary -> {
+			
+			String oldPolishJapaneseDictionaryKanji = oldPolishJapaneseDictionary.getKanji();
+			String oldPolishJapaneseDictionaryKana = oldPolishJapaneseDictionary.getKana();
+			
+			if (oldPolishJapaneseDictionaryKanji == null) {
+				oldPolishJapaneseDictionaryKanji = "-";
+			}
+			
+			return 	kanjiKanaPairKanji.equals(oldPolishJapaneseDictionaryKanji) == true &&
+					kanjiKanaPairKana.equals(oldPolishJapaneseDictionaryKana) == true;
+			
+		}).map(oldPolishJapaneseDictionary -> {
+			DictionaryEntry oldVirtualDictionaryEntry = new DictionaryEntry();
+			
+			// id
+			oldVirtualDictionaryEntry.setId((int)oldPolishJapaneseDictionary.getId());
+			
+			// dictionaryEntryTypeList
+			oldVirtualDictionaryEntry.setDictionaryEntryTypeList(Arrays.asList(oldPolishJapaneseDictionary.getDictionaryEntryTypeList().split(",")).stream(). 
+				map(m -> DictionaryEntryType.getDictionaryEntryType(m)).collect(Collectors.toList()));
+
+			// attributeList
+			dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary().getAttributeList().stream().forEach(attr -> {
+				if (oldVirtualDictionaryEntry.getAttributeList() == null) {
+					oldVirtualDictionaryEntry.setAttributeList(new AttributeList());
+				}
+				
+				oldVirtualDictionaryEntry.getAttributeList().addAttributeValue(AttributeType.valueOf(attr.getType()), attr.getValue());
+			});
+								
+			// wordType
+			oldVirtualDictionaryEntry.setWordType(WordType.valueOf(kanjiKanaPair.getKanaType().value()));
+			
+			// groups
+			oldVirtualDictionaryEntry.setGroups(dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary().getGroupsList().stream().
+				map(grr -> GroupEnum.valueOf(grr)).collect(Collectors.toList()));
+				
+			// prefixKana, kanji, kana, prefixRomaji, romaji
+			oldVirtualDictionaryEntry.setPrefixKana(oldPolishJapaneseDictionary.getPrefixKana());
+			oldVirtualDictionaryEntry.setPrefixRomaji(oldPolishJapaneseDictionary.getPrefixRomaji());
+			
+			oldVirtualDictionaryEntry.setKanji(oldPolishJapaneseDictionary.getKanji());
+			oldVirtualDictionaryEntry.setKana(oldPolishJapaneseDictionary.getKana());
+			oldVirtualDictionaryEntry.setRomaji(oldPolishJapaneseDictionary.getRomaji());
+			
+			// translates, info, exampleSentenceGroupIdsList, name
+			// tych elementow nie mapujemy
+			
+			//
+			
+			return oldVirtualDictionaryEntry;
+							
+		}).findFirst().orElse(null);
+
+		return oldDictionaryEntry;		
 	}
 	
 	public static class KanjiKanaPair {
