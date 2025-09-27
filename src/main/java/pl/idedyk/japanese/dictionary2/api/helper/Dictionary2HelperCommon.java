@@ -1812,7 +1812,13 @@ public class Dictionary2HelperCommon {
 			oldVirtualDictionaryEntry.setKana(oldPolishJapaneseDictionary.getKana());
 			oldVirtualDictionaryEntry.setRomaji(oldPolishJapaneseDictionary.getRomaji());
 			
-			// translates, info, exampleSentenceGroupIdsList, name
+			// translates, info
+			CreateTranslatesAndAdditionalInfoForOldDictionaryEntryResult createTranslatesAndAdditionalInfoForOldDictionaryEntryResult = createTranslatesAndAdditionalInfoForOldDictionaryEntry(kanjiKanaPair);
+			
+			oldVirtualDictionaryEntry.setTranslates(createTranslatesAndAdditionalInfoForOldDictionaryEntryResult.getNewPolishTranslateList());
+			oldVirtualDictionaryEntry.setInfo(createTranslatesAndAdditionalInfoForOldDictionaryEntryResult.getNewPolishAdditionalInfo());			
+			
+			// exampleSentenceGroupIdsList, name
 			// tych elementow nie mapujemy
 			
 			//
