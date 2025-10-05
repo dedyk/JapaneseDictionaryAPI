@@ -198,14 +198,14 @@ public class VerbGrammaConjugater {
 		// is keigo high
 		boolean isKeigoHigh = false;
 		
-		if (attributeList.contains(AttributeType.VERB_KEIGO_HIGH) == true) {
+		if (attributeList != null && attributeList.contains(AttributeType.VERB_KEIGO_HIGH) == true) {
 			isKeigoHigh = true;
 		}
 		
 		// is keigo low
 		boolean isKeigoLow = false;
 		
-		if (attributeList.contains(AttributeType.VERB_KEIGO_LOW) == true) {
+		if (attributeList != null && attributeList.contains(AttributeType.VERB_KEIGO_LOW) == true) {
 			isKeigoLow = true;
 		}
 				

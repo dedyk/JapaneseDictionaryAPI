@@ -20,7 +20,7 @@ public class NounExampler {
 		List<ExampleGroupTypeElements> result = new ArrayList<ExampleGroupTypeElements>();
 		
 		// suru
-		if (exampleRequest.getAttributeList().contains(AttributeType.SURU_VERB) == true) {
+		if (exampleRequest.getAttributeList() != null && exampleRequest.getAttributeList().contains(AttributeType.SURU_VERB) == true) {
 			GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_SURU, makeSuru(exampleRequest, grammaFormCache, addVirtual));
 		}
 		
@@ -91,7 +91,7 @@ public class NounExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_TO_IU, makeToIu(exampleRequest, grammaFormCache));
 		
 		// no aida ni
-		if (exampleRequest.getAttributeList().contains(AttributeType.SURU_VERB) == true) {
+		if (exampleRequest.getAttributeList() != null && exampleRequest.getAttributeList().contains(AttributeType.SURU_VERB) == true) {
 			GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_NO_AIDA_NI, makeNoAidaNi(exampleRequest, grammaFormCache));
 		}
 		

@@ -161,6 +161,8 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		}
 		
 		if (kanjiKanaPair != null) { // musza byc zapisane do Entry dane ze starego slownika, aby to dzialalo; standardowy Entry nie zadziala
+			AttributeList attributeList = new AttributeList();
+			
 			MiscInfo misc = kanjiKanaPair.getEntry().getMisc();
 			
 			if (misc != null) {
@@ -169,15 +171,13 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 				if (oldPolishJapaneseDictionary != null) {
 					List<OldPolishJapaneseDictionaryInfoAttributeListInfo> oldPolishJapaneseDictionaryAttributeList = oldPolishJapaneseDictionary.getAttributeList();
 					
-					AttributeList attributeList = new AttributeList();
-					
 					for (OldPolishJapaneseDictionaryInfoAttributeListInfo oldPolishJapaneseDictionaryInfoAttributeListInfo : oldPolishJapaneseDictionaryAttributeList) {
 						attributeList.addAttributeValue(AttributeType.valueOf(oldPolishJapaneseDictionaryInfoAttributeListInfo.getType()), oldPolishJapaneseDictionaryInfoAttributeListInfo.getValue());
 					}					
-					
-					return attributeList;
 				}
 			}
+			
+			return attributeList;
 		}
 		
 		throw new RuntimeException();

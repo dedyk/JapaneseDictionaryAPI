@@ -264,7 +264,7 @@ public class VerbExampler {
 				.addExample(result, ExampleGroupType.VERB_NIKUI, makeNikui(exampleRequest, grammaFormCache));
 
 		// te aru
-		if (exampleRequest.getAttributeList().contains(AttributeType.VERB_TRANSITIVITY) == true
+		if ((exampleRequest.getAttributeList() != null && exampleRequest.getAttributeList().contains(AttributeType.VERB_TRANSITIVITY) == true)
 				|| exampleRequest.getDictionaryEntryTypeList().contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
 			GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_ARU,
 					makeTeAruExample(exampleRequest, grammaFormCache));
@@ -1613,7 +1613,7 @@ public class VerbExampler {
 		// is keigo high
 		boolean isKeigoHigh = false;
 
-		if (attributeList.contains(AttributeType.VERB_KEIGO_HIGH) == true) {
+		if (attributeList != null && attributeList.contains(AttributeType.VERB_KEIGO_HIGH) == true) {
 			isKeigoHigh = true;
 		}
 
