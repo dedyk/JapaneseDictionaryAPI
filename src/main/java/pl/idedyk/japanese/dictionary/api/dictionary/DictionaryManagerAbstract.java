@@ -31,8 +31,12 @@ import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDicti
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
+import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon;
 import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoEntriesInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
 
@@ -370,23 +374,46 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntriesNameSize();
 	}
 	
-	public DictionaryEntry getDictionaryEntryById_TO_DELETE(int id) throws DictionaryException {
-		
-		// FM_FIXME: do usuniecia
+	public DictionaryEntry getDictionaryEntryById(int id) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
+		// pobieramy wpis na podstawie id ze starego slownika
+		Entry dictionaryEntry2 = getDictionaryEntry2ByOldPolishJapaneseDictionaryId(id);
+		
+		if (dictionaryEntry2 == null) {
+			return null;
+		}
+		
+		// pobieramy kanji i kana
+		OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary();
+		OldPolishJapaneseDictionaryInfoEntriesInfo oldPolishJapaneseDictionaryInfoEntriesInfo = oldPolishJapaneseDictionary.getEntries().stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+		
+		if (oldPolishJapaneseDictionaryInfoEntriesInfo == null) { // to jest dziwne
+			return null;
+		}
+		
+		List<KanjiKanaPair> kanjiKanaPairList = Dictionary2HelperCommon.getKanjiKanaPairListStatic(dictionaryEntry2, false);
+		
+		KanjiKanaPair kanjiKanaPair = Dictionary2HelperCommon.findKanjiKanaPair(kanjiKanaPairList, oldPolishJapaneseDictionaryInfoEntriesInfo.getKanji(), oldPolishJapaneseDictionaryInfoEntriesInfo.getKana());
+		
+		if (kanjiKanaPair == null) { // to jest dziwne
+			return null;
+		}
+		
+		return Dictionary2HelperCommon.convertKanjiKanaPairToOldDictionaryEntry(kanjiKanaPair);		
+		
+		// return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
 	}
 
-	public DictionaryEntry getDictionaryEntryByUniqueKey_TO_DELETE(String uniqueKey) throws DictionaryException {
-		
-		// FM_FIXME: do usuniecia
-		
+	/*
+	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException {
+				
 		waitForDatabaseReady();
 		
 		return databaseConnector.getDictionaryEntryByUniqueKey(uniqueKey);
 	}
+	*/
 	
 	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException {
 		

@@ -27,8 +27,8 @@ public interface IDatabaseConnector {
 	public void findDictionaryEntriesInGrammaFormAndExamples(FindWordRequest findWordRequest,
 			FindWordResult findWordResult) throws DictionaryException;
 	
-	public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
-	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException;
+	// public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
+	// public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException;
 	
 	public JMdict.Entry getDictionaryEntry2ById(Integer entryId) throws DictionaryException;	
 	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException;

@@ -182,6 +182,19 @@ public class Dictionary2HelperCommon {
 		String dictionaryEntry$Kanji = dictionaryEntry.isKanjiExists() == true ? dictionaryEntry.getKanji() : "";
 		String dictionaryEntry$Kana = dictionaryEntry.getKana() != null ? dictionaryEntry.getKana() : "";
 		
+		return findKanjiKanaPair(kanjiKanaPairList, dictionaryEntry$Kanji, dictionaryEntry$Kana);
+	}
+	
+	public static KanjiKanaPair findKanjiKanaPair(List<KanjiKanaPair> kanjiKanaPairList, String dictionaryEntry$Kanji, String dictionaryEntry$Kana) {
+		
+		if (dictionaryEntry$Kanji == null) {
+			dictionaryEntry$Kanji = "";
+		}
+		
+		if (dictionaryEntry$Kana == null) {
+			dictionaryEntry$Kana = "";
+		}
+		
 		for (KanjiKanaPair kanjiKanaPair : kanjiKanaPairList) {
 			
 			String kanjiKanaPair$Kanji = kanjiKanaPair.getKanji() != null ? kanjiKanaPair.getKanji() : "";
@@ -192,7 +205,7 @@ public class Dictionary2HelperCommon {
 			}			
 		}
 
-		return null;
+		return null;		
 	}
 		
 	public static String translateToPolishGlossType(GTypeEnum glossType) {
