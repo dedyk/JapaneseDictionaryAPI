@@ -12,6 +12,7 @@ import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 
 public interface IDatabaseConnector {
@@ -56,7 +57,7 @@ public interface IDatabaseConnector {
 	
 	public List<GroupEnum> getDictionaryEntryGroupTypes() throws DictionaryException;
 	
-	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException;
+	public List<Entry> getGroupDictionaryEntry2List(GroupEnum groupName) throws DictionaryException;
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException;
 

@@ -1089,11 +1089,11 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntryGroupTypes();
 	}
 
-	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException {
-		
+	public List<Entry> getGroupDictionaryEntry2List(GroupEnum groupName) throws DictionaryException {
+				
 		waitForDatabaseReady();
 
-		return databaseConnector.getGroupDictionaryEntries(groupName);
+		return databaseConnector.getGroupDictionaryEntry2List(groupName);
 	}
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException {
