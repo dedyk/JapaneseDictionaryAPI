@@ -1802,13 +1802,14 @@ public class Dictionary2HelperCommon {
 				map(m -> DictionaryEntryType.getDictionaryEntryType(m)).collect(Collectors.toList()));
 
 			// attributeList
-			dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary().getAttributeList().stream().forEach(attr -> {
-				if (oldVirtualDictionaryEntry.getAttributeList() == null) {
-					oldVirtualDictionaryEntry.setAttributeList(new AttributeList());
-				}
-				
+			if (oldVirtualDictionaryEntry.getAttributeList() == null) {
+				oldVirtualDictionaryEntry.setAttributeList(new AttributeList());
+			}
+			
+			dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary().getAttributeList().stream().forEach(attr -> {	
 				oldVirtualDictionaryEntry.getAttributeList().addAttributeValue(AttributeType.valueOf(attr.getType()), attr.getValue());
-			});
+			});			
+			
 								
 			// wordType
 			oldVirtualDictionaryEntry.setWordType(WordType.valueOf(kanjiKanaPair.getKanaType().value()));
