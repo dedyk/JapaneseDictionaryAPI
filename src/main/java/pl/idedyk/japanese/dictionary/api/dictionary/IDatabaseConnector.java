@@ -21,7 +21,7 @@ public interface IDatabaseConnector {
 	
 	public int getDictionaryEntriesNameSize() throws DictionaryException;
 	
-	public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
+	// public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
 	
 	public FindWordResult findDictionaryEntries(FindWordRequest findWordRequest) throws DictionaryException;
 	
