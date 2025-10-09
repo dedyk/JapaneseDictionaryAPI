@@ -187,7 +187,7 @@ public class Dictionary2HelperCommon {
 	
 	public static KanjiKanaPair findKanjiKanaPair(List<KanjiKanaPair> kanjiKanaPairList, String dictionaryEntry$Kanji, String dictionaryEntry$Kana) {
 		
-		if (dictionaryEntry$Kanji == null) {
+		if (dictionaryEntry$Kanji == null || dictionaryEntry$Kanji.equals("-") == true) {
 			dictionaryEntry$Kanji = "";
 		}
 		
