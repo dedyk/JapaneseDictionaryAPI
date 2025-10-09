@@ -57,7 +57,7 @@ public class FindWordResult implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		private Entry entry;
-		private DictionaryEntry oldDictionaryEntry;
+		private DictionaryEntry dictionaryEntry;
 		
 		private boolean isName;
 		private boolean isGrammaFormOrExamples;
@@ -68,8 +68,8 @@ public class FindWordResult implements Serializable {
 			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
 		
-		public ResultItem(DictionaryEntry oldDictionaryEntry, boolean isName, boolean isGrammaFormOrExamples) {
-			this.oldDictionaryEntry = oldDictionaryEntry;
+		public ResultItem(DictionaryEntry dictionaryEntry, boolean isName, boolean isGrammaFormOrExamples) {
+			this.dictionaryEntry = dictionaryEntry;
 			this.isName = isName;
 			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
@@ -78,8 +78,8 @@ public class FindWordResult implements Serializable {
 			return entry;
 		}
 
-		public DictionaryEntry getOldDictionaryEntry() {
-			return oldDictionaryEntry;
+		public DictionaryEntry getDictionaryEntry() {
+			return dictionaryEntry;
 		}
 
 		public boolean isName() {

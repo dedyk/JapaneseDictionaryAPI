@@ -20,6 +20,8 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenc
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerList;
+import pl.idedyk.japanese.dictionary.api.dto.Attribute;
+import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
@@ -36,6 +38,7 @@ import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKa
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoAttributeListInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoEntriesInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
@@ -294,19 +297,45 @@ public abstract class DictionaryManagerAbstract {
 			@Override
 			public int compare(ResultItem o1, ResultItem o2) {
 				
-				// FM_FIXME: do naprawy, gdy bedzie informacja o wyliczonym w czasie generowania slowniku priorytecie
-				/*
-				List<Attribute> lhsPriorityAttributeList = o1.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
-				List<Attribute> rhsPriorityAttributeList = o2.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
-				
-				Integer lhsPriority = lhsPriorityAttributeList != null && lhsPriorityAttributeList.size() > 0 ? Integer.parseInt(lhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
-				Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+				Integer lhsPriority = getPriority(o1);
+				Integer rhsPriority = getPriority(o2);
 				
 				return lhsPriority.compareTo(rhsPriority);
-				*/
+			}	
+			
+			private Integer getPriority(ResultItem resultItem) {
+				Entry dictionary2Entry = resultItem.getEntry();
+				DictionaryEntry dictionaryEntry = resultItem.getDictionaryEntry();
 				
-				return 0; // FM_FIXME: do naprawy
-			}			
+				Integer priority = null;
+				
+				if (dictionary2Entry != null) {
+					OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = dictionary2Entry.getMisc().getOldPolishJapaneseDictionary();
+					
+					if (oldPolishJapaneseDictionary != null) {
+						OldPolishJapaneseDictionaryInfoAttributeListInfo priorityAttribute = 
+								oldPolishJapaneseDictionary.getAttributeList().stream().filter(f -> f.getType().equals(AttributeType.PRIORITY.name())).findFirst().orElse(null);
+						
+						if (priorityAttribute != null) {
+							priority = Integer.parseInt(priorityAttribute.getValue());
+						}
+					}
+				}
+				
+				if (priority == null && dictionaryEntry != null) {
+					List<Attribute> priorityAttributeList = dictionaryEntry.getAttributeList().getAttributeList(AttributeType.PRIORITY);
+					
+					if (priorityAttributeList != null && priorityAttributeList.size() > 0) {
+						priority = Integer.parseInt(priorityAttributeList.get(0).getAttributeValue().get(0));
+					}
+				}
+				
+				if (priority == null) {
+					priority = Integer.MAX_VALUE;
+				}
+				
+				return priority;
+			}
 		};
 		
 		// sortujemy podlisty
