@@ -2,6 +2,7 @@ package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,40 +91,46 @@ public class FindWordResult implements Serializable {
 			return isGrammaFormOrExamples;
 		}		
 		
-		public List<String> getKanjiList() {
-			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
-			
+		public List<String> getKanjiList() {			
 			if (entry != null) {
 				return entry.getKanjiInfoList().stream().filter(f -> f.getKanji() != null).map(f -> f.getKanji()).collect(Collectors.toList());
+			}
+			
+			if (dictionaryEntry != null) {
+				return Arrays.asList(dictionaryEntry.getKanji());
 			}
 						
 			throw new RuntimeException("getKanji");
 		}
 
 		
-		public List<String> getKanaList() {
-			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
-			
+		@SuppressWarnings("deprecation")
+		public List<String> getKanaList() {			
 			if (entry != null) {
 				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getValue()).collect(Collectors.toList());
-			}			
+			}
+
+			if (dictionaryEntry != null) {
+				return dictionaryEntry.getKanaList();
+			}
 			
 			throw new RuntimeException("getKanaList");
 		}
 		
-		public List<String> getRomajiList() {
-			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
-			
+		@SuppressWarnings("deprecation")
+		public List<String> getRomajiList() {			
 			if (entry != null) {
 				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getRomaji()).collect(Collectors.toList());
+			}
+			
+			if (dictionaryEntry != null) {
+				return dictionaryEntry.getRomajiList();
 			}
 			
 			throw new RuntimeException("getRomajiList");
 		}
 		
-		public List<String> getTranslates() {
-			// FM_FIXME: tutaj pewnie tez beda slownik nazw i/lub odmiany i przyklady
-			
+		public List<String> getTranslates() {			
 			if (entry != null) {
 				List<String> result = new ArrayList<>();
 				
@@ -133,13 +140,16 @@ public class FindWordResult implements Serializable {
 				
 				return result;
 			}
+			
+			if (dictionaryEntry != null) {
+				return dictionaryEntry.getTranslates();
+			}
 						
 			throw new RuntimeException("getTranslates");
 		}
 
 
-		// FM_FIXME: do wyczyszczenia kodu
-		
+		// stary kod		
 		/*
 		public DictionaryEntry getDictionaryEntry() {
 			if (dictionaryEntry != null) {

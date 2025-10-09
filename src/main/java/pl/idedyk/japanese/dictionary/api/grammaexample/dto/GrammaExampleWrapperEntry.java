@@ -76,7 +76,6 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 	}
 	
 	public DictionaryEntryType getDictionaryEntryType() {
-		// FM_FIXME: byc moze to jeszcze bedzie do zmiany - do sprawdzenia - byc moze do usuniecia
 		return getDictionaryEntryTypeList().get(0);
 	}
 
