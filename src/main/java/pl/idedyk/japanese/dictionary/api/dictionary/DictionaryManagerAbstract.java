@@ -33,7 +33,13 @@ import pl.idedyk.japanese.dictionary.api.dto.TransitiveIntransitivePairWithDicti
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 import pl.idedyk.japanese.dictionary.api.tools.KanaHelper;
+import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon;
+import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKanaPair;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoAttributeListInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoEntriesInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
 
@@ -64,18 +70,16 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 	
-	public List<DictionaryEntry> getWordsGroup(int groupSize, int groupNo) throws DictionaryException {
+	public List<JMdict.Entry> getWordsGroup(int dictionaryEntriesSize, int groupSize, int groupNo) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesSize();
-
-		List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+		List<JMdict.Entry> result = new ArrayList<JMdict.Entry>();
 
 		for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-			DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryById(String.valueOf(idx + 1));
+			JMdict.Entry entry = databaseConnector.getDictionaryEntry2ByCounter(idx + 1);
 
-			result.add(currentDictionaryEntry);
+			result.add(entry);
 		}
 
 		return result;
@@ -108,7 +112,7 @@ public abstract class DictionaryManagerAbstract {
 
 		findWordResult = databaseConnector.findDictionaryEntries(findWordRequest);
 
-		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);		
+		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
 
 		//
@@ -172,7 +176,7 @@ public abstract class DictionaryManagerAbstract {
 			ResultItem resultItem = resultIterator.next();
 						
 			// czy jest nazwa
-			if (resultItem.getDictionaryEntry().isName() == true) {
+			if (resultItem.isName() == true) {
 				
 				nameResultList.add(resultItem);
 				
@@ -180,28 +184,28 @@ public abstract class DictionaryManagerAbstract {
 			}
 						
 			// czy kanji dokladnie pasuje
-			String kanji = resultItem.getKanji();
+			List<String> kanjiList = resultItem.getKanjiList();
 			
-			if (kanji != null && kanji.equals(findWord) == true) {
-				
+			if (kanjiList.contains(findWord) == true) {				
 				kanjiMatchResultList.add(resultItem);
 				
 				continue;
 			}
 			
 			// czy kanji zaczyna sie od
-			if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {
-				
-				kanjiBeginResultList.add(resultItem);
-				
-				continue;				
+			for (String kanji : kanjiList) {
+				if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {				
+					kanjiBeginResultList.add(resultItem);
+					
+					continue MAIN_LOOP;			
+				}
 			}
+			
 			
 			// czy kana dokladnie pasuje
 			List<String> kanaList = resultItem.getKanaList();
 			
-			if (kanaList.contains(findWord) == true) {
-				
+			if (kanaList.contains(findWord) == true) {				
 				kanaMatchResultList.add(resultItem);
 				
 				continue;
@@ -210,10 +214,8 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji dokladnie pasuje
 			List<String> romajiList = resultItem.getRomajiList();
 						
-			for (String currentRomaji : romajiList) {
-				
-				if (currentRomaji.equalsIgnoreCase(findWord) == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (currentRomaji.equalsIgnoreCase(findWord) == true) {					
 					romajiMatchResultList.add(resultItem);
 										
 					continue MAIN_LOOP;
@@ -223,10 +225,8 @@ public abstract class DictionaryManagerAbstract {
 			List<String> translates = resultItem.getTranslates();
 			
 			// czy tlumaczenie zaczyna sie od slowa
-			for (String currentTranslate : translates) {
-				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -234,10 +234,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 									
 			// czy tlumaczenie zawiera slowo
-			for (String currentTranslate : translates) {
-				
-				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBeginInAllWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -245,10 +243,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy tlumaczenie zaczyna sie od slowa
-			for (String currentTranslate : translates) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {
-					
+			for (String currentTranslate : translates) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
 					translateBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -256,10 +252,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy kana zaczyna sie od
-			for (String currentKana : kanaList) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {
-					
+			for (String currentKana : kanaList) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {					
 					kanaBeginResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -267,10 +261,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy romaji zaczyna sie od slowa
-			for (String currentRomaji : romajiList) {
-				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -278,10 +270,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 									
 			// czy romaji zawiera slowo
-			for (String currentRomaji : romajiList) {
-				
-				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBeginInAllWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -289,10 +279,8 @@ public abstract class DictionaryManagerAbstract {
 			}
 			
 			// czy romaji zaczyna sie od slowa
-			for (String currentRomaji : romajiList) {
-				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {
-					
+			for (String currentRomaji : romajiList) {				
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -303,20 +291,51 @@ public abstract class DictionaryManagerAbstract {
 			otherResultList.add(resultItem);
 		}
 		
-		// przygotowanie listy wynikowe		
+		// przygotowanie listy wynikowe	
 		Comparator<ResultItem> priorityComparator = new Comparator<ResultItem>() {
 
 			@Override
 			public int compare(ResultItem o1, ResultItem o2) {
 				
-				List<Attribute> lhsPriorityAttributeList = o1.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
-				List<Attribute> rhsPriorityAttributeList = o2.getDictionaryEntry().getAttributeList().getAttributeList(AttributeType.PRIORITY);
-				
-				Integer lhsPriority = lhsPriorityAttributeList != null && lhsPriorityAttributeList.size() > 0 ? Integer.parseInt(lhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
-				Integer rhsPriority = rhsPriorityAttributeList != null && rhsPriorityAttributeList.size() > 0 ? Integer.parseInt(rhsPriorityAttributeList.get(0).getAttributeValue().get(0)) : Integer.MAX_VALUE;
+				Integer lhsPriority = getPriority(o1);
+				Integer rhsPriority = getPriority(o2);
 				
 				return lhsPriority.compareTo(rhsPriority);
-			}			
+			}	
+			
+			private Integer getPriority(ResultItem resultItem) {
+				Entry dictionary2Entry = resultItem.getEntry();
+				DictionaryEntry dictionaryEntry = resultItem.getDictionaryEntry();
+				
+				Integer priority = null;
+				
+				if (dictionary2Entry != null) {
+					OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = dictionary2Entry.getMisc().getOldPolishJapaneseDictionary();
+					
+					if (oldPolishJapaneseDictionary != null) {
+						OldPolishJapaneseDictionaryInfoAttributeListInfo priorityAttribute = 
+								oldPolishJapaneseDictionary.getAttributeList().stream().filter(f -> f.getType().equals(AttributeType.PRIORITY.name())).findFirst().orElse(null);
+						
+						if (priorityAttribute != null) {
+							priority = Integer.parseInt(priorityAttribute.getValue());
+						}
+					}
+				}
+				
+				if (priority == null && dictionaryEntry != null) {
+					List<Attribute> priorityAttributeList = dictionaryEntry.getAttributeList().getAttributeList(AttributeType.PRIORITY);
+					
+					if (priorityAttributeList != null && priorityAttributeList.size() > 0) {
+						priority = Integer.parseInt(priorityAttributeList.get(0).getAttributeValue().get(0));
+					}
+				}
+				
+				if (priority == null) {
+					priority = Integer.MAX_VALUE;
+				}
+				
+				return priority;
+			}
 		};
 		
 		// sortujemy podlisty
@@ -388,14 +407,62 @@ public abstract class DictionaryManagerAbstract {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
+		// pobieramy wpis na podstawie id ze starego slownika
+		Entry dictionaryEntry2 = getDictionaryEntry2ByOldPolishJapaneseDictionaryId(id);
+		
+		if (dictionaryEntry2 == null) {
+			return null;
+		}
+		
+		// pobieramy kanji i kana
+		OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = dictionaryEntry2.getMisc().getOldPolishJapaneseDictionary();
+		OldPolishJapaneseDictionaryInfoEntriesInfo oldPolishJapaneseDictionaryInfoEntriesInfo = oldPolishJapaneseDictionary.getEntries().stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+		
+		if (oldPolishJapaneseDictionaryInfoEntriesInfo == null) { // to jest dziwne
+			return null;
+		}
+		
+		List<KanjiKanaPair> kanjiKanaPairList = Dictionary2HelperCommon.getKanjiKanaPairListStatic(dictionaryEntry2, false);
+		
+		KanjiKanaPair kanjiKanaPair = Dictionary2HelperCommon.findKanjiKanaPair(kanjiKanaPairList, oldPolishJapaneseDictionaryInfoEntriesInfo.getKanji(), oldPolishJapaneseDictionaryInfoEntriesInfo.getKana());
+		
+		if (kanjiKanaPair == null) { // to jest dziwne
+			return null;
+		}
+		
+		return Dictionary2HelperCommon.convertKanjiKanaPairToOldDictionaryEntry(kanjiKanaPair);		
+		
+		// return databaseConnector.getDictionaryEntryById(String.valueOf(id));		
 	}
 
+	/*
 	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException {
-		
+				
 		waitForDatabaseReady();
 		
 		return databaseConnector.getDictionaryEntryByUniqueKey(uniqueKey);
+	}
+	*/
+	
+	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByCounter(counter);
+	}
+	
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryId(long oldPolishJapaneseDictionaryId) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByOldPolishJapaneseDictionaryId(oldPolishJapaneseDictionaryId);
+	}
+	
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uniqueKey) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(uniqueKey);
 	}
 
 	public JMdict.Entry getDictionaryEntry2ById(int id) throws DictionaryException {
@@ -716,35 +783,43 @@ public abstract class DictionaryManagerAbstract {
 		return result;
 	}
 
-	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry) throws DictionaryException {
+	public List<FuriganaEntry> getFurigana(DictionaryEntry dictionaryEntry, KanjiKanaPair kanjiKanaPair) throws DictionaryException {
 		
 		waitForDatabaseReady();
 
-		if (dictionaryEntry == null) {
+		if (dictionaryEntry == null && kanjiKanaPair == null) {
 			return null;
 		}
-
-		String kanji = dictionaryEntry.getKanji();
+		
+		String kanji;
+		String kana;
+		
+		if (dictionaryEntry != null) {
+			kanji = dictionaryEntry.getKanji();
+			kana = dictionaryEntry.getKana();
+			
+		} else if (kanjiKanaPair != null) {
+			kanji = kanjiKanaPair.getKanji();
+			kana = kanjiKanaPair.getKana();
+			
+		} else {
+			throw new RuntimeException(); // to nigdy nie powinno wydarzyc sie
+		}
 
 		if (kanji == null) {
 			return null;
 		}
 		
-		@SuppressWarnings("deprecation")
-		List<String> kana = dictionaryEntry.getKanaList();
-
 		List<FuriganaEntry> result = new ArrayList<FuriganaEntry>();
+		
+		List<FuriganaEntry> currentFurigana = getFurigana(kanji, kana);
 
-		for (String currentKana : kana) {
-			List<FuriganaEntry> currentFurigana = getFurigana(kanji, currentKana);
-
-			if (currentFurigana != null) {
-				result.addAll(currentFurigana);
-			} else {
-				// Log.d("FuriganaError", kanji + " - " + currentKana);
-			}
+		if (currentFurigana != null) {
+			result.addAll(currentFurigana);
+		} else {
+			// Log.d("FuriganaError", kanji + " - " + currentKana);
 		}
-
+		
 		List<FuriganaEntry> newResult = new ArrayList<FuriganaEntry>();
 
 		for (FuriganaEntry currentFuriganaEntry : result) {
@@ -1043,11 +1118,11 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntryGroupTypes();
 	}
 
-	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException {
-		
+	public List<Entry> getGroupDictionaryEntry2List(GroupEnum groupName) throws DictionaryException {
+				
 		waitForDatabaseReady();
 
-		return databaseConnector.getGroupDictionaryEntries(groupName);
+		return databaseConnector.getGroupDictionaryEntry2List(groupName);
 	}
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException {

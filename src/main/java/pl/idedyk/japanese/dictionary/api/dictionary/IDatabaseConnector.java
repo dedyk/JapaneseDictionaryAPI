@@ -12,6 +12,7 @@ import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 
 public interface IDatabaseConnector {
@@ -20,17 +21,20 @@ public interface IDatabaseConnector {
 	
 	public int getDictionaryEntriesNameSize() throws DictionaryException;
 	
-	public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
+	// public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
 	
 	public FindWordResult findDictionaryEntries(FindWordRequest findWordRequest) throws DictionaryException;
 	
 	public void findDictionaryEntriesInGrammaFormAndExamples(FindWordRequest findWordRequest,
 			FindWordResult findWordResult) throws DictionaryException;
 	
-	public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
-	public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException;
+	// public DictionaryEntry getDictionaryEntryById(String id) throws DictionaryException;
+	// public DictionaryEntry getDictionaryEntryByUniqueKey(String uniqueKey) throws DictionaryException;
 	
 	public JMdict.Entry getDictionaryEntry2ById(Integer entryId) throws DictionaryException;	
+	public JMdict.Entry getDictionaryEntry2ByCounter(int counter) throws DictionaryException;
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryId(long oldPolishJapaneseDictionaryId) throws DictionaryException;
+	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uiqueKey) throws DictionaryException;
 	
 	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
 	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
@@ -53,7 +57,7 @@ public interface IDatabaseConnector {
 	
 	public List<GroupEnum> getDictionaryEntryGroupTypes() throws DictionaryException;
 	
-	public List<DictionaryEntry> getGroupDictionaryEntries(GroupEnum groupName) throws DictionaryException;
+	public List<Entry> getGroupDictionaryEntry2List(GroupEnum groupName) throws DictionaryException;
 	
 	public GroupWithTatoebaSentenceList getTatoebaSentenceGroup(String groupId) throws DictionaryException;
 

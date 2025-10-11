@@ -80,6 +80,22 @@ public class AttributeList implements Serializable {
 		attributeList.add(attribute);
 	}
 	
+	public void addUniqueAttributeValue(AttributeType attributeType, List<String> attributeValueList) {
+		
+		// sprawdzanie, czy taka kombinacja juz wystepuje
+		boolean isAttributeExists = 
+				attributeList.stream().filter(f -> f.getAttributeType() == attributeType).filter(f -> (f.getAttributeValue() == attributeValueList || f.getAttributeValue().equals(attributeValueList) == true)).count() > 0;
+		
+		if (isAttributeExists == false) { // atrubyt nie istnieje, wiec go dodajemy
+			Attribute attribute = new Attribute();
+			
+			attribute.setAttributeType(attributeType);
+			attribute.setAttributeValue(attributeValueList);
+			
+			attributeList.add(attribute);			
+		}
+	}
+	
 	public void addAttributeValue(AttributeType attributeType, String attributeValue) {
 		
 		Attribute attribute = new Attribute();

@@ -7,7 +7,9 @@ import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupTypeElements;
+import pl.idedyk.japanese.dictionary.api.example.dto.ExampleRequest;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
 
 public class GrammaExampleHelper {
@@ -67,36 +69,32 @@ public class GrammaExampleHelper {
 		return result;
 	}
 	
-	public static ExampleResult makeSimpleTemplateExample(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExample(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(DictionaryEntry dictionaryEntry,
+	public static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(GrammaFormConjugateRequest grammaFormConjugateRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = grammaFormConjugateRequest.getPrefixKana();
+		String kanji = grammaFormConjugateRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = grammaFormConjugateRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
 		
 		return makeSimpleTemplateGrammaFormConjugateResult(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
@@ -141,19 +139,17 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
@@ -174,19 +170,17 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExampleWithLastCharRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 
-	public static ExampleResult makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(DictionaryEntry dictionaryEntry,
+	public static ExampleResult makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(ExampleRequest exampleRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = dictionaryEntry.getPrefixKana();
-		String kanji = dictionaryEntry.getKanji();
+		String prefixKana = exampleRequest.getPrefixKana();
+		String kanji = exampleRequest.getKanji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> kanaList = dictionaryEntry.getKanaList();
+		List<String> kanaList = exampleRequest.getKanaList();
 		
-		String prefixRomaji = dictionaryEntry.getPrefixRomaji();
+		String prefixRomaji = exampleRequest.getPrefixRomaji();
 		
-		@SuppressWarnings("deprecation")
-		List<String> romajiList = dictionaryEntry.getRomajiList();
+		List<String> romajiList = exampleRequest.getRomajiList();
 		
 		return makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
@@ -346,7 +340,7 @@ public class GrammaExampleHelper {
 		return text.substring(0, text.length() - 2);
 	}
 	
-	public static DictionaryEntry convertToVirtualDictionaryEntry(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntryType dictionaryEntryType) {
+	public static GrammaFormConjugateRequest convertToVirtualDictionaryEntry(GrammaFormConjugateResult grammaFormConjugateResult, DictionaryEntryType dictionaryEntryType) {
 		
 		DictionaryEntry virtualDictionaryEntry = new DictionaryEntry();
 		
@@ -360,6 +354,6 @@ public class GrammaExampleHelper {
 		virtualDictionaryEntry.setPrefixRomaji(grammaFormConjugateResult.getPrefixRomaji());
 		virtualDictionaryEntry.setRomaji(grammaFormConjugateResult.getRomajiList().get(0));
 		
-		return virtualDictionaryEntry;
+		return new GrammaFormConjugateRequest(virtualDictionaryEntry);
 	}
 }
