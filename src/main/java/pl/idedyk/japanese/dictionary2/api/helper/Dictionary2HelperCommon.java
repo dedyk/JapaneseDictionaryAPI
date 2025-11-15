@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,6 +42,42 @@ public class Dictionary2HelperCommon {
 	}
 	
 	public static List<KanjiKanaPair> getKanjiKanaPairListStatic(Entry entry, boolean filterSearchOnly) {
+		
+		if (filterSearchOnly == true) {
+			return getKanjiKanaPairListStatic_(entry, filterSearchOnly);
+			
+		} else {		
+			// INFO: zostal odkryty pewien problem, ktory polega na tym, ze jezeli czytanie laczy sie ze znakami kanji, ktore wszystkie sa search only kanji form
+			// to wtedy takie laczenia nie byly generowane. Przyklad: 2250230, 1030360
+			// wtedy generujemy dwa razy i laczymy wyniki usuwajac duplikaty
+			
+			List<KanjiKanaPair> allKanjiKanaPairList = new ArrayList<>();
+			
+			allKanjiKanaPairList.addAll(getKanjiKanaPairListStatic_(entry, true));
+			allKanjiKanaPairList.addAll(getKanjiKanaPairListStatic_(entry, false));
+
+			// usuwamy duplikaty
+			Set<String> uniqueKanjiKanaPairSet = new TreeSet<>();
+			
+			allKanjiKanaPairList.removeIf(p -> {
+				// generujemy klucz
+				String key = p.getKanji() + "." + p.getKana();
+				
+				// sprawdzamy, czy taki klucz juz wystepuje w unikalnej liscie kluczy
+				boolean keyContains = uniqueKanjiKanaPairSet.contains(key);
+				
+				if (keyContains == false) {
+					uniqueKanjiKanaPairSet.add(key);
+				}
+				
+				return keyContains;
+			});
+			
+			return allKanjiKanaPairList;			
+		}
+	}
+	
+	public static List<KanjiKanaPair> getKanjiKanaPairListStatic_(Entry entry, boolean filterSearchOnly) {
 		
 		List<KanjiKanaPair> result = new ArrayList<>();
 		
