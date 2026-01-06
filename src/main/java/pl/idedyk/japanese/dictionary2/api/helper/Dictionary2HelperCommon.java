@@ -1052,7 +1052,34 @@ public class Dictionary2HelperCommon {
 			
 		case "kur":
 			return "kur";
-						
+			
+		case "lao":
+			return "lao";
+			
+		case "arm":
+			return "orm";
+			
+		case "ben":
+			return "ben";
+			
+		case "kaz":
+			return "kaz";
+			
+		case "div":
+			return "male";
+			
+		case "tgk":
+			return "tadż";
+			
+		case "alb":
+			return "alb";
+			
+		case "aze":
+			return "aze";
+			
+		case "tuk":
+			return "turk";
+			
 		default:
 			throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1268,6 +1295,33 @@ public class Dictionary2HelperCommon {
 			
 		case "kur":
 			return "słowo pochodzi z języka kurdyjskiego";
+			
+		case "lao":
+			return "słowo pochodzi z języka laotańskiego";
+			
+		case "arm":
+			return "słowo pochodzi z języka ormiańskiego";
+			
+		case "ben":
+			return "słowo pochodzi z języka bengalskiego";
+			
+		case "kaz":
+			return "słowo pochodzi z języka kazachskiego";
+			
+		case "div":
+			return "słowo pochodzi z języka malediwskiego";
+			
+		case "tgk":
+			return "słowo pochodzi z języka tadżyckiego";
+			
+		case "alb":
+			return "słowo pochodzi z języka albańskiego";
+			
+		case "aze":
+			return "słowo pochodzi z języka azerbejdżańskiego";
+		
+		case "tuk":
+			return "słowo pochodzi z języka turkmenistanskiego";
 			
 		default:
 			throw new RuntimeException("Unknown language: " + language);
