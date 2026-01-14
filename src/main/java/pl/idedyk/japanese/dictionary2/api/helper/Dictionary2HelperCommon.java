@@ -1967,47 +1967,47 @@ public class Dictionary2HelperCommon {
 		
 		// czesc wspolna	
 		
-		Collection<FieldEnum> fieldCommonList = null;
-		Collection<MiscEnum> miscCommonList = null;
-		Collection<DialectEnum> dialectCommonList = null;
-		Collection<String> languageSourceCommonList = null;
-		Collection<String> additionalInfoCommonList = null;
+		List<FieldEnum> fieldCommonList = null;
+		List<MiscEnum> miscCommonList = null;
+		List<DialectEnum> dialectCommonList = null;
+		List<String> languageSourceCommonList = null;
+		List<String> additionalInfoCommonList = null;
 		
 		// generowanie wspolnej czesci dla wszystkich znaczen
 		for (Sense currentSense : kanjiKanaPairSenseList) {
 
 			if (fieldCommonList == null) {
-				fieldCommonList = currentSense.getFieldList();
+				fieldCommonList = new ArrayList<>(currentSense.getFieldList());
 				
 			} else {
-				fieldCommonList = CollectionUtils.intersection(fieldCommonList, currentSense.getFieldList());
+				fieldCommonList = new ArrayList<>(CollectionUtils.intersection(fieldCommonList, currentSense.getFieldList()));
 			}
 			
 			//
 			
 			if (miscCommonList == null) {
-				miscCommonList = currentSense.getMiscList();
+				miscCommonList = new ArrayList<>(currentSense.getMiscList());
 				
 			} else {
-				miscCommonList = CollectionUtils.intersection(miscCommonList, currentSense.getMiscList());
+				miscCommonList = new ArrayList<>(CollectionUtils.intersection(miscCommonList, currentSense.getMiscList()));
 			}
 			
 			//
 			
 			if (dialectCommonList == null) {
-				dialectCommonList = currentSense.getDialectList();
+				dialectCommonList = new ArrayList<>(currentSense.getDialectList());
 				
 			} else {
-				dialectCommonList = CollectionUtils.intersection(dialectCommonList, currentSense.getDialectList());
+				dialectCommonList = new ArrayList<>(CollectionUtils.intersection(dialectCommonList, currentSense.getDialectList()));
 			}	
 			
 			//
 			
 			if (languageSourceCommonList == null) {
-				languageSourceCommonList = translateToPolishLanguageSourceList(currentSense.getLanguageSourceList());
+				languageSourceCommonList = new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
 				
 			} else {
-				languageSourceCommonList = CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
+				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
 			}
 			
 			//
@@ -2015,13 +2015,18 @@ public class Dictionary2HelperCommon {
 			List<SenseAdditionalInfo> additionalPolInfoList = currentSense.getAdditionalInfoList().stream().filter(senseAdditionalInfo -> (senseAdditionalInfo.getLang().equals("pol") == true)).collect(Collectors.toList());
 			
 			if (additionalInfoCommonList == null) {
-				additionalInfoCommonList = translateToPolishSenseAdditionalInfoList(additionalPolInfoList);
+				additionalInfoCommonList = new ArrayList<>(translateToPolishSenseAdditionalInfoList(additionalPolInfoList));
 				
 			} else {
-				additionalInfoCommonList = CollectionUtils.intersection(additionalInfoCommonList, translateToPolishSenseAdditionalInfoList(additionalPolInfoList));
+				additionalInfoCommonList = new ArrayList<>(CollectionUtils.intersection(additionalInfoCommonList, translateToPolishSenseAdditionalInfoList(additionalPolInfoList)));
 			}
 		}
-
+				
+		Collections.sort(fieldCommonList);
+		Collections.sort(miscCommonList);
+		Collections.sort(dialectCommonList);
+		Collections.sort(languageSourceCommonList);
+		Collections.sort(additionalInfoCommonList);
 		
 		List<String> newPolishTranslateList = new ArrayList<>();			
 		List<String> newPolishAdditionalInfoList = new ArrayList<>();
