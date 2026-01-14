@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -2040,11 +2041,17 @@ public class Dictionary2HelperCommon {
 			
 			
 			// wyliczenie roznic miedzy obecnym znaczeniem, a czescia wspolna dla wszystkich znaczen
-			Collection<FieldEnum> fieldEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseFieldList, fieldCommonList);
-			Collection<MiscEnum> miscEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseMiscList, miscCommonList);
-			Collection<DialectEnum> dialectEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseDialectList, dialectCommonList);
-			Collection<String> languageSourceListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseLanguageSourceList, languageSourceCommonList);
-			Collection<String> senseAdditionalInfoListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseAdditionalInfoList, additionalInfoCommonList);
+			List<FieldEnum> fieldEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseFieldList, fieldCommonList));
+			List<MiscEnum> miscEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseMiscList, miscCommonList));
+			List<DialectEnum> dialectEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseDialectList, dialectCommonList));
+			List<String> languageSourceListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseLanguageSourceList, languageSourceCommonList));
+			List<String> senseAdditionalInfoListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseAdditionalInfoList, additionalInfoCommonList));
+			
+			Collections.sort(fieldEnumListUniqueForCurrentSense);
+			Collections.sort(miscEnumListUniqueForCurrentSense);
+			Collections.sort(dialectEnumListUniqueForCurrentSense);
+			Collections.sort(languageSourceListUniqueForCurrentSense);
+			Collections.sort(senseAdditionalInfoListUniqueForCurrentSense);
 			
 			//
 							
