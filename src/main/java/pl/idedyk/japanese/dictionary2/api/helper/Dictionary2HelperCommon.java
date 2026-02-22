@@ -1092,6 +1092,9 @@ public class Dictionary2HelperCommon {
 			
 		case "kir":
 			return "kir";
+
+		case "nep":
+			return "nep";
 			
 		default:
 			throw new RuntimeException("Unknown language: " + language);
@@ -1347,7 +1350,10 @@ public class Dictionary2HelperCommon {
 			
 		case "kir":
 			return "słowo pochodzi z języka kirgiskiego";
-			
+
+		case "nep":
+			return "słowo pochodzi z języka nepalskiego";
+
 		default:
 			throw new RuntimeException("Unknown language: " + language);
 		}
