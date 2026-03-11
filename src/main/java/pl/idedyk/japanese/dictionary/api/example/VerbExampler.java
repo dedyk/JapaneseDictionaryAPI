@@ -1626,7 +1626,7 @@ public class VerbExampler {
 		if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
 
 			final String woSuruKana = "をする";
-			final String woSuruRomaji = "o suru";
+			final String woSuruRomaji = " o suru";
 
 			final String suruKana = "する";
 			final String suruRomaji = "suru";
@@ -1639,11 +1639,15 @@ public class VerbExampler {
 
 				if (kanji != null) {
 
-					if (kanji.endsWith(woSuruKana) == false) {
+					if (kanji.endsWith(woSuruKana) == true) {
+						kanji = kanji.substring(0, kanji.length() - woSuruKana.length());
+						
+					} else if (kanji.endsWith(suruKana) == true) {
+						kanji = kanji.substring(0, kanji.length() - suruKana.length());
+						
+					} else {
 						throw new RuntimeException("Kanji: " + kanji);
-					}
-
-					kanji = kanji.substring(0, kanji.length() - woSuruKana.length());
+					}					
 				}
 
 				List<String> newKanaList = new ArrayList<String>();
