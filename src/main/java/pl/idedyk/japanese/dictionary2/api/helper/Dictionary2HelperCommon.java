@@ -1377,7 +1377,7 @@ public class Dictionary2HelperCommon {
 				result.add("rzeczownik, używany jako przyrostek"); break;
 				
 			case ADJECTIVAL_NOUNS_OR_QUASI_ADJECTIVES_KEIYODOSHI:
-				result.add("rzeczownik przymiotnikowy lub quasi-przymiotnik (keiyodoshi)"); break;
+				result.add("rzeczownik przymiotnikowy lub quasi-przymiotnik (keiyou doshi)"); break;
 				
 			case NOUN_OR_PARTICIPLE_WHICH_TAKES_THE_AUX_VERB_SURU:
 				result.add("rzeczownik lub imiesłów, który przyjmuje czasownik posiłkowy suru"); break;
