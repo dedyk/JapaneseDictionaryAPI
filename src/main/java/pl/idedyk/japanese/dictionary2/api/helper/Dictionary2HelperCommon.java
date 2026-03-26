@@ -3,9 +3,11 @@ package pl.idedyk.japanese.dictionary2.api.helper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,6 +43,42 @@ public class Dictionary2HelperCommon {
 	}
 	
 	public static List<KanjiKanaPair> getKanjiKanaPairListStatic(Entry entry, boolean filterSearchOnly) {
+		
+		if (filterSearchOnly == true) {
+			return getKanjiKanaPairListStatic_(entry, filterSearchOnly);
+			
+		} else {		
+			// INFO: zostal odkryty pewien problem, ktory polega na tym, ze jezeli czytanie laczy sie ze znakami kanji, ktore wszystkie sa search only kanji form
+			// to wtedy takie laczenia nie byly generowane. Przyklad: 2250230, 1030360
+			// wtedy generujemy dwa razy i laczymy wyniki usuwajac duplikaty
+			
+			List<KanjiKanaPair> allKanjiKanaPairList = new ArrayList<>();
+			
+			allKanjiKanaPairList.addAll(getKanjiKanaPairListStatic_(entry, true));
+			allKanjiKanaPairList.addAll(getKanjiKanaPairListStatic_(entry, false));
+
+			// usuwamy duplikaty
+			Set<String> uniqueKanjiKanaPairSet = new TreeSet<>();
+			
+			allKanjiKanaPairList.removeIf(p -> {
+				// generujemy klucz
+				String key = p.getKanji() + "." + p.getKana();
+				
+				// sprawdzamy, czy taki klucz juz wystepuje w unikalnej liscie kluczy
+				boolean keyContains = uniqueKanjiKanaPairSet.contains(key);
+				
+				if (keyContains == false) {
+					uniqueKanjiKanaPairSet.add(key);
+				}
+				
+				return keyContains;
+			});
+			
+			return allKanjiKanaPairList;			
+		}
+	}
+	
+	public static List<KanjiKanaPair> getKanjiKanaPairListStatic_(Entry entry, boolean filterSearchOnly) {
 		
 		List<KanjiKanaPair> result = new ArrayList<>();
 		
@@ -1015,7 +1053,49 @@ public class Dictionary2HelperCommon {
 			
 		case "kur":
 			return "kur";
-						
+			
+		case "lao":
+			return "lao";
+			
+		case "arm":
+			return "orm";
+			
+		case "ben":
+			return "ben";
+			
+		case "kaz":
+			return "kaz";
+			
+		case "div":
+			return "male";
+			
+		case "tgk":
+			return "tadż";
+			
+		case "alb":
+			return "alb";
+			
+		case "aze":
+			return "aze";
+			
+		case "tuk":
+			return "turk";
+			
+		case "mlg":
+			return "mlg";
+			
+		case "sot":
+			return "sot";
+			
+		case "smo":
+			return "sam";
+			
+		case "kir":
+			return "kir";
+
+		case "nep":
+			return "nep";
+			
 		default:
 			throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1232,6 +1312,48 @@ public class Dictionary2HelperCommon {
 		case "kur":
 			return "słowo pochodzi z języka kurdyjskiego";
 			
+		case "lao":
+			return "słowo pochodzi z języka laotańskiego";
+			
+		case "arm":
+			return "słowo pochodzi z języka ormiańskiego";
+			
+		case "ben":
+			return "słowo pochodzi z języka bengalskiego";
+			
+		case "kaz":
+			return "słowo pochodzi z języka kazachskiego";
+			
+		case "div":
+			return "słowo pochodzi z języka malediwskiego";
+			
+		case "tgk":
+			return "słowo pochodzi z języka tadżyckiego";
+			
+		case "alb":
+			return "słowo pochodzi z języka albańskiego";
+			
+		case "aze":
+			return "słowo pochodzi z języka azerbejdżańskiego";
+		
+		case "tuk":
+			return "słowo pochodzi z języka turkmenistanskiego";
+			
+		case "mlg":
+			return "słowo pochodzi z języka malagaskiego";
+			
+		case "sot":
+			return "słowo pochodzi z języka sotho";
+			
+		case "smo":
+			return "słowo pochodzi z języka samoańskiego";
+			
+		case "kir":
+			return "słowo pochodzi z języka kirgiskiego";
+
+		case "nep":
+			return "słowo pochodzi z języka nepalskiego";
+
 		default:
 			throw new RuntimeException("Unknown language: " + language);
 		}
@@ -1255,7 +1377,7 @@ public class Dictionary2HelperCommon {
 				result.add("rzeczownik, używany jako przyrostek"); break;
 				
 			case ADJECTIVAL_NOUNS_OR_QUASI_ADJECTIVES_KEIYODOSHI:
-				result.add("rzeczownik przymiotnikowy lub quasi-przymiotnik (keiyodoshi)"); break;
+				result.add("rzeczownik przymiotnikowy lub quasi-przymiotnik (keiyou doshi)"); break;
 				
 			case NOUN_OR_PARTICIPLE_WHICH_TAKES_THE_AUX_VERB_SURU:
 				result.add("rzeczownik lub imiesłów, który przyjmuje czasownik posiłkowy suru"); break;
@@ -1851,47 +1973,47 @@ public class Dictionary2HelperCommon {
 		
 		// czesc wspolna	
 		
-		Collection<FieldEnum> fieldCommonList = null;
-		Collection<MiscEnum> miscCommonList = null;
-		Collection<DialectEnum> dialectCommonList = null;
-		Collection<String> languageSourceCommonList = null;
-		Collection<String> additionalInfoCommonList = null;
+		List<FieldEnum> fieldCommonList = null;
+		List<MiscEnum> miscCommonList = null;
+		List<DialectEnum> dialectCommonList = null;
+		List<String> languageSourceCommonList = null;
+		List<String> additionalInfoCommonList = null;
 		
 		// generowanie wspolnej czesci dla wszystkich znaczen
 		for (Sense currentSense : kanjiKanaPairSenseList) {
 
 			if (fieldCommonList == null) {
-				fieldCommonList = currentSense.getFieldList();
+				fieldCommonList = new ArrayList<>(currentSense.getFieldList());
 				
 			} else {
-				fieldCommonList = CollectionUtils.intersection(fieldCommonList, currentSense.getFieldList());
+				fieldCommonList = new ArrayList<>(CollectionUtils.intersection(fieldCommonList, currentSense.getFieldList()));
 			}
 			
 			//
 			
 			if (miscCommonList == null) {
-				miscCommonList = currentSense.getMiscList();
+				miscCommonList = new ArrayList<>(currentSense.getMiscList());
 				
 			} else {
-				miscCommonList = CollectionUtils.intersection(miscCommonList, currentSense.getMiscList());
+				miscCommonList = new ArrayList<>(CollectionUtils.intersection(miscCommonList, currentSense.getMiscList()));
 			}
 			
 			//
 			
 			if (dialectCommonList == null) {
-				dialectCommonList = currentSense.getDialectList();
+				dialectCommonList = new ArrayList<>(currentSense.getDialectList());
 				
 			} else {
-				dialectCommonList = CollectionUtils.intersection(dialectCommonList, currentSense.getDialectList());
+				dialectCommonList = new ArrayList<>(CollectionUtils.intersection(dialectCommonList, currentSense.getDialectList()));
 			}	
 			
 			//
 			
 			if (languageSourceCommonList == null) {
-				languageSourceCommonList = translateToPolishLanguageSourceList(currentSense.getLanguageSourceList());
+				languageSourceCommonList = new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
 				
 			} else {
-				languageSourceCommonList = CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
+				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
 			}
 			
 			//
@@ -1899,13 +2021,18 @@ public class Dictionary2HelperCommon {
 			List<SenseAdditionalInfo> additionalPolInfoList = currentSense.getAdditionalInfoList().stream().filter(senseAdditionalInfo -> (senseAdditionalInfo.getLang().equals("pol") == true)).collect(Collectors.toList());
 			
 			if (additionalInfoCommonList == null) {
-				additionalInfoCommonList = translateToPolishSenseAdditionalInfoList(additionalPolInfoList);
+				additionalInfoCommonList = new ArrayList<>(translateToPolishSenseAdditionalInfoList(additionalPolInfoList));
 				
 			} else {
-				additionalInfoCommonList = CollectionUtils.intersection(additionalInfoCommonList, translateToPolishSenseAdditionalInfoList(additionalPolInfoList));
+				additionalInfoCommonList = new ArrayList<>(CollectionUtils.intersection(additionalInfoCommonList, translateToPolishSenseAdditionalInfoList(additionalPolInfoList)));
 			}
 		}
-
+				
+		Collections.sort(fieldCommonList);
+		Collections.sort(miscCommonList);
+		Collections.sort(dialectCommonList);
+		Collections.sort(languageSourceCommonList);
+		Collections.sort(additionalInfoCommonList);
 		
 		List<String> newPolishTranslateList = new ArrayList<>();			
 		List<String> newPolishAdditionalInfoList = new ArrayList<>();
@@ -1925,11 +2052,17 @@ public class Dictionary2HelperCommon {
 			
 			
 			// wyliczenie roznic miedzy obecnym znaczeniem, a czescia wspolna dla wszystkich znaczen
-			Collection<FieldEnum> fieldEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseFieldList, fieldCommonList);
-			Collection<MiscEnum> miscEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseMiscList, miscCommonList);
-			Collection<DialectEnum> dialectEnumListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseDialectList, dialectCommonList);
-			Collection<String> languageSourceListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseLanguageSourceList, languageSourceCommonList);
-			Collection<String> senseAdditionalInfoListUniqueForCurrentSense = CollectionUtils.subtract(currentSenseAdditionalInfoList, additionalInfoCommonList);
+			List<FieldEnum> fieldEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseFieldList, fieldCommonList));
+			List<MiscEnum> miscEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseMiscList, miscCommonList));
+			List<DialectEnum> dialectEnumListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseDialectList, dialectCommonList));
+			List<String> languageSourceListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseLanguageSourceList, languageSourceCommonList));
+			List<String> senseAdditionalInfoListUniqueForCurrentSense = new ArrayList<>(CollectionUtils.subtract(currentSenseAdditionalInfoList, additionalInfoCommonList));
+			
+			Collections.sort(fieldEnumListUniqueForCurrentSense);
+			Collections.sort(miscEnumListUniqueForCurrentSense);
+			Collections.sort(dialectEnumListUniqueForCurrentSense);
+			Collections.sort(languageSourceListUniqueForCurrentSense);
+			Collections.sort(senseAdditionalInfoListUniqueForCurrentSense);
 			
 			//
 							

@@ -27,6 +27,10 @@ public class KeigoHelper {
 
 		// iru
 		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, null, "いる", "iru", KeigoEntryFindMatchType.END_WITH,
+				DictionaryEntryType.WORD_VERB_U, null, null, "いらっしゃる", null, "irassharu", null, null, "いらっしゃい",
+				"irasshai");
+
+		addKeigoHighEntry(DictionaryEntryType.WORD_VERB_RU, null, "いる", "iru", KeigoEntryFindMatchType.END_WITH,
 				DictionaryEntryType.WORD_VERB_U, "居らっしゃる", null, "いらっしゃる", null, "irassharu", null, "居らっしゃい", "いらっしゃい",
 				"irasshai");
 

@@ -131,6 +131,7 @@
 			<xsd:element name="used" minOccurs="1" maxOccurs="1" type="xsd:boolean" />	 <!-- czy znak uzywany w slowach -->
 			<xsd:element name="strokePaths" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- kolejnosc pisania kresek -->
 			<xsd:element name="radicals" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- lista elementow podstawowych --> 
+			<xsd:element name="kenteiLevel"  minOccurs="0" maxOccurs="1" type="kenteiLevelType" /> <!-- poziom kanji kentei -->
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -272,5 +273,21 @@
 			<xsd:enumeration value="pl" />
 		</xsd:restriction>
 	</xsd:simpleType>
-
+	
+	<xsd:simpleType name="kenteiLevelType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LEVEL_10" />
+			<xsd:enumeration value="LEVEL_9" />
+			<xsd:enumeration value="LEVEL_8" />
+			<xsd:enumeration value="LEVEL_7" />
+			<xsd:enumeration value="LEVEL_6" />
+			<xsd:enumeration value="LEVEL_5" />
+			<xsd:enumeration value="LEVEL_4" />
+			<xsd:enumeration value="LEVEL_3" />
+			<xsd:enumeration value="LEVEL_PRE2" />
+			<xsd:enumeration value="LEVEL_2" />
+			<xsd:enumeration value="LEVEL_PRE1" />
+			<xsd:enumeration value="LEVEL_1" />
+		</xsd:restriction>
+	</xsd:simpleType>
 </xsd:schema>
