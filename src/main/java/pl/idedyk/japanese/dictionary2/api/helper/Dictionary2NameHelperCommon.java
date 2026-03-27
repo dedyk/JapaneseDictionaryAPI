@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfoTransDet;
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfoTransDetAdditionalInfo;
 
 public class Dictionary2NameHelperCommon {
 	
@@ -32,7 +33,7 @@ public class Dictionary2NameHelperCommon {
 		
 		List<TranslationalInfoTransDet> result = new ArrayList<>();
 		
-		for (TranslationalInfoTransDet translationalInfoTransDet : result) {
+		for (TranslationalInfoTransDet translationalInfoTransDet : translationalInfoTransDetList) {
 			if (translationalInfoTransDet.getLang().equals(lang) == true) {
 				result.add(translationalInfoTransDet);
 			}
@@ -41,5 +42,32 @@ public class Dictionary2NameHelperCommon {
 		return result;
 	}
 
+	public static TranslationalInfoTransDetAdditionalInfo getFirstEnglishOrPolishTranslationalInfoTransDetAdditionalInfo(List<TranslationalInfoTransDetAdditionalInfo> translationalInfoTransDetAdditionalInfoList) {
+		TranslationalInfoTransDetAdditionalInfo firstPolishTranslationalInfoTransDetAdditionalInfo = getFirstPolishTranslationalInfoTransDetAdditionalInfo(translationalInfoTransDetAdditionalInfoList);
+		
+		if (firstPolishTranslationalInfoTransDetAdditionalInfo != null) {
+			return firstPolishTranslationalInfoTransDetAdditionalInfo;
+		}
+		
+		return getFirstEngTranslationalInfoTransDetAdditionalInfo(translationalInfoTransDetAdditionalInfoList);
+	}
+	
+	public static TranslationalInfoTransDetAdditionalInfo getFirstPolishTranslationalInfoTransDetAdditionalInfo(List<TranslationalInfoTransDetAdditionalInfo> translationalInfoTransDetAdditionalInfoList) {
+		return getFirstLangTranslationalInfoTransDetAdditionalInfo(translationalInfoTransDetAdditionalInfoList, "pol");
+	}
 
+	public static TranslationalInfoTransDetAdditionalInfo getFirstEngTranslationalInfoTransDetAdditionalInfo(List<TranslationalInfoTransDetAdditionalInfo> translationalInfoTransDetAdditionalInfoList) {
+		return getFirstLangTranslationalInfoTransDetAdditionalInfo(translationalInfoTransDetAdditionalInfoList, "eng");
+	}
+	
+	private static TranslationalInfoTransDetAdditionalInfo getFirstLangTranslationalInfoTransDetAdditionalInfo(List<TranslationalInfoTransDetAdditionalInfo> translationalInfoTransDetAdditionalInfoList, String lang) {
+		
+		for (TranslationalInfoTransDetAdditionalInfo translationalInfoTransDetAdditionalInfo : translationalInfoTransDetAdditionalInfoList) {
+			if (translationalInfoTransDetAdditionalInfo.getLang().equals(lang) == true) {
+				return translationalInfoTransDetAdditionalInfo;
+			}
+		}
+		
+		return null;
+	}
 }

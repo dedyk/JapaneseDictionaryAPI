@@ -63,6 +63,7 @@
 			<xsd:element name="name_type" minOccurs="0" maxOccurs="unbounded" type="translationalInfoNameType" /> <!-- rodzaj znaczenia, np. nazwa firmy -->
 			<xsd:element name="xref" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- referencja do innego kanji/kana -->
 			<xsd:element name="trans_det" minOccurs="0" maxOccurs="unbounded" type="translationalInfoTransDet" /> <!-- znaczenie -->
+			<xsd:element name="add_info" minOccurs="0" maxOccurs="unbounded" type="translationalInfoTransDetAdditionalInfo" /> <!-- dodatkowe opisowe informacje do tlumaczenia, (modyfikacja do orginalnego schematu) -->
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -98,6 +99,14 @@
 	</xsd:simpleType>
 
 	<xsd:complexType name="translationalInfoTransDet">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute ref="xml:lang" use="optional" /> <!-- identyfikator jezyka dla ktorego tlumaczenie odnosi sie, domyslne eng oznacza jezyk angielski -->
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="translationalInfoTransDetAdditionalInfo">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
 				<xsd:attribute ref="xml:lang" use="optional" /> <!-- identyfikator jezyka dla ktorego tlumaczenie odnosi sie, domyslne eng oznacza jezyk angielski -->
