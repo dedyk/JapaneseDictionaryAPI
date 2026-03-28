@@ -20,7 +20,6 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenc
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerList;
-import pl.idedyk.japanese.dictionary.api.dto.Attribute;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.FuriganaEntry;
@@ -305,8 +304,8 @@ public abstract class DictionaryManagerAbstract {
 			}	
 			
 			private Integer getPriority(ResultItem resultItem) {
-				Entry dictionary2Entry = resultItem.getEntry();
-				DictionaryEntry dictionaryEntry = resultItem.getDictionaryEntry();
+				Entry dictionary2Entry = resultItem.getWordEntry();
+				// pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict.Entry nameEntry = resultItem.getNameEntry();
 				
 				Integer priority = null;
 				
@@ -323,13 +322,15 @@ public abstract class DictionaryManagerAbstract {
 					}
 				}
 				
-				if (priority == null && dictionaryEntry != null) {
+				/*
+				if (priority == null && nameEntry != null) {
 					List<Attribute> priorityAttributeList = dictionaryEntry.getAttributeList().getAttributeList(AttributeType.PRIORITY);
 					
 					if (priorityAttributeList != null && priorityAttributeList.size() > 0) {
 						priority = Integer.parseInt(priorityAttributeList.get(0).getAttributeValue().get(0));
 					}
 				}
+				*/
 				
 				if (priority == null) {
 					priority = Integer.MAX_VALUE;

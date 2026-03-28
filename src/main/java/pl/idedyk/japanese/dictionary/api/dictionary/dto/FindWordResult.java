@@ -2,13 +2,13 @@ package pl.idedyk.japanese.dictionary.api.dictionary.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
-import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict;
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfo;
 
 public class FindWordResult implements Serializable {
 	
@@ -57,32 +57,32 @@ public class FindWordResult implements Serializable {
 		
 		private static final long serialVersionUID = 1L;
 
-		private Entry entry;
-		private DictionaryEntry dictionaryEntry;
+		private JMdict.Entry wordEntry;
+		private JMnedict.Entry nameEntry;
 		
 		private boolean isName;
 		private boolean isGrammaFormOrExamples;
 		
-		public ResultItem(Entry entry, boolean isName, boolean isGrammaFormOrExamples) {
-			this.entry = entry;
+		public ResultItem(JMdict.Entry wordEntry, boolean isName, boolean isGrammaFormOrExamples) {
+			this.wordEntry = wordEntry;
 			this.isName = isName;
 			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
 		
-		public ResultItem(DictionaryEntry dictionaryEntry, boolean isName, boolean isGrammaFormOrExamples) {
-			this.dictionaryEntry = dictionaryEntry;
+		public ResultItem(JMnedict.Entry nameEntry, boolean isName, boolean isGrammaFormOrExamples) {
+			this.nameEntry = nameEntry;
 			this.isName = isName;
 			this.isGrammaFormOrExamples = isGrammaFormOrExamples;
 		}
 				
-		public Entry getEntry() {
-			return entry;
+		public JMdict.Entry getWordEntry() {
+			return wordEntry;
 		}
 
-		public DictionaryEntry getDictionaryEntry() {
-			return dictionaryEntry;
+		public JMnedict.Entry getNameEntry() {
+			return nameEntry;
 		}
-
+		
 		public boolean isName() {
 			return isName;
 		}
@@ -92,57 +92,68 @@ public class FindWordResult implements Serializable {
 		}		
 		
 		public List<String> getKanjiList() {			
-			if (entry != null) {
-				return entry.getKanjiInfoList().stream().filter(f -> f.getKanji() != null).map(f -> f.getKanji()).collect(Collectors.toList());
+			if (wordEntry != null) {
+				return wordEntry.getKanjiInfoList().stream().filter(f -> f.getKanji() != null).map(f -> f.getKanji()).collect(Collectors.toList());
 			}
 			
-			if (dictionaryEntry != null) {
-				return Arrays.asList(dictionaryEntry.getKanji());
+			if (nameEntry != null) {
+				return nameEntry.getKanjiInfoList().stream().filter(f -> f.getKanji() != null).map(f -> f.getKanji()).collect(Collectors.toList());
 			}
 						
 			throw new RuntimeException("getKanji");
 		}
-
 		
-		@SuppressWarnings("deprecation")
 		public List<String> getKanaList() {			
-			if (entry != null) {
-				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getValue()).collect(Collectors.toList());
+			if (wordEntry != null) {
+				return wordEntry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getValue()).collect(Collectors.toList());
 			}
 
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getKanaList();
+			if (nameEntry != null) {
+				return nameEntry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana()).collect(Collectors.toList());
 			}
 			
 			throw new RuntimeException("getKanaList");
 		}
 		
-		@SuppressWarnings("deprecation")
 		public List<String> getRomajiList() {			
-			if (entry != null) {
-				return entry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getRomaji()).collect(Collectors.toList());
+			if (wordEntry != null) {
+				return wordEntry.getReadingInfoList().stream().filter(f -> f.getKana() != null).map(f -> f.getKana().getRomaji()).collect(Collectors.toList());
 			}
 			
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getRomajiList();
+			if (nameEntry != null) {
+				return nameEntry.getReadingInfoList().stream().filter(f -> f.getRomaji() != null).map(f -> f.getRomaji()).collect(Collectors.toList());
 			}
 			
 			throw new RuntimeException("getRomajiList");
 		}
 		
 		public List<String> getTranslates() {			
-			if (entry != null) {
+			if (wordEntry != null) {
 				List<String> result = new ArrayList<>();
 				
-				for (Sense sense : entry.getSenseList()) {
+				for (Sense sense : wordEntry.getSenseList()) {
 					sense.getGlossList().stream().filter(f -> f.getLang().equals("pol") == true).forEach(c -> result.add(c.getValue()));					
 				}
 				
 				return result;
 			}
 			
-			if (dictionaryEntry != null) {
-				return dictionaryEntry.getTranslates();
+			if (nameEntry != null) {
+				List<String> result = new ArrayList<>();
+				
+				// najpierw proba pobrania jezyka polskiego (moze nie byc)
+				for (TranslationalInfo translationalInfo : nameEntry.getTranslationInfo()) {
+					translationalInfo.getTransDet().stream().filter(f -> f.getLang().equals("pol") == true).forEach(c -> result.add(c.getValue()));					
+				}
+				
+				// jezeli nic nie ma to pobieramy jezyk angielski
+				if (result.size() == 0) {
+					for (TranslationalInfo translationalInfo : nameEntry.getTranslationInfo()) {
+						translationalInfo.getTransDet().stream().filter(f -> f.getLang().equals("eng") == true).forEach(c -> result.add(c.getValue()));					
+					}					
+				}
+				
+				return result;
 			}
 						
 			throw new RuntimeException("getTranslates");
