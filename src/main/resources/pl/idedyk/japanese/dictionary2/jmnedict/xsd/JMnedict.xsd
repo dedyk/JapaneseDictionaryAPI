@@ -121,7 +121,10 @@
 	</xsd:complexType>
 	
 	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
-		<xsd:attribute name="dictionaryEntryTypeList" type="xsd:string" />
+		<xsd:sequence>
+			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
+			<xsd:element name="uniqueKeyList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />			
+		</xsd:sequence>		
 	</xsd:complexType>
 	
 </xsd:schema>
