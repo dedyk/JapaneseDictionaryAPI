@@ -40,6 +40,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoAttributeListInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoEntriesInfo;
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.Misc2Info;
 
@@ -86,18 +87,18 @@ public abstract class DictionaryManagerAbstract {
 		
 	}
 
-	public List<DictionaryEntry> getWordsNameGroup(int groupSize, int groupNo) throws DictionaryException {
-		
+	public List<JMnedict.Entry> getWordsNameGroup(int groupSize, int groupNo) throws DictionaryException {
+				
 		waitForDatabaseReady();
 
 		int dictionaryEntriesSize = databaseConnector.getDictionaryEntriesNameSize();
 
-		List<DictionaryEntry> result = new ArrayList<DictionaryEntry>();
+		List<JMnedict.Entry> result = new ArrayList<JMnedict.Entry>();
 
 		for (int idx = groupNo * groupSize; idx < (groupNo + 1) * groupSize && idx < dictionaryEntriesSize; ++idx) {
-			DictionaryEntry currentDictionaryEntry = databaseConnector.getDictionaryEntryNameById(String.valueOf(idx + 1));
+			JMnedict.Entry entry = databaseConnector.getNameDictionaryEntry2ByCounter(idx + 1);
 
-			result.add(currentDictionaryEntry);
+			result.add(entry);
 		}
 
 		return result;
@@ -472,18 +473,25 @@ public abstract class DictionaryManagerAbstract {
 		return databaseConnector.getDictionaryEntry2ById(id);		
 	}
 	
-	public DictionaryEntry getDictionaryEntryNameById(int id) throws DictionaryException {
+	public JMnedict.Entry getNameDictionaryEntry2ById(int id) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryNameById(String.valueOf(id));
+		return databaseConnector.getNameDictionaryEntry2ById(String.valueOf(id));
+	}
+	
+	public JMnedict.Entry getNameDictionaryEntry2ByCounter(int counter) throws DictionaryException {
+		
+		waitForDatabaseReady();
+		
+		return databaseConnector.getNameDictionaryEntry2ByCounter(counter);
 	}
 
-	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException {
+	public JMnedict.Entry getNameDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uniqueKey) throws DictionaryException {
 		
 		waitForDatabaseReady();
 		
-		return databaseConnector.getDictionaryEntryNameByUniqueKey(uniqueKey);
+		return databaseConnector.getNameDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(uniqueKey);
 	}
 
 	public List<KanjiCharacterInfo> findKnownKanji(String text) throws DictionaryException {
