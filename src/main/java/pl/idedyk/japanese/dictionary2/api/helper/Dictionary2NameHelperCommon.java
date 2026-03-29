@@ -1,8 +1,11 @@
 package pl.idedyk.japanese.dictionary2.api.helper;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict;
 import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfoTransDet;
 import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfoTransDetAdditionalInfo;
 
@@ -69,5 +72,40 @@ public class Dictionary2NameHelperCommon {
 		}
 		
 		return null;
+	}
+	
+	public static String[] getUniqueKanjiKanaRomajiSetWithoutSearchOnly(JMnedict.Entry entry) {
+		
+		Set<String> kanjiUniqueSet = new LinkedHashSet<>();
+		Set<String> kanaUniqueSet = new LinkedHashSet<>();
+		Set<String> romajiUniqueSet = new LinkedHashSet<>();
+		
+		// kanji
+		entry.getKanjiInfoList().stream().filter(kanjiInfo -> {
+			boolean isKanjiSearchOnly = kanjiInfo != null;
+			
+			return isKanjiSearchOnly == false;
+		}).forEach(kanjiInfo -> kanjiUniqueSet.add(kanjiInfo.getKanji()));
+		
+		// kana i romaji
+		entry.getReadingInfoList().stream().forEach(readingInfo -> {
+			
+			kanaUniqueSet.add(readingInfo.getKana());
+			romajiUniqueSet.add(readingInfo.getRomaji());
+		});	
+		
+		if (kanjiUniqueSet.size() == 0) {
+			kanjiUniqueSet.add("-");
+		}
+		
+		if (kanaUniqueSet.size() == 0) {
+			kanaUniqueSet.add("-");
+		}
+		
+		if (romajiUniqueSet.size() == 0) {
+			romajiUniqueSet.add("-");
+		}
+		
+		return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
 	}
 }
