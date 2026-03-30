@@ -30,7 +30,7 @@ public class Dictionary2NameHelperCommon {
 			
 			// wszystkie czytania do listy wynikowej
 			for (ReadingInfo readingInfo : readingInfoList) {				
-				result.add(new NameKanjiKanaPair(null, readingInfo));
+				result.add(new NameKanjiKanaPair(entry, null, readingInfo));
 			}
 			
 		} else {	
@@ -62,7 +62,7 @@ public class Dictionary2NameHelperCommon {
 					}
 					
 					// mamy pare
-					result.add(new NameKanjiKanaPair(kanjiInfo, readingInfo));					
+					result.add(new NameKanjiKanaPair(entry, kanjiInfo, readingInfo));					
 				}				
 			}
 		}
@@ -282,14 +282,22 @@ public class Dictionary2NameHelperCommon {
 	
 	public static class NameKanjiKanaPair {
 		
+		private JMnedict.Entry entry;
+		
 		private KanjiInfo kanjiInfo;		
 		private ReadingInfo readingInfo;
 				
 		private List<TranslationalInfo> translationalInfoList = new ArrayList<>();
 
-		public NameKanjiKanaPair(KanjiInfo kanjiInfo, ReadingInfo readingInfo) {
+		public NameKanjiKanaPair(JMnedict.Entry entry, KanjiInfo kanjiInfo, ReadingInfo readingInfo) {
+			this.entry = entry;
+			
 			this.kanjiInfo = kanjiInfo;
 			this.readingInfo = readingInfo;
+		}
+
+		public JMnedict.Entry getEntry() {
+			return entry;
 		}
 
 		public KanjiInfo getKanjiInfo() {
