@@ -153,11 +153,7 @@ public class Dictionary2NameHelperCommon {
 		Set<String> romajiUniqueSet = new LinkedHashSet<>();
 		
 		// kanji
-		entry.getKanjiInfoList().stream().filter(kanjiInfo -> {
-			boolean isKanjiSearchOnly = kanjiInfo != null;
-			
-			return isKanjiSearchOnly == false;
-		}).forEach(kanjiInfo -> kanjiUniqueSet.add(kanjiInfo.getKanji()));
+		entry.getKanjiInfoList().stream().forEach(kanjiInfo -> kanjiUniqueSet.add(kanjiInfo.getKanji()));
 		
 		// kana i romaji
 		entry.getReadingInfoList().stream().forEach(readingInfo -> {
