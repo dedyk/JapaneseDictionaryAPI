@@ -14,6 +14,7 @@
 							<xsd:element name="k_ele" minOccurs="0" maxOccurs="unbounded" type="kanjiInfo" /> <!-- informacja o kanji -->
 							<xsd:element name="r_ele" minOccurs="1" maxOccurs="unbounded" type="readingInfo" /> <!-- informacja o czytaniu -->
 							<xsd:element name="trans" minOccurs="1" maxOccurs="unbounded" type="translationalInfo" /> <!-- informacja o znaczeniu -->
+							<xsd:element name="misc" minOccurs="0" maxOccurs="1" type="miscInfo" /> <!-- moja modyfikacja: rozne dodatkowe informacje, dodatkowy element, to calkowicie moj element -->
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
@@ -44,6 +45,7 @@
 	<xsd:complexType name="readingInfo">
 		<xsd:sequence>
 			<xsd:element name="reb" minOccurs="1" maxOccurs="1" type="xsd:string" /> <!-- kana -->
+			<xsd:element name="romaji" minOccurs="0" maxOccurs="1" type="xsd:string" /> <!-- romaji -->
 			<xsd:element name="re_restr" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- list kanji ze zbioru kanji do ktorej dane czytanie odnosi sie. Jesli jest puste to wtedy czytanie odnosi sie do wszystkich kanji -->
 			<xsd:element name="re_inf" minOccurs="0" maxOccurs="unbounded" type="readingAdditionalInfo" />  <!-- dodatkowe informacje do czytania -->
 			<xsd:element name="re_pri" minOccurs="0" maxOccurs="unbounded" type="relativePriority" /> <!-- czestotliwosc wystepowania -->
@@ -61,6 +63,7 @@
 			<xsd:element name="name_type" minOccurs="0" maxOccurs="unbounded" type="translationalInfoNameType" /> <!-- rodzaj znaczenia, np. nazwa firmy -->
 			<xsd:element name="xref" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- referencja do innego kanji/kana -->
 			<xsd:element name="trans_det" minOccurs="0" maxOccurs="unbounded" type="translationalInfoTransDet" /> <!-- znaczenie -->
+			<xsd:element name="add_info" minOccurs="0" maxOccurs="unbounded" type="translationalInfoTransDetAdditionalInfo" /> <!-- dodatkowe opisowe informacje do tlumaczenia, (modyfikacja do orginalnego schematu) -->
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -102,4 +105,26 @@
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
+	
+	<xsd:complexType name="translationalInfoTransDetAdditionalInfo">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute ref="xml:lang" use="optional" /> <!-- identyfikator jezyka dla ktorego tlumaczenie odnosi sie, domyslne eng oznacza jezyk angielski -->
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+    <xsd:complexType name="miscInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje -->
+		<xsd:sequence>
+			<xsd:element name="oldPolishJapaneseDictionary" minOccurs="0" maxOccurs="1" type="oldPolishJapaneseDictionaryInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="oldPolishJapaneseDictionaryInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje ze starego slownika -->
+		<xsd:sequence>
+			<xsd:element name="dictionaryEntryTypeList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />
+			<xsd:element name="uniqueKeyList" minOccurs="1" maxOccurs="unbounded" type="xsd:string" />			
+		</xsd:sequence>		
+	</xsd:complexType>
+	
 </xsd:schema>

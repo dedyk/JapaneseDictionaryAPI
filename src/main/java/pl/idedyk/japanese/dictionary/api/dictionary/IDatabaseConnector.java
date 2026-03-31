@@ -7,18 +7,17 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindKanjiResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordRequest;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
-import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
 import pl.idedyk.japanese.dictionary.api.dto.GroupEnum;
 import pl.idedyk.japanese.dictionary.api.dto.GroupWithTatoebaSentenceList;
 import pl.idedyk.japanese.dictionary.api.exception.DictionaryException;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
+import pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict;
 import pl.idedyk.japanese.dictionary2.kanjidic2.xsd.KanjiCharacterInfo;
 
 public interface IDatabaseConnector {
 
 	public int getDictionaryEntriesSize() throws DictionaryException;
-	
 	public int getDictionaryEntriesNameSize() throws DictionaryException;
 	
 	// public DictionaryEntry getNthDictionaryEntry(int nth) throws DictionaryException;
@@ -36,8 +35,9 @@ public interface IDatabaseConnector {
 	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryId(long oldPolishJapaneseDictionaryId) throws DictionaryException;
 	public JMdict.Entry getDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uiqueKey) throws DictionaryException;
 	
-	public DictionaryEntry getDictionaryEntryNameById(String id) throws DictionaryException;
-	public DictionaryEntry getDictionaryEntryNameByUniqueKey(String uniqueKey) throws DictionaryException;
+	public JMnedict.Entry getNameDictionaryEntry2ById(String id) throws DictionaryException;
+	public JMnedict.Entry getNameDictionaryEntry2ByCounter(int counter) throws DictionaryException;
+	public JMnedict.Entry getNameDictionaryEntry2ByOldPolishJapaneseDictionaryUniqueKey(String uniqueKey) throws DictionaryException;
 	
 	public KanjiCharacterInfo getKanjiEntryById(String id) throws DictionaryException;
 	
