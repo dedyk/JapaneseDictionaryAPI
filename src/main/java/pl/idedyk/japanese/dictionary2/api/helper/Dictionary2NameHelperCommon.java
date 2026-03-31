@@ -182,9 +182,7 @@ public class Dictionary2NameHelperCommon {
 	}
 	
 	public static List<String> translateToPolishTranslationalInfoNameTypeList(Collection<TranslationalInfoNameType> translationalInfoNameTypeList) {
-		
-		// FM_FIXME: sprawdzic, czy to dziala
-		
+				
 		List<String> result = new ArrayList<>();
 
 		for (TranslationalInfoNameType translationalInfoNameType : translationalInfoNameTypeList) {
