@@ -146,7 +146,7 @@ public class Dictionary2NameHelperCommon {
 		return null;
 	}
 	
-	public static String[] getUniqueKanjiKanaRomajiSetWithoutSearchOnly(JMnedict.Entry entry) {
+	public static String[] getUniqueKanjiKanaRomajiSetWithoutSearchOnly(JMnedict.Entry entry, boolean onlyFirst) {
 		
 		Set<String> kanjiUniqueSet = new LinkedHashSet<>();
 		Set<String> kanaUniqueSet = new LinkedHashSet<>();
@@ -174,7 +174,11 @@ public class Dictionary2NameHelperCommon {
 			romajiUniqueSet.add("-");
 		}
 		
-		return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
+		if (onlyFirst == false) {
+			return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
+		} else {
+			return new String[] { kanjiUniqueSet.iterator().next(), kanaUniqueSet.iterator().next(), romajiUniqueSet.iterator().next() };
+		}
 	}
 	
 	public static List<String> translateToPolishTranslationalInfoNameTypeList(Collection<TranslationalInfoNameType> translationalInfoNameTypeList) {
