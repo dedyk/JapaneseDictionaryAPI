@@ -1850,7 +1850,7 @@ public class Dictionary2HelperCommon {
 		return null;
 	}
 	
-	public static String[] getUniqueKanjiKanaRomajiSetWithoutSearchOnly(Entry entry, boolean onlyFirst) {
+	public static String[] getUniqueKanjiKanaRomajiSetWithoutSearchOnly(Entry entry) {
 		
 		Set<String> kanjiUniqueSet = new LinkedHashSet<>();
 		Set<String> kanaUniqueSet = new LinkedHashSet<>();
@@ -1886,11 +1886,7 @@ public class Dictionary2HelperCommon {
 			romajiUniqueSet.add("-");
 		}
 		
-		if (onlyFirst == false) {
-			return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
-		} else {
-			return new String[] { kanjiUniqueSet.iterator().next(), kanaUniqueSet.iterator().next(), romajiUniqueSet.iterator().next() };
-		}
+		return new String[] { String.join(",", kanjiUniqueSet), String.join(",", kanaUniqueSet), String.join(",", romajiUniqueSet) };
 	}
 	
 	public static DictionaryEntry convertKanjiKanaPairToOldDictionaryEntry(KanjiKanaPair kanjiKanaPair) {
