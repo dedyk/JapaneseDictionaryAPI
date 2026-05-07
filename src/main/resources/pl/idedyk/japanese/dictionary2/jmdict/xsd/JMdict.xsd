@@ -490,7 +490,7 @@
 	<xsd:complexType name="miscInfo"> <!-- moja modyfikacja: rozne dodatkowe informacje -->
 		<xsd:sequence>
 			<xsd:element name="oldPolishJapaneseDictionary" minOccurs="0" maxOccurs="1" type="oldPolishJapaneseDictionaryInfo" />
-			<xsd:element name="lastModified" minOccurs="0" maxOccurs="1" type="xsd:dateTime" /> <!-- pole techniczne, data ostatniej modyfikacji -->
+			<xsd:element name="lastModified" minOccurs="0" maxOccurs="1" type="xsd:string" /> <!-- pole techniczne, data ostatniej modyfikacji, format: yyyy-MM-dd'T'HH:mm:ssZ -->
 		</xsd:sequence>
 	</xsd:complexType>
 	
