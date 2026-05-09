@@ -106,6 +106,14 @@
 			<jxb:property name="glossList" />
 		</jxb:bindings>
 
+		<jxb:bindings node="//xsd:complexType[@name='xref']/xsd:simpleContent/xsd:extension/xsd:attribute[@name='xk']">
+			<jxb:property name="xKanji" />
+		</jxb:bindings>
+
+		<jxb:bindings node="//xsd:complexType[@name='xref']/xsd:simpleContent/xsd:extension/xsd:attribute[@name='xr']">
+			<jxb:property name="xKana" />
+		</jxb:bindings>
+
 		<jxb:bindings node="//xsd:simpleType[@name='kanjiAdditionalInfo']">
 			<jxb:typesafeEnumClass name="KanjiAdditionalInfoEnum" />
 		</jxb:bindings>
