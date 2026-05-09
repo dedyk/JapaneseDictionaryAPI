@@ -30,8 +30,9 @@
 			</xsd:sequence>
 			
 			<!-- FM_FIXME: nowe pola, dodac obsluge tego pola w formacie CSV -->
-			<xsd:attribute name="created" use="required" type="xsd:date" />
-			<xsd:attribute name="version" use="required" type="xsd:string" />
+			<!-- FM_FIXME: zamienic na required dla obu pol -->
+			<xsd:attribute name="created" use="optional" type="xsd:date" />
+			<xsd:attribute name="version" use="optional" type="xsd:string" />
 		</xsd:complexType>
 	</xsd:element>
 
@@ -512,7 +513,9 @@
 	<xsd:complexType name="xref">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string"> <!-- jako wartosc jest generowana wszystkie pola ponizej sklejone ze soba -->
-				<xsd:attribute name="type" use="required" type="xrefType" /> <!--  typ adnosnika -->
+				
+				<!-- FM_FIXME: zamienic na required -->
+				<xsd:attribute name="type" use="optional" type="xrefType" /> <!--  typ adnosnika -->
 				
 				<!-- FM_FIXME: chyba brak tego pola w obecnym slowniku, stworzyc sztuczny i przetestowac -->
 				<xsd:attribute name="dict" use="optional" type="xsd:string" /> <!-- nazwa slownika -->
