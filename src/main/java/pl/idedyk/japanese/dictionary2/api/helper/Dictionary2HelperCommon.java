@@ -1734,7 +1734,12 @@ public class Dictionary2HelperCommon {
 			
 			List<Gloss> glossList = sense.getGlossList();
 			List<SenseAdditionalInfo> senseAdditionalInfoList = sense.getAdditionalInfoList();
-			List<LanguageSource> senseLanguageSourceList = sense.getLanguageSourceList();
+			
+			List<LanguageSource> languageSourceList = new ArrayList<>();
+			
+			languageSourceList.addAll(kanjiKanaPair.getEntry().getLanguageSourceList__());
+			languageSourceList.addAll(sense.getLanguageSourceList__());
+			
 			List<FieldEnum> senseFieldList = sense.getFieldList();
 			List<MiscEnum> senseMiscList = sense.getMiscList();
 			List<DialectEnum> senseDialectList = sense.getDialectList();
@@ -1793,9 +1798,9 @@ public class Dictionary2HelperCommon {
 			}
 			
 			// czy sa informacje o zagranicznym pochodzeniu slow
-			if (senseLanguageSourceList != null && senseLanguageSourceList.size() > 0) {
+			if (languageSourceList != null && languageSourceList.size() > 0) {
 				
-				for (LanguageSource languageSource : senseLanguageSourceList) {
+				for (LanguageSource languageSource : languageSourceList) {
 											
 					String languageCodeInPolish = Dictionary2HelperCommon.translateToPolishLanguageCode(languageSource.getLang());
 					String languageValue = languageSource.getValue();
@@ -2009,11 +2014,15 @@ public class Dictionary2HelperCommon {
 			
 			//
 			
+			// FM_FIXME: sprawdzic, czy to dziala
 			if (languageSourceCommonList == null) {
-				languageSourceCommonList = new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
+				languageSourceCommonList = new ArrayList<>(); //translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
+				
+				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList__())));
+				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__())));
 				
 			} else {
-				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
+				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__())));
 			}
 			
 			//
@@ -2046,7 +2055,11 @@ public class Dictionary2HelperCommon {
 			List<FieldEnum> currentSenseFieldList = currentSense.getFieldList();
 			List<MiscEnum> currentSenseMiscList = currentSense.getMiscList();
 			List<DialectEnum> currentSenseDialectList = currentSense.getDialectList();
-			List<String> currentSenseLanguageSourceList = translateToPolishLanguageSourceList(currentSense.getLanguageSourceList());
+			List<String> currentSenseLanguageSourceList = new ArrayList<>();
+			
+			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList__()));
+			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__()));			
+			
 			List<String> currentSenseAdditionalInfoList = translateToPolishSenseAdditionalInfoList(additionalPolInfoList);
 			List<PartOfSpeechEnum> partOfSpeechList = currentSense.getPartOfSpeechList();
 			
