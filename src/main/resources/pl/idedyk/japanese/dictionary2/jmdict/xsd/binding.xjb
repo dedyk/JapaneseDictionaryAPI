@@ -57,6 +57,10 @@
 		<jxb:bindings node="//xsd:complexType[@name='readingInfo']/xsd:sequence/xsd:element[@name='re_pri']">
 			<jxb:property name="relativePriorityList" />
 		</jxb:bindings>
+		
+		<jxb:bindings node="//xsd:element[@name='entry']/xsd:complexType/xsd:sequence/xsd:element[@name='lsource']">
+			<jxb:property name="languageSourceList" />
+		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:element[@name='sense']">
 			<jxb:property name="senseList" />
