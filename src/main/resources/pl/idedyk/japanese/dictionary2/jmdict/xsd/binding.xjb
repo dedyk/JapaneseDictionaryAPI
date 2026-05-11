@@ -62,6 +62,10 @@
 			<jxb:property name="languageSourceList" />
 		</jxb:bindings>
 
+		<jxb:bindings node="//xsd:element[@name='info']">
+			<jxb:property name="infoList" />
+		</jxb:bindings>		
+
 		<jxb:bindings node="//xsd:element[@name='sense']">
 			<jxb:property name="senseList" />
 		</jxb:bindings>		
