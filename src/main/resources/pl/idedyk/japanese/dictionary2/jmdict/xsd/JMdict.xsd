@@ -539,6 +539,7 @@
 	<xsd:complexType name="info">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string"> <!-- jako wartosc jest ogolna informacja do calego slowa -->
+				<xsd:attribute ref="xml:lang" use="optional" />  <!-- identyfikator jezyka dla ktorego tlumaczenie odnosi sie, domyslne eng oznacza jezyk angielski, moja modyfikacja -->
 				<xsd:attribute name="inf_type" use="required" type="infoType" /> <!--  typ informacji -->			
 			</xsd:extension>
 		</xsd:simpleContent>
