@@ -16,6 +16,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.DialectEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.FieldEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.GTypeEnum;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Gloss;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.Info;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.KanjiInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.LanguageSource;
@@ -1724,6 +1725,8 @@ public class Dictionary2HelperCommon {
 	
 	public static PrintableSense getPrintableSense(KanjiKanaPair kanjiKanaPair) {
 		
+		// FM_FIXME: sprawdzic, jak to zachowuje sie po zmianie
+		
 		PrintableSense printableSense = new PrintableSense();
 		
 		for (int senseIdx = 0; senseIdx < kanjiKanaPair.getSenseList().size(); ++senseIdx) {
@@ -1737,13 +1740,16 @@ public class Dictionary2HelperCommon {
 			
 			List<LanguageSource> languageSourceList = new ArrayList<>();
 			
-			languageSourceList.addAll(kanjiKanaPair.getEntry().getLanguageSourceList__());
-			languageSourceList.addAll(sense.getLanguageSourceList__());
+			languageSourceList.addAll(kanjiKanaPair.getEntry().getLanguageSourceList());
+			languageSourceList.addAll(sense.getLanguageSourceList());
 			
 			List<FieldEnum> senseFieldList = sense.getFieldList();
 			List<MiscEnum> senseMiscList = sense.getMiscList();
 			List<DialectEnum> senseDialectList = sense.getDialectList();
 			List<PartOfSpeechEnum> partOfSpeechList = sense.getPartOfSpeechList();
+			
+			// pobieramy polskie info
+			List<Info> polishInfoList = getPolishInfoList(kanjiKanaPair.getEntry().getInfoList());
 										
 			// pobieramy polskie tlumaczenia
 			List<Gloss> glossPolList = getPolishGlossList(glossList);
@@ -1791,6 +1797,13 @@ public class Dictionary2HelperCommon {
 				additionalInfoToAddList.addAll(Dictionary2HelperCommon.translateToPolishDialectEnumList(senseDialectList));
 			}
 			
+			// info ogolne
+			if (polishInfoList != null && polishInfoList.size() > 0) {
+				for (Info polishInfo : polishInfoList) {
+					additionalInfoToAddList.add(polishInfo.getValue());
+				}
+			}			
+			
 			if (senseAdditionalPol != null) { // czy informacje dodatkowe istnieja				
 				String senseAdditionalPolValue = senseAdditionalPol.getValue();
 				
@@ -1829,6 +1842,19 @@ public class Dictionary2HelperCommon {
 		}
 				
 		return printableSense;
+	}
+	
+	public static List<Info> getPolishInfoList(List<Info> infoList) {
+		
+		List<Info> result = new ArrayList<>();
+		
+		for (Info info : infoList) {
+			if (info.getLang().equals("pol") == true) {
+				result.add(info);
+			}
+		}
+		
+		return result;
 	}
 	
 	public static List<Gloss> getPolishGlossList(List<Gloss> glossPolList) {
@@ -2018,11 +2044,11 @@ public class Dictionary2HelperCommon {
 			if (languageSourceCommonList == null) {
 				languageSourceCommonList = new ArrayList<>(); //translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
 				
-				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList__())));
-				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__())));
+				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList())));
+				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
 				
 			} else {
-				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__())));
+				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
 			}
 			
 			//
@@ -2057,8 +2083,8 @@ public class Dictionary2HelperCommon {
 			List<DialectEnum> currentSenseDialectList = currentSense.getDialectList();
 			List<String> currentSenseLanguageSourceList = new ArrayList<>();
 			
-			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList__()));
-			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList__()));			
+			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList()));
+			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));			
 			
 			List<String> currentSenseAdditionalInfoList = translateToPolishSenseAdditionalInfoList(additionalPolInfoList);
 			List<PartOfSpeechEnum> partOfSpeechList = currentSense.getPartOfSpeechList();
@@ -2150,6 +2176,15 @@ public class Dictionary2HelperCommon {
 		// dialekt
 		if (dialectCommonList != null && dialectCommonList.size() > 0) {
 			newPolishAdditionalInfoList.addAll(translateToPolishDialectEnumList(dialectCommonList));
+		}
+		
+		// info ogolne
+		List<Info> polishInfoList = getPolishInfoList(kanjiKanaPair.getEntry().getInfoList());
+		
+		if (polishInfoList != null && polishInfoList.size() > 0) {
+			for (Info polishInfo : polishInfoList) {
+				newPolishAdditionalInfoList.add(polishInfo.getValue());
+			}
 		}
 		
 		// informacje dodatkowe dla znaczenia

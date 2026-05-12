@@ -39,9 +39,8 @@ public enum AttributeType {
 	
 	ALTERNATIVE("alternatywa", false),
 	
-	RELATED("słowo powiązanie", false),
-	
-	ANTONYM("przeciwieństwo", false),
+	// RELATED("słowo powiązanie", false),	
+	// ANTONYM("przeciwieństwo", false),
 	
 	PRIORITY("priorytet słowa", false),
 	
