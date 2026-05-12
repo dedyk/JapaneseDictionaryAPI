@@ -103,7 +103,7 @@
 		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='lsource']">
-			<jxb:property name="languageSourceList" />
+			<jxb:property name="languageSourceList_FM_FIXME" />
 		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='dial']">

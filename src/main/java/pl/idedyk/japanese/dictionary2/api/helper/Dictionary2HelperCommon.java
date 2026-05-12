@@ -1738,10 +1738,8 @@ public class Dictionary2HelperCommon {
 			List<Gloss> glossList = sense.getGlossList();
 			List<SenseAdditionalInfo> senseAdditionalInfoList = sense.getAdditionalInfoList();
 			
-			List<LanguageSource> languageSourceList = new ArrayList<>();
-			
+			List<LanguageSource> languageSourceList = new ArrayList<>();			
 			languageSourceList.addAll(kanjiKanaPair.getEntry().getLanguageSourceList());
-			languageSourceList.addAll(sense.getLanguageSourceList());
 			
 			List<FieldEnum> senseFieldList = sense.getFieldList();
 			List<MiscEnum> senseMiscList = sense.getMiscList();
@@ -2040,15 +2038,11 @@ public class Dictionary2HelperCommon {
 			
 			//
 			
-			// FM_FIXME: sprawdzic, czy to dziala
 			if (languageSourceCommonList == null) {
-				languageSourceCommonList = new ArrayList<>(); //translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));
-				
-				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList())));
-				languageSourceCommonList.addAll(new ArrayList<>(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
+				languageSourceCommonList = new ArrayList<>(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList()));
 				
 			} else {
-				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(currentSense.getLanguageSourceList())));
+				languageSourceCommonList = new ArrayList<>(CollectionUtils.intersection(languageSourceCommonList, translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList())));
 			}
 			
 			//
@@ -2083,8 +2077,7 @@ public class Dictionary2HelperCommon {
 			List<DialectEnum> currentSenseDialectList = currentSense.getDialectList();
 			List<String> currentSenseLanguageSourceList = new ArrayList<>();
 			
-			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList()));
-			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(currentSense.getLanguageSourceList()));			
+			currentSenseLanguageSourceList.addAll(translateToPolishLanguageSourceList(kanjiKanaPair.getEntry().getLanguageSourceList()));		
 			
 			List<String> currentSenseAdditionalInfoList = translateToPolishSenseAdditionalInfoList(additionalPolInfoList);
 			List<PartOfSpeechEnum> partOfSpeechList = currentSense.getPartOfSpeechList();
