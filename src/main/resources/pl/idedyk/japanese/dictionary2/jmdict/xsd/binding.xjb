@@ -87,7 +87,7 @@
 		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='ant']">
-			<jxb:property name="antonymList" />
+			<jxb:property name="antonymList_FM_FIXME" />
 		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='field']">
