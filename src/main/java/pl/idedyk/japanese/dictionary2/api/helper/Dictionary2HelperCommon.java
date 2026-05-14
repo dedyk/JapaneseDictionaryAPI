@@ -28,6 +28,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.ReadingInfoKanaType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.SenseAdditionalInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.XrefType;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeList;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntry;
@@ -1721,6 +1722,23 @@ public class Dictionary2HelperCommon {
 		}
 		
 		return result;
+	}
+	
+	public static String translateXrefType(XrefType xrefType) {
+		switch (xrefType) {
+		
+		case ANT:
+			return "przeciwieństwo";
+
+		case SEE:
+			return "zobacz również";
+			
+		case SYN:
+			return "synonim";
+					
+		default:				
+			throw new RuntimeException("Unknown xref type enum: " + xrefType);				
+		}
 	}
 	
 	public static PrintableSense getPrintableSense(KanjiKanaPair kanjiKanaPair) {
