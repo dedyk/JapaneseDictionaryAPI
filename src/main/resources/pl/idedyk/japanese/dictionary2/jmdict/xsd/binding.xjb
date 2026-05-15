@@ -86,10 +86,6 @@
 			<jxb:property name="referenceToAnotherKanjiKanaList" />
 		</jxb:bindings>
 
-		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='ant']">
-			<jxb:property name="antonymList_FM_FIXME" />
-		</jxb:bindings>
-
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='field']">
 			<jxb:property name="fieldList" />
 		</jxb:bindings>
@@ -100,10 +96,6 @@
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='s_inf']">
 			<jxb:property name="additionalInfoList" />
-		</jxb:bindings>
-
-		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='lsource']">
-			<jxb:property name="languageSourceList_FM_FIXME" />
 		</jxb:bindings>
 
 		<jxb:bindings node="//xsd:complexType[@name='sense']/xsd:sequence/xsd:element[@name='dial']">

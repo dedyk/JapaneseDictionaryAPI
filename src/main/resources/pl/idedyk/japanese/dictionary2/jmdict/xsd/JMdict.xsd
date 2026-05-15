@@ -3,8 +3,6 @@
 	elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
 
 	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
-
-	<!-- FM_FIXME: zmodyfikowac proces aktualizacji slownika, sprawdzic nowe pola, testy -->
 	
 	<xsd:element name="JMdict">
 		<xsd:complexType>
@@ -15,13 +13,8 @@
 							<xsd:element name="ent_seq" type="xsd:integer" /> <!-- identyfikator wpisu -->
 							<xsd:element name="k_ele" minOccurs="0" maxOccurs="unbounded" type="kanjiInfo" /> <!-- informacja o kanji -->
 							<xsd:element name="r_ele" minOccurs="1" maxOccurs="unbounded" type="readingInfo" /> <!-- informacja o czytaniu -->
-							
-							<!-- FM_FIXME: pole zostalo przeniesione -->
-							<xsd:element name="lsource" minOccurs="0" maxOccurs="unbounded" type="languageSource" /> <!-- informacja z jakiego zrodlowego jezyka dane slowo pochodzi -->
-							
-							<!-- FM_FIXME: nowe pole, dodac obsluge do pliku CSV -->
-							<xsd:element name="info" minOccurs="0" maxOccurs="unbounded" type="info" /> <!-- ogolne informacje dodatkowe do calego wpisu -->
-							
+							<xsd:element name="lsource" minOccurs="0" maxOccurs="unbounded" type="languageSource" /> <!-- informacja z jakiego zrodlowego jezyka dane slowo pochodzi -->							
+							<xsd:element name="info" minOccurs="0" maxOccurs="unbounded" type="info" /> <!-- ogolne informacje dodatkowe do calego wpisu -->							
 							<xsd:element name="sense" minOccurs="1" maxOccurs="unbounded" type="sense" /> <!-- tlumaczenie -->
 							<xsd:element name="misc" minOccurs="0" maxOccurs="1" type="miscInfo" /> <!-- moja modyfikacja: rozne dodatkowe informacje, dodatkowy element, to calkowicie moj element -->
 						</xsd:sequence>
@@ -29,10 +22,8 @@
 				</xsd:element>
 			</xsd:sequence>
 			
-			<!-- FM_FIXME: nowe pola, dodac obsluge tego pola w formacie CSV -->
-			<!-- FM_FIXME: zamienic na required dla obu pol -->
-			<xsd:attribute name="created" use="optional" type="xsd:date" />
-			<xsd:attribute name="version" use="optional" type="xsd:string" />
+			<xsd:attribute name="created" use="required" type="xsd:date" />
+			<xsd:attribute name="version" use="required" type="xsd:string" />
 		</xsd:complexType>
 	</xsd:element>
 
@@ -61,20 +52,10 @@
 			<xsd:element name="stagk" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- lista kanji do ktorych dane tlumaczenie odnosi sie. Jesli jest puste to wtedy czytanie odnosi sie do wszystkich kanji -->
 			<xsd:element name="stagr" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- lista kana do ktorych dane tlumaczenie odnosi sie. Jesli jest puste to wtedy czytanie odnosi sie do wszystkich kana -->
 			<xsd:element name="pos" minOccurs="0" maxOccurs="unbounded" type="partOfSpeech" /> <!-- rzecz mowy -->
-			
-			<!--  FM_FIXME: dodac obsluge tego pola w pliku CSV -->
-			<xsd:element name="xref" minOccurs="0" maxOccurs="unbounded" type="xref" /> <!-- referencja do innego kanji/kana -->
-			
-			<!--  FM_FIXME: do usuniecia -->
-			<xsd:element name="ant" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- referencja do antonimu (przeciwienstwa) -->
-			
+			<xsd:element name="xref" minOccurs="0" maxOccurs="unbounded" type="xref" /> <!-- referencja do innego kanji/kana -->			
 			<xsd:element name="field" minOccurs="0" maxOccurs="unbounded" type="field" /> <!-- dziedzina nauki do ktorego tlumaczenie odnosi sie -->
 			<xsd:element name="misc" minOccurs="0" maxOccurs="unbounded" type="misc" /> <!-- dodatkowe informacje do tlumaczenia -->
-			<xsd:element name="s_inf" minOccurs="0" maxOccurs="unbounded" type="senseAdditionalInfo" /> <!-- dodatkowe opisowe informacje do tlumaczenia, (modyfikacja do orginalnego schematu) -->
-			
-			<!-- FM_FIXME: usunac to pole, gdyz zostalo przeniesione, usunac po przemigrowaniu slownika CSV na nowa postac -->
-			<xsd:element name="lsource" minOccurs="0" maxOccurs="unbounded" type="languageSource" /> <!-- informacja z jakiego zrodlowego jezyka dane slowo pochodzi -->
-			
+			<xsd:element name="s_inf" minOccurs="0" maxOccurs="unbounded" type="senseAdditionalInfo" /> <!-- dodatkowe opisowe informacje do tlumaczenia, (modyfikacja do orginalnego schematu) -->			
 			<xsd:element name="dial" minOccurs="0" maxOccurs="unbounded" type="dialect" /> <!-- informacja, ze dane tlumaczenie dotyczy dialektu jezyka japonskiego -->
 			<xsd:element name="gloss" minOccurs="0" maxOccurs="unbounded" type="gloss" /> <!-- tlumaczenie -->
 		</xsd:sequence>
@@ -509,17 +490,11 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 	
-	<!-- FM_FIXME: nowy typ, obsluga tego pola w pliku CSV -->
 	<xsd:complexType name="xref">
 		<xsd:simpleContent>
-			<xsd:extension base="xsd:string"> <!-- jako wartosc jest generowana wszystkie pola ponizej sklejone ze soba -->
-				
-				<!-- FM_FIXME: zamienic na required -->
-				<xsd:attribute name="type" use="optional" type="xrefType" /> <!--  typ adnosnika -->
-				
-				<!-- FM_FIXME: chyba brak tego pola w obecnym slowniku, stworzyc sztuczny i przetestowac -->
-				<xsd:attribute name="dict" use="optional" type="xsd:string" /> <!-- nazwa slownika -->
-				
+			<xsd:extension base="xsd:string"> <!-- jako wartosc jest generowana wszystkie pola ponizej sklejone ze soba -->				
+				<xsd:attribute name="type" use="required" type="xrefType" /> <!--  typ adnosnika -->
+				<xsd:attribute name="dict" use="optional" type="xsd:string" /> <!-- nazwa slownika -->				
 				<xsd:attribute name="seq" use="optional" type="xsd:integer" /> <!-- numer identyfikatora slowa -->
 				<xsd:attribute name="sno" use="optional" type="xsd:integer" /> <!-- numer sensu do ktorego odnosi sie referencja -->
 				<xsd:attribute name="xk" use="optional" type="xsd:string" /> <!-- element kanji, do ktorego odnosi sie referencja -->
