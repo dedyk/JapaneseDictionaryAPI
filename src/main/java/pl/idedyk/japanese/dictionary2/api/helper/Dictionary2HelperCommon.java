@@ -1743,8 +1743,6 @@ public class Dictionary2HelperCommon {
 	
 	public static PrintableSense getPrintableSense(KanjiKanaPair kanjiKanaPair) {
 		
-		// FM_FIXME: sprawdzic, jak to zachowuje sie po zmianie
-		
 		PrintableSense printableSense = new PrintableSense();
 		
 		for (int senseIdx = 0; senseIdx < kanjiKanaPair.getSenseList().size(); ++senseIdx) {
