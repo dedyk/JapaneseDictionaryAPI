@@ -13,6 +13,7 @@
 	<xsd:complexType name="nameEntryIndex">
 		<xsd:sequence>
 			<xsd:element name="japaneseIndexSectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndexMetadata" />
+			<xsd:element name="polishIndexSectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndexMetadata" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -24,26 +25,28 @@
 		</xsd:sequence>	
 	</xsd:complexType>
 	
-	<xsd:element name="japaneseIndexSectionIndex">
+	<xsd:element name="sectionIndex">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="sectionName" minOccurs="1" maxOccurs="1" type="xsd:string" />
-				<xsd:element name="sectionIndex" minOccurs="1" maxOccurs="unbounded" type="japaneseSectionIndex" />
+				<xsd:element name="sectionEntry" minOccurs="1" maxOccurs="unbounded" type="sectionEntry" />
 				<xsd:element name="partNo" minOccurs="1" maxOccurs="1" type="xsd:integer" />				
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>	
 
-	<xsd:complexType name="japaneseSectionIndex">
+	<xsd:complexType name="sectionEntry">
 		<xsd:sequence>
-			<xsd:element name="entry" minOccurs="1" maxOccurs="unbounded" type="sectionEntryIndex" />
+			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="sectionEntryIndexEntry" />
 		</xsd:sequence>
-		<xsd:attribute name="kana" use="required" type="xsd:string" />
-		<xsd:attribute name="romaji" use="required" type="xsd:string" />
+		<xsd:attribute name="kana" use="optional" type="xsd:string" />
+		<xsd:attribute name="romaji" use="optional" type="xsd:string" />
+		<xsd:attribute name="polishWord" use="optional" type="xsd:string" />
 	</xsd:complexType>
 	
-	<xsd:complexType name="sectionEntryIndex">		
+	<xsd:complexType name="sectionEntryIndexEntry">		
 		<xsd:attribute name="kanji" use="optional" type="xsd:string" />
+		<xsd:attribute name="kana" use="optional" type="xsd:string" />
 		<xsd:attribute name="entryId" use="required" type="xsd:integer" />
 		<xsd:attribute name="url" use="optional" type="xsd:string" />
 	</xsd:complexType>
