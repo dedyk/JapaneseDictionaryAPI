@@ -12,29 +12,29 @@
 	
 	<xsd:complexType name="nameEntryIndex">
 		<xsd:sequence>
-			<xsd:element name="japaneseIndexSectionIndex" minOccurs="1" maxOccurs="unbounded">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="sectionName" minOccurs="1" maxOccurs="1" type="xsd:string" />
-						<xsd:element name="partNo" minOccurs="1" maxOccurs="1" type="xsd:integer" />
-						<xsd:element name="fileName" minOccurs="1" maxOccurs="1" type="xsd:string" />
-					</xsd:sequence>					
-				</xsd:complexType>			
-			</xsd:element>
+			<xsd:element name="japaneseIndexSectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndexMetadata" />
 		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="sectionIndexMetadata">
+		<xsd:sequence>
+			<xsd:element name="sectionName" minOccurs="1" maxOccurs="1" type="xsd:string" />
+			<xsd:element name="partNo" minOccurs="1" maxOccurs="1" type="xsd:integer" />
+			<xsd:element name="fileName" minOccurs="1" maxOccurs="1" type="xsd:string" />
+		</xsd:sequence>	
 	</xsd:complexType>
 	
 	<xsd:element name="japaneseIndexSectionIndex">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="sectionName" minOccurs="1" maxOccurs="1" type="xsd:string" />
-				<xsd:element name="sectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndex" />
+				<xsd:element name="sectionIndex" minOccurs="1" maxOccurs="unbounded" type="japaneseSectionIndex" />
 				<xsd:element name="partNo" minOccurs="1" maxOccurs="1" type="xsd:integer" />				
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>	
 
-	<xsd:complexType name="sectionIndex">
+	<xsd:complexType name="japaneseSectionIndex">
 		<xsd:sequence>
 			<xsd:element name="entry" minOccurs="1" maxOccurs="unbounded" type="sectionEntryIndex" />
 		</xsd:sequence>
