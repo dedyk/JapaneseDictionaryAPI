@@ -9,7 +9,8 @@
 	</jxb:globalBindings>
 
 	<jxb:bindings schemaLocation="dictionaryindex.xsd">
-
+		
+		<!--
 		<jxb:bindings node="//xsd:element[@name='sectionIndex']/xsd:complexType/xsd:sequence/xsd:element[@name='s']">
 			<jxb:property name="sectionEntry" />
 		</jxb:bindings>
@@ -37,6 +38,7 @@
 		<jxb:bindings node="//xsd:complexType[@name='sectionEntryIndexEntry']/xsd:attribute[@name='i']">
 			<jxb:property name="entryId" />
 		</jxb:bindings>
+		-->
 			
 	</jxb:bindings>
 
