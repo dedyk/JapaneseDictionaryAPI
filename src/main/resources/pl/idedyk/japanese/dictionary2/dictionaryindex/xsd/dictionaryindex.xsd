@@ -30,7 +30,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="sectionName" minOccurs="1" maxOccurs="1" type="xsd:string" />
-				<xsd:element name="sectionEntry" minOccurs="1" maxOccurs="unbounded" type="sectionEntry" />
+				<xsd:element name="s" minOccurs="1" maxOccurs="unbounded" type="sectionEntry" /> <!-- sectionEntry -->
 				<xsd:element name="partNo" minOccurs="1" maxOccurs="1" type="xsd:integer" />				
 			</xsd:sequence>
 		</xsd:complexType>
@@ -38,17 +38,17 @@
 
 	<xsd:complexType name="sectionEntry">
 		<xsd:sequence>
-			<xsd:element name="entries" minOccurs="1" maxOccurs="unbounded" type="sectionEntryIndexEntry" />
+			<xsd:element name="e" minOccurs="1" maxOccurs="unbounded" type="sectionEntryIndexEntry" /> <!-- entries -->
 		</xsd:sequence>
-		<xsd:attribute name="kana" use="optional" type="xsd:string" />
-		<xsd:attribute name="romaji" use="optional" type="xsd:string" />
-		<xsd:attribute name="polishWord" use="optional" type="xsd:string" />
+		<xsd:attribute name="k" use="optional" type="xsd:string" /> <!-- kana -->
+		<xsd:attribute name="r" use="optional" type="xsd:string" /> <!-- romaji -->
+		<xsd:attribute name="p" use="optional" type="xsd:string" /> <!-- polishWord -->
 	</xsd:complexType>
 	
 	<xsd:complexType name="sectionEntryIndexEntry">		
 		<!--  <xsd:attribute name="kanji" use="optional" type="xsd:string" />
 		<xsd:attribute name="kana" use="optional" type="xsd:string" /> -->
-		<xsd:attribute name="entryId" use="required" type="xsd:integer" />
+		<xsd:attribute name="i" use="required" type="xsd:integer" /> <!-- entryId -->
 		<xsd:attribute name="url" use="optional" type="xsd:string" />
 	</xsd:complexType>
 </xsd:schema>
