@@ -5,12 +5,13 @@
 	<xsd:element name="dictionaryIndex">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="nameEntryIndex" minOccurs="0" maxOccurs="1" type="nameEntryIndex" />
+				<xsd:element name="entryIndex" minOccurs="0" maxOccurs="1" type="entryIndex" />
+				<xsd:element name="nameEntryIndex" minOccurs="0" maxOccurs="1" type="entryIndex" />
 			</xsd:sequence>			
 		</xsd:complexType>
 	</xsd:element>
 	
-	<xsd:complexType name="nameEntryIndex">
+	<xsd:complexType name="entryIndex">
 		<xsd:sequence>
 			<xsd:element name="japaneseIndexSectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndexMetadata" />
 			<xsd:element name="polishIndexSectionIndex" minOccurs="1" maxOccurs="unbounded" type="sectionIndexMetadata" />
