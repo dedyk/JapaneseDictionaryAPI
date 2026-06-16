@@ -29,6 +29,10 @@
 		<jxb:bindings node="//xsd:complexType[@name='sectionEntry']/xsd:attribute[@name='p']">
 			<jxb:property name="polishWord" />
 		</jxb:bindings>
+
+		<jxb:bindings node="//xsd:complexType[@name='sectionEntryIndexEntry']/xsd:attribute[@name='k']">
+			<jxb:property name="kanji" />
+		</jxb:bindings>
 	
 		<jxb:bindings node="//xsd:complexType[@name='sectionEntryIndexEntry']/xsd:attribute[@name='i']">
 			<jxb:property name="entryId" />

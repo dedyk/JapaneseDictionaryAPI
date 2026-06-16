@@ -46,8 +46,8 @@
 	</xsd:complexType>
 	
 	<xsd:complexType name="sectionEntryIndexEntry">		
-		<!--  <xsd:attribute name="kanji" use="optional" type="xsd:string" />
-		<xsd:attribute name="kana" use="optional" type="xsd:string" /> -->
+		<xsd:attribute name="k" use="optional" type="xsd:string" /> <!-- kanji -->
+		<!-- <xsd:attribute name="kana" use="optional" type="xsd:string" /> -->
 		<xsd:attribute name="i" use="required" type="xsd:integer" /> <!-- entryId -->
 		<xsd:attribute name="url" use="optional" type="xsd:string" />
 	</xsd:complexType>
