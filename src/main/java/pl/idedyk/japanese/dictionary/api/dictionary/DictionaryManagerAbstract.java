@@ -18,6 +18,7 @@ import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.FindWordResult.ResultItem;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.TranslateJapaneseSentenceResult.TokenType;
+import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordCommonList;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPlaceSearch;
 import pl.idedyk.japanese.dictionary.api.dictionary.dto.WordPowerList;
 import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
@@ -1233,6 +1234,7 @@ public abstract class DictionaryManagerAbstract {
 	}
 	
 	public abstract WordPowerList getWordPowerList() throws DictionaryException;
+	public abstract WordCommonList getWordCommonList() throws DictionaryException;
 	
 	private String substringSentence(String sentence, int startIdx, int endIdx) {		
 		return sentence.substring(startIdx, endIdx);
