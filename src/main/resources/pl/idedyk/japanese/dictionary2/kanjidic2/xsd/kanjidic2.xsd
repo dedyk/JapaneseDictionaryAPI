@@ -132,7 +132,7 @@
 			<xsd:element name="strokePaths" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- kolejnosc pisania kresek -->
 			<xsd:element name="radicals" minOccurs="0" maxOccurs="unbounded" type="xsd:string" /> <!-- lista elementow podstawowych --> 
 			<xsd:element name="kenteiLevel"  minOccurs="0" maxOccurs="1" type="kenteiLevelType" /> <!-- poziom kanji kentei -->
-						<xsd:element name="lastModified" minOccurs="0" maxOccurs="1" type="xsd:string" /> <!-- pole techniczne, data ostatniej modyfikacji, format: yyyy-MM-dd'T'HH:mm:ssZ -->
+			<xsd:element name="lastModified" minOccurs="0" maxOccurs="1" type="xsd:string" /> <!-- pole techniczne, data ostatniej modyfikacji, format: yyyy-MM-dd'T'HH:mm:ssZ -->
 		</xsd:sequence>
 	</xsd:complexType>
 
