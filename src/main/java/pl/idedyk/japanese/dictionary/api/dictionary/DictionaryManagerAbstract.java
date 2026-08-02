@@ -233,7 +233,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy kanji zaczyna sie od
 			for (String kanji : kanjiList) {
-				if (kanji != null && beginWord3Pattern != null && beginWord3Pattern.matcher(kanji).find() == true) {				
+				if (kanji != null && kanji.startsWith(findWord) == true) {				
 					addToResultList(resultItem, kanjiBeginCommonResultList, kanjiBeginNonCommonResultList);
 					
 					continue MAIN_LOOP;			
@@ -301,7 +301,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy kana zaczyna sie od
 			for (String currentKana : kanaList) {				
-				if (beginWord3Pattern != null && beginWord3Pattern.matcher(currentKana).find() == true) {					
+				if (currentKana != null && currentKana.startsWith(findWord) == true) {					
 					addToResultList(resultItem, kanaBeginCommonResultList, kanaBeginNonCommonResultList);
 					
 					continue MAIN_LOOP;
