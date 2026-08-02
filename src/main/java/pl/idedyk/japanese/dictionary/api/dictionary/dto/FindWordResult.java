@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pl.idedyk.japanese.dictionary.api.dto.AttributeType;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.MiscInfo;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.Sense;
+import pl.idedyk.japanese.dictionary2.jmdict.xsd.JMdict.Entry;
 import pl.idedyk.japanese.dictionary2.jmnedict.xsd.JMnedict;
 import pl.idedyk.japanese.dictionary2.jmnedict.xsd.TranslationalInfo;
 
@@ -158,7 +162,32 @@ public class FindWordResult implements Serializable {
 						
 			throw new RuntimeException("getTranslates");
 		}
-
+		
+		public boolean isCommonWord() {
+			if (wordEntry != null) {
+				return isCommonWord(wordEntry);
+			}
+			
+			if (nameEntry != null) {
+				return false;
+			}
+			
+			throw new RuntimeException("getTranslates");			
+		}
+		
+		private boolean isCommonWord(Entry entry) {
+			MiscInfo misc = entry.getMisc();
+			
+			if (misc != null) {
+				OldPolishJapaneseDictionaryInfo oldPolishJapaneseDictionary = misc.getOldPolishJapaneseDictionary();
+				
+				if (oldPolishJapaneseDictionary != null) {
+					return oldPolishJapaneseDictionary.getAttributeList().stream().filter(f2 -> AttributeType.COMMON_WORD.name().equals(f2.getType()) == true).count() > 0;
+				}
+			}
+			
+			return false;
+		}
 
 		// stary kod		
 		/*

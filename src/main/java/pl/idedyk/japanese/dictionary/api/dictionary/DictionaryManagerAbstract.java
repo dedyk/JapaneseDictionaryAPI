@@ -116,6 +116,36 @@ public abstract class DictionaryManagerAbstract {
 		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
 
+		// podzielenie listy na slowa powszechnego i niepowszechnego uzytku
+		List<ResultItem> resultItemCommonList = new ArrayList<>();
+		List<ResultItem> resultItemNonCommonList = new ArrayList<>();
+		
+		for (ResultItem resultItem : findWordResult.result) {
+			
+			if (resultItem.isCommonWord() == true) {
+				resultItemCommonList.add(resultItem);
+				
+			} else {
+				resultItemNonCommonList.add(resultItem);
+			}
+		}
+		
+		// sortowanie
+		resultItemCommonList = sortResultItem(resultItemCommonList, findWordRequest.word);
+		resultItemNonCommonList = sortResultItem(resultItemNonCommonList, findWordRequest.word);		
+		
+		List<ResultItem> newResult = new ArrayList<>();
+		
+		newResult.addAll(resultItemCommonList);
+		newResult.addAll(resultItemNonCommonList);
+		
+		findWordResult.result = newResult;
+		
+		return findWordResult;
+
+	}
+	
+	private List<ResultItem> sortResultItem(List<ResultItem> resultItemList, String findWordRequestWord) {
 		//
 				
 		// sortujemy
@@ -126,10 +156,11 @@ public abstract class DictionaryManagerAbstract {
 		
 		List<ResultItem> kanaMatchResultList = new ArrayList<>();
 		List<ResultItem> kanaBeginResultList = new ArrayList<>();
-				
-		List<ResultItem> translateBeginWordResultList = new ArrayList<>();
-		List<ResultItem> translateBeginInAllWordResultList = new ArrayList<>();
+		
+		List<ResultItem> translateBegin1WordResultList = new ArrayList<>();
 		List<ResultItem> translateBegin2WordResultList = new ArrayList<>();
+		List<ResultItem> translateBeginInAllWordResultList = new ArrayList<>();
+		List<ResultItem> translateBegin3WordResultList = new ArrayList<>();
 
 		List<ResultItem> romajiBeginWordResultList = new ArrayList<>();
 		List<ResultItem> romajiBeginInAllWordResultList = new ArrayList<>();
@@ -143,18 +174,26 @@ public abstract class DictionaryManagerAbstract {
 		
 		//
 		
-		Iterator<ResultItem> resultIterator = findWordResult.result.iterator();
+		Iterator<ResultItem> resultIterator = resultItemList.iterator();
 		
 		//
 		
-		String findWord = findWordRequest.word.replace("\\", "\\\\");
+		String findWord = findWordRequestWord.replace("\\", "\\\\");
 		
-		Pattern beginWordPattern = null;
-		Pattern beginInAllWordPattern = null;
+		Pattern beginWord1Pattern = null;
 		Pattern beginWord2Pattern = null;
+		Pattern beginInAllWordPattern = null;
+		Pattern beginWord3Pattern = null;
+
+		try {
+			beginWord1Pattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "$", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa	i konczy
+		} catch (Exception e) {
+			// noop
+		}
+
 		
 		try {
-			beginWordPattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa	
+			beginWord2Pattern = Pattern.compile("^" + Utils.removePolishChars(findWord) + "\\b", Pattern.CASE_INSENSITIVE); // tekst zaczyna sie od slowa	
 		} catch (Exception e) {
 			// noop
 		}
@@ -166,7 +205,7 @@ public abstract class DictionaryManagerAbstract {
 		}
 
 		try {
-			beginWord2Pattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + ".*", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies istnieje slowo, ktore zaczyna sie od
+			beginWord3Pattern = Pattern.compile("\\b" + Utils.removePolishChars(findWord) + ".*", Pattern.CASE_INSENSITIVE); // w calym tekscie gdzies istnieje slowo, ktore zaczyna sie od
 		} catch (Exception e) {
 			// noop
 		}
@@ -195,7 +234,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy kanji zaczyna sie od
 			for (String kanji : kanjiList) {
-				if (kanji != null && beginWord2Pattern != null && beginWord2Pattern.matcher(kanji).find() == true) {				
+				if (kanji != null && beginWord3Pattern != null && beginWord3Pattern.matcher(kanji).find() == true) {				
 					kanjiBeginResultList.add(resultItem);
 					
 					continue MAIN_LOOP;			
@@ -225,10 +264,19 @@ public abstract class DictionaryManagerAbstract {
 			
 			List<String> translates = resultItem.getTranslates();
 			
+			// czy tlumaczenie zaczyna sie od slowa i konczy
+			for (String currentTranslate : translates) {				
+				if (beginWord1Pattern != null && beginWord1Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
+					translateBegin1WordResultList.add(resultItem);
+					
+					continue MAIN_LOOP;
+				}				
+			}
+			
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBeginWordResultList.add(resultItem);
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
+					translateBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
 				}				
@@ -245,8 +293,8 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBegin2WordResultList.add(resultItem);
+				if (beginWord3Pattern != null && beginWord3Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
+					translateBegin3WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
 				}				
@@ -254,7 +302,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy kana zaczyna sie od
 			for (String currentKana : kanaList) {				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(currentKana).find() == true) {					
+				if (beginWord3Pattern != null && beginWord3Pattern.matcher(currentKana).find() == true) {					
 					kanaBeginResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -263,7 +311,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {				
-				if (beginWordPattern != null && beginWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
+				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBeginWordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -281,7 +329,7 @@ public abstract class DictionaryManagerAbstract {
 			
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {				
-				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
+				if (beginWord3Pattern != null && beginWord3Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
 					romajiBegin2WordResultList.add(resultItem);
 					
 					continue MAIN_LOOP;
@@ -347,9 +395,10 @@ public abstract class DictionaryManagerAbstract {
 		Collections.sort(kanaMatchResultList, priorityComparator);
 		Collections.sort(kanaBeginResultList, priorityComparator);
 		Collections.sort(romajiMatchResultList, priorityComparator);
-		Collections.sort(translateBeginWordResultList, priorityComparator);
+		Collections.sort(translateBegin1WordResultList, priorityComparator);
+		Collections.sort(translateBegin2WordResultList, priorityComparator);
 		Collections.sort(translateBeginInAllWordResultList, priorityComparator);
-		Collections.sort(translateBegin2WordResultList, priorityComparator);		
+		Collections.sort(translateBegin3WordResultList, priorityComparator);		
 		Collections.sort(romajiBeginWordResultList, priorityComparator);
 		Collections.sort(romajiBeginInAllWordResultList, priorityComparator);
 		Collections.sort(romajiBegin2WordResultList, priorityComparator);
@@ -369,9 +418,10 @@ public abstract class DictionaryManagerAbstract {
 		newResult.addAll(kanjiBeginResultList);
 		
 		// tlumaczenie
-		newResult.addAll(translateBeginWordResultList);
-		newResult.addAll(translateBeginInAllWordResultList);
+		newResult.addAll(translateBegin1WordResultList);
 		newResult.addAll(translateBegin2WordResultList);
+		newResult.addAll(translateBeginInAllWordResultList);
+		newResult.addAll(translateBegin3WordResultList);
 		
 		// kana zaczyna sie
 		newResult.addAll(kanaBeginResultList);
@@ -387,9 +437,7 @@ public abstract class DictionaryManagerAbstract {
 		// nazwy
 		newResult.addAll(nameResultList);
 		
-		findWordResult.result = newResult;
-					
-		return findWordResult;
+		return newResult;
 	}
 	
 	public int getDictionaryEntriesSize() throws DictionaryException {
