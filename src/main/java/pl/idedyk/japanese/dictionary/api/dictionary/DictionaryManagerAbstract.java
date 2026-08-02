@@ -115,30 +115,10 @@ public abstract class DictionaryManagerAbstract {
 
 		databaseConnector.findDictionaryEntriesInGrammaFormAndExamples(findWordRequest, findWordResult);
 		databaseConnector.findDictionaryEntriesInNames(findWordRequest, findWordResult);
-
-		// podzielenie listy na slowa powszechnego i niepowszechnego uzytku
-		List<ResultItem> resultItemCommonList = new ArrayList<>();
-		List<ResultItem> resultItemNonCommonList = new ArrayList<>();
-		
-		for (ResultItem resultItem : findWordResult.result) {
-			
-			if (resultItem.isCommonWord() == true) {
-				resultItemCommonList.add(resultItem);
-				
-			} else {
-				resultItemNonCommonList.add(resultItem);
-			}
-		}
 		
 		// sortowanie
-		resultItemCommonList = sortResultItem(resultItemCommonList, findWordRequest.word);
-		resultItemNonCommonList = sortResultItem(resultItemNonCommonList, findWordRequest.word);		
-		
-		List<ResultItem> newResult = new ArrayList<>();
-		
-		newResult.addAll(resultItemCommonList);
-		newResult.addAll(resultItemNonCommonList);
-		
+		List<ResultItem> newResult = sortResultItem(findWordResult.result, findWordRequest.word);		
+				
 		findWordResult.result = newResult;
 		
 		return findWordResult;
@@ -149,28 +129,48 @@ public abstract class DictionaryManagerAbstract {
 		//
 				
 		// sortujemy
-		List<ResultItem> nameResultList = new ArrayList<>();		
+		List<ResultItem> nameCommonResultList = new ArrayList<>();	
+		List<ResultItem> nameNonCommonResultList = new ArrayList<>();
 		
-		List<ResultItem> kanjiMatchResultList = new ArrayList<>();
-		List<ResultItem> kanjiBeginResultList = new ArrayList<>();
+		List<ResultItem> kanjiMatchCommonResultList = new ArrayList<>();
+		List<ResultItem> kanjiMatchNonCommonResultList = new ArrayList<>();
 		
-		List<ResultItem> kanaMatchResultList = new ArrayList<>();
-		List<ResultItem> kanaBeginResultList = new ArrayList<>();
+		List<ResultItem> kanjiBeginCommonResultList = new ArrayList<>();
+		List<ResultItem> kanjiBeginNonCommonResultList = new ArrayList<>();
 		
-		List<ResultItem> translateBegin1WordResultList = new ArrayList<>();
-		List<ResultItem> translateBegin2WordResultList = new ArrayList<>();
-		List<ResultItem> translateBeginInAllWordResultList = new ArrayList<>();
-		List<ResultItem> translateBegin3WordResultList = new ArrayList<>();
+		List<ResultItem> kanaMatchCommonResultList = new ArrayList<>();
+		List<ResultItem> kanaMatchNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> kanaBeginCommonResultList = new ArrayList<>();
+		List<ResultItem> kanaBeginNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> translateBegin1WordCommonResultList = new ArrayList<>();
+		List<ResultItem> translateBegin1WordNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> translateBegin2WordCommonResultList = new ArrayList<>();
+		List<ResultItem> translateBegin2WordNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> translateBeginInAllWordCommonResultList = new ArrayList<>();
+		List<ResultItem> translateBeginInAllWordNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> translateBegin3WordCommonResultList = new ArrayList<>();
+		List<ResultItem> translateBegin3WordNonCommonResultList = new ArrayList<>();
 
-		List<ResultItem> romajiBeginWordResultList = new ArrayList<>();
-		List<ResultItem> romajiBeginInAllWordResultList = new ArrayList<>();
-		List<ResultItem> romajiBegin2WordResultList = new ArrayList<>();
+		List<ResultItem> romajiBeginWordCommonResultList = new ArrayList<>();
+		List<ResultItem> romajiBeginWordNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> romajiBeginInAllWordCommonResultList = new ArrayList<>();
+		List<ResultItem> romajiBeginInAllWordNonCommonResultList = new ArrayList<>();
+		
+		List<ResultItem> romajiBegin2WordCommonResultList = new ArrayList<>();
+		List<ResultItem> romajiBegin2WordNonCommonResultList = new ArrayList<>();
 
+		List<ResultItem> romajiMatchCommonResultList = new ArrayList<>();
+		List<ResultItem> romajiMatchNonCommonResultList = new ArrayList<>();
 		
-		List<ResultItem> romajiMatchResultList = new ArrayList<>();
 		
-		
-		List<ResultItem> otherResultList = new ArrayList<>();
+		List<ResultItem> otherCommonResultList = new ArrayList<>();
+		List<ResultItem> otherNonCommonResultList = new ArrayList<>();
 		
 		//
 		
@@ -217,8 +217,7 @@ public abstract class DictionaryManagerAbstract {
 						
 			// czy jest nazwa
 			if (resultItem.isName() == true) {
-				
-				nameResultList.add(resultItem);
+				addToResultList(resultItem, nameCommonResultList, nameNonCommonResultList);
 				
 				continue;
 			}
@@ -227,7 +226,7 @@ public abstract class DictionaryManagerAbstract {
 			List<String> kanjiList = resultItem.getKanjiList();
 			
 			if (kanjiList.contains(findWord) == true) {				
-				kanjiMatchResultList.add(resultItem);
+				addToResultList(resultItem, kanjiMatchCommonResultList, kanjiMatchNonCommonResultList);
 				
 				continue;
 			}
@@ -235,7 +234,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy kanji zaczyna sie od
 			for (String kanji : kanjiList) {
 				if (kanji != null && beginWord3Pattern != null && beginWord3Pattern.matcher(kanji).find() == true) {				
-					kanjiBeginResultList.add(resultItem);
+					addToResultList(resultItem, kanjiBeginCommonResultList, kanjiBeginNonCommonResultList);
 					
 					continue MAIN_LOOP;			
 				}
@@ -246,7 +245,7 @@ public abstract class DictionaryManagerAbstract {
 			List<String> kanaList = resultItem.getKanaList();
 			
 			if (kanaList.contains(findWord) == true) {				
-				kanaMatchResultList.add(resultItem);
+				addToResultList(resultItem, kanaMatchCommonResultList, kanaMatchNonCommonResultList);
 				
 				continue;
 			}
@@ -256,7 +255,7 @@ public abstract class DictionaryManagerAbstract {
 						
 			for (String currentRomaji : romajiList) {				
 				if (currentRomaji.equalsIgnoreCase(findWord) == true) {					
-					romajiMatchResultList.add(resultItem);
+					addToResultList(resultItem, romajiMatchCommonResultList, romajiMatchNonCommonResultList);
 										
 					continue MAIN_LOOP;
 				}
@@ -267,7 +266,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zaczyna sie od slowa i konczy
 			for (String currentTranslate : translates) {				
 				if (beginWord1Pattern != null && beginWord1Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBegin1WordResultList.add(resultItem);
+					addToResultList(resultItem, translateBegin1WordCommonResultList, translateBegin1WordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -276,7 +275,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {				
 				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBegin2WordResultList.add(resultItem);
+					addToResultList(resultItem, translateBegin2WordCommonResultList, translateBegin2WordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -285,7 +284,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zawiera slowo
 			for (String currentTranslate : translates) {				
 				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBeginInAllWordResultList.add(resultItem);
+					addToResultList(resultItem, translateBeginInAllWordCommonResultList, translateBeginInAllWordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -294,7 +293,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy tlumaczenie zaczyna sie od slowa
 			for (String currentTranslate : translates) {				
 				if (beginWord3Pattern != null && beginWord3Pattern.matcher(Utils.removePolishChars(currentTranslate)).find() == true) {					
-					translateBegin3WordResultList.add(resultItem);
+					addToResultList(resultItem, translateBegin3WordCommonResultList, translateBegin3WordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -303,7 +302,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy kana zaczyna sie od
 			for (String currentKana : kanaList) {				
 				if (beginWord3Pattern != null && beginWord3Pattern.matcher(currentKana).find() == true) {					
-					kanaBeginResultList.add(resultItem);
+					addToResultList(resultItem, kanaBeginCommonResultList, kanaBeginNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -312,7 +311,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {				
 				if (beginWord2Pattern != null && beginWord2Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
-					romajiBeginWordResultList.add(resultItem);
+					addToResultList(resultItem, romajiBeginWordCommonResultList, romajiBeginWordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -321,7 +320,7 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zawiera slowo
 			for (String currentRomaji : romajiList) {				
 				if (beginInAllWordPattern != null && beginInAllWordPattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
-					romajiBeginInAllWordResultList.add(resultItem);
+					addToResultList(resultItem, romajiBeginInAllWordCommonResultList, romajiBeginInAllWordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
@@ -330,14 +329,14 @@ public abstract class DictionaryManagerAbstract {
 			// czy romaji zaczyna sie od slowa
 			for (String currentRomaji : romajiList) {				
 				if (beginWord3Pattern != null && beginWord3Pattern.matcher(Utils.removePolishChars(currentRomaji)).find() == true) {					
-					romajiBegin2WordResultList.add(resultItem);
+					addToResultList(resultItem, romajiBegin2WordCommonResultList, romajiBegin2WordNonCommonResultList);
 					
 					continue MAIN_LOOP;
 				}				
 			}
 			
 			// pozostale
-			otherResultList.add(resultItem);
+			addToResultList(resultItem, otherCommonResultList, otherNonCommonResultList);
 		}
 		
 		// przygotowanie listy wynikowe	
@@ -390,54 +389,91 @@ public abstract class DictionaryManagerAbstract {
 		};
 		
 		// sortujemy podlisty
-		Collections.sort(kanjiMatchResultList, priorityComparator);
-		Collections.sort(kanjiBeginResultList, priorityComparator);
-		Collections.sort(kanaMatchResultList, priorityComparator);
-		Collections.sort(kanaBeginResultList, priorityComparator);
-		Collections.sort(romajiMatchResultList, priorityComparator);
-		Collections.sort(translateBegin1WordResultList, priorityComparator);
-		Collections.sort(translateBegin2WordResultList, priorityComparator);
-		Collections.sort(translateBeginInAllWordResultList, priorityComparator);
-		Collections.sort(translateBegin3WordResultList, priorityComparator);		
-		Collections.sort(romajiBeginWordResultList, priorityComparator);
-		Collections.sort(romajiBeginInAllWordResultList, priorityComparator);
-		Collections.sort(romajiBegin2WordResultList, priorityComparator);
-		Collections.sort(otherResultList, priorityComparator);
-		Collections.sort(nameResultList, priorityComparator);
+		Collections.sort(kanjiMatchCommonResultList, priorityComparator);
+		Collections.sort(kanjiMatchNonCommonResultList, priorityComparator);
+		Collections.sort(kanjiBeginCommonResultList, priorityComparator);
+		Collections.sort(kanjiBeginNonCommonResultList, priorityComparator);
+		Collections.sort(kanaMatchCommonResultList, priorityComparator);
+		Collections.sort(kanaMatchNonCommonResultList, priorityComparator);
+		Collections.sort(kanaBeginCommonResultList, priorityComparator);
+		Collections.sort(kanaBeginNonCommonResultList, priorityComparator);
+		Collections.sort(romajiMatchCommonResultList, priorityComparator);
+		Collections.sort(romajiMatchNonCommonResultList, priorityComparator);
+		Collections.sort(translateBegin1WordCommonResultList, priorityComparator);
+		Collections.sort(translateBegin1WordNonCommonResultList, priorityComparator);
+		Collections.sort(translateBegin2WordCommonResultList, priorityComparator);
+		Collections.sort(translateBegin2WordNonCommonResultList, priorityComparator);
+		Collections.sort(translateBeginInAllWordCommonResultList, priorityComparator);
+		Collections.sort(translateBeginInAllWordNonCommonResultList, priorityComparator);
+		Collections.sort(translateBegin3WordCommonResultList, priorityComparator);
+		Collections.sort(translateBegin3WordNonCommonResultList, priorityComparator);
+		Collections.sort(romajiBeginWordCommonResultList, priorityComparator);
+		Collections.sort(romajiBeginWordNonCommonResultList, priorityComparator);
+		Collections.sort(romajiBeginInAllWordCommonResultList, priorityComparator);
+		Collections.sort(romajiBeginInAllWordNonCommonResultList, priorityComparator);
+		Collections.sort(romajiBegin2WordCommonResultList, priorityComparator);
+		Collections.sort(romajiBegin2WordNonCommonResultList, priorityComparator);
+		Collections.sort(otherCommonResultList, priorityComparator);
+		Collections.sort(otherNonCommonResultList, priorityComparator);
+		Collections.sort(nameCommonResultList, priorityComparator);
+		Collections.sort(nameNonCommonResultList, priorityComparator);
 		
 		List<ResultItem> newResult = new ArrayList<>();
 		
 		// dokladne dopasowanie kanji
-		newResult.addAll(kanjiMatchResultList);
+		newResult.addAll(kanjiMatchCommonResultList);
+		newResult.addAll(kanjiMatchNonCommonResultList);
 
 		// dokladne dopasowanie kana i romaji
-		newResult.addAll(kanaMatchResultList);
-		newResult.addAll(romajiMatchResultList);
+		newResult.addAll(kanaMatchCommonResultList);
+		newResult.addAll(kanaMatchNonCommonResultList);
+		newResult.addAll(romajiMatchCommonResultList);
+		newResult.addAll(romajiMatchNonCommonResultList);
 		
 		// zaczyna sie od kanji
-		newResult.addAll(kanjiBeginResultList);
+		newResult.addAll(kanjiBeginCommonResultList);
+		newResult.addAll(kanjiBeginNonCommonResultList);
 		
 		// tlumaczenie
-		newResult.addAll(translateBegin1WordResultList);
-		newResult.addAll(translateBegin2WordResultList);
-		newResult.addAll(translateBeginInAllWordResultList);
-		newResult.addAll(translateBegin3WordResultList);
+		newResult.addAll(translateBegin1WordCommonResultList);
+		newResult.addAll(translateBegin1WordNonCommonResultList);
+		newResult.addAll(translateBegin2WordCommonResultList);
+		newResult.addAll(translateBegin2WordNonCommonResultList);
+		newResult.addAll(translateBeginInAllWordCommonResultList);
+		newResult.addAll(translateBeginInAllWordNonCommonResultList);
+		newResult.addAll(translateBegin3WordCommonResultList);
+		newResult.addAll(translateBegin3WordNonCommonResultList);
 		
 		// kana zaczyna sie
-		newResult.addAll(kanaBeginResultList);
+		newResult.addAll(kanaBeginCommonResultList);
+		newResult.addAll(kanaBeginNonCommonResultList);
 		
 		// romaji
-		newResult.addAll(romajiBeginWordResultList);
-		newResult.addAll(romajiBeginInAllWordResultList);
-		newResult.addAll(romajiBegin2WordResultList);
+		newResult.addAll(romajiBeginWordCommonResultList);
+		newResult.addAll(romajiBeginWordNonCommonResultList);
+		newResult.addAll(romajiBeginInAllWordCommonResultList);
+		newResult.addAll(romajiBeginInAllWordNonCommonResultList);
+		newResult.addAll(romajiBegin2WordCommonResultList);
+		newResult.addAll(romajiBegin2WordNonCommonResultList);
 				
 		// inne
-		newResult.addAll(otherResultList);
+		newResult.addAll(otherCommonResultList);
+		newResult.addAll(otherNonCommonResultList);
 		
 		// nazwy
-		newResult.addAll(nameResultList);
+		newResult.addAll(nameCommonResultList);
+		newResult.addAll(nameNonCommonResultList);
 		
 		return newResult;
+	}
+	
+	private void addToResultList(ResultItem resultItem, List<ResultItem> commonList, List<ResultItem> nonCommonList) {
+		if (resultItem.isCommonWord() == true) {
+			commonList.add(resultItem);
+			
+		} else {
+			nonCommonList.add(resultItem);
+		}
 	}
 	
 	public int getDictionaryEntriesSize() throws DictionaryException {
