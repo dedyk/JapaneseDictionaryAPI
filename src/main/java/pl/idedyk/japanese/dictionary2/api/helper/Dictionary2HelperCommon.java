@@ -1370,7 +1370,7 @@ public class Dictionary2HelperCommon {
 			switch (partOfSpeechEnum) {
 			
 			case NOUN_COMMON_FUTSUUMEISHI:
-				result.add("rzeczownik (powszechny) (futsuumeishi)"); break;
+				result.add("rzeczownik (ogólny) (futsuumeishi)"); break;
 			
 			case NOUN_USED_AS_A_PREFIX:
 				result.add("rzeczownik, używany jako przedrostek"); break;
