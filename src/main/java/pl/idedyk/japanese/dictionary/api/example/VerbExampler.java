@@ -101,7 +101,7 @@ public class VerbExampler {
 				makeNakuchaIkemasenExample(exampleRequest, grammaFormCache));
 
 		// deshou
-		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_DESHOU, makeDeshouExample(exampleRequest));
+		// GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_DESHOU, makeDeshouExample(exampleRequest));
 
 		// te miru
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_TE_MIRU,
@@ -744,6 +744,7 @@ public class VerbExampler {
 		return text.substring(0, text.length() - 1);
 	}
 
+	/*
 	private static ExampleResult makeDeshouExample(ExampleRequest exampleRequest) {
 
 		final String templateKanji = "%sでしょう";
@@ -753,6 +754,7 @@ public class VerbExampler {
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana,
 				templateRomaji, true);
 	}
+	*/
 
 	private static ExampleResult makeTeMiruExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {

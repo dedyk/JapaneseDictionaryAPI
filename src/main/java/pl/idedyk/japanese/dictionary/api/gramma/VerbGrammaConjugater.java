@@ -2131,7 +2131,7 @@ public class VerbGrammaConjugater {
 				saying1PostfixKanjiKana, saying1PostfixKanjiKana, saying1PostfixRomaji, true);
 
 		conjecturalForm2.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
-		conjecturalForm2.setInfo("postać mówiona 1");
+		conjecturalForm2.setInfo("postać mówiona (nieformalna, prosta)");
 		
 		conjecturalForm1.setAlternative(conjecturalForm2);
 		
@@ -2143,7 +2143,7 @@ public class VerbGrammaConjugater {
 				saying2PostfixKanjiKana, saying2PostfixKanjiKana, saying2PostfixRomaji, true);
 
 		conjecturalForm3.setResultType(GrammaFormConjugateResultType.VERB_CONJECTURAL);
-		conjecturalForm3.setInfo("postać mówiona 2");
+		conjecturalForm3.setInfo("postać mówiona (formalna, uprzejma)");
 			
 		conjecturalForm2.setAlternative(conjecturalForm3);
 		

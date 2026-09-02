@@ -12,7 +12,14 @@ public enum ExampleGroupType {
 
 	ADJECTIVE_I_SUGIRU("Zbyt wiele"),
 
-	ADJECTIVE_I_DESHOU("Prawdopodobnie, ok. 60%"),
+	ADJECTIVE_I_DAROU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (nieformalna, prosta)"),
+	
+	ADJECTIVE_I_DESHOU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (formalna, uprzejma)"),
+
+	ADJECTIVE_I_DE_AROU("Prawdopodobnie, ok. 60%",
+			"Styl pisany"),
 
 	ADJECTIVE_I_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)",
 			"Bardziej używane do odbieranych przez zmysły informacji"),
@@ -67,8 +74,15 @@ public enum ExampleGroupType {
 	ADJECTIVE_NA_NA_DESU("Forma wyjaśniająca"),
 
 	ADJECTIVE_NA_SUGIRU("Zbyt wiele"),
+	
+	ADJECTIVE_NA_DAROU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (nieformalna, prosta)"),
+	
+	ADJECTIVE_NA_DESHOU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (formalna, uprzejma)"),
 
-	ADJECTIVE_NA_DESHOU("Prawdopodobnie, ok. 60%"),
+	ADJECTIVE_NA_DE_AROU("Prawdopodobnie, ok. 60%",
+			"Styl pisany"),
 
 	ADJECTIVE_NA_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)",
 			"Bardziej używane do odbieranych przez zmysły informacji"),
@@ -119,9 +133,16 @@ public enum ExampleGroupType {
 	NOUN_DISLIKE("Nie lubić"),
 
 	NOUN_NA_DESU("Forma wyjaśniająca"),
+	
+	NOUN_DAROU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (nieformalna, prosta)"),
+	
+	NOUN_DESHOU("Prawdopodobnie, ok. 60%",
+			"Postać mówiona (formalna, uprzejma)"),
 
-	NOUN_DESHOU("Prawdopodobnie, ok. 60%"),
-
+	NOUN_DE_AROU("Prawdopodobnie, ok. 60%",
+			"Styl pisany"),
+	
 	NOUN_HOSHII("Chcieć (I i II osoba)"),
 
 	NOUN_HOSHIGATE_IRU("Chcieć (III osoba)"),
@@ -208,7 +229,7 @@ public enum ExampleGroupType {
 
 	VERB_NAKUCHA_IKEMASEN("Musieć 1"),
 
-	VERB_DESHOU("Prawdopodobnie, ok. 60%"),
+	// VERB_DESHOU("Prawdopodobnie, ok. 60%"),
 
 	VERB_TE_MIRU("Próbować 1"),
 	

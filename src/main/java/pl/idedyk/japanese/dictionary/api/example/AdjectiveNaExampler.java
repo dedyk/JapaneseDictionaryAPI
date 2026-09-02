@@ -32,10 +32,16 @@ public class AdjectiveNaExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_NA_DESU, makeNaDesuExample(exampleRequest));
 		
 		// sugiru
-		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_SUGIRU, makeSugiruExample(exampleRequest));
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_SUGIRU, makeSugiruExample(exampleRequest));		
+		
+		// darou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_DAROU, makeDarouExample(exampleRequest));		
 		
 		// deshou
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_DESHOU, makeDeshouExample(exampleRequest));
+
+		// de arou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_DE_AROU, makeDeArouExample(exampleRequest));
 		
 		// sou desu looks like
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_NA_SOU_DESU_LOOKS_LIKE, makeSouDesuLooksLikeExample(exampleRequest, grammaFormCache));
@@ -153,11 +159,29 @@ public class AdjectiveNaExampler {
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}
 
+	private static ExampleResult makeDarouExample(ExampleRequest exampleRequest) {
+		
+		final String templateKanji = "%sだろう";
+		final String templateKana = "%sだろう";
+		final String templateRomaji = "%s darou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+	}
+	
 	private static ExampleResult makeDeshouExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sでしょう";
 		final String templateKana = "%sでしょう";
 		final String templateRomaji = "%s deshou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+	}
+	
+	private static ExampleResult makeDeArouExample(ExampleRequest exampleRequest) {
+		
+		final String templateKanji = "%sであろう";
+		final String templateKana = "%sであろう";
+		final String templateRomaji = "%s de arou";
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}

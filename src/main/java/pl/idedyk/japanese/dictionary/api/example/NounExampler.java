@@ -35,9 +35,15 @@ public class NounExampler {
 		
 		// na desu
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_NA_DESU, makeNaDesuExample(exampleRequest));
+
+		// darou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_DAROU, makeDarouExample(exampleRequest));		
 		
 		// deshou
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_DESHOU, makeDeshouExample(exampleRequest));
+
+		// de arou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_DE_AROU, makeDeArouExample(exampleRequest));
 
 		// hoshii
 		GrammaExampleHelper.addExample(result, ExampleGroupType.NOUN_HOSHII, makeHoshiiExample(exampleRequest));
@@ -176,6 +182,15 @@ public class NounExampler {
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}
+
+	private static ExampleResult makeDarouExample(ExampleRequest exampleRequest) {
+		
+		final String templateKanji = "%sだろう";
+		final String templateKana = "%sだろう";
+		final String templateRomaji = "%s darou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+	}
 	
 	private static ExampleResult makeDeshouExample(ExampleRequest exampleRequest) {
 		
@@ -185,7 +200,16 @@ public class NounExampler {
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}
-	
+
+	private static ExampleResult makeDeArouExample(ExampleRequest exampleRequest) {
+		
+		final String templateKanji = "%sであろう";
+		final String templateKana = "%sであろう";
+		final String templateRomaji = "%s de arou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+	}
+
 	private static ExampleResult makeHoshiiExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sがほしい";
