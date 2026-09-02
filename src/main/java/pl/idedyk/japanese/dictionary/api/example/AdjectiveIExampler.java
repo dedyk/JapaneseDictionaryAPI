@@ -3,6 +3,7 @@ package pl.idedyk.japanese.dictionary.api.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupTypeElements;
@@ -115,6 +116,9 @@ public class AdjectiveIExampler {
 
 		// ki
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KI, makeKiExample(exampleRequest, grammaFormCache));		
+
+		// shi
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_SHI, makeShiExample(exampleRequest, grammaFormCache));		
 
 		return result;
 	}
@@ -586,6 +590,39 @@ public class AdjectiveIExampler {
 		final String templateKanji = "%sき";
 		final String templateKana = "%sき";
 		final String templateRomaji = "%ski";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
+	}
+	
+	private static ExampleResult makeShiExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL).createCopy();
+		
+		if (virtualForm.getKanji() != null && virtualForm.getKanji().endsWith("し") == true) {
+			virtualForm.setKanji(virtualForm.getKanji().substring(0, virtualForm.getKanji().length() - 1));
+		}
+		
+		virtualForm.setKanaList(virtualForm.getKanaList().stream().map(m -> { 
+			if (m != null && m.endsWith("し") == true) {
+				return m.subSequence(0, m.length() - 1).toString();
+				
+			} else {
+				return m;
+			}		
+		}).collect(Collectors.toList()));
+		
+		virtualForm.setRomajiList(virtualForm.getRomajiList().stream().map(m -> { 
+			if (m != null && m.endsWith("shi") == true) {
+				return m.subSequence(0, m.length() - 3).toString();
+				
+			} else {
+				return m;
+			}		
+		}).collect(Collectors.toList()));
+				
+		final String templateKanji = "%sし";
+		final String templateKana = "%sし";
+		final String templateRomaji = "%sshi";
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
 	}

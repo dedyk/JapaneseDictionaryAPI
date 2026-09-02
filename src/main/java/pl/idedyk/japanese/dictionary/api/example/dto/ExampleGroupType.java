@@ -72,6 +72,10 @@ public enum ExampleGroupType {
 			"Klasyczny odpowiednik końcówki \"i\" określajacy rzeczownik. Obecnie nadal stosowane do uzyskania efektu stylistycznego, głównie w nagłówkach lub w tytułach filmów i książek, "
 			+ "gdzie formy \"utsukushii [rzeczownik]\" i \"subarashii [rzeczownik]\" niemal zawsze przyjmują postać \"utsukushiki [rzeczownik]\" i \"subarashiki [rzeczownik]\""),
 	
+	ADJECTIVE_I_SHI("Klasyczny odpowiedni i-przymiotnika stojący na końcu zdania",
+			"Klasyczny odpowiednik końcówki \"i\" stojący na koncu zdania. Obecnie nadal stosowane do uzyskania efektu stylistycznego, zwłaszcza w klasycznym "
+			+ "zastosowaniu przymiotnika kończącego się na -nai, który nie wymaga partykuły i tworzy zwięzłe zdanie. Używane zazwyczaj w piśmie."), 
+	
 	ADJECTIVE_NA_II_GRADATION("Stopniowanie (II poziom, bardziej)"),
 
 	ADJECTIVE_NA_III_GRADATION("Stopniowanie (III poziom, najbardziej)"),
