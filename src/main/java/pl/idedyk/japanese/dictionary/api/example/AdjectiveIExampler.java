@@ -101,6 +101,9 @@ public class AdjectiveIExampler {
 		// zakaz
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_IMPERATIVE_NOT, makeImperativeNotExample(exampleRequest));
 		
+		// kare
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KARE, makeKare(exampleRequest, grammaFormCache));		
+		
 		return result;
 	}
 	
@@ -523,4 +526,16 @@ public class AdjectiveIExampler {
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}
+	
+	private static ExampleResult makeKare(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL);
+		
+		final String templateKanji = "%sかれ";
+		final String templateKana = "%sかれ";
+		final String templateRomaji = "%s kare";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
+	}
+
 }

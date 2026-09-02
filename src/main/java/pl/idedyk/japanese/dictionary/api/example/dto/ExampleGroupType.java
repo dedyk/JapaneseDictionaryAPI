@@ -55,6 +55,9 @@ public enum ExampleGroupType {
 	
 	ADJECTIVE_I_IMPERATIVE_NOT("Zakaz (nie bądź)"),
 
+	ADJECTIVE_I_KARE("Łączenie dwóch przeciwstawnych przymiotników",
+			"Służy do łączenia w jedną frazę dwóch przeciwstawnych przymiotników takich jak ōi/sukunai lub hayai/osoi. Przykładowo haya-kare oso-kare (遅かれ早かれ) może być przetłumaczone jako prędzej lub później"),
+	
 	ADJECTIVE_NA_II_GRADATION("Stopniowanie (II poziom, bardziej)"),
 
 	ADJECTIVE_NA_III_GRADATION("Stopniowanie (III poziom, najbardziej)"),
