@@ -112,7 +112,10 @@ public class AdjectiveIExampler {
 		
 		// kare
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KARE, makeKareExample(exampleRequest, grammaFormCache));		
-		
+
+		// ki
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KI, makeKiExample(exampleRequest, grammaFormCache));		
+
 		return result;
 	}
 	
@@ -572,6 +575,17 @@ public class AdjectiveIExampler {
 		final String templateKanji = "%sかろう";
 		final String templateKana = "%sかろう";
 		final String templateRomaji = "%s karou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
+	}
+	
+	private static ExampleResult makeKiExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL);
+		
+		final String templateKanji = "%sき";
+		final String templateKana = "%sき";
+		final String templateRomaji = "%ski";
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
 	}

@@ -68,6 +68,10 @@ public enum ExampleGroupType {
 	ADJECTIVE_I_KARE("Łączenie dwóch przeciwstawnych przymiotników",
 			"Służy do łączenia w jedną frazę dwóch przeciwstawnych przymiotników takich jak ōi/sukunai lub hayai/osoi. Przykładowo haya-kare oso-kare (遅かれ早かれ) może być przetłumaczone jako prędzej lub później"),
 	
+	ADJECTIVE_I_KI("Klasyczna forma przydawkowa",
+			"Klasyczny odpowiednik końcówki \"i\" określajacy rzeczownik. Obecnie nadal stosowane do uzyskania efektu stylistycznego, głównie w nagłówkach lub w tytułach filmów i książek, "
+			+ "gdzie formy \"utsukushii [rzeczownik]\" i \"subarashii [rzeczownik]\" niemal zawsze przyjmują postać \"utsukushiki [rzeczownik]\" i \"subarashiki [rzeczownik]\""),
+	
 	ADJECTIVE_NA_II_GRADATION("Stopniowanie (II poziom, bardziej)"),
 
 	ADJECTIVE_NA_III_GRADATION("Stopniowanie (III poziom, najbardziej)"),
