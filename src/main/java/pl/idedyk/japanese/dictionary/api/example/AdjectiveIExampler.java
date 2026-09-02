@@ -46,6 +46,9 @@ public class AdjectiveIExampler {
 		
 		// de arou
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_DE_AROU, makeDeArouExample(exampleRequest));
+
+		// karou
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KAROU, makeKarouExample(exampleRequest, grammaFormCache));		
 		
 		// sou desu look like
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_SOU_DESU_LOOKS_LIKE, makeSouDesuLooksLikeExample(exampleRequest, grammaFormCache));		
@@ -108,7 +111,7 @@ public class AdjectiveIExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_IMPERATIVE_NOT, makeImperativeNotExample(exampleRequest));
 		
 		// kare
-		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KARE, makeKare(exampleRequest, grammaFormCache));		
+		GrammaExampleHelper.addExample(result, ExampleGroupType.ADJECTIVE_I_KARE, makeKareExample(exampleRequest, grammaFormCache));		
 		
 		return result;
 	}
@@ -551,7 +554,7 @@ public class AdjectiveIExampler {
 		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 	}
 	
-	private static ExampleResult makeKare(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static ExampleResult makeKareExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL);
 		
@@ -561,5 +564,15 @@ public class AdjectiveIExampler {
 		
 		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
 	}
-
+	
+	private static ExampleResult makeKarouExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL);
+		
+		final String templateKanji = "%sかろう";
+		final String templateKana = "%sかろう";
+		final String templateRomaji = "%s karou";
+		
+		return GrammaExampleHelper.makeSimpleTemplateExample(virtualForm, templateKanji, templateKana, templateRomaji, true);
+	}
 }

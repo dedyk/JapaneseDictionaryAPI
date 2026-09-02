@@ -21,6 +21,9 @@ public enum ExampleGroupType {
 	ADJECTIVE_I_DE_AROU("Prawdopodobnie, ok. 60%",
 			"Styl pisany"),
 
+	ADJECTIVE_I_KAROU("Prawdopodobnie, ok. 60%",
+			"Przestarzały odpowiednik darou"),
+	
 	ADJECTIVE_I_SOU_DESU_LOOKS_LIKE("Wygląda na to, że ... (forma imperceptywna)",
 			"Bardziej używane do odbieranych przez zmysły informacji"),
 
