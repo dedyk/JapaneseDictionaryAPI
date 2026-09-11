@@ -348,6 +348,9 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI,
 				makeNakerebaNaranaiNakuteWaNaranai(exampleRequest, grammaFormCache));
 
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI_INFORMAL,
+				makeNakerebaNaranaiNakuteWaNaranaiInformal(exampleRequest, grammaFormCache));
+
 		// neba naranai
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NEBA_NARANAI_NAKUTE_WA_NARANAI,
 				makeNebaNaranaiNakuteWaNaranai(exampleRequest, grammaFormCache));
@@ -2501,7 +2504,43 @@ public class VerbExampler {
 
 		return startExampleResult;
 	}
-	
+
+	private static ExampleResult makeNakerebaNaranaiNakuteWaNaranaiInformal(ExampleRequest exampleRequest,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		String[][] templates = new String[][] { 
+			{ "%sきゃいけない", "%sきゃいけない", "%skya ikenai" },
+			{ "%sきゃ", "%sきゃ", "%skya" },
+			{ "%sいといけない", "%sいといけない", "%si to ikenai" },
+			{ "%sいと", "%sいと", "%si to" },				
+		};
+
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
+				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+
+		ExampleResult currentExampleResult = null;
+		ExampleResult startExampleResult = null;
+
+		for (int idx = 0; idx < templates.length; ++idx) {
+
+			if (idx == 0) {
+				startExampleResult = currentExampleResult = GrammaExampleHelper
+						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+								templates[idx][1], templates[idx][2], true);
+			} else {
+				ExampleResult alternativeExampleResult = GrammaExampleHelper
+						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
+								templates[idx][1], templates[idx][2], true);
+				
+				currentExampleResult.setAlternative(alternativeExampleResult);
+
+				currentExampleResult = alternativeExampleResult;
+			}
+		}
+
+		return startExampleResult;
+	}	
+
 	private static ExampleResult makeNebaNaranaiNakuteWaNaranai(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 				

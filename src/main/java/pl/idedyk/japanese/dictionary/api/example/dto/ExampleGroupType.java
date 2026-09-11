@@ -369,9 +369,9 @@ public enum ExampleGroupType {
 	VERB_NAKUTE_MO_KAMAWANAI("Nie jest konieczne (potrzebne)"),
 
 	VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI("Musieć 2 / Trzeba"),
+	VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI_INFORMAL("Musieć 3 / Trzeba", "Forma potoczna"),	
+	VERB_NEBA_NARANAI_NAKUTE_WA_NARANAI("Musieć 4 / Trzeba", "Forma bardziej formalna, literacka, staroświecka lub dramatyczna"),	
 	
-	VERB_NEBA_NARANAI_NAKUTE_WA_NARANAI("Musieć 3 / Trzeba", "Forma bardziej formalna, literacka, staroświecka lub dramatyczna"),
-
 	VERB_KA_MO_SHIRENAI("Być może"),
 	
 	VERB_MAI("Forma negatywno-przypuszczająca");
