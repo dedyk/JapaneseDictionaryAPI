@@ -348,6 +348,10 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKEREBA_NARANAI_NAKUTE_WA_NARANAI,
 				makeNakerebaNaranaiNakuteWaNaranai(exampleRequest, grammaFormCache));
 
+		// neba naranai
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NEBA_NARANAI_NAKUTE_WA_NARANAI,
+				makeNebaNaranaiNakuteWaNaranai(exampleRequest, grammaFormCache));
+		
 		// ka mo shirenai
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_KA_MO_SHIRENAI,
 				makeKaMoShirenai(exampleRequest, grammaFormCache));
@@ -2206,8 +2210,13 @@ public class VerbExampler {
 
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(baForm, templateKanji,
 				templateKana, templateRomaji, true);
+		
+		exampleResult1.setInfo("Jeżeli (zrobisz), wtedy ...");
+		
 		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(baNegativeForm, templateKanji,
 				templateKana, templateRomaji, true);
+		
+		exampleResult2.setInfo("Jeżeli (nie zrobisz), wtedy ...");
 
 		exampleResult1.setAlternative(exampleResult2);
 
@@ -2462,10 +2471,9 @@ public class VerbExampler {
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		String[][] templates = new String[][] { { "%sければならない", "%sければならない", "%skereba naranai" },
-				{ "%sければなりません", "sければなりません", "%skereba narimasen" }, 
+				{ "%sければなりません", "%sければなりません", "%skereba narimasen" }, 
 				{ "%sくてはならない", "%sくてはならない", "%skute wa naranai" }, // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
 				{ "%sくてはなりません", "%sくてはなりません", "%skute wa narimasen" } // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
-
 		};
 
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
@@ -2484,7 +2492,7 @@ public class VerbExampler {
 				ExampleResult alternativeExampleResult = GrammaExampleHelper
 						.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, templates[idx][0],
 								templates[idx][1], templates[idx][2], true);
-
+				
 				currentExampleResult.setAlternative(alternativeExampleResult);
 
 				currentExampleResult = alternativeExampleResult;
@@ -2493,6 +2501,49 @@ public class VerbExampler {
 
 		return startExampleResult;
 	}
+	
+	private static ExampleResult makeNebaNaranaiNakuteWaNaranai(ExampleRequest exampleRequest,
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+				
+		// przeczenie, czas terazniejszy
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+
+		// usuwamy i z nai
+		ExampleResult informalPresentNegativeFormWithoutI = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(informalPresentNegativeForm, "%s", "%s", "%s", true);
+		
+		// usuwamy na z na(i)
+		ExampleResult informalPresentNegativeFormWithoutNai = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(informalPresentNegativeFormWithoutI, "%s", "%s", "%s", true);
+		
+		// tworzenie koncowej formy
+		String[][] templates = new String[][] { { "%sねばならない", "%sねばならない", "%sneba naranai" },
+				{ "%sねばなりません", "%sねばなりません", "%sneba narimasen" }, 
+				{ "%sねばならない", "%sねばならない", "%sneba wa naranai" }, // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
+				{ "%sねばなりません", "%sねばなりません", "%sneba wa narimasen" } // tutaj mogla byc uzyta negatywna forma te, ale wynik jest ten sam
+		};
+
+
+		ExampleResult currentExampleResult = null;
+		ExampleResult startExampleResult = null;
+
+		for (int idx = 0; idx < templates.length; ++idx) {
+
+			if (idx == 0) {
+				startExampleResult = currentExampleResult = GrammaExampleHelper
+						.makeSimpleTemplateExample(informalPresentNegativeFormWithoutNai, templates[idx][0],
+								templates[idx][1], templates[idx][2], true);
+			} else {
+				ExampleResult alternativeExampleResult = GrammaExampleHelper
+						.makeSimpleTemplateExample(informalPresentNegativeFormWithoutNai, templates[idx][0],
+								templates[idx][1], templates[idx][2], true);
+				
+				currentExampleResult.setAlternative(alternativeExampleResult);
+
+				currentExampleResult = alternativeExampleResult;
+			}
+		}
+
+		return startExampleResult;
+	}	
 
 	private static ExampleResult makeKaMoShirenai(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {

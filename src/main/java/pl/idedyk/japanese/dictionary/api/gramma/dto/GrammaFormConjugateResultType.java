@@ -140,8 +140,8 @@ public enum GrammaFormConjugateResultType {
 	
 	VERB_CONJECTURAL("Forma przypuszczająca", false),
 	
-	VERB_BA_AFFIRMATIVE("Twierdzenie", true),
-	VERB_BA_NEGATIVE("Przeczenie", true),
+	VERB_BA_AFFIRMATIVE("Twierdzenie", "Jeżeli (zrobisz)", true),
+	VERB_BA_NEGATIVE("Przeczenie", "Jeżeli nie (zrobisz)", true),
 	
 	VERB_KEIGO_HIGH_1("Forma honoryfikatywna (wywyższająca) 1", true),
 	VERB_KEIGO_HIGH_2("Forma honoryfikatywna (wywyższająca) 2", "Forma homofoniczna ze stroną bierną", true),
