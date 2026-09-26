@@ -72,9 +72,7 @@ public enum GrammaFormConjugateGroupType {
 	VERB_VIRTUAL("Grupa pomocnicza", null, false);
 	
 	private String name;
-	
 	private String info;
-	
 	private boolean show;
 	
 	GrammaFormConjugateGroupType(String name) {

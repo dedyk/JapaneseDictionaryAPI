@@ -15,7 +15,7 @@ import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfo
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoAttributeListInfo;
 import pl.idedyk.japanese.dictionary2.jmdict.xsd.OldPolishJapaneseDictionaryInfoEntriesInfo;
 
-public abstract class GrammaExampleWrapperEntry implements Serializable {
+public abstract class GrammaExampleWrapperEntry implements IGrammaExampleWrapperEntry, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,6 +34,7 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 	}
 
 	public List<DictionaryEntryType> getDictionaryEntryTypeList() {
+		int fixme = 1; // FM_FIXME: do zastanowienia sie co z tym
 		
 		if (dictionaryEntry != null) {
 			return dictionaryEntry.getDictionaryEntryTypeList();
@@ -79,6 +80,7 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		return getDictionaryEntryTypeList().get(0);
 	}
 
+	@Override
 	public String getPrefixKana() {
 		
 		if (dictionaryEntry != null) {
@@ -92,6 +94,7 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getPrefixRomaji() {
 		
 		if (dictionaryEntry != null) {
@@ -105,6 +108,7 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getKanji() {
 		
 		if (dictionaryEntry != null) {
@@ -120,6 +124,7 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 
 	@SuppressWarnings("deprecation")
 	public List<String> getKanaList() {
+		int fixme = 1; // FM_FIXME: do zastanowienia sie co z tym
 		
 		if (dictionaryEntry != null) {
 			return dictionaryEntry.getKanaList();
@@ -132,12 +137,14 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		throw new RuntimeException();
 	}
 	
+	@Override
 	public String getKana() {
 		return getKanaList().get(0);
 	}
 
 	@SuppressWarnings("deprecation")
 	public List<String> getRomajiList() {
+		int fixme = 1; // FM_FIXME: do zastanowienia sie co z tym
 		
 		if (dictionaryEntry != null) {
 			return dictionaryEntry.getRomajiList();
@@ -150,11 +157,14 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRomaji() {
 		return getRomajiList().get(0);
 	}
 
 	public AttributeList getAttributeList() {
+		int fixme = 1; // FM_FIXME: do zastanowienia sie co z tym
+		
 		if (dictionaryEntry != null) {
 			return dictionaryEntry.getAttributeList();
 		}
