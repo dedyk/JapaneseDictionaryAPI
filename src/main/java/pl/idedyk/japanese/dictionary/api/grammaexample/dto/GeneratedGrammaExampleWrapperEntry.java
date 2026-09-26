@@ -15,6 +15,9 @@ public class GeneratedGrammaExampleWrapperEntry implements IGrammaExampleWrapper
 	private String prefixRomaji;	
 	private List<String> romajiList;
 	
+	@Deprecated
+	public GeneratedGrammaExampleWrapperEntry(int sprawdzic_czy_byl_uzywany_add_stack_a_pozniej_usunac_ten_konstruktor) { }
+	
 	@Override
 	public String getPrefixKana() {
 		return prefixKana;

@@ -2,11 +2,7 @@ package pl.idedyk.japanese.dictionary.api.gramma.dto;
 
 @Deprecated
 public enum GrammaFormConjugateResultType {
-			
-	ADJECTIVE_I_VIRTUAL("Wirtualny typ", false),
-	
-	ADJECTIVE_I_KEIGO_LOW("Forma modestywna (skromna)", true),
-	
+		
 	ADJECTIVE_NA_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
 	ADJECTIVE_NA_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),	
 	ADJECTIVE_NA_INFORMAL_PAST("Twierdzenie, czas przeszły", true),
@@ -45,14 +41,10 @@ public enum GrammaFormConjugateResultType {
 	VERB_TE_NEGATIVE("Przeczenie", true),
 
 	VERB_MASU_TE("Forma te od masu", false),
-	
-	ADJECTIVE_I_TE("Twierdzenie", true),
-	ADJECTIVE_I_TE_NEGATIVE("Przeczenie", true),
-	
+		
 	ADJECTIVE_NA_TE("Twierdzenie", true),
 	ADJECTIVE_NA_TE_NEGATIVE("Przeczenie", true),
 	
-	ADJECTIVE_I_ADVERB("Forma przysłówkowa", false),
 	ADJECTIVE_NA_ADVERB("Forma przysłówkowa", false),
 	
 	NOUN_TE("Twierdzenie", true),

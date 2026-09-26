@@ -12,6 +12,16 @@ public enum GrammaExampleType {
 	ADJECTIVE_I_INFORMAL_PAST("Forma nieformalna (prosta) / Twierdzenie, czas przeszły", true),
 	ADJECTIVE_I_INFORMAL_PAST_NEGATIVE("Forma nieformalna (prosta) / Przeczenie, czas przeszły", true),
 
+	ADJECTIVE_I_ADVERB("Forma przysłówkowa", false),
+	
+	ADJECTIVE_I_TE("Forma te / Twierdzenie", true),
+	ADJECTIVE_I_TE_NEGATIVE("Forma te / Przeczenie", true),
+		
+	ADJECTIVE_I_KEIGO_LOW("Keigo / Forma modestywna (skromna)", true),
+	ADJECTIVE_I_VIRTUAL("Wirtualny typ", false),
+
+
+	
 	
 	;
 	

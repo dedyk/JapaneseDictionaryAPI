@@ -6,7 +6,7 @@ public enum GrammaFormConjugateGroupType {
 	// ADJECTIVE_I_INFORMAL("Forma nieformalna (prosta)"),
 	// ADJECTIVE_I_FORMAL("Forma formalna"),
 	
-	ADJECTIVE_I_KEIGO("Keigo"),
+	// ADJECTIVE_I_KEIGO("Keigo"),
 
 	ADJECTIVE_NA_INFORMAL("Forma nieformalna (prosta)"),
 	ADJECTIVE_NA_FORMAL("Forma formalna"),
@@ -21,14 +21,14 @@ public enum GrammaFormConjugateGroupType {
 	VERB_FORMAL("Forma formalna (długa)"),
 	VERB_INFORMAL("Forma nieformalna (prosta)"),
 	
-	ADJECTIVE_I_TE("Forma te"),
+	// ADJECTIVE_I_TE("Forma te"),
 	ADJECTIVE_NA_TE("Forma te"),
 	NOUN_TE("Forma te"),
 	VERB_TE("Forma te (forma niefinitywna 2)"),
 	
 	VERB_MASU_TE("Forma te od masu"),
 	
-	ADJECTIVE_I_ADVERB("Forma przysłówkowa"),
+	// ADJECTIVE_I_ADVERB("Forma przysłówkowa"),
 	ADJECTIVE_NA_ADVERB("Forma przysłówkowa"),
 	
 	VERB_STEM("Temat czasownika (forma niefinitywna 1, ang: stem)"),

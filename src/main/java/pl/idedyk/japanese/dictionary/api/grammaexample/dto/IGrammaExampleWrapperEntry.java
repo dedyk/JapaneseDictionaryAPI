@@ -10,6 +10,7 @@ public interface IGrammaExampleWrapperEntry extends Serializable {
 	public List<DictionaryEntryType> getDictionaryEntryTypeList();
 	public DictionaryEntryType getDictionaryEntryType();
 	
+	public GrammaExampleType getGrammaExampleType();
 	public List<GrammaExampleType> getStackGrammaExampleTypeList();
 	public void addStackGrammaExampleType(GrammaExampleType grammaExampleType);
 	
