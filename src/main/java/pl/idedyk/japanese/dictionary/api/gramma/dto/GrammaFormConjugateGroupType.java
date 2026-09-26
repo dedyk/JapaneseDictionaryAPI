@@ -1,9 +1,10 @@
 package pl.idedyk.japanese.dictionary.api.gramma.dto;
 
+@Deprecated
 public enum GrammaFormConjugateGroupType {
 	
-	ADJECTIVE_I_INFORMAL("Forma nieformalna (prosta)"),
-	ADJECTIVE_I_FORMAL("Forma formalna"),
+	// ADJECTIVE_I_INFORMAL("Forma nieformalna (prosta)"),
+	// ADJECTIVE_I_FORMAL("Forma formalna"),
 	
 	ADJECTIVE_I_KEIGO("Keigo"),
 

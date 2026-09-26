@@ -10,6 +10,8 @@ public class ExampleRequest extends GrammaExampleWrapperEntry implements Seriali
 
 	private static final long serialVersionUID = 1L;
 	
+	int fixme = 1; // FM_FIXME: do zastanowienia sie
+	
 	public ExampleRequest(DictionaryEntry dictionaryEntry) {
 		super(dictionaryEntry);
 	}

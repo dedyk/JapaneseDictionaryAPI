@@ -11,6 +11,7 @@ import pl.idedyk.japanese.dictionary.api.example.dto.ExampleRequest;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
+import pl.idedyk.japanese.dictionary.api.grammaexample.dto.IGrammaExampleWrapperEntry;
 
 public class GrammaExampleHelper {
 	
@@ -84,17 +85,19 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(GrammaFormConjugateRequest grammaFormConjugateRequest,
+	public static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(IGrammaExampleWrapperEntry grammaExampleWrapperEntry,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
-		String prefixKana = grammaFormConjugateRequest.getPrefixKana();
-		String kanji = grammaFormConjugateRequest.getKanji();
+		int fixme = 1; // FM_FIXME: chyba do usuniecia
 		
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String prefixKana = grammaExampleWrapperEntry.getPrefixKana();
+		String kanji = grammaExampleWrapperEntry.getKanji();
 		
-		String prefixRomaji = grammaFormConjugateRequest.getPrefixRomaji();
+		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
 		
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
+		String prefixRomaji = grammaExampleWrapperEntry.getPrefixRomaji();
+		
+		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
 		
 		return makeSimpleTemplateGrammaFormConjugateResult(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}

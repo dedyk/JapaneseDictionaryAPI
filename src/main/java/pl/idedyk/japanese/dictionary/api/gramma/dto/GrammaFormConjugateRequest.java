@@ -9,6 +9,8 @@ import pl.idedyk.japanese.dictionary2.api.helper.Dictionary2HelperCommon.KanjiKa
 public class GrammaFormConjugateRequest extends GrammaExampleWrapperEntry implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	int fixme = 1; // FM_FIXME: do zastanowienia sie
 
 	public GrammaFormConjugateRequest(DictionaryEntry dictionaryEntry) {
 		super(dictionaryEntry);

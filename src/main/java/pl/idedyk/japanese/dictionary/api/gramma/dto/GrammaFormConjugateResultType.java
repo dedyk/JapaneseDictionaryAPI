@@ -1,17 +1,8 @@
 package pl.idedyk.japanese.dictionary.api.gramma.dto;
 
+@Deprecated
 public enum GrammaFormConjugateResultType {
-	
-	ADJECTIVE_I_INFORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
-	ADJECTIVE_I_INFORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),	
-	ADJECTIVE_I_INFORMAL_PAST("Twierdzenie, czas przeszły", true),
-	ADJECTIVE_I_INFORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
-	
-	ADJECTIVE_I_FORMAL_PRESENT("Twierdzenie, czas teraźniejszy", true),
-	ADJECTIVE_I_FORMAL_PRESENT_NEGATIVE("Przeczenie, czas teraźniejszy", true),
-	ADJECTIVE_I_FORMAL_PAST("Twierdzenie, czas przeszły", true),
-	ADJECTIVE_I_FORMAL_PAST_NEGATIVE("Przeczenie, czas przeszły", true),
-	
+			
 	ADJECTIVE_I_VIRTUAL("Wirtualny typ", false),
 	
 	ADJECTIVE_I_KEIGO_LOW("Forma modestywna (skromna)", true),
