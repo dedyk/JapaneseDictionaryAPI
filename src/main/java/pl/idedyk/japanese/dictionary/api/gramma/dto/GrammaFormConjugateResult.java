@@ -94,25 +94,7 @@ public class GrammaFormConjugateResult implements Serializable {
 		this.info = info;
 	}
 	
-	public GrammaFormConjugateResult createCopy() {
-		/*
-		private GrammaFormConjugateResultType resultType;
-		
-		private String prefixKana;
-		
-		private String kanji;
-		
-		private List<String> kanaList;
-		
-		private String prefixRomaji;
-		
-		private List<String> romajiList;
-		
-		private String info;
-		
-		private GrammaFormConjugateResult alternative;
-		*/
-		
+	public GrammaFormConjugateResult createCopy() {		
 		GrammaFormConjugateResult copy = new GrammaFormConjugateResult();
 		
 		copy.setResultType(getResultType());
