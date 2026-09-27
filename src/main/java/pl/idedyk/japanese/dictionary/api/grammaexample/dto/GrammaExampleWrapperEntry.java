@@ -117,41 +117,29 @@ public abstract class GrammaExampleWrapperEntry implements Serializable {
 		
 		throw new RuntimeException();
 	}
-
-	@SuppressWarnings("deprecation")
-	public List<String> getKanaList() {
-		
-		if (dictionaryEntry != null) {
-			return dictionaryEntry.getKanaList();
-		}
-		
-		if (kanjiKanaPair != null) {
-			return Arrays.asList(kanjiKanaPair.getKana());
-		}
-		
-		throw new RuntimeException();
-	}
 	
 	public String getKana() {
-		return getKanaList().get(0);
-	}
-
-	@SuppressWarnings("deprecation")
-	public List<String> getRomajiList() {
-		
 		if (dictionaryEntry != null) {
-			return dictionaryEntry.getRomajiList();
+			return dictionaryEntry.getKana();
 		}
 		
 		if (kanjiKanaPair != null) {
-			return Arrays.asList(kanjiKanaPair.getRomaji());
+			return kanjiKanaPair.getKana();
 		}
 		
 		throw new RuntimeException();
 	}
 
-	public String getRomaji() {
-		return getRomajiList().get(0);
+	public String getRomaji() {		
+		if (dictionaryEntry != null) {
+			return dictionaryEntry.getRomaji();
+		}
+		
+		if (kanjiKanaPair != null) {
+			return kanjiKanaPair.getRomaji();
+		}
+		
+		throw new RuntimeException();
 	}
 
 	public AttributeList getAttributeList() {

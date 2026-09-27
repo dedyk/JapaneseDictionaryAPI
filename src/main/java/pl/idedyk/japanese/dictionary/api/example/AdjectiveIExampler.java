@@ -131,13 +131,11 @@ public class AdjectiveIExampler {
 			return true;
 		}
 
-		List<String> kanaList = exampleRequest.getKanaList();
-
-		for (String currentKana : kanaList) {
-			if (currentKana.endsWith("イ") == true) {
-				return true;
-			}			
-		}		
+		String kana = exampleRequest.getKana();
+		
+		if (kana.endsWith("イ") == true) {
+			return true;
+		}			
 		
 		return false;
 	}
@@ -233,14 +231,10 @@ public class AdjectiveIExampler {
 		
 		boolean isIiAdjective = false;
 		
-		List<String> kanaList = exampleRequest.getKanaList();
-		
-		for (String currentKana : kanaList) {
-			if (currentKana.endsWith("いい") == true) {
-				isIiAdjective = true;
+		String kana = exampleRequest.getKana();
 				
-				break;
-			}
+		if (kana.endsWith("いい") == true) {
+			isIiAdjective = true;
 		}
 		
 		GrammaFormConjugateResult virtualForm = grammaFormCache.get(GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL);

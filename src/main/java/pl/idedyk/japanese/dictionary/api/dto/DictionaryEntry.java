@@ -147,26 +147,6 @@ public class DictionaryEntry implements Serializable {
 		return kana;
 	}
 	
-	@Deprecated
-	public List<String> getKanaList() {
-		
-		List<String> kanaList = new ArrayList<String>();
-		
-		kanaList.add(kana);
-		
-		return kanaList;
-	}
-
-	@Deprecated
-	public List<String> getRomajiList() {
-		
-		List<String> romajiList = new ArrayList<String>();
-		
-		romajiList.add(romaji);
-		
-		return romajiList;
-	}
-	
 	public String getInfo() {
 		return info;
 	}

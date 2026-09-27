@@ -1,8 +1,6 @@
 package pl.idedyk.japanese.dictionary.api.gramma.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GrammaFormConjugateResult implements Serializable {
 	
@@ -14,11 +12,11 @@ public class GrammaFormConjugateResult implements Serializable {
 	
 	private String kanji;
 	
-	private List<String> kanaList;
+	private String kana;
 	
 	private String prefixRomaji;
 	
-	private List<String> romajiList;
+	private String romaji;
 	
 	private String info;
 	
@@ -28,24 +26,24 @@ public class GrammaFormConjugateResult implements Serializable {
 		return kanji;
 	}
 
-	public List<String> getKanaList() {
-		return kanaList;
+	public String getKana() {
+		return kana;
 	}
 
-	public List<String> getRomajiList() {
-		return romajiList;
+	public String getRomaji() {
+		return romaji;
 	}
 
 	public void setKanji(String kanji) {
 		this.kanji = kanji;
 	}
 
-	public void setKanaList(List<String> kanaList) {
-		this.kanaList = kanaList;
+	public void setKana(String kana) {
+		this.kana = kana;
 	}
 
-	public void setRomajiList(List<String> romajiList) {
-		this.romajiList = romajiList;
+	public void setRomaji(String romaji) {
+		this.romaji = romaji;
 	}
 
 	public GrammaFormConjugateResultType getResultType() {
@@ -120,19 +118,11 @@ public class GrammaFormConjugateResult implements Serializable {
 		copy.setResultType(getResultType());
 		copy.setPrefixKana(prefixKana);
 		copy.setKanji(kanji);
-		
-		if (kanaList != null) {
-			copy.setKanaList(new ArrayList<>());
-			copy.getKanaList().addAll(kanaList);
-		}
-		
+		copy.setKana(kana);
+				
 		copy.setPrefixRomaji(prefixRomaji);
-		
-		if (romajiList != null) {
-			copy.setRomajiList(new ArrayList<>());
-			copy.getRomajiList().addAll(romajiList);
-		}
-		
+		copy.setRomaji(romaji);
+				
 		copy.setInfo(info);
 		
 		if (alternative != null) {

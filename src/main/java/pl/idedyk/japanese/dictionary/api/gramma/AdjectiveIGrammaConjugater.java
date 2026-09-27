@@ -238,7 +238,7 @@ public class AdjectiveIGrammaConjugater {
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String kana = grammaFormConjugateRequest.getKana();
 
 		List<String> kanaListResult = new ArrayList<String>();
 
