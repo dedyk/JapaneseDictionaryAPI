@@ -204,25 +204,11 @@ public class NounGrammaConjugater {
 			result.setKanji(kanji + postfixKana);
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String kana = grammaFormConjugateRequest.getKana();
+		result.setKana(kana + postfixKana);
 
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {
-			kanaListResult.add(currentKana + postfixKana);
-		}
-
-		result.setKanaList(kanaListResult);
-
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			romajiListResult.add(currentRomaji + postfixRomaji);
-		}
-
-		result.setRomajiList(romajiListResult);
+		String romaji = grammaFormConjugateRequest.getRomaji();
+		result.setRomaji(romaji + postfixRomaji);
 
 		return result;
 	}
