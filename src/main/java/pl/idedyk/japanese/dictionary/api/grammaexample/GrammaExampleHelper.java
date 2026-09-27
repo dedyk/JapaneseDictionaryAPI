@@ -215,7 +215,7 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static ExampleResult makeSimpleTemplateExample(String prefixKana, String kanji, List<String> kanaList, String prefixRomaji, List<String> romajiList,
+	public static ExampleResult makeSimpleTemplateExample(String prefixKana, String kanji, String kana, String prefixRomaji, String romaji,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
 		
 		ExampleResult result = new ExampleResult();
@@ -229,21 +229,8 @@ public class GrammaExampleHelper {
 			result.setKanji(String.format(templateKanji, kanji));
 		}
 
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {			
-			kanaListResult.add(String.format(templateKana, currentKana));
-		}
-
-		result.setKanaList(kanaListResult);
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			romajiListResult.add(String.format(templateRomaji, currentRomaji));
-		}
-
-		result.setRomajiList(romajiListResult);
+		result.setKana(String.format(templateKana, kana));
+		result.setRomaji(String.format(templateRomaji, romaji));
 		
 		return result;		
 	}

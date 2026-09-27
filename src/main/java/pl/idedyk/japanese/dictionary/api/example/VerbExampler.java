@@ -1422,7 +1422,7 @@ public class VerbExampler {
 
 		ExampleResult exampleResult2 = null;
 
-		if (verbTe.getKanaList().get(0).endsWith("て") == true) {
+		if (verbTe.getKana().endsWith("て") == true) {
 
 			final String templateKanji2 = "%sちゃう";
 			final String templateKana2 = "%sちゃう";
@@ -1452,7 +1452,7 @@ public class VerbExampler {
 
 			exampleResult2.setRomajiList(newExampleResultRomajiList);
 
-		} else if (verbTe.getKanaList().get(0).endsWith("で") == true) {
+		} else if (verbTe.getKana().endsWith("で") == true) {
 
 			final String templateKanji2 = "%sじゃう";
 			final String templateKana2 = "%sじゃう";
@@ -1462,7 +1462,7 @@ public class VerbExampler {
 					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
 
 		} else {
-			throw new RuntimeException("Bad te form for: " + verbTe.getKanaList().get(0));
+			throw new RuntimeException("Bad te form for: " + verbTe.getKana());
 		}
 
 		exampleResult1.setAlternative(exampleResult2);
@@ -1478,7 +1478,7 @@ public class VerbExampler {
 
 		ExampleResult exampleResult4 = null;
 
-		if (verbTe.getKanaList().get(0).endsWith("て") == true) {
+		if (verbTe.getKana().endsWith("て") == true) {
 
 			final String templateKanji2 = "%sちゃいました";
 			final String templateKana2 = "%sちゃいました";
@@ -1508,7 +1508,7 @@ public class VerbExampler {
 
 			exampleResult4.setRomajiList(newExampleResultRomajiList);
 
-		} else if (verbTe.getKanaList().get(0).endsWith("で") == true) {
+		} else if (verbTe.getKana().endsWith("で") == true) {
 
 			final String templateKanji2 = "%sじゃいました";
 			final String templateKana2 = "%sじゃいました";
@@ -1518,7 +1518,7 @@ public class VerbExampler {
 					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
 
 		} else {
-			throw new RuntimeException("Bad te form for: " + verbTe.getKanaList().get(0));
+			throw new RuntimeException("Bad te form for: " + verbTe.getKana());
 		}
 
 		exampleResult3.setAlternative(exampleResult4);
@@ -1609,14 +1609,11 @@ public class VerbExampler {
 
 		String kanji = exampleRequest.getKanji();
 
-		List<String> kanaList = exampleRequest.getKanaList();
-		List<String> romajiList = exampleRequest.getRomajiList();
+		String kana = exampleRequest.getKana();
+		String romaji = exampleRequest.getRomaji();
 
-		for (String currentKana : kanaList) {
-
-			if (currentKana.equals("ある") == true) {
-				return null;
-			}
+		if (kana.equals("ある") == true) {
+			return null;
 		}
 
 		// is keigo high
@@ -1644,7 +1641,7 @@ public class VerbExampler {
 			final String templateGoSuruKana = "ご%sください";
 			final String templateGoSuruRomaji = "go%s kudasai";
 
-			if (kanaList.get(0).endsWith(woSuruKana) == true) {
+			if (kana.endsWith(woSuruKana) == true) {
 
 				if (kanji != null) {
 
@@ -1659,33 +1656,19 @@ public class VerbExampler {
 					}					
 				}
 
-				List<String> newKanaList = new ArrayList<String>();
-
-				for (String currentKanaList : kanaList) {
-					newKanaList.add(currentKanaList.substring(0, currentKanaList.length() - woSuruKana.length()));
+				kana = kana.substring(0, kana.length() - woSuruKana.length());
+				
+				if (romaji.endsWith(woSuruRomaji) == false) {
+					throw new RuntimeException("Romaji: " + kanji);
 				}
+				
+				romaji = romaji.substring(0, romaji.length() - woSuruRomaji.length());
 
-				kanaList = newKanaList;
-
-				List<String> newRomajiList = new ArrayList<String>();
-
-				for (String currentRomajiList : romajiList) {
-
-					if (currentRomajiList.endsWith(woSuruRomaji) == false) {
-						throw new RuntimeException("Romaji: " + kanji);
-					}
-
-					newRomajiList
-							.add(currentRomajiList.substring(0, currentRomajiList.length() - woSuruRomaji.length()));
-				}
-
-				romajiList = newRomajiList;
-
-				return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kanaList,
-						exampleRequest.getPrefixRomaji(), romajiList, templateGoSuruKanji, templateGoSuruKana,
+				return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana,
+						exampleRequest.getPrefixRomaji(), romaji, templateGoSuruKanji, templateGoSuruKana,
 						templateGoSuruRomaji, false);
 
-			} else if (kanaList.get(0).endsWith(suruKana) == true) {
+			} else if (kana.endsWith(suruKana) == true) {
 				
 				if (kanji != null && kanji.equals("為る") == true) {
 					kanji = null;
@@ -1699,30 +1682,17 @@ public class VerbExampler {
 
 					kanji = kanji.substring(0, kanji.length() - suruKana.length());
 				}
-
-				List<String> newKanaList = new ArrayList<String>();
-
-				for (String currentKanaList : kanaList) {
-					newKanaList.add(currentKanaList.substring(0, currentKanaList.length() - suruKana.length()));
+				
+				kana = kana.substring(0, kana.length() - suruKana.length());
+				
+				if (romaji.endsWith(suruRomaji) == false) {
+					throw new RuntimeException("Romaji: " + kanji);
 				}
+				
+				romaji = romaji.substring(0, romaji.length() - suruRomaji.length());
 
-				kanaList = newKanaList;
-
-				List<String> newRomajiList = new ArrayList<String>();
-
-				for (String currentRomajiList : romajiList) {
-
-					if (currentRomajiList.endsWith(suruRomaji) == false) {
-						throw new RuntimeException("Romaji: " + kanji);
-					}
-
-					newRomajiList.add(currentRomajiList.substring(0, currentRomajiList.length() - suruRomaji.length()));
-				}
-
-				romajiList = newRomajiList;
-
-				return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kanaList,
-						exampleRequest.getPrefixRomaji(), romajiList, templateGoSuruKanji, templateGoSuruKana,
+				return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana,
+						exampleRequest.getPrefixRomaji(), romaji, templateGoSuruKanji, templateGoSuruKana,
 						templateGoSuruRomaji, false);
 
 			} else {

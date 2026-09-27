@@ -327,8 +327,7 @@ public class KeigoHelper {
 		return keigoWordToKeigoEntryLowMap.get(getKey(keigoKanji, keigoKanjiPostfix, keigoKana, keigoKanaPostfix));
 	}
 
-	public KeigoEntry findKeigoLowEntry(DictionaryEntryType dictionaryEntryType, String kanji, List<String> kanaList,
-			List<String> romajiList) {
+	public KeigoEntry findKeigoLowEntry(DictionaryEntryType dictionaryEntryType, String kanji, String kana, String romaji) {
 
 		for (KeigoEntry keigoEntry : keigoLowEntryList) {
 
@@ -337,32 +336,29 @@ public class KeigoHelper {
 			String keigoEntryKanji = keigoEntry.getKanji();
 			String keigoEntryKana = keigoEntry.getKana();
 			String keigoEntryRomaji = keigoEntry.getRomaji();
+			
+			if (dictionaryEntryType == keigoEntryDictionaryEntryType) {
 
-			for (int idx = 0; idx < kanaList.size(); ++idx) {
+				KeigoEntryFindMatchType findMatchType = keigoEntry.getFindMatchType();
 
-				if (dictionaryEntryType == keigoEntryDictionaryEntryType) {
+				if (findMatchType == KeigoEntryFindMatchType.END_WITH) {
 
-					KeigoEntryFindMatchType findMatchType = keigoEntry.getFindMatchType();
+					if (stringEndWith(kanji, keigoEntryKanji) == true
+							&& stringEndWith(kana, keigoEntryKana) == true
+							&& stringEndWith(romaji, keigoEntryRomaji) == true) {
 
-					if (findMatchType == KeigoEntryFindMatchType.END_WITH) {
-
-						if (stringEndWith(kanji, keigoEntryKanji) == true
-								&& stringEndWith(kanaList.get(idx), keigoEntryKana) == true
-								&& stringEndWith(romajiList.get(idx), keigoEntryRomaji) == true) {
-
-							return keigoEntry;
-						}
-
-					} else if (findMatchType == KeigoEntryFindMatchType.EXACT) {
-
-						if (equals(kanji, keigoEntryKanji) == true && equals(kanaList.get(idx), keigoEntryKana) == true
-								&& equals(romajiList.get(idx), keigoEntryRomaji) == true) {
-
-							return keigoEntry;
-						}
-					} else {
-						throw new RuntimeException("Unknown find match type: " + findMatchType);
+						return keigoEntry;
 					}
+
+				} else if (findMatchType == KeigoEntryFindMatchType.EXACT) {
+
+					if (equals(kanji, keigoEntryKanji) == true && equals(kana, keigoEntryKana) == true
+							&& equals(romaji, keigoEntryRomaji) == true) {
+
+						return keigoEntry;
+					}
+				} else {
+					throw new RuntimeException("Unknown find match type: " + findMatchType);
 				}
 			}
 		}

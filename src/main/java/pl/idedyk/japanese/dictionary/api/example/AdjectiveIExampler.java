@@ -3,7 +3,6 @@ package pl.idedyk.japanese.dictionary.api.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupType;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleGroupTypeElements;
@@ -596,24 +595,20 @@ public class AdjectiveIExampler {
 			virtualForm.setKanji(virtualForm.getKanji().substring(0, virtualForm.getKanji().length() - 1));
 		}
 		
-		virtualForm.setKanaList(virtualForm.getKanaList().stream().map(m -> { 
-			if (m != null && m.endsWith("し") == true) {
-				return m.subSequence(0, m.length() - 1).toString();
-				
-			} else {
-				return m;
-			}		
-		}).collect(Collectors.toList()));
+		if (virtualForm.getKana() != null && virtualForm.getKana().endsWith("し") == true) {
+			virtualForm.setKana(virtualForm.getKana().subSequence(0, virtualForm.getKana().length() - 1).toString());
+						
+		} else {
+			virtualForm.setKana(virtualForm.getKana());
+		}
 		
-		virtualForm.setRomajiList(virtualForm.getRomajiList().stream().map(m -> { 
-			if (m != null && m.endsWith("shi") == true) {
-				return m.subSequence(0, m.length() - 3).toString();
-				
-			} else {
-				return m;
-			}		
-		}).collect(Collectors.toList()));
-				
+		if (virtualForm.getRomaji() != null && virtualForm.getRomaji().endsWith("shi") == true) {
+			virtualForm.setRomaji(virtualForm.getRomaji().subSequence(0, virtualForm.getRomaji().length() - 3).toString());
+			
+		} else {
+			virtualForm.setRomaji(virtualForm.getRomaji());
+		}
+		
 		final String templateKanji = "%sし";
 		final String templateKana = "%sし";
 		final String templateRomaji = "%sshi";

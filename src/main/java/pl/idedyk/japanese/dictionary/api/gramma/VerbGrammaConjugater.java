@@ -2218,21 +2218,8 @@ public class VerbGrammaConjugater {
 					}
 				}
 				
-				List<String> masuKanaListResult = new ArrayList<String>();
-
-				for (String currentKana : kanaList) {			
-					masuKanaListResult.add(replaceEndWith(currentKana, keigoEntry.getKana(), keigoLongFormWithoutMasuKana) + "ます");
-				}
-
-				masuResult.setKanaList(masuKanaListResult);
-
-				List<String> masuRomajiListResult = new ArrayList<String>();
-
-				for (String currentRomaji : romajiList) {
-					masuRomajiListResult.add(replaceEndWith(currentRomaji, keigoEntry.getRomaji(), keigoEntry.getKeigoLongFormWithoutMasuRomaji()) + "masu");
-				}
-
-				masuResult.setRomajiList(masuRomajiListResult);
+				masuResult.setKana(replaceEndWith(kana, keigoEntry.getKana(), keigoLongFormWithoutMasuKana) + "ます");
+				masuResult.setRomaji(replaceEndWith(romaji, keigoEntry.getRomaji(), keigoEntry.getKeigoLongFormWithoutMasuRomaji()) + "masu");
 				
 				masuResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_HIGH_1);
 
@@ -2266,7 +2253,7 @@ public class VerbGrammaConjugater {
 	
 	private static GrammaFormConjugateResult makeKeigoLowForm(KeigoHelper keigoHelper, GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
-		KeigoEntry keigoEntry = keigoHelper.findKeigoLowEntry(grammaFormConjugateRequest.getDictionaryEntryType(), grammaFormConjugateRequest.getKanji(), grammaFormConjugateRequest.getKanaList(), grammaFormConjugateRequest.getRomajiList());
+		KeigoEntry keigoEntry = keigoHelper.findKeigoLowEntry(grammaFormConjugateRequest.getDictionaryEntryType(), grammaFormConjugateRequest.getKanji(), grammaFormConjugateRequest.getKana(), grammaFormConjugateRequest.getRomaji());
 		
 		GrammaFormConjugateResult resultInformalResult = null;
 		
@@ -2289,11 +2276,10 @@ public class VerbGrammaConjugater {
 			resultInformalResult = makeCommon(grammaFormConjugateRequest);
 			
 			String kanji = grammaFormConjugateRequest.getKanji();
-			List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
+			String kana = grammaFormConjugateRequest.getKana();
+			String romaji = grammaFormConjugateRequest.getRomaji();
 			
 			if (kanji != null) {
-				
 				if (keigoEntry.getKanji() != null && keigoEntry.getKeigoKanji(true) != null) {
 					resultInformalResult.setKanji(replaceEndWith(kanji, keigoEntry.getKanji(), keigoEntry.getKeigoKanji(true)));
 					
@@ -2303,25 +2289,13 @@ public class VerbGrammaConjugater {
 				} else {
 					resultInformalResult.setKanji(replaceEndWith(kanji, keigoEntry.getKana(), keigoEntry.getKeigoKana(true)));
 				}
+				
 			} else if (keigoEntry.getKeigoKanji(true) != null) {
-				resultInformalResult.setKanji(replaceEndWith(kanaList.get(0), keigoEntry.getKana(), keigoEntry.getKeigoKanji(true)));				
+				resultInformalResult.setKanji(replaceEndWith(kana, keigoEntry.getKana(), keigoEntry.getKeigoKanji(true)));				
 			}
 
-			List<String> kanaListResult = new ArrayList<String>();
-
-			for (String currentKana : kanaList) {			
-				kanaListResult.add(replaceEndWith(currentKana, keigoEntry.getKana(), keigoEntry.getKeigoKana(true)));
-			}
-
-			resultInformalResult.setKanaList(kanaListResult);
-
-			List<String> romajiListResult = new ArrayList<String>();
-
-			for (String currentRomaji : romajiList) {
-				romajiListResult.add(replaceEndWith(currentRomaji, keigoEntry.getRomaji(), keigoEntry.getKeigoRomaji(true)));
-			}
-
-			resultInformalResult.setRomajiList(romajiListResult);
+			resultInformalResult.setKana(replaceEndWith(kana, keigoEntry.getKana(), keigoEntry.getKeigoKana(true)));
+			resultInformalResult.setRomaji(replaceEndWith(romaji, keigoEntry.getRomaji(), keigoEntry.getKeigoRomaji(true)));
 			
 			resultInformalResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_LOW);
 			
@@ -2336,8 +2310,8 @@ public class VerbGrammaConjugater {
 			masuResult = makeCommon(grammaFormConjugateRequest);
 			
 			String kanji = grammaFormConjugateRequest.getKanji();
-			List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
+			String kana = grammaFormConjugateRequest.getKana();
+			String romaji = grammaFormConjugateRequest.getRomaji();
 
 			if (kanji != null) {
 				
@@ -2348,21 +2322,8 @@ public class VerbGrammaConjugater {
 				}
 			}
 			
-			List<String> masuKanaListResult = new ArrayList<String>();
-
-			for (String currentKana : kanaList) {			
-				masuKanaListResult.add(replaceEndWith(currentKana, keigoEntry.getKana(), keigoEntry.getKeigoLongFormWithoutMasuKana()) + "ます");
-			}
-
-			masuResult.setKanaList(masuKanaListResult);
-
-			List<String> masuRomajiListResult = new ArrayList<String>();
-
-			for (String currentRomaji : romajiList) {
-				masuRomajiListResult.add(replaceEndWith(currentRomaji, keigoEntry.getRomaji(), keigoEntry.getKeigoLongFormWithoutMasuRomaji()) + "masu");
-			}
-
-			masuResult.setRomajiList(masuRomajiListResult);
+			masuResult.setKana(replaceEndWith(kana, keigoEntry.getKana(), keigoEntry.getKeigoLongFormWithoutMasuKana()) + "ます");
+			masuResult.setRomaji(replaceEndWith(romaji, keigoEntry.getRomaji(), keigoEntry.getKeigoLongFormWithoutMasuRomaji()) + "masu");
 			
 			masuResult.setResultType(GrammaFormConjugateResultType.VERB_KEIGO_LOW);
 			
@@ -2404,25 +2365,11 @@ public class VerbGrammaConjugater {
 			result.setKanji(makePassiveFormForKanjiOrKana(kanji, dictionaryEntryType, postfixKana));
 		}
 		
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			
-		List<String> kanaListResult = new ArrayList<String>();
-		
-		for (String currentKanaList : kanaList) {			
-			kanaListResult.add(makePassiveFormForKanjiOrKana(currentKanaList, dictionaryEntryType, postfixKana));
-		}
-		
-		result.setKanaList(kanaListResult);
+		String kana = grammaFormConjugateRequest.getKana();		
+		result.setKana(makePassiveFormForKanjiOrKana(kana, dictionaryEntryType, postfixKana));
 				
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-		
-		List<String> romajiListResult = new ArrayList<String>();
-		
-		for (String currentRomajiList : romajiList) {			
-			romajiListResult.add(makePassiveFormForRomaji(currentRomajiList, dictionaryEntryType, postfixRomaji));
-		}
-		
-		result.setRomajiList(romajiListResult);
+		String romaji = grammaFormConjugateRequest.getRomaji();		
+		result.setRomaji(makePassiveFormForRomaji(romaji, dictionaryEntryType, postfixRomaji));
 		
 		return result;
 	}
@@ -2662,25 +2609,11 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeCausativeFormForKanjiOrKana(kanji, dictionaryEntryType, postfixKana));
 		}
 		
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			
-		List<String> kanaListResult = new ArrayList<String>();
-		
-		for (String currentKanaList : kanaList) {			
-			kanaListResult.add(makeCausativeFormForKanjiOrKana(currentKanaList, dictionaryEntryType, postfixKana));
-		}
-		
-		result.setKanaList(kanaListResult);
+		String kana = grammaFormConjugateRequest.getKana();		
+		result.setKana(makeCausativeFormForKanjiOrKana(kana, dictionaryEntryType, postfixKana));
 				
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-		
-		List<String> romajiListResult = new ArrayList<String>();
-		
-		for (String currentRomajiList : romajiList) {			
-			romajiListResult.add(makeCausativeFormForRomaji(currentRomajiList, dictionaryEntryType, postfixRomaji));
-		}
-		
-		result.setRomajiList(romajiListResult);
+		String romaji = grammaFormConjugateRequest.getRomaji();		
+		result.setRomaji(makeCausativeFormForRomaji(romaji, dictionaryEntryType, postfixRomaji));
 		
 		return result;
 	}
@@ -3047,28 +2980,14 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeCausativePassiveFormForKanjiOrKana(kanji, dictionaryEntryType, false));
 		}
 		
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			
-		List<String> kanaListResult = new ArrayList<String>();
-		
-		for (String currentKanaList : kanaList) {			
-			kanaListResult.add(makeCausativePassiveFormForKanjiOrKana(currentKanaList, dictionaryEntryType, false));
-		}
-		
-		result.setKanaList(kanaListResult);
+		String kana = grammaFormConjugateRequest.getKana();		
+		result.setKana(makeCausativePassiveFormForKanjiOrKana(kana, dictionaryEntryType, false));
 				
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-		
-		List<String> romajiListResult = new ArrayList<String>();
-		
-		for (String currentRomajiList : romajiList) {			
-			romajiListResult.add(makeCausativePassiveFormForRomaji(currentRomajiList, dictionaryEntryType, false));
-		}
-		
-		result.setRomajiList(romajiListResult);
+		String romaji = grammaFormConjugateRequest.getRomaji();		
+		result.setRomaji(makeCausativePassiveFormForRomaji(romaji, dictionaryEntryType, false));
 		
 		// alternative
-		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U && kanaList.get(0).endsWith("す") == false) {
+		if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U && kana.endsWith("す") == false) {
 
 			// make common
 			GrammaFormConjugateResult alternativeResult = makeCommon(grammaFormConjugateRequest);
@@ -3078,22 +2997,9 @@ public class VerbGrammaConjugater {
 			if (kanji != null) { 			
 				alternativeResult.setKanji(makeCausativePassiveFormForKanjiOrKana(kanji, dictionaryEntryType, true));
 			}
-							
-			List<String> kanaListAlternativeResult = new ArrayList<String>();
-			
-			for (String currentKanaList : kanaList) {			
-				kanaListAlternativeResult.add(makeCausativePassiveFormForKanjiOrKana(currentKanaList, dictionaryEntryType, true));
-			}
-			
-			alternativeResult.setKanaList(kanaListAlternativeResult);
 						
-			List<String> romajiListAlternativeResult = new ArrayList<String>();
-			
-			for (String currentRomajiList : romajiList) {			
-				romajiListAlternativeResult.add(makeCausativePassiveFormForRomaji(currentRomajiList, dictionaryEntryType, true));
-			}
-			
-			alternativeResult.setRomajiList(romajiListAlternativeResult);
+			alternativeResult.setKana(makeCausativePassiveFormForKanjiOrKana(kana, dictionaryEntryType, true));			
+			alternativeResult.setRomaji(makeCausativePassiveFormForRomaji(romaji, dictionaryEntryType, true));
 			
 			result.setAlternative(alternativeResult);
 		}
@@ -3457,25 +3363,11 @@ public class VerbGrammaConjugater {
 			result.setKanji(makeImperativeFormForKanjiOrKana(kanji, dictionaryEntryType));
 		}
 		
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-			
-		List<String> kanaListResult = new ArrayList<String>();
-		
-		for (String currentKanaList : kanaList) {			
-			kanaListResult.add(makeImperativeFormForKanjiOrKana(currentKanaList, dictionaryEntryType));
-		}
-		
-		result.setKanaList(kanaListResult);
+		String kana = grammaFormConjugateRequest.getKana();		
+		result.setKana(makeImperativeFormForKanjiOrKana(kana, dictionaryEntryType));
 				
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-		
-		List<String> romajiListResult = new ArrayList<String>();
-		
-		for (String currentRomajiList : romajiList) {			
-			romajiListResult.add(makeImperativeFormForRomaji(currentRomajiList, dictionaryEntryType));
-		}
-		
-		result.setRomajiList(romajiListResult);		
+		String romaji = grammaFormConjugateRequest.getRomaji();		
+		result.setRomaji(makeImperativeFormForRomaji(romaji, dictionaryEntryType));		
 				
 		return result;
 	}

@@ -239,28 +239,12 @@ public class AdjectiveIGrammaConjugater {
 		}
 
 		String kana = grammaFormConjugateRequest.getKana();
+		kana = getKanaToConjugate(kana, grammaFormConjugateRequest.getRomaji(), grammaFormConjugateResultType);
+		result.setKana(removeLastChar(kana) + postfixKana);		
 
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), grammaFormConjugateResultType);
-
-			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
-		}
-
-		result.setKanaList(kanaListResult);		
-
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, grammaFormConjugateResultType);
-
-			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
-		}
-
-		result.setRomajiList(romajiListResult);
+		String romaji = grammaFormConjugateRequest.getRomaji();
+		romaji = getRomajiToConjugate(romaji, grammaFormConjugateResultType);
+		result.setRomaji(removeLastChar(romaji) + postfixRomaji);
 
 		return result; 
 	}
@@ -323,21 +307,17 @@ public class AdjectiveIGrammaConjugater {
 			throw new RuntimeException("kanji.endsWith(い) == false: " + kanji);
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String kana = grammaFormConjugateRequest.getKana();
 
-		for (String currentKana : kanaList) {
-			if (currentKana.endsWith("い") == false) {
-				throw new RuntimeException("currentKana.endsWith(い) == false: " + currentKana);
-			}			
+		if (kana.endsWith("い") == false) {
+			throw new RuntimeException("currentKana.endsWith(い) == false: " + kana);
+		}			
+
+		String romaji = grammaFormConjugateRequest.getRomaji();
+
+		if (romaji.endsWith("i") == false) {
+			throw new RuntimeException("currentRomaji.endsWith(i) == false: " + romaji);
 		}
-
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-
-		for (String currentRomaji : romajiList) {
-			if (currentRomaji.endsWith("i") == false) {
-				throw new RuntimeException("currentRomaji.endsWith(i) == false: " + currentRomaji);
-			}
-		}		
 	}
 	
 	private static boolean isKanaI(GrammaFormConjugateRequest grammaFormConjugateRequest) {
@@ -348,13 +328,11 @@ public class AdjectiveIGrammaConjugater {
 			return true;
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
-
-		for (String currentKana : kanaList) {
-			if (currentKana.endsWith("イ") == true) {
-				return true;
-			}			
-		}		
+		String kana = grammaFormConjugateRequest.getKana();
+	
+		if (kana.endsWith("イ") == true) {
+			return true;
+		}			
 		
 		return false;
 	}
@@ -387,29 +365,13 @@ public class AdjectiveIGrammaConjugater {
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String kana = grammaFormConjugateRequest.getKana();
+		kana = getKanaToConjugate(kana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+		result.setKana(removeLastChar(kana) + postfixKana);		
 
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
-
-			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
-		}
-
-		result.setKanaList(kanaListResult);		
-
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
-
-			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
-		}
-
-		result.setRomajiList(romajiListResult);		
+		String romaji = grammaFormConjugateRequest.getRomaji();
+		romaji = getRomajiToConjugate(romaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+		result.setRomaji(removeLastChar(romaji) + postfixRomaji);		
 		
 		return result;
 	}
@@ -433,29 +395,13 @@ public class AdjectiveIGrammaConjugater {
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+		String kana = grammaFormConjugateRequest.getKana();
+		kana = getKanaToConjugate(kana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+		result.setKana(removeLastChar(kana) + postfixKana);		
 
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
-
-			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
-		}
-
-		result.setKanaList(kanaListResult);		
-
-		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
-
-			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
-		}
-
-		result.setRomajiList(romajiListResult);		
+		String romaji = grammaFormConjugateRequest.getRomaji();
+		romaji = getRomajiToConjugate(romaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+		result.setRomaji(removeLastChar(romaji) + postfixRomaji);		
 		
 		return result;
 	}
