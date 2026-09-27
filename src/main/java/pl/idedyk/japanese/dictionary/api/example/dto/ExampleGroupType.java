@@ -376,7 +376,11 @@ public enum ExampleGroupType {
 	
 	VERB_MAI("Forma negatywno-przypuszczająca");
 
+	// nakereba naranai
+	// nakute wa naranai
+
 	private String name;
+
 	private String info;
 
 	ExampleGroupType(String name) {

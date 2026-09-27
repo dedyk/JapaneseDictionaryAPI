@@ -4,12 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated
 public class GrammaFormConjugateGroupTypeElements implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
-	int fixme = 1; // FM_FIXME: do usuniecia
 
 	private GrammaFormConjugateGroupType grammaFormConjugateGroupType;
 	

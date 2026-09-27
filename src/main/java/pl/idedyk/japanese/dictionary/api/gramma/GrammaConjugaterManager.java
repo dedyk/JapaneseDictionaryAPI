@@ -8,29 +8,28 @@ import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateGroupType
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResultType;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.IGrammaExampleWrapperEntry;
 import pl.idedyk.japanese.dictionary.api.keigo.KeigoHelper;
 
 public class GrammaConjugaterManager {
 
 	public static List<GrammaFormConjugateGroupTypeElements> getGrammaConjufateResult(KeigoHelper keigoHelper,
-			IGrammaExampleWrapperEntry grammaExampleWrapperEntry,
+			GrammaFormConjugateRequest grammaFormConjugateRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache,
 			DictionaryEntryType forceDictionaryEntryType, boolean addVirtual) {
 
 		DictionaryEntryType dictionaryEntryType = null;
 
 		if (forceDictionaryEntryType == null) {
-			dictionaryEntryType = grammaExampleWrapperEntry.getDictionaryEntryType();
+			dictionaryEntryType = grammaFormConjugateRequest.getDictionaryEntryType();
 		} else {
 			dictionaryEntryType = forceDictionaryEntryType;
 		}
 
 		if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_I) {
-			return AdjectiveIGrammaConjugater.makeAll(grammaExampleWrapperEntry, grammaFormCache, addVirtual);
+			return AdjectiveIGrammaConjugater.makeAll(grammaFormConjugateRequest, grammaFormCache, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NA) {
-			return AdjectiveNaGrammaConjugater.makeAll(grammaExampleWrapperEntry, grammaFormCache, forceDictionaryEntryType, addVirtual);
+			return AdjectiveNaGrammaConjugater.makeAll(grammaFormConjugateRequest, grammaFormCache, forceDictionaryEntryType, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_NOUN || 
 				dictionaryEntryType == DictionaryEntryType.WORD_ADJECTIVE_NO ||
@@ -38,13 +37,13 @@ public class GrammaConjugaterManager {
 				dictionaryEntryType == DictionaryEntryType.WORD_ADVERBIAL_NOUN ||
 				dictionaryEntryType == DictionaryEntryType.WORD_PROPER_NOUN) {
 			
-			return NounGrammaConjugater.makeAll(grammaExampleWrapperEntry, grammaFormCache, forceDictionaryEntryType, addVirtual);
+			return NounGrammaConjugater.makeAll(grammaFormConjugateRequest, grammaFormCache, forceDictionaryEntryType, addVirtual);
 
 		} else if (dictionaryEntryType == DictionaryEntryType.WORD_VERB_U
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_RU
 				|| dictionaryEntryType == DictionaryEntryType.WORD_VERB_IRREGULAR) {
 
-			return VerbGrammaConjugater.makeAll(keigoHelper, grammaExampleWrapperEntry, grammaFormCache, addVirtual);
+			return VerbGrammaConjugater.makeAll(keigoHelper, grammaFormConjugateRequest, grammaFormCache, addVirtual);
 		}
 
 		return null;

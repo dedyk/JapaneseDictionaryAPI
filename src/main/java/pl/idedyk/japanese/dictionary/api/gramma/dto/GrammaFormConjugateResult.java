@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated
 public class GrammaFormConjugateResult implements Serializable {
-	
-	int fixme = 1; // FM_FIXME: do zastanowienia
 	
 	private static final long serialVersionUID = 1L;
 

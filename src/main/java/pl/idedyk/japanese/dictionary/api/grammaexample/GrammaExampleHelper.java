@@ -11,8 +11,6 @@ import pl.idedyk.japanese.dictionary.api.example.dto.ExampleRequest;
 import pl.idedyk.japanese.dictionary.api.example.dto.ExampleResult;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
 import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.GeneratedGrammaExampleWrapperEntry;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.IGrammaExampleWrapperEntry;
 
 public class GrammaExampleHelper {
 	
@@ -86,19 +84,19 @@ public class GrammaExampleHelper {
 		return makeSimpleTemplateExample(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 	
-	public static IGrammaExampleWrapperEntry makeSimpleTemplateGrammaFormConjugateResult(IGrammaExampleWrapperEntry grammaExampleWrapperEntry,
+	public static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(GrammaFormConjugateRequest grammaFormConjugateRequest,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
-				
-		String prefixKana = grammaExampleWrapperEntry.getPrefixKana();
-		String kanji = grammaExampleWrapperEntry.getKanji();
 		
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		String prefixKana = grammaFormConjugateRequest.getPrefixKana();
+		String kanji = grammaFormConjugateRequest.getKanji();
 		
-		String prefixRomaji = grammaExampleWrapperEntry.getPrefixRomaji();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 		
-		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
+		String prefixRomaji = grammaFormConjugateRequest.getPrefixRomaji();
 		
-		return makeSimpleGrammaExampleWrapperEntryResult(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
+		
+		return makeSimpleTemplateGrammaFormConjugateResult(prefixKana, kanji, kanaList, prefixRomaji, romajiList, templateKanji, templateKana, templateRomaji, canAddPrefix);
 	}
 
 	public static ExampleResult makeSimpleTemplateExample(GrammaFormConjugateResult grammaFormConjugateResult,
@@ -250,11 +248,8 @@ public class GrammaExampleHelper {
 		return result;		
 	}
 	
-	@Deprecated
 	private static GrammaFormConjugateResult makeSimpleTemplateGrammaFormConjugateResult(String prefixKana, String kanji, List<String> kanaList, String prefixRomaji, List<String> romajiList,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
-		
-		// FM_FIXME: chyba do usuniecia
 		
 		GrammaFormConjugateResult result = new GrammaFormConjugateResult();
 				
@@ -286,11 +281,8 @@ public class GrammaExampleHelper {
 		return result;		
 	}
 
-	@Deprecated
 	private static ExampleResult makeSimpleTemplateExampleWithLastCharRemove(String prefixKana, String kanji, List<String> kanaList, String prefixRomaji, List<String> romajiList,
 			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
-		
-		// FM_FIXME: chyba do usuniecia
 		
 		ExampleResult result = new ExampleResult();
 		
@@ -315,42 +307,6 @@ public class GrammaExampleHelper {
 
 		for (String currentRomaji : romajiList) {
 			romajiListResult.add(String.format(templateRomaji, removeLastChar(currentRomaji)));
-		}
-
-		result.setRomajiList(romajiListResult);
-		
-		return result;		
-	}
-	
-	private static IGrammaExampleWrapperEntry makeSimpleGrammaExampleWrapperEntryResult(String prefixKana, String kanji, List<String> kanaList, String prefixRomaji, List<String> romajiList,
-			String templateKanji, String templateKana, String templateRomaji, boolean canAddPrefix) {
-			
-		GeneratedGrammaExampleWrapperEntry result = new GeneratedGrammaExampleWrapperEntry(666);
-		
-		// stos poprzednich typow
-		result.getStackGrammaExampleTypeList().forEach(s -> result.addStackGrammaExampleType(s));
-		
-		if (canAddPrefix == true) {
-			result.setPrefixKana(prefixKana);
-			result.setPrefixRomaji(prefixRomaji);
-		}
-		
-		if (kanji != null) {		
-			result.setKanji(String.format(templateKanji, kanji));
-		}
-
-		List<String> kanaListResult = new ArrayList<String>();
-
-		for (String currentKana : kanaList) {			
-			kanaListResult.add(String.format(templateKana, currentKana));
-		}
-
-		result.setKanaList(kanaListResult);
-
-		List<String> romajiListResult = new ArrayList<String>();
-
-		for (String currentRomaji : romajiList) {
-			romajiListResult.add(String.format(templateRomaji, currentRomaji));
 		}
 
 		result.setRomajiList(romajiListResult);

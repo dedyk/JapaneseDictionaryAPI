@@ -5,216 +5,257 @@ import java.util.List;
 import java.util.Map;
 
 import pl.idedyk.japanese.dictionary.api.dto.DictionaryEntryType;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateGroupType;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateGroupTypeElements;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateRequest;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
+import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResultType;
 import pl.idedyk.japanese.dictionary.api.grammaexample.GrammaExampleHelper;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.GeneratedGrammaExampleWrapperEntry;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.GrammaExampleType;
-import pl.idedyk.japanese.dictionary.api.grammaexample.dto.IGrammaExampleWrapperEntry;
 
 public class AdjectiveIGrammaConjugater {
 
-	public static List<IGrammaExampleWrapperEntry> makeAll(IGrammaExampleWrapperEntry grammaExampleWrapperEntry, 
-			Map<GrammaExampleType, IGrammaExampleWrapperEntry> grammaFormCache, boolean addVirtual) {
+	public static List<GrammaFormConjugateGroupTypeElements> makeAll(GrammaFormConjugateRequest grammaFormConjugateRequest, 
+			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
 
-		if (isKanaI(grammaExampleWrapperEntry) == true) { // nie liczymy dla i dla kany
+		if (isKanaI(grammaFormConjugateRequest) == true) { // nie liczymy dla i dla kany
 			return null;
 		}
 		
 		// validate DictionaryEntry
-		validateDictionaryEntry(grammaExampleWrapperEntry);
+		validateDictionaryEntry(grammaFormConjugateRequest);
 		
-		List<IGrammaExampleWrapperEntry> result = new ArrayList<IGrammaExampleWrapperEntry>();
+		List<GrammaFormConjugateGroupTypeElements> result = new ArrayList<GrammaFormConjugateGroupTypeElements>();
 
 		// forma formalna
-		result.add(makeFormalPresentForm(grammaExampleWrapperEntry));
-		result.add(makeFormalPresentNegativeForm(grammaExampleWrapperEntry));
-		result.add(makeFormalPastForm(grammaExampleWrapperEntry));
-		result.add(makeFormalPastNegativeForm(grammaExampleWrapperEntry));
-		
+		GrammaFormConjugateGroupTypeElements formal = new GrammaFormConjugateGroupTypeElements();
+
+		formal.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_FORMAL);
+
+		formal.getGrammaFormConjugateResults().add(makeFormalPresentForm(grammaFormConjugateRequest));
+		formal.getGrammaFormConjugateResults().add(makeFormalPresentNegativeForm(grammaFormConjugateRequest));
+		formal.getGrammaFormConjugateResults().add(makeFormalPastForm(grammaFormConjugateRequest));
+		formal.getGrammaFormConjugateResults().add(makeFormalPastNegativeForm(grammaFormConjugateRequest));
+
+		result.add(formal);
+
 		// forma nieformalna (prosta)
-		result.add(makeInformalPresentForm(grammaExampleWrapperEntry));
-		result.add(makeInformalPresentNegativeForm(grammaExampleWrapperEntry));
-		result.add(makeInformalPastForm(grammaExampleWrapperEntry));
-		result.add(makeInformalPastNegativeForm(grammaExampleWrapperEntry));
+		GrammaFormConjugateGroupTypeElements informal = new GrammaFormConjugateGroupTypeElements();
+
+		informal.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_INFORMAL);
+
+		informal.getGrammaFormConjugateResults().add(makeInformalPresentForm(grammaFormConjugateRequest));
+		informal.getGrammaFormConjugateResults().add(makeInformalPresentNegativeForm(grammaFormConjugateRequest));
+		informal.getGrammaFormConjugateResults().add(makeInformalPastForm(grammaFormConjugateRequest));
+		informal.getGrammaFormConjugateResults().add(makeInformalPastNegativeForm(grammaFormConjugateRequest));
+
+		result.add(informal);
 		
-		// forma przyslowkowa		
-		result.add(makeAdverbForm(grammaExampleWrapperEntry));
-				
-		// forma te	
-		result.add(makeTeForm(grammaExampleWrapperEntry));
-		result.add(makeNegativeTeForm(grammaExampleWrapperEntry));
-				
-		// forma honoryfikatywna		
-		result.add(makeKeigoLowForm(grammaExampleWrapperEntry));
-				
+		// forma przyslowkowa
+		GrammaFormConjugateGroupTypeElements adverbForm = new GrammaFormConjugateGroupTypeElements();
+		
+		adverbForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_ADVERB);
+		
+		adverbForm.getGrammaFormConjugateResults().add(makeAdverbForm(grammaFormConjugateRequest));
+		
+		result.add(adverbForm);
+		
+		// forma te
+		GrammaFormConjugateGroupTypeElements teForm = new GrammaFormConjugateGroupTypeElements();
+		
+		teForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_TE);
+		
+		teForm.getGrammaFormConjugateResults().add(makeTeForm(grammaFormConjugateRequest));
+		teForm.getGrammaFormConjugateResults().add(makeNegativeTeForm(grammaFormConjugateRequest));
+		
+		result.add(teForm);
+		
+		// forma honoryfikatywna
+		GrammaFormConjugateGroupTypeElements keigoForm = new GrammaFormConjugateGroupTypeElements();
+		
+		keigoForm.setGrammaFormConjugateGroupType(GrammaFormConjugateGroupType.ADJECTIVE_I_KEIGO);
+		
+		keigoForm.getGrammaFormConjugateResults().add(makeKeigoLowForm(grammaFormConjugateRequest));
+		
+		result.add(keigoForm);
+		
 		// caching
-		for (IGrammaExampleWrapperEntry generatedGrammaExampleWrapperEntry : result) {					
-			grammaFormCache.put(generatedGrammaExampleWrapperEntry.getGrammaExampleType(), generatedGrammaExampleWrapperEntry);
+		for (GrammaFormConjugateGroupTypeElements grammaFormConjugateGroupTypeElements : result) {
+			
+			List<GrammaFormConjugateResult> grammaFormConjugateResults = grammaFormConjugateGroupTypeElements.getGrammaFormConjugateResults();
+			
+			for (GrammaFormConjugateResult grammaFormConjugateResult : grammaFormConjugateResults) {
+				grammaFormCache.put(grammaFormConjugateResult.getResultType(), grammaFormConjugateResult);
+			}
 		}
 		
 		// virtual
-		IGrammaExampleWrapperEntry virtualForm = makeVirtualForm(grammaExampleWrapperEntry);
+		GrammaFormConjugateResult virtualForm = makeVirtualForm(grammaFormConjugateRequest);
 		
-		grammaFormCache.put(virtualForm.getGrammaExampleType(), virtualForm);
+		grammaFormCache.put(virtualForm.getResultType(), virtualForm);
 
 		return result;		
 	}
 	
-	private static IGrammaExampleWrapperEntry makeVirtualForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeVirtualForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
-		// wirtualna metoda bez "i" na koncu i ewentualne przerobienie ii na yoi		
-		IGrammaExampleWrapperEntry virtualForm = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_VIRTUAL,
+		// wirtualna metoda bez "i" na koncu i ewentualne przerobienie ii na yoi
+		
+		GrammaFormConjugateResult virtualForm = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_VIRTUAL,
 				"", "");
 				
 		return virtualForm;
 	}
 
-	private static IGrammaExampleWrapperEntry makeFormalPresentForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPresentForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas terazniejszy, twierdzenie, forma formalna, -i desu
 
 		final String postfixKana = "いです";
 		final String postfixRomaji = "i desu";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PRESENT,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT,
 				postfixKana, postfixRomaji);
 	}
 
-	private static IGrammaExampleWrapperEntry makeFormalPresentNegativeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPresentNegativeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas terazniejszy, przeczenie, forma formalna (prosta), -kunai desu
 
 		final String postfixKana = "くないです";
 		final String postfixRomaji = "kunai desu";
 
-		IGrammaExampleWrapperEntry grammaExampleWrapperEntryResult = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PRESENT_NEGATIVE,
+		GrammaFormConjugateResult grammaFormConjugateResult = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT_NEGATIVE,
 				postfixKana, postfixRomaji);
 		
 		// alternative
-		grammaExampleWrapperEntryResult.setAlternative(makeFormalPresentNegativeForm2(grammaExampleWrapperEntry));
+		grammaFormConjugateResult.setAlternative(makeFormalPresentNegativeForm2(grammaFormConjugateRequest));
 		
-		return grammaExampleWrapperEntryResult;
+		return grammaFormConjugateResult;
 	}
 
-	private static IGrammaExampleWrapperEntry makeFormalPresentNegativeForm2(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPresentNegativeForm2(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas terazniejszy, przeczenie, forma formalna (prosta), -ku arimasen
 
 		final String postfixKana = "くありません";
 		final String postfixRomaji = "ku arimasen";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PRESENT_NEGATIVE,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT_NEGATIVE,
 				postfixKana, postfixRomaji);
 	}
 	
-	private static IGrammaExampleWrapperEntry makeFormalPastForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPastForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas przesly, twierdzenie, forma formalna, -katta desu
 
 		final String postfixKana = "かったです";
 		final String postfixRomaji = "katta desu";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PAST,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PAST,
 				postfixKana, postfixRomaji);
 	}
 
-	private static IGrammaExampleWrapperEntry makeFormalPastNegativeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPastNegativeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas przesly, przeczenie, forma formalna, -ku nakatta desu
 
 		final String postfixKana = "くなかったです";
 		final String postfixRomaji = "kunakatta desu";
 
-		IGrammaExampleWrapperEntry grammaExampleWrapperEntryResult = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PAST_NEGATIVE,
+		GrammaFormConjugateResult grammaFormConjugateResult = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PAST_NEGATIVE,
 				postfixKana, postfixRomaji);
 		
 		// alternative
-		grammaExampleWrapperEntryResult.setAlternative(makeFormalPastNegativeForm2(grammaExampleWrapperEntry));
+		grammaFormConjugateResult.setAlternative(makeFormalPastNegativeForm2(grammaFormConjugateRequest));
 		
-		return grammaExampleWrapperEntryResult;
+		return grammaFormConjugateResult;
 	}
 
-	private static IGrammaExampleWrapperEntry makeFormalPastNegativeForm2(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeFormalPastNegativeForm2(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas przesly, przeczenie, forma formalna, -ku arimasen deshita
 		
 		final String postfixKana = "くありませんでした";
 		final String postfixRomaji = "ku arimasen deshita";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_FORMAL_PAST_NEGATIVE,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PAST_NEGATIVE,
 				postfixKana, postfixRomaji);
 	}
 	
-	private static IGrammaExampleWrapperEntry makeInformalPresentForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeInformalPresentForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas terazniejszy, twierdzenie, forma nieformalna (prosta), -i
 
 		final String postfixKana = "い";
 		final String postfixRomaji = "i";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_INFORMAL_PRESENT,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT,
 				postfixKana, postfixRomaji);
 	}
 
-	private static IGrammaExampleWrapperEntry makeInformalPresentNegativeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeInformalPresentNegativeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
 		// czas terazniejszy, przeczenie, forma nieformalna (prosta), -kunai
 
 		final String postfixKana = "くない";
 		final String postfixRomaji = "kunai";
 
-		IGrammaExampleWrapperEntry grammaExampleWrapperEntryResult = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_INFORMAL_PRESENT_NEGATIVE,
+		GrammaFormConjugateResult grammaFormConjugateResult = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT_NEGATIVE,
 				postfixKana, postfixRomaji);
 				
-		return grammaExampleWrapperEntryResult;
+		return grammaFormConjugateResult;
 	}
 
-	private static IGrammaExampleWrapperEntry makeInformalPastForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeInformalPastForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
 		// czas przesly, twierdzenie, forma nieformalna (prosta), -katta
 
 		final String postfixKana = "かった";
 		final String postfixRomaji = "katta";
 
-		IGrammaExampleWrapperEntry grammaExampleWrapperEntryResult = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_INFORMAL_PAST,
+		GrammaFormConjugateResult grammaFormConjugateResult = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PAST,
 				postfixKana, postfixRomaji);
 				
-		return grammaExampleWrapperEntryResult;
+		return grammaFormConjugateResult;
 	}
 
-	private static IGrammaExampleWrapperEntry makeInformalPastNegativeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeInformalPastNegativeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// czas przesly, przeczenie, forma nieformalna (prosta), -ku nakatta
 
 		final String postfixKana = "くなかった";
 		final String postfixRomaji = "kunakatta";
 
-		return makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_INFORMAL_PAST_NEGATIVE,
+		return makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PAST_NEGATIVE,
 				postfixKana, postfixRomaji);
 	}
 
-	private static IGrammaExampleWrapperEntry makeAdjectiveGrammaConjugateForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry, 
-			GrammaExampleType grammaExampleType, String postfixKana, String postfixRomaji) {
+	private static GrammaFormConjugateResult makeAdjectiveGrammaConjugateForm(GrammaFormConjugateRequest grammaFormConjugateRequest, 
+			GrammaFormConjugateResultType grammaFormConjugateResultType, String postfixKana, String postfixRomaji) {
 
 		// make common
-		GeneratedGrammaExampleWrapperEntry result = makeCommon(grammaExampleWrapperEntry);
-		result.addStackGrammaExampleType(grammaExampleType);
+		GrammaFormConjugateResult result = makeCommon(grammaFormConjugateRequest);
 
-		String kanji = grammaExampleWrapperEntry.getKanji();
+		result.setResultType(grammaFormConjugateResultType);
+
+		String kanji = grammaFormConjugateRequest.getKanji();
 
 		if (kanji != null) {
-			kanji = getKanaToConjugate(kanji, grammaExampleWrapperEntry.getRomaji(), grammaExampleType);
+			kanji = getKanaToConjugate(kanji, grammaFormConjugateRequest.getRomaji(), grammaFormConjugateResultType);
 			
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
+
 		List<String> kanaListResult = new ArrayList<String>();
 
 		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaExampleWrapperEntry.getRomaji(), grammaExampleType);
+			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), grammaFormConjugateResultType);
 
 			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
 		}
 
 		result.setKanaList(kanaListResult);		
 
-		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
+
 		List<String> romajiListResult = new ArrayList<String>();
 
 		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, grammaExampleType);
+			currentRomaji = getRomajiToConjugate(currentRomaji, grammaFormConjugateResultType);
 
 			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
 		}
@@ -224,10 +265,10 @@ public class AdjectiveIGrammaConjugater {
 		return result; 
 	}
 
-	private static String getKanaToConjugate(String kana, String romaji, GrammaExampleType grammaExampleType) {
+	private static String getKanaToConjugate(String kana, String romaji, GrammaFormConjugateResultType grammaFormConjugateResultType) {
 
-		if (grammaExampleType != GrammaExampleType.ADJECTIVE_I_FORMAL_PRESENT && 
-				grammaExampleType != GrammaExampleType.ADJECTIVE_I_INFORMAL_PRESENT) {
+		if (grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT && 
+				grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT) {
 
 			if (kana.endsWith("いい") == true) {
 				
@@ -240,10 +281,10 @@ public class AdjectiveIGrammaConjugater {
 		return kana;
 	}
 
-	private static String getRomajiToConjugate(String romaji, GrammaExampleType grammaExampleType) {
+	private static String getRomajiToConjugate(String romaji, GrammaFormConjugateResultType grammaFormConjugateResultType) {
 
-		if (grammaExampleType != GrammaExampleType.ADJECTIVE_I_FORMAL_PRESENT && 
-				grammaExampleType != GrammaExampleType.ADJECTIVE_I_INFORMAL_PRESENT) {
+		if (grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_FORMAL_PRESENT && 
+				grammaFormConjugateResultType != GrammaFormConjugateResultType.ADJECTIVE_I_INFORMAL_PRESENT) {
 
 			if (romaji.equals("ii") == true || romaji.endsWith(" ii") == true) {
 				return romaji.substring(0, romaji.length() - 2) + "yoi";
@@ -253,17 +294,14 @@ public class AdjectiveIGrammaConjugater {
 		return romaji;
 	}
 
-	private static GeneratedGrammaExampleWrapperEntry makeCommon(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeCommon(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 
 		// create result
-		GeneratedGrammaExampleWrapperEntry result = new GeneratedGrammaExampleWrapperEntry(666);
+		GrammaFormConjugateResult result = new GrammaFormConjugateResult();
 
-		result.setPrefixKana(grammaExampleWrapperEntry.getPrefixKana());
-		result.setPrefixRomaji(grammaExampleWrapperEntry.getPrefixRomaji());
+		result.setPrefixKana(grammaFormConjugateRequest.getPrefixKana());
+		result.setPrefixRomaji(grammaFormConjugateRequest.getPrefixRomaji());
 		
-		// stos poprzednich typow
-		grammaExampleWrapperEntry.getStackGrammaExampleTypeList().forEach(s -> result.addStackGrammaExampleType(s));
-				
 		return result;
 	}
 
@@ -271,21 +309,21 @@ public class AdjectiveIGrammaConjugater {
 		return text.substring(0, text.length() - 1);
 	}
 
-	private static void validateDictionaryEntry(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static void validateDictionaryEntry(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
-		List<DictionaryEntryType> dictionaryEntryTypeList = grammaExampleWrapperEntry.getDictionaryEntryTypeList();
+		List<DictionaryEntryType> dictionaryEntryTypeList = grammaFormConjugateRequest.getDictionaryEntryTypeList();
 
 		if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_ADJECTIVE_I) == false) {
 			throw new RuntimeException("dictionaryEntryType != DictionaryEntryType.WORD_ADJECTIVE_I: " + dictionaryEntryTypeList);
 		}
 
-		String kanji = grammaExampleWrapperEntry.getKanji();
+		String kanji = grammaFormConjugateRequest.getKanji();
 
 		if (kanji != null && kanji.endsWith("い") == false) {
 			throw new RuntimeException("kanji.endsWith(い) == false: " + kanji);
 		}
 
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		for (String currentKana : kanaList) {
 			if (currentKana.endsWith("い") == false) {
@@ -293,7 +331,7 @@ public class AdjectiveIGrammaConjugater {
 			}			
 		}
 
-		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
 
 		for (String currentRomaji : romajiList) {
 			if (currentRomaji.endsWith("i") == false) {
@@ -302,15 +340,15 @@ public class AdjectiveIGrammaConjugater {
 		}		
 	}
 	
-	private static boolean isKanaI(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static boolean isKanaI(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		
-		String kanji = grammaExampleWrapperEntry.getKanji();
+		String kanji = grammaFormConjugateRequest.getKanji();
 
 		if (kanji != null && kanji.endsWith("イ") == true) {
 			return true;
 		}
 
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		for (String currentKana : kanaList) {
 			if (currentKana.endsWith("イ") == true) {
@@ -321,49 +359,52 @@ public class AdjectiveIGrammaConjugater {
 		return false;
 	}
 	
-	private static IGrammaExampleWrapperEntry makeAdverbForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {				
-		IGrammaExampleWrapperEntry adverbForm = makeAdjectiveGrammaConjugateForm(grammaExampleWrapperEntry, GrammaExampleType.ADJECTIVE_I_ADVERB,
+	private static GrammaFormConjugateResult makeAdverbForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
+				
+		GrammaFormConjugateResult virtualForm = makeAdjectiveGrammaConjugateForm(grammaFormConjugateRequest, GrammaFormConjugateResultType.ADJECTIVE_I_ADVERB,
 				"く", "ku");
 				
-		return adverbForm;
+		return virtualForm;
 	}
 
-	private static IGrammaExampleWrapperEntry makeTeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	
+	private static GrammaFormConjugateResult makeTeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// forma te
 		
 		String postfixKana = "くて";
 		String postfixRomaji = "kute";
 		
 		// make common
-		GeneratedGrammaExampleWrapperEntry result = makeCommon(grammaExampleWrapperEntry);
-		result.addStackGrammaExampleType(GrammaExampleType.ADJECTIVE_I_TE);
+		GrammaFormConjugateResult result = makeCommon(grammaFormConjugateRequest);
 		
-		String kanji = grammaExampleWrapperEntry.getKanji();
+		result.setResultType(GrammaFormConjugateResultType.ADJECTIVE_I_TE);
+		
+		String kanji = grammaFormConjugateRequest.getKanji();
 
 		if (kanji != null) {
-			kanji = getKanaToConjugate(kanji, grammaExampleWrapperEntry.getRomaji(), GrammaExampleType.ADJECTIVE_I_TE);
+			kanji = getKanaToConjugate(kanji, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
 			
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
 
 		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaExampleWrapperEntry.getRomaji(), GrammaExampleType.ADJECTIVE_I_TE);
+			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE);
 
 			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
 		}
 
 		result.setKanaList(kanaListResult);		
 
-		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
 
 		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaExampleType.ADJECTIVE_I_TE);
+			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE);
 
 			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
 		}
@@ -373,42 +414,43 @@ public class AdjectiveIGrammaConjugater {
 		return result;
 	}
 	
-	private static IGrammaExampleWrapperEntry makeNegativeTeForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeNegativeTeForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
 		// forma te
 		
 		String postfixKana = "くなくて";
 		String postfixRomaji = "kunakute";
 		
 		// make common
-		GeneratedGrammaExampleWrapperEntry result = makeCommon(grammaExampleWrapperEntry);
-		result.addStackGrammaExampleType(GrammaExampleType.ADJECTIVE_I_TE_NEGATIVE);
+		GrammaFormConjugateResult result = makeCommon(grammaFormConjugateRequest);
 		
-		String kanji = grammaExampleWrapperEntry.getKanji();
+		result.setResultType(GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
+		
+		String kanji = grammaFormConjugateRequest.getKanji();
 
 		if (kanji != null) {
-			kanji = getKanaToConjugate(kanji, grammaExampleWrapperEntry.getRomaji(), GrammaExampleType.ADJECTIVE_I_TE_NEGATIVE);
+			kanji = getKanaToConjugate(kanji, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
 			
 			result.setKanji(removeLastChar(kanji) + postfixKana);
 		}
 
-		List<String> kanaList = grammaExampleWrapperEntry.getKanaList();
+		List<String> kanaList = grammaFormConjugateRequest.getKanaList();
 
 		List<String> kanaListResult = new ArrayList<String>();
 
 		for (String currentKana : kanaList) {			
-			currentKana = getKanaToConjugate(currentKana, grammaExampleWrapperEntry.getRomaji(), GrammaExampleType.ADJECTIVE_I_TE_NEGATIVE);
+			currentKana = getKanaToConjugate(currentKana, grammaFormConjugateRequest.getRomaji(), GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
 
 			kanaListResult.add(removeLastChar(currentKana) + postfixKana);
 		}
 
 		result.setKanaList(kanaListResult);		
 
-		List<String> romajiList = grammaExampleWrapperEntry.getRomajiList();
+		List<String> romajiList = grammaFormConjugateRequest.getRomajiList();
 
 		List<String> romajiListResult = new ArrayList<String>();
 
 		for (String currentRomaji : romajiList) {
-			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaExampleType.ADJECTIVE_I_TE_NEGATIVE);
+			currentRomaji = getRomajiToConjugate(currentRomaji, GrammaFormConjugateResultType.ADJECTIVE_I_TE_NEGATIVE);
 
 			romajiListResult.add(removeLastChar(currentRomaji) + postfixRomaji);
 		}
@@ -418,24 +460,25 @@ public class AdjectiveIGrammaConjugater {
 		return result;
 	}
 	
-	private static IGrammaExampleWrapperEntry makeKeigoLowForm(IGrammaExampleWrapperEntry grammaExampleWrapperEntry) {
+	private static GrammaFormConjugateResult makeKeigoLowForm(GrammaFormConjugateRequest grammaFormConjugateRequest) {
+		
 		// keigo low
 		
 		final String templateKanji1 = "%sでございます";
 		final String templateKana1 = "%sでございます";
 		final String templateRomaji1 = "%s de gozaimasu";
 		
-		IGrammaExampleWrapperEntry result = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(grammaExampleWrapperEntry, templateKanji1, templateKana1, templateRomaji1, true);
+		GrammaFormConjugateResult result = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(grammaFormConjugateRequest, templateKanji1, templateKana1, templateRomaji1, true);
 		
-		result.addStackGrammaExampleType(GrammaExampleType.ADJECTIVE_I_KEIGO_LOW);
+		result.setResultType(GrammaFormConjugateResultType.ADJECTIVE_I_KEIGO_LOW);
 		
 		final String templateKanji2 = "%sでござる";
 		final String templateKana2 = "%sでござる";
 		final String templateRomaji2 = "%s de gozaru";
 		
-		IGrammaExampleWrapperEntry alternative = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(grammaExampleWrapperEntry, templateKanji2, templateKana2, templateRomaji2, true);
+		GrammaFormConjugateResult alternative = GrammaExampleHelper.makeSimpleTemplateGrammaFormConjugateResult(grammaFormConjugateRequest, templateKanji2, templateKana2, templateRomaji2, true);
 
-		result.addStackGrammaExampleType(GrammaExampleType.ADJECTIVE_I_KEIGO_LOW);
+		alternative.setResultType(GrammaFormConjugateResultType.ADJECTIVE_I_KEIGO_LOW);
 		
 		result.setAlternative(alternative);
 		
