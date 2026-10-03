@@ -391,16 +391,63 @@ public class VerbExampler {
 		return result;
 	}
 
-	private static ExampleResult makeTeIruExample(ExampleRequest exampleRequest,
-			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static ExampleResult makeTeIruExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
-		final String templateKanji = "%sいる";
-		final String templateKana = "%sいる";
-		final String templateRomaji = "%s iru";
+		String[][] templates = new String[][] { 
+			{ "%sいます",  "%sいます",  "%s imasu",  "Forma formalna, twierdzenie czasu teraźniejszego"},
+			{ "%sいません ",  "%sいません",  "%s imasen",  "Forma formalna, przeczenie czasu teraźniejszego"},
+			{ "%sいました ",  "%sいました",  "%s imashita",  "Forma formalna, twierdzenie czasu przeszłego"},
+			{ "%sいませんでした",  "%sいませんでした",  "%s imasen deshita",  "Forma formalna, przeczenie czasu przeszłego"},
+			
+			{ "%sいる",  "%sいる",  "%s iru",  "Forma nieformalna, twierdzenie czasu teraźniejszego"},
+			{ "%sいない ",  "%sいない ",  "%s inai",  "Forma nieformalna, przeczenie czasu teraźniejszego"},
+			{ "%sいた",  "%sいた",  "%s ita",  "Forma nieformalna, twierdzenie czasu przeszłego"},
+			{ "%sいなかった",  "%sいなかった",  "%s inakatta",  "Forma nieformalna, przeczenie czasu przeszłego"},
+			
+			{ "%sる",  "%sる",  "%sru",  "Forma potoczna, twierdzenie czasu teraźniejszego"},
+			{ "%sない ",  "%sない ",  "%snai",  "Forma potoczna, przeczenie czasu teraźniejszego"},
+			{ "%sた",  "%sた",  "%sta",  "Forma potoczna, twierdzenie czasu przeszłego"},
+			{ "%sなかった",  "%sなかった",  "%snakatta",  "Forma potoczna, przeczenie czasu przeszłego"},
+		};
+		
+		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
+		
+		ExampleResult currentExampleResult = null;
+		ExampleResult startExampleResult = null;
+
+		for (int idx = 0; idx < templates.length; ++idx) {
+
+			if (idx == 0) {
+				startExampleResult = currentExampleResult = GrammaExampleHelper.makeSimpleTemplateExample(teForm,
+						templates[idx][0], templates[idx][1], templates[idx][2], true);
+				
+				currentExampleResult.setInfo(templates[idx][3]);
+			} else {
+				ExampleResult alternativeExampleResult = GrammaExampleHelper.makeSimpleTemplateExample(teForm,
+						templates[idx][0], templates[idx][1], templates[idx][2], true);
+
+				alternativeExampleResult.setInfo(templates[idx][3]);				
+				currentExampleResult.setAlternative(alternativeExampleResult);
+
+				currentExampleResult = alternativeExampleResult;
+			}
+		}
+		
+		//
+		
+		return startExampleResult;
+		/*
+		final String templateKanji = ;
+		final String templateKana = ;
+		final String templateRomaji = ;
 
 		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
 
-		return GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true);
+	return GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true);
+		
+		*/
+		/////
+		/// 
 	}
 
 	private static ExampleResult makeTeKudasaiExample(ExampleRequest exampleRequest,
