@@ -96,9 +96,9 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_ADVICE,
 				makeAdviceExample(exampleRequest, grammaFormCache));
 
-		// nakucha ikemasen
-		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKUCHA_IKEMASEN,
-				makeNakuchaIkemasenExample(exampleRequest, grammaFormCache));
+		// nakucha ikenai
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAKUCHA_IKENAI,
+				makeNakuchaIkenaiExample(exampleRequest, grammaFormCache));
 
 		// deshou
 		// GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_DESHOU, makeDeshouExample(exampleRequest));
@@ -433,21 +433,7 @@ public class VerbExampler {
 			}
 		}
 		
-		//
-		
 		return startExampleResult;
-		/*
-		final String templateKanji = ;
-		final String templateKana = ;
-		final String templateRomaji = ;
-
-		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
-
-	return GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true);
-		
-		*/
-		/////
-		/// 
 	}
 
 	private static ExampleResult makeTeKudasaiExample(ExampleRequest exampleRequest,
@@ -733,15 +719,40 @@ public class VerbExampler {
 		return houGaIiDesu;
 	}
 
-	private static ExampleResult makeNakuchaIkemasenExample(ExampleRequest exampleRequest,
+	private static ExampleResult makeNakuchaIkenaiExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
-		String postfixKana = "くちゃいけません";
-		String postfixRomaji = "kucha ikemasen";
+		String[][] templates = new String[][] { 
+			{ "くちゃいけません", "kucha ikemasen", "Forma formalna"},
+			{ "くちゃいけない", "kucha ikenai", "Forma nieformalna"},
+		};
+		
+		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+		
+		ExampleResult currentExampleResult = null;
+		ExampleResult startExampleResult = null;
 
-		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
-				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+		for (int idx = 0; idx < templates.length; ++idx) {
 
+			if (idx == 0) {
+				startExampleResult = currentExampleResult = makeNakuchaIkenaiExample(exampleRequest, informalPresentNegativeForm, templates[idx][0], templates[idx][1]);
+				
+				currentExampleResult.setInfo(templates[idx][2]);
+			} else {
+				ExampleResult alternativeExampleResult = makeNakuchaIkenaiExample(exampleRequest, informalPresentNegativeForm, templates[idx][0], templates[idx][1]);
+
+				alternativeExampleResult.setInfo(templates[idx][2]);				
+				currentExampleResult.setAlternative(alternativeExampleResult);
+
+				currentExampleResult = alternativeExampleResult;
+			}
+		}
+		
+		return startExampleResult;
+	}
+	
+	private static ExampleResult makeNakuchaIkenaiExample(ExampleRequest exampleRequest, GrammaFormConjugateResult informalPresentNegativeForm, String postfixKana, String postfixRomaji) {
+		
 		String kanji = informalPresentNegativeForm.getKanji();
 		String kana = informalPresentNegativeForm.getKana();
 		String romaji = informalPresentNegativeForm.getRomaji();

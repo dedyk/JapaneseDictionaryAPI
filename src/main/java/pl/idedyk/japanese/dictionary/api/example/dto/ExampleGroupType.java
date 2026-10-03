@@ -238,7 +238,7 @@ public enum ExampleGroupType {
 
 	VERB_ADVICE("Rada"),
 
-	VERB_NAKUCHA_IKEMASEN("Musieć 1"),
+	VERB_NAKUCHA_IKENAI("Musieć 1"),
 
 	// VERB_DESHOU("Prawdopodobnie, ok. 60%"),
 
