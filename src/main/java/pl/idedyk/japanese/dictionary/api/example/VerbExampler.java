@@ -362,6 +362,10 @@ public class VerbExampler {
 		// mai
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_MAI,
 				makeMai(exampleRequest, grammaFormCache));
+		
+		// alternatywy dla -nai
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAI_ALTERNATIVE,
+				makeNaiAlternative(exampleRequest, grammaFormCache));		
 
 		return result;
 	}
@@ -2574,5 +2578,94 @@ public class VerbExampler {
 		}
 		
 		return maiExample;
+	}
+	
+	private static ExampleResult makeNaiAlternative(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	
+		ExampleResult nuExample;
+		
+		// forma -nu:
+		{			
+			List<DictionaryEntryType> dictionaryEntryTypeList = exampleRequest.getDictionaryEntryTypeList();
+			
+			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
+		
+				String kanji = exampleRequest.getKanji();
+				String kana = exampleRequest.getKana();
+				String romaji = exampleRequest.getRomaji();
+				
+				if (kanji != null) {
+					if (kanji.endsWith("為る") == true) {
+						kanji = kanji.substring(0, kanji.length() - 2) + "為ぬ";
+						
+					} else if (kanji.endsWith("する") == true) {
+						kanji = kanji.substring(0, kanji.length() - 2) + "せぬ";
+						
+					} else if (kanji.endsWith("来る") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "来ぬ";
+						
+					} else if (kanji.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "こぬ";
+						
+					} else {
+						throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+					}
+				}
+
+				if (kana.endsWith("する") == true) {
+					kana = kana.substring(0, kana.length() - 2) + "せぬ";
+										
+				} else if (kana.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
+					kana = kana.substring(0, kana.length() - 2) + "こぬ";
+					
+				} else {
+					throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+				}
+				
+				if (romaji.endsWith("suru") == true) {
+					romaji = romaji.substring(0, romaji.length() - 4) + "senu";
+					
+				} else if (romaji.endsWith("kuru") == true) { // to nie jest wyjatek, ale niech tak bedzie
+					romaji = romaji.substring(0, romaji.length() - 4) + "konu";
+				
+				} else {
+					throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+				}
+				
+				// pusty template
+				final String templateKanji = "%s";
+				final String templateKana = "%s";
+				final String templateRomaji = "%s";
+
+				nuExample = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana, exampleRequest.getPrefixRomaji(), romaji,
+						templateKanji, templateKana, templateRomaji, true);
+				
+			} else {
+				GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				
+				String kanji = informalPresentNegativeForm.getKanji();
+				String kana = informalPresentNegativeForm.getKana();
+				String romaji = informalPresentNegativeForm.getRomaji();
+				
+				if (kanji != null) {
+					kanji = kanji.substring(0, kanji.length() - 2) + "ぬ";
+				}
+				
+				kana = kana.substring(0, kana.length() - 2) + "ぬ";
+				romaji = romaji.substring(0, romaji.length() - 3) + "nu";
+
+				// pusty template
+				final String templateKanji = "%s";
+				final String templateKana = "%s";
+				final String templateRomaji = "%s";
+
+				nuExample = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana, exampleRequest.getPrefixRomaji(), romaji,
+						templateKanji, templateKana, templateRomaji, true);				
+			}
+			
+			nuExample.setInfo("Forma -nu: Forma historyczna, literacka, dramatyczna, poetycka i etc. Uwaga, w klasycznym języku japońskim końcówka nu może być również pomocniczym czasownikiem oznaczającym dokonanie/ukończenie czynności");
+		}
+				
+		return nuExample;
 	}
 }

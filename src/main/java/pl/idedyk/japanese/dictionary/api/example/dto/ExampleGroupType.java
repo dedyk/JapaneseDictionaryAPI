@@ -374,7 +374,9 @@ public enum ExampleGroupType {
 	
 	VERB_KA_MO_SHIRENAI("Być może"),
 	
-	VERB_MAI("Forma negatywno-przypuszczająca");
+	VERB_MAI("Forma negatywno-przypuszczająca"),
+	
+	VERB_NAI_ALTERNATIVE("Alternatywne formy dla -nai");
 
 	// nakereba naranai
 	// nakute wa naranai
