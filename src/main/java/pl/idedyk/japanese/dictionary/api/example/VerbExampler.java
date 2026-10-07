@@ -2584,6 +2584,7 @@ public class VerbExampler {
 	
 		ExampleResult nuExample;
 		ExampleResult nExample;
+		ExampleResult zuExample;
 		
 		// forma -nu:
 		{			
@@ -2664,7 +2665,9 @@ public class VerbExampler {
 						templateKanji, templateKana, templateRomaji, true);				
 			}
 			
-			nuExample.setInfo("Forma -nu: Forma historyczna, literacka, dramatyczna, poetycka i etc. Uwaga, w klasycznym języku japońskim końcówka nu może być również pomocniczym czasownikiem oznaczającym dokonanie/ukończenie czynności");
+			nuExample.setInfo("Forma -nu: Forma historyczna, literacka, dramatyczna i etc. "
+					+ "Uwaga, w klasycznym języku japońskim końcówka nu może być również pomocniczym czasownikiem oznaczającym dokonanie/ukończenie czynności. "
+					+ "Forma ta zwykle kończy zdanie lub określa rzeczownik");
 		}
 		
 		// forma -n:
@@ -2748,7 +2751,91 @@ public class VerbExampler {
 			
 			nExample.setInfo("Forma -n: Pisemny wariant używany przez mężczyzn i w niektórych lokalnych dialektach");			
 		}
+		
+		// zu
+		{
+			List<DictionaryEntryType> dictionaryEntryTypeList = exampleRequest.getDictionaryEntryTypeList();
+			
+			if (dictionaryEntryTypeList.contains(DictionaryEntryType.WORD_VERB_IRREGULAR) == true) {
+		
+				String kanji = exampleRequest.getKanji();
+				String kana = exampleRequest.getKana();
+				String romaji = exampleRequest.getRomaji();
+				
+				if (kanji != null) {
+					if (kanji.endsWith("為る") == true) {
+						kanji = kanji.substring(0, kanji.length() - 2) + "為ず";
+						
+					} else if (kanji.endsWith("する") == true) {
+						kanji = kanji.substring(0, kanji.length() - 2) + "せず";
+						
+					} else if (kanji.endsWith("来る") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "来ず";
+						
+					} else if (kanji.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "こず";
+						
+					} else {
+						throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+					}
+				}
 
+				if (kana.endsWith("する") == true) {
+					kana = kana.substring(0, kana.length() - 2) + "せず";
+										
+				} else if (kana.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
+					kana = kana.substring(0, kana.length() - 2) + "こず";
+					
+				} else {
+					throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+				}
+				
+				if (romaji.endsWith("suru") == true) {
+					romaji = romaji.substring(0, romaji.length() - 4) + "sezu";
+					
+				} else if (romaji.endsWith("kuru") == true) { // to nie jest wyjatek, ale niech tak bedzie
+					romaji = romaji.substring(0, romaji.length() - 4) + "kozu";
+				
+				} else {
+					throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+				}
+				
+				// pusty template
+				final String templateKanji = "%s";
+				final String templateKana = "%s";
+				final String templateRomaji = "%s";
+
+				zuExample = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana, exampleRequest.getPrefixRomaji(), romaji,
+						templateKanji, templateKana, templateRomaji, true);
+				
+			} else {
+				GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
+				
+				String kanji = informalPresentNegativeForm.getKanji();
+				String kana = informalPresentNegativeForm.getKana();
+				String romaji = informalPresentNegativeForm.getRomaji();
+				
+				if (kanji != null) {
+					kanji = kanji.substring(0, kanji.length() - 2) + "ず";
+				}
+				
+				kana = kana.substring(0, kana.length() - 2) + "ず";
+				romaji = romaji.substring(0, romaji.length() - 3) + "zu";
+
+				// pusty template
+				final String templateKanji = "%s";
+				final String templateKana = "%s";
+				final String templateRomaji = "%s";
+
+				zuExample = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana, exampleRequest.getPrefixRomaji(), romaji,
+						templateKanji, templateKana, templateRomaji, true);				
+			}
+			
+			zuExample.setInfo("Forma -zu: Forma historyczna, literacka, dramatyczna i etc, ale współcześnie również używane np. w nagłówkach gazet. "
+					+ "Może być formą kończącą zdanie, ale może również łączyć kolejne zdanie.");
+		}
+
+		nExample.setAlternative(zuExample);
 		nuExample.setAlternative(nExample);
 		
 		return nuExample;
