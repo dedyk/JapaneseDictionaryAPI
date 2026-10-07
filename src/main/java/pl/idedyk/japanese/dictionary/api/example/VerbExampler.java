@@ -247,10 +247,6 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_HAZU_DESU,
 				makeHazuDesu(exampleRequest, grammaFormCache));
 
-		// nai de
-		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAI_DE,
-				makeNaiDe(exampleRequest, grammaFormCache));
-
 		// questions with larger sentences
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_QUESTIONS_WITH_LARGER_SENTENCES,
 				makeQuestionsWithLargerSentences(exampleRequest, grammaFormCache));
@@ -367,6 +363,10 @@ public class VerbExampler {
 		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAI_ALTERNATIVE,
 				makeNaiAlternative(exampleRequest, grammaFormCache));		
 
+		// nai de
+		GrammaExampleHelper.addExample(result, ExampleGroupType.VERB_NAI_DE,
+				makeNaiDe(exampleRequest, result, grammaFormCache));
+		
 		return result;
 	}
 
@@ -1892,6 +1892,7 @@ public class VerbExampler {
 	}
 
 	private static ExampleResult makeNaiDe(ExampleRequest exampleRequest,
+			List<ExampleGroupTypeElements> exampleGroupTypeElementsList, // aktualne przyklady (potrzebne do -zu ni)
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 
 		final String templateKanji = "%sで、...";
@@ -1901,8 +1902,36 @@ public class VerbExampler {
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache
 				.get(GrammaFormConjugateResultType.VERB_INFORMAL_PRESENT_NEGATIVE);
 
-		return GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji, templateKana,
+		ExampleResult naiDeExample = GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji, templateKana,
 				templateRomaji, true);
+		
+		// -zu ni
+		// !!! INFO !!!: Jezeli cos tutaj zmieniasz to moze trzeba zmienic rowniez w makeNaiAlternative
+		ExampleGroupTypeElements naiAlternative = exampleGroupTypeElementsList.stream().filter(c -> c.getExampleGroupType() == ExampleGroupType.VERB_NAI_ALTERNATIVE).findFirst().orElse(null);
+		
+		if (	naiAlternative == null || naiAlternative.getExampleResults().size() != 1 ||
+				naiAlternative.getExampleResults().get(0).getAlternative() == null ||
+				naiAlternative.getExampleResults().get(0).getAlternative().getAlternative() == null ||
+				naiAlternative.getExampleResults().get(0).getAlternative().getAlternative().getKana().endsWith("ず") == false) { // wariant -zu ni jest trzeci
+			
+			throw new RuntimeException(); // to nigdy nie powinno zdarzyc sie
+		}
+		
+		ExampleResult zuExample = naiAlternative.getExampleResults().get(0).getAlternative().getAlternative();
+		
+		// tworzenie -zu ni
+		final String zuNiTemplateKanji = "%sに";
+		final String zuNiTemplateKana = "%sに";
+		final String zuNiTemplateRomaji = "%s ni";
+
+		ExampleResult zuNiExample = GrammaExampleHelper.makeSimpleTemplateExample(zuExample.getPrefixKana(), zuExample.getKanji(), zuExample.getKana(), zuExample.getPrefixRomaji(), zuExample.getRomaji(),
+				zuNiTemplateKanji, zuNiTemplateKana, zuNiTemplateRomaji, true);
+		
+		zuNiExample.setInfo("Forma -zu ni: Forma historyczna, literacka, dramatyczna i etc");
+		
+		naiDeExample.setAlternative(zuNiExample);
+		
+		return naiDeExample;
 	}
 
 	private static ExampleResult makeQuestionsWithLargerSentences(ExampleRequest exampleRequest,
@@ -2582,6 +2611,8 @@ public class VerbExampler {
 	
 	private static ExampleResult makeNaiAlternative(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 	
+		// !!! INFO !!!: Jezeli cos tutaj zmieniasz to moze trzeba zmienic rowniez w makeNaiDe / makeNaiAlternative (wariant -zu ni)
+		
 		ExampleResult nuExample;
 		ExampleResult nExample;
 		ExampleResult zuExample;
