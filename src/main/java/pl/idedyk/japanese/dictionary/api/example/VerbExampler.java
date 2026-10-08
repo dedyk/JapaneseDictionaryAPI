@@ -2636,6 +2636,9 @@ public class VerbExampler {
 						
 					} else if (kanji.endsWith("来る") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "来ぬ";
+
+					} else if (kanji.endsWith("來る") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "來ぬ";
 						
 					} else if (kanji.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "こぬ";
@@ -2720,7 +2723,10 @@ public class VerbExampler {
 						
 					} else if (kanji.endsWith("来る") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "来ん";
-						
+
+					} else if (kanji.endsWith("來る") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "來ん";
+
 					} else if (kanji.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "こん";
 						
@@ -2802,6 +2808,9 @@ public class VerbExampler {
 						
 					} else if (kanji.endsWith("来る") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "来ず";
+
+					} else if (kanji.endsWith("來る") == true) { // to nie jest wyjatek, ale niech tak bedzie
+						kanji = kanji.substring(0, kanji.length() - 2) + "來ず";
 						
 					} else if (kanji.endsWith("くる") == true) { // to nie jest wyjatek, ale niech tak bedzie
 						kanji = kanji.substring(0, kanji.length() - 2) + "こず";
