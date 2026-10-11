@@ -764,8 +764,7 @@ public class VerbExampler {
 				for (ExampleResult currentExampleResult : currentExampleResultList) {
 					currentExampleResult.setInfo(templates[idx][2]);
 					
-					int fixme = 1; // CELOWY BLAD
-					//result.add(currentExampleResult);
+					result.add(currentExampleResult);
 				}
 				
 			} else {
@@ -898,16 +897,14 @@ public class VerbExampler {
 		result.add(alternativeExample);
 		
 		// od formy wolitywnej (tai)
-		List<ExampleResult> taiExampleList = makeTaiExample(exampleRequest, grammaFormCache);
+		ExampleResult taiExample = makeTaiExample(exampleRequest, grammaFormCache).get(0);
+				
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
 		
-		for (ExampleResult taiExample : taiExampleList) {
-			ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-					taiExample, templateKanji2, templateKana2, templateRomaji2, true);
-			
-			alternativeExample2.setInfo("od formy wolitywnej (gdybym chciał)");
-			
-			result.add(alternativeExample2);			
-		}
+		alternativeExample2.setInfo("od formy wolitywnej (gdybym chciał)");
+		
+		result.add(alternativeExample2);
 		
 		return result;
 	}
@@ -945,16 +942,14 @@ public class VerbExampler {
 		result.add(alternativeExample);
 		
 		// od formy wolitywnej (tai)
-		List<ExampleResult> taiExampleList = makeTaiExample(exampleRequest, grammaFormCache);
+		ExampleResult taiExample = makeTaiExample(exampleRequest, grammaFormCache).get(0);
 		
-		for (ExampleResult taiExample : taiExampleList) {
-			ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-					taiExample, templateKanji2, templateKana2, templateRomaji2, true);
-			
-			alternativeExample2.setInfo("od formy wolitywnej");
-			
-			result.add(alternativeExample2);			
-		}
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample2.setInfo("od formy wolitywnej");
+		
+		result.add(alternativeExample2);			
 
 		return result;
 	}
@@ -992,16 +987,14 @@ public class VerbExampler {
 		result.add(alternativeExample);
 		
 		// od formy wolitywnej (tai)
-		List<ExampleResult> taiExampleList = makeTaiExample(exampleRequest, grammaFormCache);
+		ExampleResult taiExample = makeTaiExample(exampleRequest, grammaFormCache).get(0);
 		
-		for (ExampleResult taiExample : taiExampleList) {
-			ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
-					taiExample, templateKanji2, templateKana2, templateRomaji2, true);
-			
-			alternativeExample2.setInfo("od formy wolitywnej (chyba chciał)");
-			
-			result.add(alternativeExample2);
-		}
+		ExampleResult alternativeExample2 = GrammaExampleHelper.makeSimpleTemplateExampleWithLastCharRemove(
+				taiExample, templateKanji2, templateKana2, templateRomaji2, true);
+		
+		alternativeExample2.setInfo("od formy wolitywnej (chyba chciał)");
+		
+		result.add(alternativeExample2);
 		
 		return result;
 	}
@@ -1372,9 +1365,7 @@ public class VerbExampler {
 		List<ExampleResult> result = new ArrayList<>();
 		
 		result.add(positiveExample);
-		int fixme = 1;
-		// CELOWY BLAD
-		//result.add(negativeExample);
+		result.add(negativeExample);
 				
 		return result;
 	}
@@ -1455,8 +1446,7 @@ public class VerbExampler {
 		ExampleResult alternative5 = GrammaExampleHelper.makeSimpleTemplateExample(informalPast, templateKanji2,
 				templateKana2, templateRomaji2, true);
 		alternative5.setInfo("Zachowuje się, jak na-przymiotnik");
-		int fixme = 1; // CELOWY BLAD
-		//result.add(alternative5);
+		result.add(alternative5);
 
 		ExampleResult alternative6 = GrammaExampleHelper.makeSimpleTemplateExample(informalPast, templateKanji3,
 				templateKana3, templateRomaji3, false);
@@ -2965,15 +2955,9 @@ public class VerbExampler {
 		
 		List<ExampleResult> result = new ArrayList<>();
 		
-		
-		int fixme = 1; // CELOWY BLAD
-		// result.add(nuExample);
-		// result.add(nExample);
-		// result.add(zuExample);
-
+		result.add(nuExample);
 		result.add(nExample);
 		result.add(zuExample);
-		result.add(nuExample);
 
 		return result;
 	}

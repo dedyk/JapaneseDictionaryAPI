@@ -574,8 +574,7 @@ public class NounExampler {
 		List<ExampleResult> result = new ArrayList<>();
 		
 		result.add(exampleResult1);
-		int fixme = 1; // CELOWY BLAD
-		//result.add(exampleResult2);
+		result.add(exampleResult2);
 				
 		return result;
 	}
