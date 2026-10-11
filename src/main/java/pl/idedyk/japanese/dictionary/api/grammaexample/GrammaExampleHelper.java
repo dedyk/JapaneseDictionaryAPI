@@ -13,9 +13,9 @@ import pl.idedyk.japanese.dictionary.api.gramma.dto.GrammaFormConjugateResult;
 
 public class GrammaExampleHelper {
 	
-	public static void addExample(List<ExampleGroupTypeElements> result, ExampleGroupType exampleGroupType, ExampleResult exampleResult) {
+	public static void addExample(List<ExampleGroupTypeElements> result, ExampleGroupType exampleGroupType, List<ExampleResult> exampleResultList) {
 		
-		if (exampleResult == null) {
+		if (exampleResultList == null) {
 			return;
 		}
 		
@@ -23,7 +23,7 @@ public class GrammaExampleHelper {
 		
 		exampleGroup.setExampleGroupType(exampleGroupType);
 		
-		exampleGroup.getExampleResults().add(exampleResult);
+		exampleGroup.getExampleResults().addAll(exampleResultList);
 		
 		result.add(exampleGroup);
 	}

@@ -17,9 +17,7 @@ public class ExampleResult implements Serializable {
 	private String romaji;
 	
 	private String info;
-		
-	private ExampleResult alternative;
-	
+			
 	public String getKanji() {
 		return kanji;
 	}
@@ -42,14 +40,6 @@ public class ExampleResult implements Serializable {
 
 	public void setRomaji(String romaji) {
 		this.romaji = romaji;
-	}
-
-	public ExampleResult getAlternative() {
-		return alternative;
-	}
-
-	public void setAlternative(ExampleResult alternative) {
-		this.alternative = alternative;
 	}
 	
 	public String getPrefixKana() {
