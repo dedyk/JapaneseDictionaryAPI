@@ -1,6 +1,7 @@
 package pl.idedyk.japanese.dictionary.api.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -125,7 +126,9 @@ public class NounExampler {
 		return result;
 	}
 	
-	private static ExampleResult makeSuru(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
+	private static List<ExampleResult> makeSuru(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache, boolean addVirtual) {
+		
+		List<ExampleResult> result = new ArrayList<>();
 		
 		final String templateKanji1 = "%sする";
 		final String templateKana1 = "%sする";
@@ -133,6 +136,8 @@ public class NounExampler {
 		
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji1, templateKana1, templateRomaji1, true);
 
+		result.add(exampleResult1);
+		
 		if (addVirtual == true) {
 			
 			final String templateKanji2 = "%sする";
@@ -141,130 +146,130 @@ public class NounExampler {
 			
 			ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji2, templateKana2, templateRomaji2, true);
 			
-			exampleResult1.setAlternative(exampleResult2);
+			result.add(exampleResult2);
 		}
 				
-		return exampleResult1;
+		return result;
 	}
 
-	private static ExampleResult makeSukiExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeSukiExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sが好き";
 		final String templateKana = "%sがすき";
 		final String templateRomaji = "%s ga suki";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 
-	private static ExampleResult makeKiraiExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeKiraiExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sがきらい";
 		final String templateKana = "%sがきらい";
 		final String templateRomaji = "%s ga kirai";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeNounNiNaru(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeNounNiNaru(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sになる";
 		final String templateKana = "%sになる";
 		final String templateRomaji = "%s ni naru";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeNaDesuExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeNaDesuExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sなんです";
 		final String templateKana = "%sなんです";
 		final String templateRomaji = "%s nan desu";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 
-	private static ExampleResult makeDarouExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeDarouExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sだろう";
 		final String templateKana = "%sだろう";
 		final String templateRomaji = "%s darou";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeDeshouExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeDeshouExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sでしょう";
 		final String templateKana = "%sでしょう";
 		final String templateRomaji = "%s deshou";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 
-	private static ExampleResult makeDeArouExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeDeArouExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sであろう";
 		final String templateKana = "%sであろう";
 		final String templateRomaji = "%s de arou";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 
-	private static ExampleResult makeHoshiiExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeHoshiiExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sがほしい";
 		final String templateKana = "%sがほしい";
 		final String templateRomaji = "%s ga hoshii";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 
-	private static ExampleResult makeHoshigatteIruExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeHoshigatteIruExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sをほしがっている";
 		final String templateKana = "%sをほしがっている";
 		final String templateRomaji = "%s o hoshigatte iru";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeKamoshiRemasenExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeKamoshiRemasenExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sかもしれません";
 		final String templateKana = "%sかもしれません";
 		final String templateRomaji = "%s kamoshi remasen";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeAgeruExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeAgeruExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "私 [は/が] [odbiorca] に%sをあげる";
 		final String templateKana = "わたし [は/が] [odbiorca] に%sをあげる";
 		final String templateRomaji = "watashi [wa/ga] [odbiorca] ni %s o ageru";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false));
 	}
 	
-	private static ExampleResult makeKureruExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeKureruExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "[dający] [は/が] %sをくれる";
 		final String templateKana = "[dający] [は/が] %sをくれる";
 		final String templateRomaji = "[dający] [wa/ga] %s o kureru";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false));
 	}
 	
-	private static ExampleResult makeMorauExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeMorauExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "[odbiorca] [は/が] [dający] [に/から] %sを貰う";
 		final String templateKana = "[odbiorca] [は/が] [dający] [に/から] %sをもらう";
 		final String templateRomaji = "[odbiorca] [wa/ga] [dający] [ni/kara] %s o morau";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false));
 	}
 	
-	private static ExampleResult makeToIIToOthers(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeToIIToOthers(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji = "%sといいですね";
@@ -277,12 +282,15 @@ public class NounExampler {
 		
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PRESENT_NEGATIVE);
 		
-		exampleResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji, templateKana, templateRomaji, true));
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult;
+		result.add(exampleResult);
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji, templateKana, templateRomaji, true));
+		
+		return result;
 	}
 	
-	private static ExampleResult makeToIIToMe(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeToIIToMe(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sといいんですが";
@@ -298,17 +306,20 @@ public class NounExampler {
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(informalPresentForm, templateKanji1, templateKana1, templateRomaji1, true);
 		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(informalPresentForm, templateKanji2, templateKana2, templateRomaji2, true);
 		
-		exampleResult1.setAlternative(exampleResult2);
+		List<ExampleResult> result = new ArrayList<>();
+		
+		result.add(exampleResult1);
+		result.add(exampleResult2);
 		
 		GrammaFormConjugateResult informalPresentNegativeForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PRESENT_NEGATIVE);
 		
-		exampleResult2.setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji1, templateKana1, templateRomaji1, true));
-		exampleResult2.getAlternative().setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true));
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji1, templateKana1, templateRomaji1, true));
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPresentNegativeForm, templateKanji2, templateKana2, templateRomaji2, true));
 		
-		return exampleResult1;
+		return result;
 	}
 	
-	private static ExampleResult makeToki(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeToki(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sの時、...";
@@ -323,12 +334,15 @@ public class NounExampler {
 		final String templateKana2 = "%sとき、...";
 		final String templateRomaji2 = "%s toki, ...";
 		
-		exampleResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji2, templateKana2, templateRomaji2, true));
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult;
+		result.add(exampleResult);
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji2, templateKana2, templateRomaji2, true));
+		
+		return result;
 	}
 	
-	private static ExampleResult makeSouDesuHearExample(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeSouDesuHearExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		String templateKanji = "%sそうです";
@@ -341,13 +355,15 @@ public class NounExampler {
 		
 		GrammaFormConjugateResult informalPastForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PAST);
 		
-		souDesuResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(
-				informalPastForm, templateKanji, templateKana, templateRomaji, true));		
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return souDesuResult;
+		result.add(souDesuResult);
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji, templateKana, templateRomaji, true));		
+		
+		return result;
 	}
 
-	private static ExampleResult makeTteExample(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeTteExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		String templateKanji = "%sって";
@@ -360,13 +376,15 @@ public class NounExampler {
 		
 		GrammaFormConjugateResult informalPastForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PAST);
 		
-		souDesuResult.setAlternative(GrammaExampleHelper.makeSimpleTemplateExample(
-				informalPastForm, templateKanji, templateKana, templateRomaji, true));		
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return souDesuResult;
+		result.add(souDesuResult);
+		result.add(GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji, templateKana, templateRomaji, true));		
+		
+		return result;
 	}	
 	
-	private static ExampleResult makeTaraExample(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeTaraExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		GrammaFormConjugateResult informalPastForm = grammaFormCache.get(GrammaFormConjugateResultType.NOUN_INFORMAL_PAST);
@@ -390,13 +408,18 @@ public class NounExampler {
 		
 		alternativeExample.setInfo("przeczenie");
 		
-		exampleResult.setAlternative(alternativeExample);
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult;
+		result.add(exampleResult);
+		result.add(alternativeExample);
+		
+		return result;
 	}
 	
-	private static ExampleResult makeMitaiDesuExample(ExampleRequest exampleRequest,
+	private static List<ExampleResult> makeMitaiDesuExample(ExampleRequest exampleRequest,
 			Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+		
+		List<ExampleResult> result = new ArrayList<>();
 		
 		final String templateKanji1 = "%sみたいです";
 		final String templateKana1 = "%sみたいです";
@@ -412,7 +435,8 @@ public class NounExampler {
 		
 		alternative2.setInfo("Zachowuje się, jak na-przymiotnik");
 		
-		exampleResult.setAlternative(alternative2);
+		result.add(exampleResult);
+		result.add(alternative2);
 		
 		final String templateKanji3 = "%sみたいに [przymiotnik, czasownik]";
 		final String templateKana3 = "%sみたいに [przymiotnik, czasownik]";
@@ -420,23 +444,29 @@ public class NounExampler {
 		
 		ExampleResult alternative3 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji3, templateKana3, templateRomaji3, true);
 
-		alternative2.setAlternative(alternative3);
+		result.add(alternative3);
 	
-		return exampleResult;
+		return result;
 	}
 	
-	private static ExampleResult makeToExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeToExample(ExampleRequest exampleRequest) {
 		
-		ExampleResult nounNiNaru = makeNounNiNaru(exampleRequest);
+		List<ExampleResult> nounNiNaruList = makeNounNiNaru(exampleRequest);
 		
 		final String templateKanji = "%sと, ...";
 		final String templateKana = "%sと, ...";
 		final String templateRomaji = "%s to, ...";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(nounNiNaru, templateKanji, templateKana, templateRomaji, true);
+		List<ExampleResult> result = new ArrayList<>();
+		
+		for (ExampleResult currentNounNiNaru : nounNiNaruList) {
+			result.add(GrammaExampleHelper.makeSimpleTemplateExample(currentNounNiNaru, templateKanji, templateKana, templateRomaji, true));
+		}
+		
+		return result;
 	}
 	
-	private static ExampleResult makeHazuDesu(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeHazuDesu(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sのはずです";
 		final String templateKana1 = "%sなのはずです";
@@ -450,12 +480,15 @@ public class NounExampler {
 		
 		ExampleResult alternative1 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji2, templateKana2, templateRomaji2, true);
 		
-		exampleResult1.setAlternative(alternative1);
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult1;
+		result.add(exampleResult1);
+		result.add(alternative1);
+				
+		return result;
 	}
 	
-	private static ExampleResult makeQuestionsWithLargerSentences(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeQuestionsWithLargerSentences(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%s か (どうか) 知っています, 覚えていません, わかりません, etc";
 		final String templateKana1 = "%s か (どうか) しっています, おぼえていません, わかりません, etc";
@@ -463,10 +496,10 @@ public class NounExampler {
 		
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji1, templateKana1, templateRomaji1, false);
 		
-		return exampleResult1;
+		return Arrays.asList(exampleResult1);
 	}
 	
-	private static ExampleResult makeToIu(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeToIu(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji = "[nazwa] という%s";
 		final String templateKana = "[nazwa] という%s";
@@ -474,10 +507,10 @@ public class NounExampler {
 		
 		ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, false);
 		
-		return exampleResult;
+		return Arrays.asList(exampleResult);
 	}
 	
-	private static ExampleResult makeNoAidaNi(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeNoAidaNi(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 				
 		final String templateKanji1 = "%sの間に, ...";
 		final String templateKana1 = "%sのあいだに, ...";
@@ -492,12 +525,15 @@ public class NounExampler {
 		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji2, templateKana2, templateRomaji2, true);
 		exampleResult2.setInfo("Czynność wykonywana przez dłuższy okres czasu");
 		
-		exampleResult1.setAlternative(exampleResult2);
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult1;
+		result.add(exampleResult1);
+		result.add(exampleResult2);
+				
+		return result;
 	}
 	
-	private static ExampleResult makeNoni(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeNoni(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sなのに, ...";
 		final String templateKana1 = "%sなのに, ...";
@@ -513,12 +549,15 @@ public class NounExampler {
 		
 		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(informalPastForm, templateKanji2, templateKana2, templateRomaji2, true);
 		
-		exampleResult1.setAlternative(exampleResult2);
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult1;
+		result.add(exampleResult1);
+		result.add(exampleResult2);
+				
+		return result;
 	}
 	
-	private static ExampleResult makeYouna(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeYouna(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sのような [inny rzeczownik]";
 		final String templateKana1 = "%sのような [inny rzeczownik]";
@@ -532,12 +571,16 @@ public class NounExampler {
 		
 		ExampleResult exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji2, templateKana2, templateRomaji2, true);
 		
-		exampleResult1.setAlternative(exampleResult2);
+		List<ExampleResult> result = new ArrayList<>();
 		
-		return exampleResult1;
+		result.add(exampleResult1);
+		int fixme = 1; // CELOWY BLAD
+		//result.add(exampleResult2);
+				
+		return result;
 	}
 	
-	private static ExampleResult makeTeMoExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeTeMoExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sも";
 		final String templateKana1 = "%sも";
@@ -547,10 +590,10 @@ public class NounExampler {
 		
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1, templateKana1, templateRomaji1, true);
 				
-		return exampleResult1;
+		return Arrays.asList(exampleResult1);
 	}
 
-	private static ExampleResult makeNegativeTeMoExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeNegativeTeMoExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji1 = "%sも";
 		final String templateKana1 = "%sも";
@@ -560,10 +603,10 @@ public class NounExampler {
 		
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji1, templateKana1, templateRomaji1, true);
 				
-		return exampleResult1;
+		return Arrays.asList(exampleResult1);
 	}
 
-	private static ExampleResult makeNiSuruExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
+	private static List<ExampleResult> makeNiSuruExample(ExampleRequest exampleRequest, Map<GrammaFormConjugateResultType, GrammaFormConjugateResult> grammaFormCache) {
 		
 		final String templateKanji = "%sにする";
 		final String templateKana = "%sにする";
@@ -571,24 +614,24 @@ public class NounExampler {
 				
 		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
 
-		return exampleResult1;
+		return Arrays.asList(exampleResult1);
 	}
 	
-	private static ExampleResult makeImperativeExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeImperativeExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sであれ";
 		final String templateKana = "%sであれ";
 		final String templateRomaji = "%s de are";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 	
-	private static ExampleResult makeImperativeNotExample(ExampleRequest exampleRequest) {
+	private static List<ExampleResult> makeImperativeNotExample(ExampleRequest exampleRequest) {
 		
 		final String templateKanji = "%sであるな";
 		final String templateKana = "%sであるな";
 		final String templateRomaji = "%s de aru na";
 		
-		return GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true);
+		return Arrays.asList(GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest, templateKanji, templateKana, templateRomaji, true));
 	}
 }
