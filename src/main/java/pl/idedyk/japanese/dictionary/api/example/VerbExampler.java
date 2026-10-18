@@ -1485,113 +1485,206 @@ public class VerbExampler {
 		
 		GrammaFormConjugateResult verbTe = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
 
-		final String templateKanji1 = "%sしまう";
-		final String templateKana1 = "%sしまう";
-		final String templateRomaji1 = "%s shimau";
+		{
+			final String templateKanji = "%sしまう";
+			final String templateKana = "%sしまう";
+			final String templateRomaji = "%s shimau";
 
-		ExampleResult exampleResult1 = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji1,
-				templateKana1, templateRomaji1, true);
+			ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji,
+					templateKana, templateRomaji, true);
+			
+			exampleResult.setInfo("Forma teraźniejsza, prosta");
+			
+			result.add(exampleResult);
+		}
 		
-		result.add(exampleResult1);
+		{
+			final String templateKanji = "%sしまいます";
+			final String templateKana = "%sしまいます ";
+			final String templateRomaji = "%s shimaimasu";
 
-		ExampleResult exampleResult2 = null;
-
-		if (verbTe.getKana().endsWith("て") == true) {
-
-			final String templateKanji2 = "%sちゃう";
-			final String templateKana2 = "%sちゃう";
-			final String templateRomaji2 = "%schau";
-
-			exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
-					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
-
-			String exampleResultRomaji = exampleResult2.getRomaji();
-
-			String templateRomajiToCheck = String.format(templateRomaji2, "t");
-			String templateRomajiToChange = String.format(templateRomaji2, "c");			
-
-			String newExampleResultRomaji;
+			ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji,
+					templateKana, templateRomaji, true);
 			
-			if (exampleResultRomaji.endsWith(templateRomajiToCheck) == true) {
-				newExampleResultRomaji = exampleResultRomaji.substring(0,
-						exampleResultRomaji.length() - templateRomajiToCheck.length())
-						+ templateRomajiToChange;
+			exampleResult.setInfo("Forma teraźniejsza, formalna");
+			
+			result.add(exampleResult);
+		}
+		
+		{
+			final String templateKanji = "%sしまった";
+			final String templateKana = "%sしまった";
+			final String templateRomaji = "%s shimatta";
+
+			ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji,
+					templateKana, templateRomaji, true);
+
+			exampleResult.setInfo("Forma przeszła, prosta");
+			
+			result.add(exampleResult);			
+		}
+		
+		{
+			final String templateKanji = "%sしまいました";
+			final String templateKana = "%sしまいました";
+			final String templateRomaji = "%s shimaimashita";
+
+			ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji,
+					templateKana, templateRomaji, true);
+			
+			exampleResult.setInfo("Forma przeszła, formalna");
+
+			result.add(exampleResult);
+		}
+		
+		// formy potoczne
+		{
+			if (verbTe.getKana().endsWith("て") == true) {
 				
+				{
+					final String templateKanji = "%sちゃう";
+					final String templateKana = "%sちゃう";
+					final String templateRomaji = "%schau";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji, templateKana, templateRomaji, true);
+					
+					// lekka poprawa romaji
+					fixRomajiForCasualTeChouJauForm(exampleResult, templateRomaji);
+
+					exampleResult.setInfo("Forma teraźniejsza, prosta, potoczna");
+					
+					result.add(exampleResult);
+				}
+				
+				{
+					final String templateKanji = "%sちゃいます";
+					final String templateKana = "%sちゃいます";
+					final String templateRomaji = "%schaimasu";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji, templateKana, templateRomaji, true);
+					
+					// lekka poprawa romaji
+					fixRomajiForCasualTeChouJauForm(exampleResult, templateRomaji);
+					
+					exampleResult.setInfo("Forma teraźniejsza, formalna, potoczna");
+					
+					result.add(exampleResult);
+				}
+
+				{
+					final String templateKanji = "%sちゃった";
+					final String templateKana = "%sちゃった";
+					final String templateRomaji = "%schatta";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji, templateKana, templateRomaji, true);
+					
+					// lekka poprawa romaji
+					fixRomajiForCasualTeChouJauForm(exampleResult, templateRomaji);
+
+					exampleResult.setInfo("Forma przeszła, prosta, potoczna");
+					
+					result.add(exampleResult);
+				}
+				
+				{
+					final String templateKanji = "%sちゃいました";
+					final String templateKana = "%sちゃいました";
+					final String templateRomaji = "%schaimashita";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji, templateKana, templateRomaji, true);
+					
+					// lekka poprawa romaji
+					fixRomajiForCasualTeChouJauForm(exampleResult, templateRomaji);
+					
+					exampleResult.setInfo("Forma przeszła, formalna, potoczna");
+					
+					result.add(exampleResult);
+				}
+
+			} else if (verbTe.getKana().endsWith("で") == true) {
+				
+				{
+					final String templateKanji2 = "%sじゃう";
+					final String templateKana2 = "%sじゃう";
+					final String templateRomaji2 = "%sjau";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji2, templateKana2, templateRomaji2, true);
+
+					exampleResult.setInfo("Forma teraźniejsza, prosta, potoczna");
+					
+					result.add(exampleResult);
+				}
+				
+				{
+					final String templateKanji2 = "%sじゃいます";
+					final String templateKana2 = "%sじゃいます";
+					final String templateRomaji2 = "%sjaimasu";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji2, templateKana2, templateRomaji2, true);
+					
+					exampleResult.setInfo("Forma teraźniejsza, formalna, potoczna");
+					
+					result.add(exampleResult);
+				}
+
+				{
+					final String templateKanji2 = "%sじゃった";
+					final String templateKana2 = "%sじゃった";
+					final String templateRomaji2 = "%sjatta";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji2, templateKana2, templateRomaji2, true);
+
+					exampleResult.setInfo("Forma przeszła, prosta, potoczna");
+					
+					result.add(exampleResult);
+				}
+
+				{
+					final String templateKanji2 = "%sじゃいました";
+					final String templateKana2 = "%sじゃいました";
+					final String templateRomaji2 = "%sjaimashita";
+
+					ExampleResult exampleResult = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
+							verbTe, templateKanji2, templateKana2, templateRomaji2, true);
+					
+					exampleResult.setInfo("Forma przeszła, formalna, potoczna");
+					
+					result.add(exampleResult);
+				}
+
 			} else {
-				newExampleResultRomaji = exampleResultRomaji;
-			}
-
-			exampleResult2.setRomaji(newExampleResultRomaji);
-
-		} else if (verbTe.getKana().endsWith("で") == true) {
-
-			final String templateKanji2 = "%sじゃう";
-			final String templateKana2 = "%sじゃう";
-			final String templateRomaji2 = "%sjau";
-
-			exampleResult2 = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
-					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
-
-		} else {
-			throw new RuntimeException("Bad te form for: " + verbTe.getKana());
+				throw new RuntimeException("Bad te form for: " + verbTe.getKana());
+			}						
 		}
-
-		result.add(exampleResult2);
-
-		final String templateKanji3 = "%sしまいました";
-		final String templateKana3 = "%sしまいました";
-		final String templateRomaji3 = "%s shimaimashita";
-
-		ExampleResult exampleResult3 = GrammaExampleHelper.makeSimpleTemplateExample(verbTe, templateKanji3,
-				templateKana3, templateRomaji3, true);
-
-		result.add(exampleResult3);
-
-		ExampleResult exampleResult4 = null;
-
-		if (verbTe.getKana().endsWith("て") == true) {
-
-			final String templateKanji2 = "%sちゃいました";
-			final String templateKana2 = "%sちゃいました";
-			final String templateRomaji2 = "%schaimashita";
-
-			exampleResult4 = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
-					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
-
-			String exampleResultRomaji = exampleResult4.getRomaji();
-
-			String templateRomajiToCheck = String.format(templateRomaji2, "t");
-			String templateRomajiToChange = String.format(templateRomaji2, "c");
-			
-			String newExampleResultRomaji;
-			
-			if (exampleResultRomaji.endsWith(templateRomajiToCheck) == true) {
-				newExampleResultRomaji = exampleResultRomaji.substring(0,
-						exampleResultRomaji.length() - templateRomajiToCheck.length())
-						+ templateRomajiToChange;
-
-			} else {
-				newExampleResultRomaji = exampleResultRomaji;
-			}
-
-			exampleResult4.setRomaji(newExampleResultRomaji);
-
-		} else if (verbTe.getKana().endsWith("で") == true) {
-
-			final String templateKanji2 = "%sじゃいました";
-			final String templateKana2 = "%sじゃいました";
-			final String templateRomaji2 = "%sjaimashita";
-
-			exampleResult4 = GrammaExampleHelper.makeSimpleTemplateExampleWithKanaLastCharAndRomajiTwoCharsRemove(
-					verbTe, templateKanji2, templateKana2, templateRomaji2, true);
-
-		} else {
-			throw new RuntimeException("Bad te form for: " + verbTe.getKana());
-		}
-
-		result.add(exampleResult4);
 
 		return result;
+	}
+	
+	private static void fixRomajiForCasualTeChouJauForm(ExampleResult exampleResult, String templateRomaji) {
+		String exampleResultRomaji = exampleResult.getRomaji();
+
+		String templateRomajiToCheck = String.format(templateRomaji, "t");
+		String templateRomajiToChange = String.format(templateRomaji, "c");
+		
+		String newExampleResultRomaji;
+		
+		if (exampleResultRomaji.endsWith(templateRomajiToCheck) == true) {
+			newExampleResultRomaji = exampleResultRomaji.substring(0,
+					exampleResultRomaji.length() - templateRomajiToCheck.length())
+					+ templateRomajiToChange;
+
+		} else {
+			newExampleResultRomaji = exampleResultRomaji;
+		}
+
+		exampleResult.setRomaji(newExampleResultRomaji);
 	}
 
 	private static List<ExampleResult> makeTo(ExampleRequest exampleRequest,
