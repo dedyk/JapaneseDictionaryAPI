@@ -298,7 +298,7 @@ public enum ExampleGroupType {
 
 	VERB_TE_KARA("Po czynności, robię ..."),
 
-	VERB_TE_SHIMAU("Zrobić cos do końca / Niestety coś stało się"),
+	VERB_TE_SHIMAU("Zrobić coś do końca / Niestety coś stało się / Zrobić coś niespodziewanie, niezamierzenie", "Często z nutą żalu lub zaskoczenia"),
 
 	VERB_TO("Kiedy A staje się, wtedy również B staje się",
 			"Mówi o rzeczach oczywistych, z której druga wynika z pierwszej"),
