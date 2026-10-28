@@ -1062,6 +1062,7 @@ public class VerbExampler {
 		
 		GrammaFormConjugateResult teForm = grammaFormCache.get(GrammaFormConjugateResultType.VERB_TE);
 		
+		// te oku
 		{
 			final String templateKanji = "%sおく";
 			final String templateKana = "%sおく";
@@ -1070,6 +1071,7 @@ public class VerbExampler {
 			result.add(GrammaExampleHelper.makeSimpleTemplateExample(teForm, templateKanji, templateKana, templateRomaji, true));
 		}
 		
+		// toku / ttoku / doku - potocznie
 		{
 			String kanji = teForm.getKanji();
 			String kana = teForm.getKana();
@@ -1140,6 +1142,79 @@ public class VerbExampler {
 			 teOkuCasualExampleResult.setInfo("potocznie");
 			 
 			 result.add(teOkuCasualExampleResult);			
+		}
+		
+		// toku / ttoku / doku - potocznie, rozkaz
+		{
+			String kanji = teForm.getKanji();
+			String kana = teForm.getKana();
+			String romaji = teForm.getRomaji();
+			
+			if (kanji != null) {
+				if (kanji.endsWith("って") == true) {
+					kanji = removeLastChar(kanji);
+					
+					kanji = kanji + "とけ";
+					
+				} else if (kanji.endsWith("て") == true) {
+					kanji = removeLastChar(kanji);
+					
+					kanji = kanji + "とけ";					
+				
+				} else if (kanji.endsWith("で") == true) {
+					kanji = removeLastChar(kanji);
+					
+					kanji = kanji + "どけ";					
+				
+				} else {
+					throw new RuntimeException(kanji); // to nigdy nie powinno zdarzyc sie
+				}
+			}
+			
+			if (kana.endsWith("って") == true) {
+				kana = removeLastChar(kana);
+				
+				kana = kana + "とけ";
+				
+			} else if (kana.endsWith("て") == true) {
+				kana = removeLastChar(kana);
+				
+				kana = kana + "とけ";					
+			
+			} else if (kana.endsWith("で") == true) {
+				kana = removeLastChar(kana);
+				
+				kana = kana + "どけ";					
+			
+			} else {
+				throw new RuntimeException(kana); // to nigdy nie powinno zdarzyc sie
+			}
+			
+			if (romaji.endsWith("tte") == true) {
+				romaji = removeLast3Chars(romaji);
+				
+				romaji = romaji + "ttoke";
+				
+			} else if (romaji.endsWith("te") == true) {
+				romaji = removeLast2Chars(romaji);
+				
+				romaji = romaji + "toke";					
+			
+			} else if (romaji.endsWith("de") == true) {
+				romaji = removeLast2Chars(romaji);
+				
+				romaji = romaji + "doke";					
+			
+			} else {
+				throw new RuntimeException(romaji); // to nigdy nie powinno zdarzyc sie
+			}
+			
+			 ExampleResult teOkuCasualOrderExampleResult = GrammaExampleHelper.makeSimpleTemplateExample(exampleRequest.getPrefixKana(), kanji, kana, exampleRequest.getPrefixRomaji(), romaji,
+						"%s", "%s", "%s", true);	
+			
+			 teOkuCasualOrderExampleResult.setInfo("potocznie, rozkaz");
+			 
+			 result.add(teOkuCasualOrderExampleResult);			
 		}
 		
 		return result;
